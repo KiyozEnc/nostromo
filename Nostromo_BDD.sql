@@ -36,7 +36,7 @@ CREATE TABLE commander (
 	primary key (numArt, numCde),
 	foreign key (numCde) references commande(numCde),
 	foreign key (numArt) references article(numArt)
-);
+);q
 
 CREATE TABLE reservation (
 	numRes int not null,
