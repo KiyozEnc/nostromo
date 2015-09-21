@@ -1,8 +1,8 @@
-DROP SCHEMA IF EXISTS 2014-nostromo-base;
+DROP SCHEMA nostromo IF EXISTS;
 
-CREATE SCHEMA 2014-nostromo-base;
+CREATE SCHEMA nostromo;
 
-USE 2014-nostromo-base;
+USE nostromo;
 
 CREATE TABLE client (
 	numClient int not null auto_increment,
@@ -12,14 +12,13 @@ CREATE TABLE client (
 	cpClient varchar(5) not null,
 	villeClient varchar(30) not null,
 	mdpClient text not null,
-	mailClient text not null,
+	mailClient mail not null,
 	pointsClient int not null,
 	primary key (numClient)
 );
 
 CREATE TABLE commande (
 	numCde int not null auto_increment primary key,
-    numClient int not null,
 	numClient int not null references client(numClient)
 );
 
@@ -41,22 +40,22 @@ CREATE TABLE commander (
 
 CREATE TABLE reservation (
 	numRes int not null,
-	numClient int not null,
+    numClt int not null,
 	dateRes date not null,
 	primary key (numRes),
-	foreign key (numClient) references Client(numClient)
+	foreign key (numClt) references Client(numClt)
 );
 
 CREATE TABLE vol (
 	numVol int not null,
 	dateVol date not null,
-	nbPlace int not null,
+    nbPlace int not null,
 	primary key (numVol)
 );
 
 CREATE TABLE reserver (
-	numVol int not null,
-	numRes int not null,
-	nbPers int not null,
-	primary key (numRes,numVol)
+    numVol int not null,
+    numRes int not null,
+    nbPers int not null,
+    primary key (numRes,numVol)
 );
