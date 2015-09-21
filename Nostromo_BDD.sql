@@ -19,6 +19,7 @@ CREATE TABLE client (
 
 CREATE TABLE commande (
 	numCde int not null auto_increment primary key,
+    numClient int not null,
 	numClient int not null references client(numClient)
 );
 
