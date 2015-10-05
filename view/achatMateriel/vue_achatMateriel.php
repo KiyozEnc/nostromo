@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
 
-TEST index
+TEST achatMateriel
 
 <?php $contenu = ob_get_clean(); ?>

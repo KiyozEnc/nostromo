@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
 
-TEST index
+TEST aPropos
 
 <?php $contenu = ob_get_clean(); ?>
