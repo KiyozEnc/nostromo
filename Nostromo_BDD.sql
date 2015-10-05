@@ -1,26 +1,31 @@
+DROP SCHEMA nostromo IF EXISTS;
+
+CREATE SCHEMA nostromo;
+
+USE nostromo;
+
 CREATE TABLE client (
-	numClt int not null auto_increment,
-	nomClt varchar(30) not null,
-	prenomClt varchar(30) not null,
-	adresseClt varchar(50) not null,
-	cpClt varchar(5) not null,
-	villeClt varchar(30) not null,
-	mdpClt text not null,
-	mailClt text not null,
-	pointsClt int not null,
-	primary key (numClt)
+	numClient int not null auto_increment,
+	nomClient varchar(30) not null,
+	prenomClient varchar(30) not null,
+	adresseClient varchar(50) not null,
+	cpClient varchar(5) not null,
+	villeClient varchar(30) not null,
+	mdpClient text not null,
+	mailClient mail not null,
+	pointsClient int not null,
+	primary key (numClient)
 );
 
 CREATE TABLE commande (
 	numCde int not null auto_increment primary key,
-	numClt int not null references client(numClt)
+	numClient int not null references client(numClient)
 );
 
 CREATE TABLE article (
 	numArt int not null,
 	designation varchar(50) not null,
 	pu int not null,
-	qteStock int not null,
 	primary key (numArt)
 );
 
@@ -33,33 +38,24 @@ CREATE TABLE commander (
 	foreign key (numArt) references article(numArt)
 );
 
+CREATE TABLE reservation (
+	numRes int not null,
+    numClt int not null,
+	dateRes date not null,
+	primary key (numRes),
+	foreign key (numClt) references Client(numClt)
+);
+
 CREATE TABLE vol (
 	numVol int not null,
 	dateVol date not null,
-	heureVol time not null,
-	nbPlace int not null,
+    nbPlace int not null,
 	primary key (numVol)
 );
 
-CREATE TABLE reservation (
-	numRes int not null,
-	numClt int not null,
-	numVol int not null,
-	dateRes datetime not null,
-	nbPers int not null,
-	primary key (numRes),
-	foreign key (numClt) references client(numClt),
-	foreign key (numVol) references vol(numVol)
+CREATE TABLE reserver (
+    numVol int not null,
+    numRes int not null,
+    nbPers int not null,
+    primary key (numRes,numVol)
 );
-
-CREATE TABLE echeance (
-	numRes int not null primary key,
-	montant int not null,
-	dateEcheance datetime not null,
-	foreign key (numRes) references reservation(numRes)
-);
-
-INSERT INTO vol VALUES (1,"2015-08-15", "15:15:00",33);
-INSERT INTO vol VALUES (2,"2015-08-15", "15:15:00",10);
-INSERT INTO vol VALUES (3,"2015-08-15", "15:15:00",13);
-INSERT INTO vol VALUES (4,"2015-08-15", "15:15:00",6);

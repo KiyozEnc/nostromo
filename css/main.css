@@ -1,0 +1,10 @@
+
+.fond{
+	background-attachment:fixed;
+	background-image: url("/nostromo/img/1.jpg");
+	background-size:cover;
+}
+.Titre{
+	vertical-align: middle;
+	text-align: middle;
+}
