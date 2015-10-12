@@ -19,9 +19,9 @@
 		</div>
 
 
-
 		<button type="submit" class="btn btn-primary">Valider</button>
 		<a class="btn btn-default" href="?uc=inscription" role="button">Pas encore inscrit ?</a>
 	</form>
 </div>
+
 <?php if(isset($_SESSION['error'])) { unset($_SESSION['error']); } ?>

@@ -9,9 +9,11 @@
 	<form action="?uc=inscription&action=inscrire" method="POST" role="form">
 		<legend>Inscription à Nostromo</legend>
 
-		<div class="form-group">
-			<label for="nomUser">Nom</label>
-			<input type="text" class="form-control" id="nomUser" name="nomUser" placeholder="Nom">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="form-group">
+				<label for="nomUser">Nom</label>
+				<input type="text" class="form-control" id="nomUser" name="nomUser" placeholder="Nom">
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="prenUser">Prénom</label>

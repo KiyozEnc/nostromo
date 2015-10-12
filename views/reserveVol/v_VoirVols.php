@@ -1,7 +1,11 @@
 <?php
 
 // Affichage des fleurs dans un tableau
+
+require_once("classes/date.classe.php");
+
 ?>
+
 <div class="jumbotron">
   <table class="table table-bordered table-hover table-condensed">
     <legend>Listes de vols disponible</legend>
@@ -11,22 +15,19 @@
         <th>Heure</th>
         <th>Nombre de place</th>
         <th>Actions</th>
-        <!--<th>Actions</th>-->
       </tr>
     </thead>
     <tbody>
       <?php
-
-      foreach ($tabVols as $vol)
+      foreach ($tabVols as $vol => $unVol)
         { ?>
       <tr>
-       <td><?php echo $vol['dateVol']; ?></td>
-       <td> <?php echo $vol['heureVol']; ?> </td>
-       <td> <?php echo $vol['nbPlace']; ?> </td>
-       <td> OPTION AJOUTER PANIER </td>
-       <!--<td><a href='?uc=gestionVols&action=modifierVol&numVol=<?php echo $vol['numVol'];?>'><img border=0 src='Public/Images/Divers/Modifier.png'></a><a href='?uc=gestionVols&action=supprimerVol&numVol=<?php echo $vol['numVol'];?>'><img border=0 src='Public/Images/Divers/Poubelle.png'></a></td>-->
-     </tr>
-     <?php } ?>
-   </tbody>
- </table>
+        <td> <?php echo DateVol::formaterDate($unVol->getDateVol()); ?> </td>
+        <td> <?php echo DateVol::formaterHeure($unVol->getHeureVol()); ?> </td>
+        <td><?php echo $unVol->getNbPlace(); ?></td>
+        <td> OPTION AJOUTER PANIER </td>
+      </tr>
+      <?php } ?>
+    </tbody>
+  </table>
 </div>

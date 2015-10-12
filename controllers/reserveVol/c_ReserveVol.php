@@ -11,9 +11,9 @@ switch($action)
 {
 	case 'voirVols' :
 
-	$tabVols = Vol::getVols();
+	$tabVols = MVol::getVols();
 	include("views/reserveVol/v_VoirVols.php"); break;
-	case 'ajoutVol' :
-	$d = 'd';break;
+
+	;break;
 	default : header("Location:?uc=index");
 }

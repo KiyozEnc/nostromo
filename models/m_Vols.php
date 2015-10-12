@@ -1,7 +1,7 @@
 <?php require_once "models/m_Connexion.php";
+require_once "classes/Vol.classe.php";
 
-
-class Vol
+class MVol
 {
 
 	static public function getVols()
@@ -11,7 +11,7 @@ class Vol
 			$conn = Connexion::getBdd();
 			$reqPrepare = $conn->query("SELECT * FROM vol");
 			$conn = null;
-			return $reqPrepare->fetchAll();
+			return $reqPrepare->fetchAll(PDO::FETCH_CLASS, "Vol");
 
 		}
 		catch(PDOException $ex)
@@ -19,20 +19,15 @@ class Vol
 			echo "Aucun vol n'est disponible";
 		}
 	}
-	static public function getUnVol($codeVol)
+	static public function getUnVol($numVol)
 	{
 		$conn = Connexion::getBdd();
-		$reqPrepare = $conn->prepare("SELECT * FROM vol WHERE codeVol = ?");
-		$reqPrepare->execute(array($codeVol));
+		$reqPrepare = $conn->prepare("SELECT * FROM vol WHERE numVol = ?");
+		$unVol = new Vol();
+		$reqPrepare->setFetchMode(PDO::FETCH_INTO, $unVol);
+		$reqPrepare->execute(array($numVol));
+		$reqPrepare->fetch(PDO::FETCH_INTO);
 		$conn = null;
-		return $reqPrepare->fetch();
-	}
-	static public function setAjoutVol($code, $date, $heure, $nbPlace)
-	{
-		$conn = Connexion::getBdd();
-		$reqprepare2=$conn->prepare("INSERT INTO vol (codeVol, dateVol, heureVol, nbPlace) VALUES (?,?,?,?)");
-		$reqprepare2->execute(array($code,$date,$heure,$nbPlace));
-		$conn = null;
-		return true;
+		return $unVol;
 	}
 }

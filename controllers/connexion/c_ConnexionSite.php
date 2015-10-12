@@ -10,7 +10,6 @@ else
 switch($action)
 {
 	case 'voirForm' :
-
 	include("views/connexion/v_VoirForm.php"); break;
 	case 'seConnecter' :
 	if(isset($_POST['mailUser']))
