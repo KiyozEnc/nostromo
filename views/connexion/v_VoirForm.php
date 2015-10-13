@@ -9,13 +9,19 @@
 	<form action="?uc=connexion&action=seConnecter" method="POST" role="form">
 		<legend>Connexion à Nostromo</legend>
 
-		<div class="form-group">
-			<label for="">Adresse e-mail</label>
-			<input type="email" class="form-control" id="mailUser" name="mailUser" placeholder="Adresse e-mail">
-		</div>
-		<div class="form-group">
-			<label for="">Mot de passe</label>
-			<input type="password" class="form-control" id="mdpUser" name="mdpUser" placeholder="Mot de passe">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<div class="form-group">
+					<label for="">Adresse e-mail</label>
+					<input type="email" class="form-control" id="mailUser" name="mailUser" placeholder="Adresse e-mail">
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<div class="form-group">
+					<label for="">Mot de passe</label>
+					<input type="password" class="form-control" id="mdpUser" name="mdpUser" placeholder="Mot de passe">
+				</div>
+			</div>
 		</div>
 
 

@@ -14,6 +14,19 @@ switch($action)
 	$tabVols = MVol::getVols();
 	include("views/reserveVol/v_VoirVols.php"); break;
 
-	;break;
-	default : header("Location:?uc=index");
+	case 'reserverVol' :
+
+	if(isset($_GET['vol']) && !empty($_GET['vol']))
+	{
+
+	}
+	else
+	{
+		$_SESSION['error'] = "Le vol demandé n'existe pas.";
+		header("Location:?uc=reserver");
+	}
+	; break;
+	default :
+	$_SESSION['error'] = "Impossible d'accéder à la page demandé.";
+	header("Location:?uc=index");
 }

@@ -38,12 +38,6 @@ session_start(); ?>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'materiel') { ?> class="active" <?php }} ?>><a href="?uc=materiel">Achats de matériel</a></li>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'apropos') { ?> class="active" <?php }} ?>><a href="?uc=apropos">A propos</a></li>
 			</ul>
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Rechercher">
-				</div>
-				<button type="submit" class="btn btn-default">Envoyer</button>
-			</form>
 			<?php if(!Connexion::sessionOuverte())
 			{ ?>
 			<ul class="nav navbar-nav navbar-right">
@@ -52,9 +46,10 @@ session_start(); ?>
 			</ul>
 			<?php } else { ?>
 			<ul class="nav navbar-nav navbar-right">
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'maReservation') { ?> class="active" <?php }} ?>><a href="?uc=maReservation">Ma réservation</a></li>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'voirPanier') { ?> class="active" <?php }} ?>><a href="?uc=voirPanier">Panier</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'voirPanier') { ?> class="active" <?php }} ?>><a href="?uc=monCompte">Mon Compte</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'voirPanier') { ?> class="active" <?php }} ?>><a href="?uc=deconnexion">Déconnexion</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monCompte') { ?> class="active" <?php }} ?>><a href="?uc=monCompte">Mon Compte</a></li>
+				<li><a href="?uc=deconnexion">Déconnexion</a></li>
 			</ul>
 			<?php } ?>
 		</div><!-- /.navbar-collapse -->
