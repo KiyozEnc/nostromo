@@ -1,4 +1,5 @@
 <?php
+require_once("classes/date.classe.php");
 require_once 'models/m_Connexion.php';
 session_start(); ?>
 <!DOCTYPE html>
@@ -66,6 +67,7 @@ session_start(); ?>
 			case 'connexion' : include("controllers/connexion/c_ConnexionSite.php");break;
 			case 'inscription' : include("controllers/inscription/c_InscriptionSite.php");break;
 			case 'deconnexion' : include("controllers/deconnexion/c_Deconnexion.php");break;
+			case 'maReservation' : include("controllers/maReservation/c_MaReservation.php");break;
 			case 'monCompte' : include("controllers/compte/c_MonCompte.php");break;
 			default : include("views/Index/v_Erreur.php"); break;
 		}
