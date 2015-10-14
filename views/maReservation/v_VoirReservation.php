@@ -21,26 +21,37 @@
   <?php
   if(isset($_SESSION['Reservation']))
     { ?>
+  <!-- COMPTEUR VOL DANS XX TEMPS EN JS ICI -->
   <table class="table table-bordered table-hover table-condensed">
-    <legend>Vol réservé</legend>
+    <?php
+    if($_SESSION['Reservation']->getValid() == false)
+    {
+      ?> <legend>Vol demandé</legend> <?php
+    }
+    else
+    {
+      ?> <legend>Vol réservé</legend> <?php
+    } ?>
     <thead>
       <tr>
         <th>Code</th>
         <th>Date</th>
         <th>Heure</th>
         <th>Nombre de place</th>
-        <th>Actions</th>
+        <?php if($_SESSION['Reservation']->getValid() == false) { ?> <th>Actions</th> <?php } ?>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <?php var_dump($_SESSION['Reservation']); ?>
-        <td><?php echo DateVol::formaterDate($_SESSION['Reservation']->getDateVol()); ?> </td>
-        <td><?php echo DateVol::formaterHeure($_SESSION['Reservation']->getHeureVol()); ?> </td>
+        <td><?php echo $_SESSION['Reservation']->getRef(); ?> </td>
+        <td><?php echo DateVol::formaterDate($_SESSION['Reservation']->getDate()); ?> </td>
+        <td><?php echo DateVol::formaterHeure($_SESSION['Reservation']->getHeure()); ?> </td>
         <td><?php echo $_SESSION['Reservation']->getNbPlace(); ?></td>
+        <?php if($_SESSION['Reservation']->getValid() == false) { ?> <td><a href="?uc=maReservation&action=annulerReservation" title="Annuler la réservation du vol n°<?= $_SESSION['Reservation']->getRef(); ?>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a></td><?php } ?>
       </tr>
     </tbody>
   </table>
+  <?php if($_SESSION['Reservation']->getValid() == false) { ?> <a class="btn btn-primary" href="?uc=maReservation&action=validerReservation" role="button">Valider la réservation</a><?php } else { echo "Pour retirer votre réservation, contacter Nostromo"; } ?>
   <?php }
   else
   {
@@ -52,4 +63,3 @@
 
   <?php if(isset($_SESSION['valid'])) { unset($_SESSION['valid']); } ?>
   <?php if(isset($_SESSION['error'])) { unset($_SESSION['error']); } ?>
-  <?php unset($_SESSION['Reservation']); ?>

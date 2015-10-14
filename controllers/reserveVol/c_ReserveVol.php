@@ -1,7 +1,4 @@
 <?php
-require_once('models/m_Connexion.php');
-require_once('models/m_Vols.php');
-require_once('classes/produit.classe.php');
 
 if(isset($_GET['action']))
 	$action = $_GET['action'];
@@ -21,18 +18,21 @@ switch($action)
 	{
 		if(!isset($_SESSION['Reservation']))
 		{
-			$prod = new Produit($_GET['vol']);
-			$_SESSION['Reservation'] = $prod;
+			$_SESSION['Reservation'] = new Produit($_GET['vol']);
    		 // On crée un produit et on l'ajoute au Reservation
    		 // $prod =
 
 			echo "
 			<SCRIPT LANGUAGE='JavaScript' TYPE='text/javascript'>
-				alert('Votre produit ".$prod->getRef()." a été ajouté au Reservation');
+				alert('Votre produit ".$_SESSION['Reservation']->getRef()." a été ajouté au Reservation');
 			</SCRIPT>";
 			header("Location:?uc=maReservation");
 		}
-		break;
+		else
+		{
+			$_SESSION['error'] = "Vous avez déjà une réservation.";
+			header("Location:?uc=maReservation");
+		}
 	}
 	else
 	{
@@ -40,6 +40,7 @@ switch($action)
 		header("Location:?uc=reserver");
 	}
 	; break;
+
 	default :
 	$_SESSION['error'] = "Impossible d'accéder à la page demandé.";
 	header("Location:?uc=index");

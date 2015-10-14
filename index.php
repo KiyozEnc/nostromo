@@ -1,6 +1,8 @@
 <?php
 require_once("classes/date.classe.php");
-require_once 'models/m_Connexion.php';
+require_once('models/m_Connexion.php');
+require_once('models/m_Vols.php');
+require_once('classes/produit.classe.php');
 session_start(); ?>
 <!DOCTYPE html>
 <html>

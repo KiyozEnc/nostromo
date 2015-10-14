@@ -11,6 +11,7 @@ class Produit
 	private $date;   // Libellé du produit
 	private $heure;   // Quantité du produit
 	private $nbPlace;  // Prix du produit
+  private $valid;
 
  /**
   * Constructeur d'un produit, sa référence est passé en paramètre
@@ -24,6 +25,7 @@ class Produit
     $this->date = $tab->getDateVol();
     $this->heure = $tab->getHeureVol();
     $this->nbPlace = $tab->getNbPlace();
+    $this->valid = false;
   }
   /**
    * Retourne la référence du produit
@@ -60,6 +62,28 @@ class Produit
   {
    return ($this->nbPlace);
  }
+ public function getProduit()
+ {
+  $ref = $this->getRef();
+  $date = $this->getDate();
+  $heure = $this->getHeure();
+  $nbPlace = $this->getNbPlace();
+  $tab = array (
+    "ref" => $ref,
+    "date" => $date,
+    "heure" => $heure,
+    "nbPlace" => $nbPlace
+    );
+  return $tab;
+}
+public function getValid()
+{
+  return $this->valid;
+}
+public function setValider()
+{
+  $this->valid = true;
+}
 
 
 }

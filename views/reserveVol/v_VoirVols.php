@@ -40,7 +40,7 @@ require_once("models/m_Connexion.php");
         <td> <?php echo DateVol::formaterHeure($unVol->getHeureVol()); ?> </td>
         <td><?php echo $unVol->getNbPlace(); ?></td>
         <?php
-        if(Connexion::sessionOuverte()) { ?><td> <a href="?uc=reserver&action=reserverVol&vol=<?php echo $unVol->getNumVol(); ?>">Reserver</a> </td><?php } ?>
+        if(Connexion::sessionOuverte()) { ?><td> <a href="?uc=reserver&action=reserverVol&vol=<?php echo $unVol->getNumVol(); ?>" title="Réserver le vol n° <?= $unVol->getNumVol(); ?>"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Réserver</a> </td><?php } ?>
       </tr>
       <?php } ?>
     </tbody>

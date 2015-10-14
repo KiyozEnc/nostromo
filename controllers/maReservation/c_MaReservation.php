@@ -11,25 +11,15 @@ switch ($action)
 {
 	case 'voirReservation' :
 
-       // Si le panier n'existe pas encore, on le crée
 	include ('views/maReservation/v_VoirReservation.php');
 	break;
 
 	case 'ajouterProduit' :
 
-		 // Si le Reservation n'existe pas encore, on le crée
-         //   ....
 	if(isset($_SESSION['Reservation']))
 	{
-		$prod = new Produit($_GET['ref']);
-		$_SESSION['Reservation'] = $prod;
-   		 // On crée un produit et on l'ajoute au Reservation
-   		 // $prod =
-
-		echo "
-		<SCRIPT LANGUAGE='JavaScript' TYPE='text/javascript'>
-			alert('Votre produit ".$prod->getRef()." a été ajouté au Reservation');
-		</SCRIPT>";
+		$_SESSION['Reservation'] = new Produit($_GET['ref']);
+		$_SESSION['valid'] = "Réservation effectuée avec succès.";
 		header("Location:?uc=maReservation");
 	}
 	else
@@ -38,16 +28,12 @@ switch ($action)
 	}
 	break;
 
-	case 'supprimerProduit' :
+	case 'annulerReservation' :
 	if(isset($_SESSION['Reservation']))
 	{
-		$_SESSION['Reservation']->supprimerUnProduit($_GET['ref']);
-
-		echo "
-		<SCRIPT LANGUAGE='JavaScript' TYPE='text/javascript'>
-			alert('Votre produit ".$_GET['ref']." a été supprimé du Reservation');
-			document.location='index.php?uc=Reservation&action=voirReservation';
-		</SCRIPT>";
+		unset($_SESSION['Reservation']);
+		$_SESSION['valid'] = "Réservation annulée avec succès.";
+		header("Location:?uc=maReservation");
 	}
 	else
 	{
@@ -56,7 +42,16 @@ switch ($action)
 	break;
 
 	case 'validerReservation' :
-	echo "Bravo";
+	if(isset($_SESSION['Reservation']))
+	{
+		$_SESSION['valid'] = "Réservation validée avec succès.";
+		$_SESSION['Reservation']->setValider();
+		header("Location:?uc=maReservation");
+	}
+	else
+	{
+		header("Location:?uc=maReservation");
+	}
 	break;
 }
 ?>
