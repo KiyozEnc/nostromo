@@ -12,7 +12,9 @@
 </div>
 <?php } ?>
 
-TEST index
+<div class="jumbotron">
+	TEST index
+</div>
 
 
 <?php if(isset($_SESSION['valid'])) { unset($_SESSION['valid']); } ?>

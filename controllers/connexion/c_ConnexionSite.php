@@ -17,10 +17,15 @@ switch($action)
 		$utilisateur = ConnexionSite::getUser($_POST['mailUser']);
 		if($_POST['mailUser'] == $utilisateur['mailClt'] && sha1($_POST['mdpUser']) == $utilisateur['mdpClt'])
 		{
+			$_SESSION['numClt'] = $utilisateur['numClt'];
 			$_SESSION['login'] = $utilisateur['nomClt'];
 			$_SESSION['mailClient'] = $utilisateur['mailClt'];
 			$_SESSION['prenomClient'] = $utilisateur['prenomClt'];
 			$_SESSION['pointsClient'] = $utilisateur['pointsClt'];
+			$_SESSION['Reservation'] = MVol::reservationExistante($utilisateur['numClt']);
+			$_SESSION['Reservation']->setValider();
+			if(empty($_SESSION['Reservation']->getRef()))
+				unset($_SESSION['Reservation']);
 			$_SESSION['valid'] = "Connecté avec succès.";
 			header("Location:?uc=index");
 		}

@@ -42,7 +42,7 @@ CREATE TABLE vol (
 );
 
 CREATE TABLE reservation (
-	numRes int not null,
+	numRes int not null auto_increment,
 	numClt int not null,
 	numVol int not null,
 	dateRes datetime not null,

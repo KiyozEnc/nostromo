@@ -1,5 +1,6 @@
 <?php
 
+// Affichage des fleurs dans un tableau
 
 require_once("classes/date.classe.php");
 require_once("models/m_Connexion.php");

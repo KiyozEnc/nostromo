@@ -1,1 +1,3 @@
-TEST ERREUR 404
+<div class="jumbotron">
+	TEST ERROR 404
+</div>

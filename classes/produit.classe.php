@@ -18,13 +18,13 @@ class Produit
   * Les autres informations sont obtenues via la base de données
   * @param type $reference
   */
-  public function Produit ($reference) // Constructeur
+  public function Produit ($reference,$personnes) // Constructeur
   {
     $this->ref = $reference;
     $tab = MVol::getUnVol($reference);
     $this->date = $tab->getDateVol();
     $this->heure = $tab->getHeureVol();
-    $this->nbPlace = $tab->getNbPlace();
+    $this->nbPlace = $personnes;
     $this->valid = false;
   }
   /**
@@ -84,8 +84,15 @@ public function setValider()
 {
   $this->valid = true;
 }
-
-
+public function enregistrerValid()
+{
+  $dateRes = date('Y-m-d H:i:s');
+  MVol::validReservation($_SESSION['numClt'],$this->getRef(),$dateRes,$this->getNbPlace());
+}
+public function setNonValid()
+{
+  $this->valid = false;
+}
 }
 
 

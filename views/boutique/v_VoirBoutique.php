@@ -1,7 +1,4 @@
 <?php
-
-
-require_once("classes/date.classe.php");
 require_once("models/m_Connexion.php");
 
 ?>
@@ -20,26 +17,25 @@ require_once("models/m_Connexion.php");
 	</div>
 	<?php } ?>
 	<table class="table table-bordered table-hover table-condensed">
-		<legend>Liste des vols disponible</legend>
+		<legend>Liste des articles disponible</legend>
 		<thead>
 			<tr>
-				<th>Date</th>
-				<th>Heure</th>
-				<th>Nombre de place</th>
-				<?php
-				if(Connexion::sessionOuverte()) { ?><th>Actions</th><?php } ?>
+				<th>Numéro de l'article</th>
+				<th>Désignation</th>
+				<th>Prix unitaire</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
-			foreach ($tabVols as $vol => $unVol)
+			foreach ($tabArt as $art => $unArt)
 				{ ?>
 			<tr>
-				<td> <?php echo DateVol::formaterDate($unVol->getDateVol()); ?> </td>
-				<td> <?php echo DateVol::formaterHeure($unVol->getHeureVol()); ?> </td>
-				<td><?php echo $unVol->getNbPlace(); ?></td>
-				<?php
-				if(Connexion::sessionOuverte()) { ?><td> <a href="?uc=reserver&action=reserverVol&vol=<?php echo $unVol->getNumVol(); ?>" title="Réserver le vol n° <?= $unVol->getNumVol(); ?>"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Réserver</a> </td><?php } ?>
+				<td> <?php echo $unArt->getNumArt(); ?> </td>
+				<td> <?php echo $unArt->getDesignation(); ?> </td>
+				<td><?php echo $unArt->getPu(); ?> €</td>
+				<td> <a href="?uc=materiel&action=voirArticle&article=<?php echo $unArt->getNumArt(); ?>" type="button" class="btn btn-default">Détails</a></td>
+
 			</tr>
 			<?php } ?>
 		</tbody>

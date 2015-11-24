@@ -9,9 +9,13 @@ class Connexion {
 			$user = "2014-nostromo";
 			$mdp = "123456";*/
 			$host = "localhost";
-			$dbname = "nostromo";
-			$user = "root";
-			$mdp = "admin";
+			$dbname = "2014-nostromo_base";
+			$user = "2014-nostromo";
+			$mdp = "123456";
+			/*$host = "btsinfo-rousseau53.fr:33017";
+			$dbname = "2014-nostromo_base";
+			$user = "2014-nostromo";
+			$mdp = "123456";*/
 			$pdo = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',
 				$user, $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			return $pdo;

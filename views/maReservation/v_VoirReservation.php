@@ -1,8 +1,5 @@
 <?php
 
-// Affichage des fleurs dans un tableau
-
-
 ?>
 <div class="jumbotron">
   <?php if(isset($_SESSION['valid'])) { ?>
@@ -20,7 +17,8 @@
   <?php } ?>
   <?php
   if(isset($_SESSION['Reservation']))
-    { ?>
+    {  ?>
+
   <!-- COMPTEUR VOL DANS XX TEMPS EN JS ICI -->
   <table class="table table-bordered table-hover table-condensed">
     <?php
@@ -32,12 +30,13 @@
     {
       ?> <legend>Vol réservé</legend> <?php
     } ?>
+
     <thead>
       <tr>
         <th>Code</th>
         <th>Date</th>
         <th>Heure</th>
-        <th>Nombre de place</th>
+        <th>Nombre de personnes</th>
         <?php if($_SESSION['Reservation']->getValid() == false) { ?> <th>Actions</th> <?php } ?>
       </tr>
     </thead>

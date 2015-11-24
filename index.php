@@ -2,14 +2,18 @@
 require_once("classes/date.classe.php");
 require_once('models/m_Connexion.php');
 require_once('models/m_Vols.php');
+require_once('models/m_Article.php');
 require_once('classes/produit.classe.php');
+require_once('classes/article.classe.php');
+require_once('classes/panier.classe.php');
+require_once('classes/collection.classe.php');
 session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-	<link type="text/css" rel="stylesheet" href="/nostromo/css/main.css"/>
+	<link type="text/css" rel="stylesheet" href="/2014-nostromo/css/main.css"/>
 	<title>Nostromo</title>
 </head>
 
@@ -30,7 +34,7 @@ session_start(); ?>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/nostromo/">Nostromo</a>
+			<a class="navbar-brand" href="?uc=index">Nostromo</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,7 +75,9 @@ session_start(); ?>
 			case 'deconnexion' : include("controllers/deconnexion/c_Deconnexion.php");break;
 			case 'maReservation' : include("controllers/maReservation/c_MaReservation.php");break;
 			case 'monCompte' : include("controllers/compte/c_MonCompte.php");break;
-			default : include("views/Index/v_Erreur.php"); break;
+			case 'materiel' : include("controllers/boutique/c_Boutique.php");break;
+			case 'monPanier' :include("controllers/panier/c_Panier.php");break;
+			default : include("views/index/v_Erreur.php"); break;
 		}
 		else
 		{
