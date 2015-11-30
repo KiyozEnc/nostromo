@@ -8,6 +8,7 @@ require_once "collection.classe.php";
  */
 class Panier
 {
+
   /**
    * Collection de produits
    * @var Collection
@@ -42,9 +43,7 @@ class Panier
   public function augmenterQuantiteProduit($ref ,$qte)
   {
     if($this->CollProduit->cleExiste($ref))
-    {
       $this->CollProduit->getElement($ref)->augmenterQuantite($qte);
-    }
   }
 
   /**
@@ -70,14 +69,12 @@ class Panier
    * @param type $unProduit Objet Produit à ajouter au panier
    */
 
-  public function ajouterUnProduit($unProduit)
+  public function ajouterUnProduit($unProduit,$qte)
   {
-    if($this->CollProduit->cleExiste($unProduit->getRef()))
-    {
-      $this->augmenterQuantiteProduit($unProduit->getRef(),1);
-    }
+    if($this->CollProduit->cleExiste($unProduit->getNumArt()))
+      $this->augmenterQuantiteProduit($unProduit->getNumArt(),$qte);
     else
-      $this->CollProduit->ajouter($unProduit, $unProduit->getRef());
+      $this->CollProduit->ajouter($unProduit, $unProduit->getNumArt());
   }
 
   /**

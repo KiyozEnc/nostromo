@@ -23,7 +23,7 @@ require_once("models/m_Connexion.php");
 				<th>Numéro de l'article</th>
 				<th>Désignation</th>
 				<th>Prix unitaire</th>
-				<th>Action</th>
+				<?php if(Connexion::sessionOuverte()) { ?><th>Actions</th><?php } ?>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,7 +34,7 @@ require_once("models/m_Connexion.php");
 				<td> <?php echo $unArt->getNumArt(); ?> </td>
 				<td> <?php echo $unArt->getDesignation(); ?> </td>
 				<td><?php echo $unArt->getPu(); ?> €</td>
-				<td> <a href="?uc=materiel&action=voirArticle&article=<?php echo $unArt->getNumArt(); ?>" type="button" class="btn btn-default">Détails</a></td>
+				<?php if(Connexion::sessionOuverte()) { ?><th><a href="?uc=materiel&action=voirArticle&article=<?php echo $unArt->getNumArt(); ?>" type="button" class="btn btn-default">Détails</a></th><?php } ?>
 
 			</tr>
 			<?php } ?>

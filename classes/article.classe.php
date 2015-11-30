@@ -11,6 +11,7 @@ class Article
   private $designation;
   private $pu;
   private $qteStock;
+  private $qte;
 
  /**
   * Constructeur d'un Article, sa référence est passé en paramètre
@@ -27,6 +28,7 @@ class Article
   $designation = $this->getDesignation();
   $pu = $this->getPu();
   $qteStock = $this->getQteStock();
+  $qte=0;
   $tab = array (
     "numArt" => $numArt,
     "designation" => $designation,
@@ -43,6 +45,10 @@ class Article
   {
    return ($this->numArt);
  }
+ public function vider()
+ {
+
+ }
 
   /**
    * Retourne le libellé du Article
@@ -52,7 +58,19 @@ class Article
   {
     return ($this->designation);
   }
-
+  public function getQte()
+  {
+    return ($this->qte);
+  }
+  public function augmenterQuantite($quantite)
+  {
+    $this->qte=$this->qte+$quantite;
+  }
+    public function diminuerQuantite($quantite)
+  {
+    $this->qte=$this->qte-$quantite;
+    if($this->qte<0){$this->qte=0;}
+  }
   /**
    * Retourne la quantité commmandée
    * @return type
@@ -82,6 +100,12 @@ class Article
   {
     $this->$property = $value;
   }
+public function setQte($quantite)
+{
+  $this->qte=$quantite;
+}
+
+
 }
 
 

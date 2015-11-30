@@ -19,11 +19,11 @@ require_once("models/m_Connexion.php");
 	<?php echo $article->getDesignation(); ?> → Prix unitaire : <?php echo $article->getPu(); ?> €
 	<br><br><br>
 
-	<form action="?uc=monPanier&action=ajouterArticle" method="POST" role="form">
+	<form action="?uc=monPanier&action=ajouterArticle&ref=<?php echo $article->getNumArt(); ?>" method="POST" role="form" autocomplet>
 
 		<div class="form-group">
 			<label for="">Quantitée voulu</label>
-			<input type="text" class="form-control" id="" placeholder="Quantitée">
+			<input name="qte" type="text" class="form-control" id="" placeholder="Quantitée">
 		</div>
 
 

@@ -6,31 +6,80 @@ else
 
 switch ($action)
 {
-	case 'voirPanier' :// si le panier n'éxiste pas on le crée
-	if(!isset($_SESSION['Panier']))
-	{
-		$_SESSION['Panier'] = new Panier();
-	}
+	case 'voirPanier' :
 	include("views/panier/v_VoirPanier.php"); break;
 
 	case 'ajouterArticle' :// si le panier n'éxiste pas on le crée
-	if(!isset($_SESSION['Panier']))
-	{
-		$_SESSION['Panier'] = new Panier();
-	}
-	$prod = new Produit($_GET('ref'));
-	$_SESSION['Panier']->ajouterProduit($prod);
-	;break;
+		if(!isset($_SESSION['Panier']))
+		{
+			$_SESSION['Panier'] = new Panier();
+		}
+		$prod = MArticle::getArticle($_GET['ref']);
+		if($prod->getQteStock()-$_POST['qte']<0)
+		{
+			$_SESSION['error']="Quantitée en stock insuffisante.";
+			$ref=$_GET['ref'];
+			if($_SESSION['Panier']->getNbProd()==0)
+			{
+				unset($_SESSION['Panier']);
+			}
+			header("Location:?uc=materiel&action=voirArticle&article=$ref");
+		}
+		else
+		{
+			$prod->setQte($_POST['qte']);
+			$_SESSION['Panier']->ajouterUnProduit($prod,$_POST['qte']);
+			header('Location:?uc=materiel');
+		}
 
-	case 'supprimerProduit' :	;break;
+	break;
 
-	case 'augmenterProduit' :	;break;
+	case 'supprimerProduit' :
+		$_SESSION['Panier']->supprimerUnProduit($_GET['article']);
+		if($_SESSION['Panier']->getNbProd()==0)
+		{
+			unset($_SESSION['Panier']);
+		}
+		header('Location:?uc=monPanier');break;
+	case 'augmenterProduit' :
+		$_SESSION['Panier']->augmenterQuantiteProduit($_GET['article'],1);
+		$prod = MArticle::getArticle($_GET['ref']);
+		if($prod->getQteStock()-$prod->getQte()<0)
+		{
+			$_SESSION['error']="Quantitée en stock insuffisante.";
+			$ref=$_GET['ref'];
+			$_SESSION['Panier']->supprimerUnProduit($_GET['article']);
+			if($_SESSION['Panier']->getNbProd()==0)
+			{
+				unset($_SESSION['Panier']);
+			}
+			header("Location:?uc=materiel&action=voirArticle&article=$ref");
+		}
 
-	case 'diminuerProduit' :	;break;
 
+
+
+
+
+
+		header('Location:?uc=monPanier')
+		;break;
+	case 'diminuerProduit' :
+		$_SESSION['Panier']->diminuerQuantiteProduit($_GET['article'],1);
+		if($_SESSION['Panier']->getNbProd()==0)
+		{
+			unset($_SESSION['Panier']);
+		}
+		header('Location:?uc=monPanier');break;
 	case 'validerCommande' :	;break;
+		//lol
+	case 'viderPanier':
+		$_SESSION['Panier']->videPanier();
+		unset($_SESSION['Panier']);
+		include("views/panier/v_VoirPanier.php");
+	break;
 
 	default :
 	$_SESSION['error'] = "Impossible d'accéder à la page demandé.";
-	header("Location:?uc=index");
+	header("Location:?uc=index");break;
 }

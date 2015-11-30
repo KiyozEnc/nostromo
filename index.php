@@ -54,7 +54,7 @@ session_start(); ?>
 			<?php } else { ?>
 			<ul class="nav navbar-nav navbar-right">
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'maReservation') { ?> class="active" <?php }} ?>><a href="?uc=maReservation">Ma réservation</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'voirPanier') { ?> class="active" <?php }} ?>><a href="?uc=voirPanier">Panier</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monPanier') { ?> class="active" <?php }} ?>><a href="?uc=monPanier">Panier</a></li>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monCompte') { ?> class="active" <?php }} ?>><a href="?uc=monCompte">Mon Compte</a></li>
 				<li><a href="?uc=deconnexion">Déconnexion</a></li>
 			</ul>
