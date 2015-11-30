@@ -15,6 +15,7 @@ switch ($action)
 			$_SESSION['Panier'] = new Panier();
 		}
 		$prod = MArticle::getArticle($_GET['ref']);
+
 		if($prod->getQteStock()-$_POST['qte']<0)
 		{
 			$_SESSION['error']="Quantitée en stock insuffisante.";
@@ -41,18 +42,18 @@ switch ($action)
 			unset($_SESSION['Panier']);
 		}
 		header('Location:?uc=monPanier');break;
+
 	case 'augmenterProduit' :
+
 		$_SESSION['Panier']->augmenterQuantiteProduit($_GET['article'],1);
-		$prod = MArticle::getArticle($_GET['ref']);
-		if($prod->getQteStock()-$prod->getQte()<0)
+
+		$prod = MArticle::getArticle($_GET['article']);
+		var_dump($prod);
+		if(($prod->getQteStock()-$prod->getQte()) < "0")
 		{
 			$_SESSION['error']="Quantitée en stock insuffisante.";
-			$ref=$_GET['ref'];
-			$_SESSION['Panier']->supprimerUnProduit($_GET['article']);
-			if($_SESSION['Panier']->getNbProd()==0)
-			{
-				unset($_SESSION['Panier']);
-			}
+
+			$ref=$_GET['article'];
 			header("Location:?uc=materiel&action=voirArticle&article=$ref");
 		}
 
@@ -60,9 +61,7 @@ switch ($action)
 
 
 
-
-
-		header('Location:?uc=monPanier')
+		header('Location:?uc=monPanier');
 		;break;
 	case 'diminuerProduit' :
 		$_SESSION['Panier']->diminuerQuantiteProduit($_GET['article'],1);
@@ -71,8 +70,11 @@ switch ($action)
 			unset($_SESSION['Panier']);
 		}
 		header('Location:?uc=monPanier');break;
+
 	case 'validerCommande' :	;break;
 		//lol
+
+
 	case 'viderPanier':
 		$_SESSION['Panier']->videPanier();
 		unset($_SESSION['Panier']);
