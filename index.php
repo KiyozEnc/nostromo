@@ -30,9 +30,9 @@ session_start(); ?>
 
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'index') { ?> class="active" <?php }} ?>><a href="?uc=index">Accueil</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'reserver') { ?> class="active" <?php }} ?>><a href="?uc=reserver">Réservations de vol</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'materiel') { ?> class="active" <?php }} ?>><a href="?uc=materiel">Achats de matériel</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'index') { ?> class="active" <?php }} ?>><a href="?uc=index"><img src="img/home.png" height="20"> Accueil</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'reserver') { ?> class="active" <?php }} ?>><a href="?uc=reserver"><img src="img/avion.png" height="20"> Réservations de vol</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'materiel') { ?> class="active" <?php }} ?>><a href="?uc=materiel"><img src="img/boutique.png" height="20"> Achats de matériel</a></li>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'apropos') { ?> class="active" <?php }} ?>><a href="?uc=apropos">A propos</a></li>
 			</ul>
 			<?php if(!Connexion::sessionOuverte())
@@ -44,8 +44,8 @@ session_start(); ?>
 			<?php } else { ?>
 			<ul class="nav navbar-nav navbar-right">
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'maReservation') { ?> class="active" <?php }} ?>><a href="?uc=maReservation">Ma réservation</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monPanier') { ?> class="active" <?php }} ?>><a href="?uc=monPanier">Panier</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monCompte') { ?> class="active" <?php }} ?>><a href="?uc=monCompte">Mon Compte</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monPanier') { ?> class="active" <?php }} ?>><a href="?uc=monPanier"><img src="img/panier.png" height="20"> Panier</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monCompte') { ?> class="active" <?php }} ?>><a href="?uc=monCompte"><img src="img/user.png" height="20"> Mon Compte</a></li>
 				<li><a href="?uc=deconnexion">Déconnexion</a></li>
 			</ul>
 			<?php } ?>
