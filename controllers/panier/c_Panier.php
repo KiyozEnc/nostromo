@@ -42,17 +42,16 @@ switch ($action)
         header('Location:?uc=monPanier');break;
 
     case 'augmenterProduit' :
-
-        $_SESSION['Panier']->augmenterQuantiteProduit($_GET['article'], 1);
-        $prod = MArticle::getArticle($_GET['article']);
-        var_dump($prod);
-        if(($prod->getQteStock() - $prod->getQte()) < 0)
+        try
         {
-            $_SESSION['error']="Quantitée en stock insuffisante.";
-            $ref=$_GET['article'];
-            header("Location:?uc=materiel&action=voirArticle&article=$ref");
+            $_SESSION['Panier']->augmenterQuantiteProduit($_GET['article'], 1);
+            $prod = MArticle::getArticle($_GET['article']);
+            header('Location:?uc=monPanier');
         }
-        header('Location:?uc=monPanier');
+        catch (Exception $e)
+        {
+            $_SESSION['error'] = $e->getMessage();
+        }
         break;
 
     case 'diminuerProduit' :

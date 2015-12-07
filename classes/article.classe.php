@@ -67,7 +67,7 @@ class Article
       if($this->qte < $this->qteStock)
           $this->qte = $this->qte + $quantite;
       else
-          $_SESSION['error'] = "La quantité en stock est insuffisante.";
+          throw new Exception("La quantité en stock est insuffisante.");
   }
     public function diminuerQuantite($quantite)
   {
