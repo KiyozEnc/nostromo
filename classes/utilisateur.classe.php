@@ -65,7 +65,7 @@ class Utilisateur
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int) $id;
 
         return $this;
     }
@@ -156,7 +156,7 @@ class Utilisateur
      */
     public function setCp($cp)
     {
-        $this->cp = $cp;
+        $this->cp = (int) $cp;
 
         return $this;
     }
@@ -248,7 +248,7 @@ class Utilisateur
      */
     public function setPoints($points)
     {
-        $this->points = $points;
+        $this->points = (int) $points;
 
         return $this;
     }
