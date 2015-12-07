@@ -33,6 +33,7 @@ require_once("models/m_Connexion.php");
             <tbody>
             <?php
             $total = 0;
+            echo $_SESSION['Panier']->getNbProd();
             foreach ($_SESSION['Panier']->getProduitsPanier() as $art => $Panier)
             { ?>
                 <tr>
