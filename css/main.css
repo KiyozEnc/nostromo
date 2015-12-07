@@ -1,10 +1,14 @@
 
 .background{
-	background-attachment:fixed;
-	background-image: url("http://puu.sh/l7R7a/c38cc933a5.jpg");
-	background-size: cover;
+    background-attachment:fixed;
+    background-image: url("http://puu.sh/l7R7a/c38cc933a5.jpg");
+    background-size: cover;
 }
 .Titre{
-	vertical-align: middle;
-	text-align: center;
+    vertical-align: middle;
+    text-align: center;
+}
+
+th, td {
+    text-align: center;
 }

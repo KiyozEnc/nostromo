@@ -6,8 +6,8 @@
             <?= $_SESSION['error'] ?>
         </div>
     <?php } ?>
-    <form action="?uc=reserver&action=validReserverVol&vol=<?= $vol->getNumVol(); ?>" method="POST" role="form">
-        <legend>Réserver le vol n° <?= $vol->getNumVol(); ?></legend>
+    <form action="?uc=reserver&action=validReserverVol&vol=<?= $vol->getNumVol(); ?>" method="POST" role="form" autocomplete="off">
+        <legend>Réserver le vol n° <?= $vol->getNumVol(); ?> - Nombre de place restantes pour ce vol : <?= $nbPlaceRestante ?> places</legend>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
