@@ -49,7 +49,7 @@ class Vol
      */
     public function setNumVol($numVol)
     {
-        $this->numVol = $numVol;
+        $this->numVol = (int) $numVol;
 
         return $this;
     }
@@ -106,7 +106,7 @@ class Vol
      */
     public function setNbPlace($nbPlace)
     {
-        $this->nbPlace = $nbPlace;
+        $this->nbPlace = (int) $nbPlace;
 
         return $this;
     }

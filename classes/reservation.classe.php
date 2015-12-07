@@ -20,7 +20,7 @@ class Reservation
      */
     private $unVol;
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     private $dateRes;
     /**
@@ -32,9 +32,9 @@ class Reservation
      */
     private $valid = false;
 
-    public function Vol()
+    public function Reservation()
     {
-        $this->dateRes = new DateTime();
+        $this->dateRes = new \DateTime();
     }
 
     /**
@@ -47,10 +47,13 @@ class Reservation
 
     /**
      * @param int $id
+     * @return Reservation
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int) $id;
+
+        return $this;
     }
 
     /**
@@ -63,10 +66,13 @@ class Reservation
 
     /**
      * @param Vol $unVol
+     * @return Reservation
      */
     public function setUnVol($unVol)
     {
         $this->unVol = $unVol;
+
+        return $this;
     }
 
     /**
@@ -79,14 +85,17 @@ class Reservation
 
     /**
      * @param Utilisateur $unClient
+     * @return Reservation
      */
     public function setUnClient($unClient)
     {
         $this->unClient = $unClient;
+
+        return $this;
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDateRes()
     {
@@ -94,11 +103,14 @@ class Reservation
     }
 
     /**
-     * @param DateTime $dateRes
+     * @param \DateTime $dateRes
+     * @return Reservation
      */
     public function setDateRes($dateRes)
     {
-        $this->dateRes = $dateRes;
+        $this->dateRes = DateTime::createFromFormat('Y-m-d H:i:s', $dateRes);
+
+        return $this;
     }
 
     /**
@@ -111,10 +123,13 @@ class Reservation
 
     /**
      * @param int $nbPers
+     * @return Reservation
      */
     public function setNbPers($nbPers)
     {
-        $this->nbPers = $nbPers;
+        $this->nbPers = (int) $nbPers;
+
+        return $this;
     }
 
     /**
@@ -127,10 +142,13 @@ class Reservation
 
     /**
      * @param boolean $valid
+     * @return Reservation
      */
     public function setValid($valid)
     {
-        $this->valid = $valid;
+        $this->valid = (boolean) $valid;
+
+        return $this;
     }
 
     public function flushValid()

@@ -179,7 +179,7 @@ class Utilisateur
      */
     public function setVille($ville)
     {
-        $this->ville = $ville;
+        $this->ville = strtoupper($ville);
 
         return $this;
     }
