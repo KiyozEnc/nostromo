@@ -14,11 +14,30 @@ class Connexion {
             echo $ex->getMessage();
         }
     }
+
+    /**
+     * @return boolean
+     */
     static public function sessionOuverte()
     {
-        if(isset($_SESSION['login']))
+        if(isset($_SESSION['Utilisateur']))
             return true;
         else
             return false;
+    }
+
+    /**
+     * @param string $message
+     * @param string $type
+     */
+    static public function setFlashMessage($message, $type)
+    {
+        switch ($type)
+        {
+            case 'valid' : $_SESSION['valid'] = $message; if(isset($_SESSION['error'])) { unset($_SESSION['error']); } break;
+            case 'error' : $_SESSION['error'] = $message; if(isset($_SESSION['valid'])) { unset($_SESSION['valid']); } break;
+            default : $_SESSION['error'] = "Erreur inconnue"; break;
+        }
+
     }
 }
