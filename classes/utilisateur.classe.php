@@ -202,7 +202,7 @@ class Utilisateur
      */
     public function setMdp($mdp)
     {
-        $this->mdp = sha1($mdp);
+        $this->mdp = $mdp;
 
         return $this;
     }
