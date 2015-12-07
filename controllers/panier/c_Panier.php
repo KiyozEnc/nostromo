@@ -46,12 +46,12 @@ switch ($action)
         {
             $_SESSION['Panier']->augmenterQuantiteProduit($_GET['article'], 1);
             $prod = MArticle::getArticle($_GET['article']);
-            header('Location:?uc=monPanier');
         }
         catch (Exception $e)
         {
             $_SESSION['error'] = $e->getMessage();
         }
+        header('Location:?uc=monPanier');
         break;
 
     case 'diminuerProduit' :
