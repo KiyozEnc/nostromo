@@ -22,15 +22,19 @@ switch ($action)
         header("Location:?uc=maReservation"); break;
 
     case 'validerReservation' :
-        if(isset($_SESSION['Reservation']))
+        try
         {
-            $_SESSION['Reservation']->setValider();
-            $_SESSION['Reservation']->enregistrerValid();
-            $_SESSION['valid'] = "Réservation validée avec succès.";
+            if(isset($_SESSION['Reservation']))
+            {
+                $_SESSION['Reservation']->setValid(true);
+                $_SESSION['Reservation']->flushValid();
+                $_SESSION['valid'] = "Réservation validée avec succès.";
+            }
             header("Location:?uc=maReservation");
         }
-        else
+        catch (PDOException $e)
         {
+            Connexion::setFlashMessage($e->getMessage(), "error");
             header("Location:?uc=maReservation");
         } break;
 }

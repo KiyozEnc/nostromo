@@ -17,8 +17,8 @@ switch($action)
         {
             if(isset($_POST['mailUser']))
             {
-                $utilisateur = ConnexionSite::getUser($_POST['mailUser']);
-                if($_POST['mailUser'] == $utilisateur['mailClt'])
+                $unUser = ConnexionSite::getUser($_POST['mailUser']);
+                if($_POST['mailUser'] == $unUser->getMail())
                 {
                     Connexion::setFlashMessage('Cette e-mail est déjà utilisée.', "error");
                     header("Location:?uc=inscription");
@@ -45,7 +45,6 @@ switch($action)
                 }
                 else
                 {
-                    unset($_SESSION['error']);
                     $unUser = new Utilisateur();
                     $unUser
                         ->setNom($_POST['nomUser'])
@@ -53,8 +52,9 @@ switch($action)
                         ->setAdresse($_POST['adrUser'])
                         ->setCp($_POST['cpUser'])
                         ->setVille($_POST['villeUser'])
-                        ->setMdp($_POST['mdpUser'])
+                        ->setMdp(sha1($_POST['mdpUser']))
                         ->setMail($_POST['mailUser'])
+                        ->setPoints(10)
                     ;
                     ConnexionSite::setAjoutUser($unUser);
                     Connexion::setFlashMessage("Inscription réussie, vous pouvez désormais vous connecter.","valid");
