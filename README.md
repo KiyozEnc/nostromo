@@ -1,4 +1,4 @@
-# Nostromo
+# Nostromo 1.0
 ### Vol dans l'espace
 Pour utiliser le code source de notre projet Nostromo, il vous faut créer votre fichier de configuration pour la base de données qui se situe dans 'models' :
  - Renommez m_Connexion.php.model en m_Connexion.php
