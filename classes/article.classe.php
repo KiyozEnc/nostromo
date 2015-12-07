@@ -64,7 +64,8 @@ class Article
   }
   public function augmenterQuantite($quantite)
   {
-    $this->qte=$this->qte+$quantite;
+      if($this->qte < $this->qteStock)
+          $this->qte = $this->qte + $quantite;
   }
     public function diminuerQuantite($quantite)
   {
