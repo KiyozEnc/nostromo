@@ -1,24 +1,35 @@
 <?php
 require_once "models/m_Connexion.php";
 require_once "classes/Vol.classe.php";
-require_once "classes/produit.classe.php";
 
 class MVol
 {
     static public function getVols()
     {
+        $lesVols = new Collection();
         try
         {
             $conn = Connexion::getBdd();
             $reqPrepare = $conn->query("SELECT * FROM vol");
             $conn = null;
-            return $reqPrepare->fetchAll(PDO::FETCH_CLASS, "Vol");
-
+            $reqPrepare = $reqPrepare->fetchAll();
+            foreach ($reqPrepare as $tabVol)
+            {
+                $unVol = new Vol();
+                $unVol
+                    ->setNumVol($tabVol['numVol'])
+                    ->setDateVol($tabVol['dateVol'])
+                    ->setHeureVol($tabVol['heureVol'])
+                    ->setNbPlace($tabVol['nbPlace'])
+                ;
+                $lesVols->ajouter($unVol);
+            }
         }
         catch(PDOException $ex)
         {
             throw new Exception("Aucun vol n'est disponible");
         }
+        return $lesVols;
     }
     static public function getUnVol($numVol)
     {
@@ -27,9 +38,14 @@ class MVol
         {
             $conn = Connexion::getBdd();
             $reqPrepare = $conn->prepare("SELECT * FROM vol WHERE numVol = ?");
-            $reqPrepare->setFetchMode(PDO::FETCH_INTO, $unVol);
             $reqPrepare->execute(array($numVol));
-            $reqPrepare->fetch(PDO::FETCH_INTO);
+            $reqPrepare = $reqPrepare->fetch();
+            $unVol
+                ->setNumVol($reqPrepare['numVol'])
+                ->setDateVol($reqPrepare['dateVol'])
+                ->setHeureVol($reqPrepare['heureVol'])
+                ->setNbPlace($reqPrepare['nbPlace'])
+            ;
             $conn = null;
         }
         catch (PDOException $e)
@@ -38,13 +54,13 @@ class MVol
         }
         return $unVol;
     }
-    static public function validReservation(Utilisateur $unClient,Vol $unVol, Reservation $uneReservation)
+    static public function validReservation(Utilisateur $unClient, Vol $unVol, Reservation $uneReservation)
     {
         try
         {
             $conn = Connexion::getBdd();
             $reqPrepare = $conn->prepare("INSERT INTO reservation (numClt,numVol,dateRes,nbPers) VALUES (?,?,?,?)");
-            $reqPrepare->execute(array($unClient->getId(),$unVol->getNumVol(),$uneReservation->getDateRes(),$uneReservation->getNbPers()));
+            $reqPrepare->execute(array($unClient->getId(),$unVol->getNumVol(),$uneReservation->getDateRes()->format('Y-m-d H:i:s'),$uneReservation->getNbPers()));
             $conn = null;
         }
         catch (PDOException $e)
@@ -59,13 +75,17 @@ class MVol
         {
             $conn = Connexion::getBdd();
             $reqPrepare = $conn->prepare("SELECT * FROM reservation WHERE NumClt = ?");
-            $reqPrepare->setFetchMode(PDO::FETCH_INTO, $uneReservation);
             $reqPrepare->execute(array($unClient->getId()));
-            $reqPrepare->fetch(PDO::FETCH_INTO);
-            $uneReservation->setValid(true);
-            $uneReservation->setUnClient($unClient);
+            $reqPrepare = $reqPrepare->fetch();
             $unVol = MVol::getUnVol($reqPrepare['numVol']);
-            $uneReservation->setUnVol($unVol);
+            $uneReservation
+                ->setId($reqPrepare['numRes'])
+                ->setUnVol($unVol)
+                ->setUnClient($unClient)
+                ->setDateRes($reqPrepare['dateRes'])
+                ->setNbPers($reqPrepare['nbPers'])
+                ->setValid(true)
+            ;
             $conn = null;
         }
         catch (PDOException $e)
@@ -74,5 +94,26 @@ class MVol
             //throw new Exception("L'utilisateur $unClient->getId() n'a pas de réservation");
         }
         return $uneReservation;
+    }
+    static public function getPlaceRestante(Vol $unVol)
+    {
+        $nbPlace = $unVol->getNbPlace();
+        try
+        {
+            $conn = Connexion::getBdd();
+            $reqPrepare = $conn->prepare("SELECT * FROM reservation WHERE numVol = ?");
+            $reqPrepare->execute(array($unVol->getNumVol()));
+            $reqPrepare = $reqPrepare->fetchAll();
+            foreach ($reqPrepare as $tabVol)
+            {
+                $nbPlace = $nbPlace - $tabVol['nbPers'];
+            }
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception("Le vol n'existe pas");
+        }
+
+        return $nbPlace;
     }
 }
