@@ -9,42 +9,42 @@ switch($action)
 {
 	case 'voirVols' :
 
-	$tabVols = MVol::getVols();
-	include("views/reserveVol/v_VoirVols.php"); break;
+		$tabVols = MVol::getVols();
+		include("views/reserveVol/v_VoirVols.php"); break;
 
 	case 'reserverVol' :
-	$vol = MVol::getUnVol($_GET['vol']);
-	include("views/reserveVol/v_VoirFormulaire.php"); break;
+		$vol = MVol::getUnVol($_GET['vol']);
+		include("views/reserveVol/v_VoirFormulaire.php"); break;
 
-	; break;
+		; break;
 	case 'validReserverVol' :
-	if(isset($_GET['vol'],$_POST['nbPers']) && !empty($_GET['vol']))
-	{
-		if(!isset($_SESSION['Reservation']))
+		if(isset($_GET['vol'],$_POST['nbPers']) && !empty($_GET['vol']))
 		{
-			$_SESSION['Reservation'] = new Produit($_GET['vol'],$_POST['nbPers']);
-   		 // On crée un produit et on l'ajoute au Reservation
-			echo "
+			if(!isset($_SESSION['Reservation']))
+			{
+				$_SESSION['Reservation'] = new Produit($_GET['vol'],$_POST['nbPers']);
+				// On crée un produit et on l'ajoute au Reservation
+				echo "
 			<SCRIPT TYPE='text/javascript'>
 				alert('Votre produit ".$_SESSION['Reservation']->getRef()." a été ajouté au Reservation');
 			</SCRIPT>";
+			}
+			else
+			{
+				if($_SESSION['Reservation']->getValid() == false)
+					$_SESSION['error'] = "Vous avez déjà une réservation. Vous pouvez l'annuler via le bouton ci-dessous.";
+				else
+					$_SESSION['error'] = "Vous avez déjà une réservation. Veuillez contacter Nostromo pour annuler votre réservation.";
+			}
+			header("Location:?uc=maReservation");
 		}
 		else
 		{
-			if($_SESSION['Reservation']->getValid() == false)
-				$_SESSION['error'] = "Vous avez déjà une réservation. Vous pouvez l'annuler via le bouton ci-dessous.";
-			else
-				$_SESSION['error'] = "Vous avez déjà une réservation. Veuillez contacter Nostromo pour annuler votre réservation.";
+			$_SESSION['error'] = "Le vol demandé n'existe pas.";
+			header("Location:?uc=reserver");
 		}
-		header("Location:?uc=maReservation");
-	}
-	else
-	{
-		$_SESSION['error'] = "Le vol demandé n'existe pas.";
-		header("Location:?uc=reserver");
-	}
-	; break;
+		; break;
 	default :
-	$_SESSION['error'] = "Impossible d'accéder à la page demandé.";
-	header("Location:?uc=index");
+		$_SESSION['error'] = "Impossible d'accéder à la page demandé.";
+		header("Location:?uc=index");
 }
