@@ -17,7 +17,7 @@
             </div>
         </div>
 
-
+        <a href="?uc=reserver" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
         <button type="submit" class="btn btn-primary">Valider</button>
     </form>
 </div>

@@ -25,7 +25,7 @@ require_once("models/m_Connexion.php");
                     </div>
                 </div>
             </div>
-
+            <a href="?uc=materiel" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
             <button type="submit" class="btn btn-primary">Ajouter au panier</button>
         </form>
     </div>
