@@ -8,5 +8,6 @@ switch ($action)
 {
     case 'voirMonCompte' :
         include("views/compte/v_VoirProfile.php");
+        
     ; break;
 }
