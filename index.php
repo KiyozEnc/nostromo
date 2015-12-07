@@ -4,6 +4,8 @@ require_once('models/m_Connexion.php');
 require_once('models/m_Vols.php');
 require_once('models/m_Article.php');
 require_once('classes/produit.classe.php');
+require_once('classes/utilisateur.classe.php');
+require_once('classes/reservation.classe.php');
 require_once('classes/article.classe.php');
 require_once('classes/panier.classe.php');
 require_once('classes/collection.classe.php');
@@ -34,20 +36,18 @@ session_start(); ?>
             <li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'materiel') { ?> class="active" <?php }} ?>><a href="?uc=materiel"><img src="img/boutique.png" height="20"> Achats de matériel</a></li>
             <li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'apropos') { ?> class="active" <?php }} ?>><a href="?uc=apropos"><img src="img/information.png" height="20"> A propos</a></li>
         </ul>
-        <?php if(!Connexion::sessionOuverte())
-        { ?>
-            <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <?php if(!Connexion::sessionOuverte())
+            { ?>
                 <li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'connexion') { ?> class="active" <?php }} ?>><a href="?uc=connexion">Connexion</a></li>
                 <li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'inscription') { ?> class="active" <?php }} ?>><a href="?uc=inscription">Inscription</a></li>
-            </ul>
-        <?php } else { ?>
-            <ul class="nav navbar-nav navbar-right">
+            <?php } else { ?>
                 <li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'maReservation') { ?> class="active" <?php }} ?>><a href="?uc=maReservation"><img src="img/reservation.png" height="20"> Ma réservation</a></li>
                 <li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monPanier') { ?> class="active" <?php }} ?>><a href="?uc=monPanier"><img src="img/panier2.png" height="20"> Panier</a></li>
                 <li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'monCompte') { ?> class="active" <?php }} ?>><a href="?uc=monCompte"><img src="img/user.png" height="20"> Mon Compte</a></li>
                 <li><a href="?uc=deconnexion">Déconnexion</a></li>
-            </ul>
-        <?php } ?>
+            <?php } ?>
+        </ul>
     </div>
 </nav>
 <div class="container">
@@ -72,7 +72,7 @@ session_start(); ?>
         header("Location:?uc=index");
     } ?>
 </div>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

@@ -17,43 +17,62 @@ class MVol
         }
         catch(PDOException $ex)
         {
-            echo "Aucun vol n'est disponible";
+            throw new Exception("Aucun vol n'est disponible");
         }
     }
     static public function getUnVol($numVol)
     {
-        $conn = Connexion::getBdd();
-        $reqPrepare = $conn->prepare("SELECT * FROM vol WHERE numVol = ?");
         $unVol = new Vol();
-        $reqPrepare->setFetchMode(PDO::FETCH_INTO, $unVol);
-        $reqPrepare->execute(array($numVol));
-        $reqPrepare->fetch(PDO::FETCH_INTO);
-        $conn = null;
+        try
+        {
+            $conn = Connexion::getBdd();
+            $reqPrepare = $conn->prepare("SELECT * FROM vol WHERE numVol = ?");
+            $reqPrepare->setFetchMode(PDO::FETCH_INTO, $unVol);
+            $reqPrepare->execute(array($numVol));
+            $reqPrepare->fetch(PDO::FETCH_INTO);
+            $conn = null;
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception("Le vol $numVol n'existe pas.");
+        }
         return $unVol;
     }
-    static public function validReservation($numClt,$numVol,$dateRes,$nbPers)
+    static public function validReservation(Utilisateur $unClient,Vol $unVol, Reservation $uneReservation)
     {
         try
         {
             $conn = Connexion::getBdd();
             $reqPrepare = $conn->prepare("INSERT INTO reservation (numClt,numVol,dateRes,nbPers) VALUES (?,?,?,?)");
-            $reqPrepare->execute(array($numClt,$numVol,$dateRes,$nbPers));
+            $reqPrepare->execute(array($unClient->getId(),$unVol->getNumVol(),$uneReservation->getDateRes(),$uneReservation->getNbPers()));
             $conn = null;
-            return true;
         }
         catch (PDOException $e)
         {
-            return false;
+            throw new Exception("Vous avez déjà une réservation. Veuillez contacter Nostromo pour annuler votre réservation.");
         }
     }
-    static public function reservationExistante($numClt)
+    static public function reservationExistante(Utilisateur $unClient)
     {
-        $conn = Connexion::getBdd();
-        $reqPrepare = $conn->prepare("SELECT * FROM reservation WHERE NumClt = ?");
-        $reqPrepare->execute(array($numClt));
-        $reqPrepare = $reqPrepare->fetch();
-        $uneReservation = new Produit($reqPrepare['numVol'],$reqPrepare['nbPers']);
+        $uneReservation = new Reservation();
+        try
+        {
+            $conn = Connexion::getBdd();
+            $reqPrepare = $conn->prepare("SELECT * FROM reservation WHERE NumClt = ?");
+            $reqPrepare->setFetchMode(PDO::FETCH_INTO, $uneReservation);
+            $reqPrepare->execute(array($unClient->getId()));
+            $reqPrepare->fetch(PDO::FETCH_INTO);
+            $uneReservation->setValid(true);
+            $uneReservation->setUnClient($unClient);
+            $unVol = MVol::getUnVol($reqPrepare['numVol']);
+            $uneReservation->setUnVol($unVol);
+            $conn = null;
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage();
+            //throw new Exception("L'utilisateur $unClient->getId() n'a pas de réservation");
+        }
         return $uneReservation;
-        $conn = null;
     }
 }
