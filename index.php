@@ -12,21 +12,12 @@ session_start(); ?>
 <html>
 <head>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 	<link type="text/css" rel="stylesheet" href="/2014-nostromo/css/main.css"/>
 	<title>Nostromo</title>
 </head>
 
 <body class="fond">
-	<?php
-	/*$TailleImage = getimagesize("/nostromo/img/logo2.png");
-	$largeur=$TailleImage[1];
-	$longueur=$TailleImage[0];
-	echo $TailleImage;*/
-	?>
-	<!--<div calss="Titre"><img  src="/nostromo/img/logo2.png" height="<?php echo $largeur ?>" width="<?php echo $longueur ?>"/> NOSTROMO</div>-->
 	<nav class="navbar navbar-default" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Toggle navigation</span>
@@ -37,7 +28,6 @@ session_start(); ?>
 			<a class="navbar-brand" href="?uc=index">Nostromo</a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'index') { ?> class="active" <?php }} ?>><a href="?uc=index">Accueil</a></li>
@@ -59,10 +49,8 @@ session_start(); ?>
 				<li><a href="?uc=deconnexion">Déconnexion</a></li>
 			</ul>
 			<?php } ?>
-		</div><!-- /.navbar-collapse -->
+		</div>
 	</nav>
-
-
 	<div class="container">
 		<?php
 		if (isset($_GET['uc']))
