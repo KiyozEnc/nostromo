@@ -2,72 +2,115 @@
 require_once ('models/m_Vols.php');
 
 /**
- * Permet de cr�er un produit pour un ajout ultérieur dans le panier
+ * Permet de créer un vol pour un ajout ultérieur dans une réservation
  */
 class Vol
 {
-    private $numVol;	// Référence du produit
-    private $dateVol;   // Libellé du produit
-    private $heureVol;   // Quantité du produit
-    private $nbPlace;  // Prix du produit
+    /**
+     * Numéro du vol
+     * @var int $numVol
+     */
+    private $numVol;
+    /**
+     * Date du vol
+     * @var string $dateVol
+     */
+    private $dateVol;
+    /**
+     * Heure du vol
+     * @var string $dateVol
+     */
+    private $heureVol;
+    /**
+     * Nombre de place du vol
+     * @var int $nbPlace
+     */
+    private $nbPlace;
 
     /**
-     * Constructeur d'un produit, sa référence est passé en paramètre
-     * Les autres informations sont obtenues via la base de donn�es
+     * Constructeur du vol
      */
-
-    public function __construct()
+    public function Vol()
     {
 
     }
 
     /**
-     * Retourne la référence du produit
-     * @return type
+     * @return int
      */
     public function getNumVol()
     {
-        return ($this->numVol);
+        return $this->numVol;
     }
 
     /**
-     * Retourne le libellé du produit
-     * @return type
+     * @param int $numVol
+     * @return Vol
+     */
+    public function setNumVol($numVol)
+    {
+        $this->numVol = $numVol;
+
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getDateVol()
     {
-        return ($this->dateVol);
+        return $this->dateVol;
     }
 
     /**
-     * Retourne la quantité commmandée
-     * @return type
+     * @param string $dateVol
+     * @return Vol
+     */
+    public function setDateVol($dateVol)
+    {
+        $this->dateVol = $dateVol;
+
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getHeureVol()
     {
-        return ($this->heureVol);
+        return $this->heureVol;
     }
 
     /**
-     * Retourne le prix du produit
-     * @return type
+     * @param string $heureVol
+     * @return Vol
+     */
+    public function setHeureVol($heureVol)
+    {
+        $this->heureVol = $heureVol;
+
+        return $this;
+    }
+
+    /**
+     * @return int
      */
     public function getNbPlace()
     {
-        return ($this->nbPlace);
-    }
-    public function __get($property)
-    {
-        return $this->$property;
+        return $this->nbPlace;
     }
 
-    public function __set($property, $value)
+    /**
+     * @param int $nbPlace
+     * @return Vol
+     */
+    public function setNbPlace($nbPlace)
     {
-        $this->$property = $value;
+        $this->nbPlace = $nbPlace;
+
+        return $this;
     }
+
+
 
 }
-
-
-
-?>
