@@ -33,7 +33,7 @@ session_start(); ?>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'index') { ?> class="active" <?php }} ?>><a href="?uc=index"><img src="img/home.png" height="20"> Accueil</a></li>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'reserver') { ?> class="active" <?php }} ?>><a href="?uc=reserver"><img src="img/avion.png" height="20"> Réservations de vol</a></li>
 				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'materiel') { ?> class="active" <?php }} ?>><a href="?uc=materiel"><img src="img/boutique.png" height="20"> Achats de matériel</a></li>
-				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'apropos') { ?> class="active" <?php }} ?>><a href="?uc=apropos">A propos</a></li>
+				<li <?php if(isset($_GET['uc'])) { if($_GET['uc'] == 'apropos') { ?> class="active" <?php }} ?>><a href="?uc=apropos"><img src="img/information.png" height="20"> A propos</a></li>
 			</ul>
 			<?php if(!Connexion::sessionOuverte())
 			{ ?>
