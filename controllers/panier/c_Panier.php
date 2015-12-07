@@ -57,12 +57,9 @@ switch ($action)
 			header("Location:?uc=materiel&action=voirArticle&article=$ref");
 		}
 
-
-
-
-
 		header('Location:?uc=monPanier');
-		;break;
+		break;
+
 	case 'diminuerProduit' :
 		$_SESSION['Panier']->diminuerQuantiteProduit($_GET['article'],1);
 		if($_SESSION['Panier']->getNbProd()==0)
@@ -72,7 +69,6 @@ switch ($action)
 		header('Location:?uc=monPanier');break;
 
 	case 'validerCommande' :	;break;
-		//lol
 
 
 	case 'viderPanier':

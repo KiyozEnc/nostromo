@@ -21,7 +21,6 @@ require_once("models/m_Connexion.php");
 	$total=0;
 	if(isset($_SESSION['Panier'])){
 	?>
-
 	<table class="table table-bordered table-hover table-condensed">
 		<legend>Voici votre Panier</legend>
 		<br>
