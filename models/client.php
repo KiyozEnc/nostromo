@@ -1,7 +1,5 @@
 <?php
-
 require_once 'main.php';
-
 class Client {
 
 	public function getClient($numClt)
@@ -14,7 +12,7 @@ class Client {
 		}
 		catch (PDOException $e)
 		{
-			$error = "Le client $numClt n'existe pas";
+			$_SESSION['error'] = "Le client $numClt n'existe pas";
 			return false;
 		}
 	}
@@ -27,7 +25,7 @@ class Client {
 		}
 		catch (PDOException $e)
 		{
-			$error = "Il y a actuellement aucun client.";
+			$_SESSION['error'] = "Il y a actuellement aucun client.";
 			return false;
 		}
 	}
