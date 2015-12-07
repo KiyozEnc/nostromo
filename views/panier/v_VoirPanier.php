@@ -33,7 +33,6 @@ require_once("models/m_Connexion.php");
             <tbody>
             <?php
             $total = 0;
-            echo $_SESSION['Panier']->getNbProd();
             foreach ($_SESSION['Panier']->getProduitsPanier() as $art => $Panier)
             { ?>
                 <tr>
@@ -42,14 +41,14 @@ require_once("models/m_Connexion.php");
                     <td><?php echo $Panier->getPu(); ?> €</td>
                     <td>
                         <a href="?uc=monPanier&action=diminuerProduit&article=<?php echo $Panier->getNumArt(); ?>" title="Enlever une quantité">
-                            <span class="glyphicon glyphicon-minus"></span>
+                            <img src="img/moins.png" height="17">
                         </a>
                         <?php echo " ".$Panier->getQte()." "; ?>
                         <a href="?uc=monPanier&action=augmenterProduit&article=<?php echo $Panier->getNumArt(); ?>" title="Ajouter une quantité">
-                            <span class="glyphicon glyphicon-plus"></span>
+                            <img src="img/plus.png" height="17">
                         </a>
                         <a href="?uc=monPanier&action=supprimerProduit&article=<?php echo $Panier->getNumArt(); ?>" title="Supprimer de la liste">
-                            <span class="glyphicon glyphicon-remove"></span>
+                            <img src="img/croix.png" height="17">
                         </a>
                     </td>
                     <td>
