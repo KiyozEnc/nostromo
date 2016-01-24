@@ -15,7 +15,8 @@ require_once("models/m_Connexion.php");
                 <?= $_SESSION['error'] ?>
             </div>
         <?php } ?>
-        <h4><?php echo $article->getDesignation(); ?> → Prix unitaire : <?php echo $article->getPu(); ?> €</h4>
+        <h2><?php echo $article->getDesignation(); ?> — Référence : <?= $article->getNumArt() ?></h2>
+        <p>Prix unitaire : <?php echo $article->getPu(); ?> € TTC</p>
         <form action="?uc=monPanier&action=ajouterArticle&ref=<?php echo $article->getNumArt(); ?>" method="POST" role="form" autocomplete="off">
             <div class="row">
                 <div class="col-sm-3">

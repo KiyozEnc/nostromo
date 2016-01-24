@@ -16,8 +16,8 @@ require_once("models/m_Connexion.php");
             <?= $_SESSION['error'] ?>
         </div>
     <?php } ?>
-    <h3>Liste des vols disponible</h3>
     <table class="table table-bordered table-hover table-condensed">
+        <h2>Vols disponibles</h2>
         <thead>
         <tr>
             <th>Date</th>
@@ -36,7 +36,7 @@ require_once("models/m_Connexion.php");
                 <td> <?php echo DateVol::formaterDate($unVol->getDateVol()); ?> </td>
                 <td> <?php echo DateVol::formaterHeure($unVol->getHeureVol()); ?> </td>
                 <td><?php echo $unVol->getNbPlace(); ?></td>
-                <td id="nbPlaceRestante"><?php echo MVol::getPlaceRestante($unVol) ?></td>
+                <td><?php echo MVol::getPlaceRestante($unVol) ?></td>
                 <?php
                 if(Connexion::sessionOuverte()) { ?>
                     <td> <?php

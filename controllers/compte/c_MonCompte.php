@@ -10,12 +10,8 @@ switch ($action)
         include("views/compte/v_VoirProfile.php");
 
         ; break;
-    case 'editMDP' :
-
-    ; break;
-
-    case 'editAddr' :
-
-    ; break;
+    case 'edit' : 
+    echo 'Coucou';
+    break;
 
 }

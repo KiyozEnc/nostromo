@@ -7,7 +7,7 @@
         </div>
     <?php } ?>
     <form action="?uc=reserver&action=validReserverVol&vol=<?= $vol->getNumVol(); ?>" method="POST" role="form" autocomplete="off">
-        <legend>Réserver le vol n° <?= $vol->getNumVol(); ?> - Nombre de place restantes pour ce vol : <?= $nbPlaceRestante ?> places</legend>
+        <h2>Réserver le vol n° <?= $vol->getNumVol(); ?> — Nombre de place restantes pour ce vol : <?= $nbPlaceRestante ?> places</h2>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">

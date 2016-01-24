@@ -17,7 +17,7 @@ require_once("models/m_Connexion.php");
 		</div>
 	<?php } ?>
 	<table class="table table-bordered table-hover table-condensed">
-		<legend>Liste des articles disponible</legend>
+		<h2>Articles disponibles</h2>
 		<thead>
 		<tr>
 			<th>Numéro de l'article</th>

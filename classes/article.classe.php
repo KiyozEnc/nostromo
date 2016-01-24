@@ -27,7 +27,6 @@ class Article
         $designation = $this->getDesignation();
         $pu = $this->getPu();
         $qteStock = $this->getQteStock();
-        $qte=0;
         $tab = array (
             "numArt" => $numArt,
             "designation" => $designation,
@@ -63,10 +62,18 @@ class Article
     }
     public function augmenterQuantite($quantite)
     {
-        if($this->qte < $this->qteStock)
-            $this->qte = $this->qte + $quantite;
-        else
-            throw new Exception("La quantité en stock est insuffisante.");
+        try 
+        {
+            if($this->qte < $this->qteStock)
+                $this->qte = $this->qte + $quantite;
+            else
+                throw new Exception("La quantité en stock est insuffisante.");
+        }
+        catch (Exception $e)
+        {
+            Connexion::setFlashMessage($e->getMessage(), "error");
+        }
+        
     }
     public function diminuerQuantite($quantite)
     {

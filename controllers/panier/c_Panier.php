@@ -63,12 +63,18 @@ switch ($action)
         header('Location:?uc=monPanier');
         break;
 
-    case 'validerCommande' :	;break;
+    case 'validerPanier' :
+        include('views/panier/v_ValiderPanier.php');
+    ;break;
 
 
     case 'viderPanier' :
         unset($_SESSION['Panier']);
         include("views/panier/v_VoirPanier.php");
+        break;
+
+    case 'enregistrerPanier' :
+        
         break;
 
     default :
