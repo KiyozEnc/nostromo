@@ -7,10 +7,25 @@ require_once ('models/m_Article.php');
  */
 class Article
 {
+    /**
+     * @var int
+     */
     private $numArt;
+    /**
+     * @var string
+     */
     private $designation;
+    /**
+     * @var int
+     */
     private $pu;
+    /**
+     * @var int
+     */
     private $qteStock;
+    /**
+     * @var int
+     */
     private $qte;
 
     /**
@@ -37,7 +52,7 @@ class Article
     }
     /**
      * Retourne la référence du Article
-     * @return type
+     * @return string
      */
     public function getNumArt()
     {
@@ -50,7 +65,7 @@ class Article
 
     /**
      * Retourne le libellé du Article
-     * @return type
+     * @return string
      */
     public function getDesignation()
     {
@@ -62,7 +77,7 @@ class Article
     }
     public function augmenterQuantite($quantite)
     {
-        try 
+        try
         {
             if($this->qte < $this->qteStock)
                 $this->qte = $this->qte + $quantite;
@@ -73,7 +88,7 @@ class Article
         {
             Connexion::setFlashMessage($e->getMessage(), "error");
         }
-        
+
     }
     public function diminuerQuantite($quantite)
     {
@@ -98,20 +113,54 @@ class Article
         return ($this->qteStock);
     }
 
-
-
-    public function __get($property)
+    /**
+     * @param int $qte
+     * @return Article
+     */
+    public function setQte($qte)
     {
-        return $this->$property;
+        $this->qte = (int) $qte;
+        return $this;
     }
 
-    public function __set($property, $value)
+    /**
+     * @param int $numArt
+     * @return Article
+     */
+    public function setNumArt($numArt)
     {
-        $this->$property = $value;
+        $this->numArt = (int) $numArt;
+        return $this;
     }
-    public function setQte($quantite)
+
+    /**
+     * @param string $designation
+     * @return Article
+     */
+    public function setDesignation($designation)
     {
-        $this->qte=$quantite;
+        $this->designation = $designation;
+        return $this;
+    }
+
+    /**
+     * @param int $pu
+     * @return Article
+     */
+    public function setPu($pu)
+    {
+        $this->pu = (int) $pu;
+        return $this;
+    }
+
+    /**
+     * @param int $qteStock
+     * @return Article
+     */
+    public function setQteStock($qteStock)
+    {
+        $this->qteStock = (int) $qteStock;
+        return $this;
     }
 
 

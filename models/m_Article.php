@@ -9,10 +9,15 @@ class MArticle
         {
             $conn = Connexion::getBdd();
             $reqPrepare = $conn->prepare("SELECT * FROM article WHERE numArt = ?");
-            $unArt = new Article;
-            $reqPrepare->setFetchMode(PDO::FETCH_INTO,$unArt);
+            $unArt = new Article();
             $reqPrepare->execute(array($ref));
-            $reqPrepare->fetch(PDO::FETCH_INTO);
+            $reqPrepare = $reqPrepare->fetch();
+            $unArt
+                ->setNumArt($reqPrepare['numArt'])
+                ->setDesignation($reqPrepare["designation"])
+                ->setPu($reqPrepare['pu'])
+                ->setQteStock($reqPrepare['qteStock'])
+            ;
             $conn = null;
             return $unArt;
 

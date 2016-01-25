@@ -1,0 +1,12 @@
+div.rectangle p, div.rectangle a {
+    font-size: 1em;
+}
+.rectangle {
+    border:1px solid #ffffff;
+    background-color: #ffffff;
+    border-radius: 2%;
+}
+
+.margin {
+    padding-left: 5.5%;
+}

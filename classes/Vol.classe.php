@@ -59,7 +59,7 @@ class Vol
      */
     public function getDateVol()
     {
-        return $this->dateVol;
+        return DateVol::formaterDate($this->dateVol);
     }
 
     /**
@@ -78,7 +78,7 @@ class Vol
      */
     public function getHeureVol()
     {
-        return $this->heureVol;
+        return DateVol::formaterHeure($this->heureVol);
     }
 
     /**

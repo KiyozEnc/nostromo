@@ -65,7 +65,7 @@ class MVol
         }
         catch (PDOException $e)
         {
-            throw new Exception("Vous avez déjà une réservation. Veuillez contacter Nostromo pour annuler votre réservation.");
+            throw new Exception("Vous avez dï¿½jï¿½ une rï¿½servation. Veuillez contacter Nostromo pour annuler votre rï¿½servation.");
         }
     }
     static public function reservationExistante(Utilisateur $unClient)
@@ -91,7 +91,7 @@ class MVol
         catch (PDOException $e)
         {
             echo $e->getMessage();
-            //throw new Exception("L'utilisateur $unClient->getId() n'a pas de réservation");
+            throw new Exception("Impossible de rÃ©cupÃ©rer la rÃ©servation de $unClient->getMail(), DÃ©tails : ".$e->getMessage());
         }
         return $uneReservation;
     }

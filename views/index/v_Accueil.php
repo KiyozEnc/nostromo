@@ -11,8 +11,48 @@
         <?= $_SESSION['error'] ?>
     </div>
 <?php } ?>
+<?php if(isset($_SESSION['Utilisateur'])) { ?>
+    <div class="row">
+        <div class="rectangle col-lg-4">
+            <h4 class="text-center">Réservation</h4>
+            <?php if(isset($reservation))
+            { ?>
+                <p class="text-justify"><?php echo "Vol n°".$reservation->getUnVol()->getNumVol()." - ".$reservation->getNbPers()."/".$reservation->getUnVol()->getNbPlace()." personnes" ?>, pour le <?php echo $reservation->getUnVol()->getDateVol()." à ".$reservation->getUnVol()->getHeureVol() ?></p>
+                <a href="?uc=maReservation">Détails</a>
+                <?php
+            }
+            else
+            {
+                echo '<p class="text-justify">Aucune réservation</p>';
+            } ?>
+        </div>
+        <div class="rectangle col-lg-4 col-lg-offset-4">
+            <h4 class="text-center">Vos dernières commandes</h4>
+            <p class="text-justify">
+                <?php if(isset($commandes))
+                { ?>
+                    <?php foreach ($commandes->getCollection() as $commande)
+                {
+                    echo 'N°: '.$commande->getId().' - le '.$commande->getUnedate();
+                    echo '<p class="margin">';
+                    foreach ($commande->getLesArticles()->getCollection() as $article)
+                    {
+                        echo 'Article n°: '.$article->getNumArt().' - '.$article->getDesignation().' - Quantité : '.$article->getQte().'<br>';
+                    }
+                    echo '</p>';
+                } ?>
+                <?php }
+                else
+                {
+                    echo 'Aucune commande';
+                } ?>
+            </p>
+        </div>
+    </div>
+    <br>
+<?php } ?>
 <div class="jumbotron">
-    TEST index
+    Test index
 </div>
 <?php if(isset($_SESSION['valid'])) { unset($_SESSION['valid']); } ?>
 <?php if(isset($_SESSION['error'])) { unset($_SESSION['error']); } ?>

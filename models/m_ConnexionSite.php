@@ -63,4 +63,38 @@ class ConnexionSite
             throw new Exception("Erreur interne (Error code 1) :  merci de contacter un administrateur.");
         }
     }
+
+    /**
+     * @param int $id
+     * @return Utilisateur
+     * @throws Exception
+     */
+    static public function getUnUser($id)
+    {
+        $unClient = new Utilisateur();
+        try
+        {
+            $conn = Connexion::getBdd();
+            $reqPrepare = $conn->prepare("SELECT * FROM client WHERE numClt = ?");
+            $reqPrepare->execute(array($id));
+            $reqPrepare = $reqPrepare->fetch();
+            $unClient
+                ->setId($reqPrepare['numClt'])
+                ->setNom($reqPrepare['nomClt'])
+                ->setPrenom($reqPrepare['prenomClt'])
+                ->setAdresse($reqPrepare['adresseClt'])
+                ->setCp($reqPrepare['cpClt'])
+                ->setVille($reqPrepare['villeClt'])
+                ->setMdp($reqPrepare['mdpClt'])
+                ->setMail($reqPrepare['mailClt'])
+                ->setPoints($reqPrepare['pointsClt'])
+            ;
+            $conn = null;
+        }
+        catch(PDOException $ex)
+        {
+            throw new Exception("L'utilisateur n°'$id' n'existe pas.");
+        }
+        return $unClient;
+    }
 }
