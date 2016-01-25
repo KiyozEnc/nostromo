@@ -33,8 +33,8 @@ require_once("models/m_Connexion.php");
         foreach ($lesVols->getCollection() as $unVol)
         { ?>
             <tr>
-                <td> <?php echo DateVol::formaterDate($unVol->getDateVol()); ?> </td>
-                <td> <?php echo DateVol::formaterHeure($unVol->getHeureVol()); ?> </td>
+                <td> <?php echo $unVol->getDateVol(); ?> </td>
+                <td> <?php echo $unVol->getHeureVol(); ?> </td>
                 <td><?php echo $unVol->getNbPlace(); ?></td>
                 <td><?php echo MVol::getPlaceRestante($unVol) ?></td>
                 <?php

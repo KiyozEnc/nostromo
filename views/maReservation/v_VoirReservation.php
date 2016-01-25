@@ -43,8 +43,8 @@
             <tbody>
             <tr>
                 <td><?php echo $_SESSION['Reservation']->getUnVol()->getNumVol(); ?></td>
-                <td><?php echo DateVol::formaterDate($_SESSION['Reservation']->getUnVol()->getDateVol()) ?></td>
-                <td><?php echo DateVol::formaterHeure($_SESSION['Reservation']->getUnVol()->getHeureVol()) ?></td>
+                <td><?php echo $_SESSION['Reservation']->getUnVol()->getDateVol() ?></td>
+                <td><?php echo $_SESSION['Reservation']->getUnVol()->getHeureVol() ?></td>
                 <td><?php echo $_SESSION['Reservation']->getNbPers(); ?></td>
                 <?php if($_SESSION['Reservation']->isValid() == false) { ?> <td><a href="?uc=maReservation&action=annulerReservation" title="Annuler la réservation du vol n°<?= $_SESSION['Reservation']->getUnVol()->getNumVol(); ?>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a></td><?php } ?>
             </tr>
