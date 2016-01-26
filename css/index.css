@@ -2,8 +2,7 @@ div.rectangle p, div.rectangle a {
     font-size: 1em;
 }
 .rectangle {
-    border:1px solid #ffffff;
-    background-color: #ffffff;
+    border:1px solid #000;
     border-radius: 2%;
 }
 

@@ -1,11 +1,9 @@
-<div class="jumbotron">
-	<h1>Mon compte</h1>
-	<h2>&timerRestant& avant le lancement</h2>
-	<p>Actions disponibles : 
-		<ul>
-			<li><a href="?uc=monCompte&action=edit">Modifier vos informations de compte</a></li>
-			<li><a href="?uc=maReservation">Modifier votre réservation</a></li>
-			<li><a href="?uc=monCompte">Modifier votre</a></li>
-		</ul>
-	</p>
+<ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="?uc=monCompte">Accueil</a></li>
+    <li role="presentation"><a href="?uc=monCompte&action=edit">Modifier mes informations</a></li>
+    <li role="presentation"><a href="?uc=monCompte&action=voirCommandes">Mes commandes</a></li>
+</ul>
+<div class="page-header">
+	<h1>Mon compte <small>Page principale</small></h1>
 </div>
+<h2>&timerRestant& avant le lancement</h2>

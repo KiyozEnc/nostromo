@@ -57,27 +57,31 @@ session_start(); ?>
         <?php } ?>
     </div>
 </nav>
-<div class="container">
-    <?php
-    if (isset($_GET['uc']))
-        switch ($_GET['uc'])
+<div class="jumbotron">
+    <div class="container">
+        <?php
+        if (isset($_GET['uc']))
+            switch ($_GET['uc'])
+            {
+                case 'index' : include("controllers/index/c_Index.php"); break;
+                case 'reserver' : include("controllers/reserveVol/c_ReserveVol.php");break;
+                case 'connexion' : include("controllers/connexion/c_ConnexionSite.php");break;
+                case 'inscription' : include("controllers/inscription/c_InscriptionSite.php");break;
+                case 'deconnexion' : include("controllers/deconnexion/c_Deconnexion.php");break;
+                case 'maReservation' : include("controllers/maReservation/c_MaReservation.php");break;
+                case 'monCompte' : include("controllers/compte/c_MonCompte.php");break;
+                case 'materiel' : include("controllers/boutique/c_Boutique.php");break;
+                case 'monPanier' :include("controllers/panier/c_Panier.php");break;
+                case 'aPropos' :include("views/aPropos/v_APropos.php");break;
+                default : include("views/index/v_Erreur.php"); break;
+            }
+        else
         {
-            case 'index' : include("controllers/index/c_Index.php"); break;
-            case 'reserver' : include("controllers/reserveVol/c_ReserveVol.php");break;
-            case 'connexion' : include("controllers/connexion/c_ConnexionSite.php");break;
-            case 'inscription' : include("controllers/inscription/c_InscriptionSite.php");break;
-            case 'deconnexion' : include("controllers/deconnexion/c_Deconnexion.php");break;
-            case 'maReservation' : include("controllers/maReservation/c_MaReservation.php");break;
-            case 'monCompte' : include("controllers/compte/c_MonCompte.php");break;
-            case 'materiel' : include("controllers/boutique/c_Boutique.php");break;
-            case 'monPanier' :include("controllers/panier/c_Panier.php");break;
-            case 'aPropos' :include("views/aPropos/v_APropos.php");break;
-            default : include("views/index/v_Erreur.php"); break;
-        }
-    else
-    {
-        header("Location:?uc=index");
-    } ?>
+            header("Location:?uc=index");
+        } ?>
+    </div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </html>
