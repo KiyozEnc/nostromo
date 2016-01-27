@@ -14,11 +14,10 @@
 <?php if(isset($_SESSION['Utilisateur'])) { ?>
     <div class="row">
         <div class="rectangle col-lg-4">
-            <h4 class="text-center">Réservation</h4>
+            <h4 class="text-center"><a href="?uc=maReservation">Réservation</a></h4>
             <?php if(isset($reservation))
             { ?>
                 <p class="text-justify"><?php echo "Vol n°".$reservation->getUnVol()->getNumVol()." - ".$reservation->getNbPers()."/".$reservation->getUnVol()->getNbPlace()." personnes" ?>, pour le <?php echo $reservation->getUnVol()->getDateVol()." à ".$reservation->getUnVol()->getHeureVol() ?></p>
-                <a href="?uc=maReservation">Détails</a>
                 <?php
             }
             else
@@ -27,13 +26,13 @@
             } ?>
         </div>
         <div class="rectangle col-lg-4 col-lg-offset-4">
-            <h4 class="text-center">Vos dernières commandes</h4>
+            <h4 class="text-center"><a href="?uc=monCompte&action=voirCommandes">Vos dernières commandes</a></h4>
             <p class="text-justify">
                 <?php if(isset($commandes))
                 { ?>
                     <?php foreach ($commandes->getCollection() as $commande)
                 {
-                    echo 'N°: '.$commande->getId().' - le '.$commande->getUnedate();
+                    echo 'N°'.$commande->getId().' - le '.$commande->getUnedate();
                     echo '<p class="margin">';
                     foreach ($commande->getLesArticles()->getCollection() as $article)
                     {

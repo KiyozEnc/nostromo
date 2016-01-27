@@ -7,13 +7,41 @@ else
 switch ($action)
 {
     case 'voirMonCompte' :
-        include("views/compte/v_VoirProfile.php");
-        ; break;
+        try
+        {
+            include("views/compte/v_VoirProfile.php");
+        }
+        catch (Exception $e)
+        {
+            Connexion::setFlashMessage($e->getMessage(), "error");
+            header("Location:?uc=index");
+        }
+        break;
     case 'edit' :
-        include("views/compte/v_EditProfile.php");
-    break;
+        try
+        {
+            include("views/compte/v_EditProfile.php");
+        }
+        catch (Exception $e)
+        {
+            Connexion::setFlashMessage($e->getMessage(), "error");
+            header("Location:?uc=monCompte");
+        }
+        break;
     case 'voirCommandes' :
-        $lesCommandes = MCommande::getCommandes($_SESSION['Utilisateur']);
-        include("views/compte/v_VoirCommandes.php");
-
+        try
+        {
+            $lesCommandes = MCommande::getCommandes($_SESSION['Utilisateur']);
+            if(isset($_GET['cde']))
+            {
+                $uneCommande = MCommande::getUneCommande($_GET['cde']);
+            }
+            include("views/compte/v_VoirCommandes.php");
+        }
+        catch (Exception $e)
+        {
+            Connexion::setFlashMessage($e->getMessage(), "error");
+            header("Location:?uc=monCompte");
+        }
+        break;
 }

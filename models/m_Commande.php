@@ -1,5 +1,6 @@
 <?php
 require_once 'm_Connexion.php';
+require_once 'm_ConnexionSite.php';
 /**
  * Created by PhpStorm.
  * User: Kiyoz
@@ -8,9 +9,11 @@ require_once 'm_Connexion.php';
  */
 class MCommande
 {
+
     /**
      * Récupère la commande dont le numéro est passé en paramètre
      * @param int $id numéro d'une commande
+     * @return Commande $uneCommande
      * @throws Exception
      */
     static public function getUneCommande($id)
@@ -24,6 +27,7 @@ class MCommande
             $unClient = ConnexionSite::getUnUser($req['numClt']);
             $uneCommande = new Commande($id,$unClient,$req["date"]);
             $uneCommande->setLesArticles(MCommander::getUneCommande($uneCommande));
+            return $uneCommande;
         }
         catch(PDOException $e)
         {

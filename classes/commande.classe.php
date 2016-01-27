@@ -110,4 +110,14 @@ class Commande
         $this->lesArticles = $lesArticles;
         return $this;
     }
+
+    public function getMontantTotal()
+    {
+        $montant = 0;
+         foreach ($this->getLesArticles()->getCollection() as $article)
+         {
+             $montant += $article->getPu() * $article->getQte();
+         }
+        return $montant;
+    }
 }
