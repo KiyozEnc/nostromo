@@ -21,6 +21,7 @@ class MCommander
         try
         {
             $conn = Connexion::getBdd();
+            $conn->beginTransaction();
             $req = $conn->prepare("SELECT * FROM commander WHERE numCde = ? LIMIT 3");
             $req->execute(array($uneCommande->getId()));
             $req = $req->fetchAll();
@@ -30,6 +31,7 @@ class MCommander
                 $unArticle->setQte($tabs['qte']);
                 $lesArticles->ajouter($unArticle);
             }
+            $conn->commit();
         }
         catch(PDOException $e)
         {

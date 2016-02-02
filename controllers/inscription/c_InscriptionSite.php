@@ -18,7 +18,19 @@ switch($action)
             if(isset($_POST['mailUser']))
             {
                 $unUser = ConnexionSite::getUser($_POST['mailUser']);
-                if($_POST['mailUser'] == $unUser->getMail())
+                if(empty($unUser->getMail())
+                    || empty($_POST['nomUser'])
+                    || empty($_POST['prenUser'])
+                    || empty($_POST['cpUser'])
+                    || empty($_POST['mdpUser'])
+                    || empty($_POST['mdpConfUser'])
+                    || empty($_POST['villeUser'])
+                    || empty($_POST['adrUser']))
+                {
+                    Connexion::setFlashMessage('Veuillez renseignez tous les champs.', "error");
+                    header("Location:?uc=inscription");
+                }
+                elseif($_POST['mailUser'] == $unUser->getMail())
                 {
                     Connexion::setFlashMessage('Cette e-mail est déjà utilisée.', "error");
                     header("Location:?uc=inscription");

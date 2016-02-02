@@ -93,7 +93,7 @@ class Utilisateur
     }
 
     /**
-     * Get prenom
+     * Get prénom
      *
      * @return string
      */
@@ -103,7 +103,7 @@ class Utilisateur
     }
 
     /**
-     * Set prenom
+     * Set prénom
      *
      * @param string $prenom
      * @return Utilisateur

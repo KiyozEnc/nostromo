@@ -73,12 +73,19 @@ switch ($action)
     case 'voirCommandes' :
         try
         {
-            $lesCommandes = MCommande::getCommandes($_SESSION['Utilisateur']);
-            if(isset($_GET['cde']))
+            if(isset($_SESSION['Utilisateur']))
             {
-                $uneCommande = MCommande::getUneCommande($_GET['cde']);
+                $lesCommandes = MCommande::getCommandes($_SESSION['Utilisateur']);
+                if(isset($_GET['cde']))
+                {
+                    $uneCommande = MCommande::getUneCommande($_GET['cde']);
+                }
+                include("views/compte/v_VoirCommandes.php");
             }
-            include("views/compte/v_VoirCommandes.php");
+            else
+            {
+                header("Location:?uc=connexion");
+            }
         }
         catch (Exception $e)
         {
