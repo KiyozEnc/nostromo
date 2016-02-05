@@ -26,13 +26,16 @@ session_start(); ?>
 <body class="background">
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
+        <a class="navbar-brand" href="?uc=index">
+            Nostromo
+        </a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="?uc=index">Nostromo</a>
+        <a class="navbar-brand" href="?uc=index"></a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
@@ -61,11 +64,11 @@ session_start(); ?>
     <div class="container">
         <?php if(Connexion::sessionOuverte())
         { ?>
-        <div class="col-md-9"> <?php
+        <div class="col-md-9 col-sm-9"> <?php
             }
             else
             { ?>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12">
                 <?php
                 }
                 if (isset($_GET['uc']))
@@ -104,7 +107,7 @@ session_start(); ?>
                 <div class="col-md-3" id="leftCol">
                     <div class="row">
                         <?php if($action != "voirReservation") { ?>
-                            <div class="rectangle col-lg-12">
+                            <div class="rectangle col-md-12">
                                 <h4 class="text-center"><a href="?uc=maReservation">Réservation</a></h4>
                                 <?php if(isset($_SESSION['Reservation']))
                                 {
@@ -121,7 +124,7 @@ session_start(); ?>
                     </div>
                     <div class="row">
                         <?php if($action != "voirCommandes") { ?>
-                            <div class="rectangle col-lg-12">
+                            <div class="rectangle col-md-12 col-xs-12">
                                 <h4 class="text-center"><a href="?uc=monCompte&action=voirCommandes">Vos dernières commandes</a></h4>
                                 <p class="text-justify">
                                     <?php if(isset($_SESSION['Commandes']))
