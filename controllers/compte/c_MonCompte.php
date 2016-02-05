@@ -24,6 +24,10 @@ switch ($action)
         {
             if(isset($_POST['actualpwd']))
             {
+                if(empty($_POST['pwd']) && empty($_POST['pwdconf']) && empty($_POST['name']) && empty($_POST['firstname']) && empty($_POST['cp']) && empty($_POST['city']) && empty($_POST['address']))
+                {
+                    throw new Exception ("Veuillez remplir au moins un champ à modifier.");
+                }
                 if(sha1($_POST['actualpwd']) == $_SESSION['Utilisateur']->getMdp())
                 {
                     if(!empty($_POST['pwd']) && !empty($_POST['pwdconf']))
@@ -31,7 +35,7 @@ switch ($action)
                         if($_POST['pwd'] && $_POST['pwdconf'])
                             $_SESSION['Utilisateur']->setMdp(sha1($_POST['pwd']));
                         else
-                            throw new Exception ("Les mots de passe ne sont pas identiques");
+                            throw new Exception ("Les mots de passe ne sont pas identiques.");
                     }
                     if(!empty($_POST['name']))
                     {
@@ -52,14 +56,22 @@ switch ($action)
                         }
                         else
                         {
-                            throw new Exception ("Le code postal doit être au format numérique");
+                            throw new Exception ("Le code postal doit être au format numérique.");
                         }
+                    }
+                    if(!empty($_POST['cp']))
+                    {
+                        if(!is_numeric($_POST['cp']))
+                            throw new Exception ("Le code postal doit être au format numérique.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Mot de passe incorrect");
+                    throw new Exception("Mot de passe incorrect.");
                 }
+                ConnexionSite::updateUser($_SESSION['Utilisateur']);
+                Connexion::setFlashMessage("Données mise à jour avec succès", "valid");
+                header("Location:?uc=monCompte&action=edit");
             }
             else
             {

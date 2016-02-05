@@ -97,4 +97,34 @@ class ConnexionSite
         }
         return $unClient;
     }
+
+    /**
+     * Met à jour un utilisateur dans la base de données dont l'utilisateur est passé en paramètre
+     * @param Utilisateur $user
+     * @throws Exception
+     */
+    public static function updateUser(Utilisateur $user)
+    {
+        try
+        {
+            $conn = Connexion::getBdd();
+            $reqprepare2=$conn->prepare("UPDATE client SET nomClt = ?, prenomClt = ?, adresseClt = ?, cpClt = ?, villeClt = ?, mdpClt = ?, mailClt = ?, pointsClt = ? WHERE numClt = ?;");
+            $reqprepare2->execute(array(
+                    $user->getNom(),
+                    $user->getPrenom(),
+                    $user->getAdresse(),
+                    $user->getCp(),
+                    $user->getVille(),
+                    $user->getMdp(),
+                    $user->getMail(),
+                    $user->getPoints(),
+                    $user->getId())
+            );
+            $conn = null;
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception ($e->getMessage());
+        }
+    }
 }
