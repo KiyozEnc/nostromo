@@ -20,6 +20,9 @@ class Panier
      *  Initialise la collection de produit
      */
 
+    /**
+     * Panier constructor.
+     */
     public function Panier()
     {
         $this->CollProduit = new Collection;
@@ -27,7 +30,7 @@ class Panier
 
     /**
      * Retourne le nombre de produit
-     * @return Retourne un entier
+     * @return int Retourne un entier
      */
     public function getNbProd()
     {
@@ -36,8 +39,8 @@ class Panier
 
     /**
      * Augmenter le produit de référence $ref de la quantité $qte
-     * @param type $ref  Reference du produit
-     * @param type $qte  Nombre de produits à ajouter à la quantité
+     * @param int $ref  Reference du produit
+     * @param int $qte  Nombre de produits à ajouter à la quantité
      */
 
     public function augmenterQuantiteProduit($ref ,$qte)
@@ -48,8 +51,8 @@ class Panier
 
     /**
      * Diminuer le produit de référence $ref de la quantité $qte
-     * @param type $ref  Reference du produit
-     * @param type $qte  Nombre de produits à retirer à la quantité
+     * @param int $ref  Reference du produit
+     * @param int $qte  Nombre de produits à retirer à la quantité
      */
     public function diminuerQuantiteProduit($ref ,$qte)
     {
@@ -62,13 +65,12 @@ class Panier
             }
         }
     }
-
     /**
      * Ajoute un produit au panier s'il n'existe pas encore
      * Sinon ajoute une unité à la quantité commandée
-     * @param type $unProduit Objet Produit à ajouter au panier
+     * @param Article $unProduit
+     * @param int $qte
      */
-
     public function ajouterUnProduit($unProduit,$qte)
     {
         if($this->CollProduit->cleExiste($unProduit->getNumArt()))
@@ -79,7 +81,7 @@ class Panier
 
     /**
      * Supprime le produit du panier
-     * @param type $refer  Référence du produit
+     * @param int $refer  Référence du produit
      */
     public function supprimerUnProduit($refer)
     {
@@ -91,7 +93,7 @@ class Panier
 
     /**
      * Retourne l'ensemble des produits du panier
-     * @return tableau
+     * @return array tableau
      */
     public function getProduitsPanier()
     {

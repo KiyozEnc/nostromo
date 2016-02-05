@@ -9,27 +9,41 @@ switch ($action)
     case 'voirPanier' :
         include("views/panier/v_VoirPanier.php"); break;
     case 'ajouterArticle' :
-        if(!isset($_SESSION['Panier']))
+        try
         {
-            $_SESSION['Panier'] = new Panier();
-        }
-        $prod = MArticle::getArticle($_GET['ref']);
-        if(($prod->getQteStock() - $_POST['qte']) < 0)
-        {
-            $_SESSION['error']="Quantitée en stock insuffisante.";
-            $ref = $_GET['ref'];
-            if($_SESSION['Panier']->getNbProd() == 0)
+            if($_POST['qte'] == 0)
+                throw new Exception ("Veuillez sélectionner une quantité");
+            if(!isset($_SESSION['Panier']))
             {
-                unset($_SESSION['Panier']);
+                $_SESSION['Panier'] = new Panier();
             }
+            $prod = MArticle::getArticle($_GET['ref']);
+            if(($prod->getQteStock() - $_POST['qte']) < 0)
+            {
+                Connexion::setFlashMessage("Quantitée en stock insuffisante.", "error");
+                $ref = $_GET['ref'];
+                if($_SESSION['Panier']->getNbProd() == 0)
+                {
+                    unset($_SESSION['Panier']);
+                }
+                header("Location:?uc=materiel&action=voirArticle&article=$ref");
+            }
+            else
+            {
+
+                $prod->setQte($_POST['qte']);
+                $_SESSION['Panier']->ajouterUnProduit($prod, $_POST['qte']);
+                Connexion::setFlashMessage("Produit ajouté au panier. <a href='?uc=monPanier'>Voir mon panier</a>","valid");
+                header('Location:?uc=materiel');
+            }
+        }
+        catch (Exception $e)
+        {
+            Connexion::setFlashMessage($e->getMessage(), "error");
+            $ref = $_GET['ref'];
             header("Location:?uc=materiel&action=voirArticle&article=$ref");
         }
-        else
-        {
-            $prod->setQte($_POST['qte']);
-            $_SESSION['Panier']->ajouterUnProduit($prod, $_POST['qte']);
-            header('Location:?uc=materiel');
-        }
+
 
         ; break;
 
@@ -65,7 +79,7 @@ switch ($action)
 
     case 'validerPanier' :
         include('views/panier/v_ValiderPanier.php');
-    ;break;
+        ;break;
 
 
     case 'viderPanier' :
@@ -74,7 +88,7 @@ switch ($action)
         break;
 
     case 'enregistrerPanier' :
-        
+
         break;
 
     default :
