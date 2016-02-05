@@ -19,7 +19,6 @@
         </div>
     </div>
 </form>
-
 <?php
 if(isset($uneCommande))
 { ?>

@@ -1,44 +1,38 @@
-<?php
-require_once("models/m_Connexion.php");
-
-?>
-<div class="jumbotron">
-	<?php if(isset($_SESSION['valid'])) { ?>
-		<div class="alert alert-success" role="alert">
-			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-			<?= $_SESSION['valid'] ?>
-		</div>
-	<?php } ?>
-	<?php if(isset($_SESSION['error'])) { ?>
-		<div class="alert alert-danger" role="alert">
-			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			<span class="sr-only">Error:</span>
-			<?= $_SESSION['error'] ?>
-		</div>
-	<?php } ?>
-	<table class="table table-bordered table-hover table-condensed">
-		<h2>Articles disponibles</h2>
-		<thead>
+<?php if(isset($_SESSION['valid'])) { ?>
+	<div class="alert alert-success" role="alert">
+		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+		<?= $_SESSION['valid'] ?>
+	</div>
+<?php } ?>
+<?php if(isset($_SESSION['error'])) { ?>
+	<div class="alert alert-danger" role="alert">
+		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		<span class="sr-only">Error:</span>
+		<?= $_SESSION['error'] ?>
+	</div>
+<?php } ?>
+<table class="table table-bordered table-hover table-condensed">
+	<h2>Articles disponibles</h2>
+	<thead>
+	<tr>
+		<th>Numéro de l'article</th>
+		<th>Désignation</th>
+		<th>Prix unitaire</th>
+		<?php if(Connexion::sessionOuverte()) { ?><th>Actions</th><?php } ?>
+	</tr>
+	</thead>
+	<tbody>
+	<?php
+	foreach ($tabArt as $art => $unArt)
+	{ ?>
 		<tr>
-			<th>Numéro de l'article</th>
-			<th>Désignation</th>
-			<th>Prix unitaire</th>
-			<?php if(Connexion::sessionOuverte()) { ?><th>Actions</th><?php } ?>
+			<td> <?php echo $unArt->getNumArt(); ?> </td>
+			<td> <?php echo $unArt->getDesignation(); ?> </td>
+			<td><?php echo $unArt->getPu(); ?> €</td>
+			<?php if(Connexion::sessionOuverte()) { ?><th><a href="?uc=materiel&action=voirArticle&article=<?php echo $unArt->getNumArt(); ?>" type="button" class="btn btn-default">Détails</a></th><?php } ?>
 		</tr>
-		</thead>
-		<tbody>
-		<?php
-		foreach ($tabArt as $art => $unArt)
-		{ ?>
-			<tr>
-				<td> <?php echo $unArt->getNumArt(); ?> </td>
-				<td> <?php echo $unArt->getDesignation(); ?> </td>
-				<td><?php echo $unArt->getPu(); ?> €</td>
-				<?php if(Connexion::sessionOuverte()) { ?><th><a href="?uc=materiel&action=voirArticle&article=<?php echo $unArt->getNumArt(); ?>" type="button" class="btn btn-default">Détails</a></th><?php } ?>
-			</tr>
-		<?php } ?>
-		</tbody>
-	</table>
-</div>
+	<?php } ?>
+	</tbody>
+</table>
 <?php if(isset($_SESSION['valid'])) { unset($_SESSION['valid']); } ?>
 <?php if(isset($_SESSION['error'])) { unset($_SESSION['error']); } ?>
