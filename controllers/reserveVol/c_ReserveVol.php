@@ -10,9 +10,20 @@ switch($action)
         $lesVols = MVol::getVols();
         include("views/reserveVol/v_VoirVols.php"); break;
     case 'reserverVol' :
-        $vol = MVol::getUnVol($_GET['vol']);
-        $nbPlaceRestante = MVol::getPlaceRestante($vol);
-        include("views/reserveVol/v_VoirFormulaire.php"); break;
+        try
+        {
+            if(!Connexion::sessionOuverte())
+                throw new Exception ("Invalid arguments");
+            $vol = MVol::getUnVol($_GET['vol']);
+            $nbPlaceRestante = MVol::getPlaceRestante($vol);
+            include("views/reserveVol/v_VoirFormulaire.php");
+        }
+        catch (Exception $e)
+        {
+            Connexion::setFlashMessage($e->getMessage(), 'error');
+            header("Location:?uc=reserver");
+        }
+        break;
     case 'validReserverVol' :
         try
         {

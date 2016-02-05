@@ -59,16 +59,18 @@ foreach ($lesVols->getCollection() as $unVol)
 </table>
 -->
 <div class="row">
-    <h2>Vols disponibles</h2>
+    <h2 class="text-center text-info text-muted">Vols disponibles</h2>
     <?php foreach ($lesVols->getCollection() as $unVol)
     { ?>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
                 <img class="img-responsive" src="img/avion.png" title="Vol n°<?= $unVol->getNumVol() ?>">
                 <div class="caption">
                     <h3>Vol n°<?= $unVol->getNumVol() ?></h3>
                     <p>Date et heure : <?= $unVol->getDateVol() ?> à <?= $unVol->getHeureVol() ?></p>
-                    <p><a href="?uc=reserver&action=reserverVol&vol=<?= $unVol->getNumVol() ?>" class="btn btn-primary" role="button">Réserver</a></p>
+                    <?php if(Connexion::sessionOuverte()) : ?>
+                        <p><a href="?uc=reserver&action=reserverVol&vol=<?= $unVol->getNumVol() ?>" class="btn btn-primary" role="button">Réserver</a></p>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
