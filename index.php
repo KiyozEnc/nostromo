@@ -59,7 +59,7 @@ session_start(); ?>
 </nav>
 <div class="jumbotron">
     <div class="container">
-        <?php if(isset($_SESSION['Utilisateur']))
+        <?php if(Connexion::sessionOuverte())
         { ?>
         <div class="col-md-9"> <?php
             }
@@ -88,7 +88,7 @@ session_start(); ?>
                     header("Location:?uc=index");
                 } ?>
             </div>
-            <?php if(isset($_SESSION['Utilisateur'])) {
+            <?php if(Connexion::sessionOuverte()) {
                 if(isset($_GET['action']))
                 {
                     $action = $_GET['action'];
