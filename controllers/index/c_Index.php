@@ -19,12 +19,16 @@ switch ($action)
         {
             if(isset($_SESSION['Utilisateur']))
             {
-                $reservation = MVol::reservationExistante($_SESSION['Utilisateur']);
-                if(empty($reservation->getId()))
-                    unset($reservation);
-                $commandes = MCommande::getCommandes($_SESSION['Utilisateur']);
-                if(empty($commandes->getCollection()))
-                    unset($commandes);
+                if(!isset($_SESSION['Reservation']))
+                {
+                    $_SESSION['Reservation'] = MVol::reservationExistante($_SESSION['Utilisateur']);
+                }
+                if(empty($_SESSION['Reservation']->getId()))
+                    unset($_SESSION['Reservation']);
+                if(!isset($_SESSION['Commandes']))
+                $_SESSION['Commandes'] = MCommande::getCommandes($_SESSION['Utilisateur']);
+                if(empty($_SESSION['Commandes']->getCollection()))
+                    unset($_SESSION['Commandes']);
             }
             include("views/index/v_Accueil.php");
         }

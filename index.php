@@ -59,28 +59,97 @@ session_start(); ?>
 </nav>
 <div class="jumbotron">
     <div class="container">
-        <?php
-        if (isset($_GET['uc']))
-            switch ($_GET['uc'])
-            {
-                case 'index' : include("controllers/index/c_Index.php"); break;
-                case 'reserver' : include("controllers/reserveVol/c_ReserveVol.php");break;
-                case 'connexion' : include("controllers/connexion/c_ConnexionSite.php");break;
-                case 'inscription' : include("controllers/inscription/c_InscriptionSite.php");break;
-                case 'deconnexion' : include("controllers/deconnexion/c_Deconnexion.php");break;
-                case 'maReservation' : include("controllers/maReservation/c_MaReservation.php");break;
-                case 'monCompte' : include("controllers/compte/c_MonCompte.php");break;
-                case 'materiel' : include("controllers/boutique/c_Boutique.php");break;
-                case 'monPanier' :include("controllers/panier/c_Panier.php");break;
-                case 'aPropos' :include("views/aPropos/v_APropos.php");break;
-                default : include("views/index/v_Erreur.php"); break;
+        <?php if(isset($_SESSION['Utilisateur']))
+        { ?>
+        <div class="col-md-9"> <?php
             }
-        else
-        {
-            header("Location:?uc=index");
-        } ?>
+            else
+            { ?>
+            <div class="col-md-12">
+                <?php
+                }
+                if (isset($_GET['uc']))
+                    switch ($_GET['uc'])
+                    {
+                        case 'index' : include("controllers/index/c_Index.php"); break;
+                        case 'reserver' : include("controllers/reserveVol/c_ReserveVol.php");break;
+                        case 'connexion' : include("controllers/connexion/c_ConnexionSite.php");break;
+                        case 'inscription' : include("controllers/inscription/c_InscriptionSite.php");break;
+                        case 'deconnexion' : include("controllers/deconnexion/c_Deconnexion.php");break;
+                        case 'maReservation' : include("controllers/maReservation/c_MaReservation.php");break;
+                        case 'monCompte' : include("controllers/compte/c_MonCompte.php");break;
+                        case 'materiel' : include("controllers/boutique/c_Boutique.php");break;
+                        case 'monPanier' :include("controllers/panier/c_Panier.php");break;
+                        case 'aPropos' :include("views/aPropos/v_APropos.php");break;
+                        default : include("views/index/v_Erreur.php"); break;
+                    }
+                else
+                {
+                    header("Location:?uc=index");
+                } ?>
+            </div>
+            <?php if(isset($_SESSION['Utilisateur'])) {
+                if(isset($_GET['action']))
+                {
+                    $action = $_GET['action'];
+                }
+                else
+                {
+                    $action = "";
+                    if($_GET['uc'] == "maReservation" && $action == "")
+                    {
+                        $action = "voirReservation";
+                    }
+                } ?>
+                <div class="col-md-3" id="leftCol">
+                    <div class="row">
+                        <?php if($action != "voirReservation") { ?>
+                            <div class="rectangle col-lg-12">
+                                <h4 class="text-center"><a href="?uc=maReservation">Réservation</a></h4>
+                                <?php if(isset($_SESSION['Reservation']))
+                                {
+                                    ?>
+                                    <p class="text-justify"><?php echo "Vol n°".$_SESSION['Reservation']->getUnVol()->getNumVol()." - ".$_SESSION['Reservation']->getNbPers()."/".$_SESSION['Reservation']->getUnVol()->getNbPlace()." personnes" ?>, pour le <?php echo $_SESSION['Reservation']->getUnVol()->getDateVol()." à ".$_SESSION['Reservation']->getUnVol()->getHeureVol() ?></p>
+                                    <?php
+                                }
+                                else
+                                {
+                                    echo '<p class="text-justify">Aucune réservation</p>';
+                                } ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div class="row">
+                        <?php if($action != "voirCommandes") { ?>
+                            <div class="rectangle col-lg-12">
+                                <h4 class="text-center"><a href="?uc=monCompte&action=voirCommandes">Vos dernières commandes</a></h4>
+                                <p class="text-justify">
+                                    <?php if(isset($_SESSION['Commandes']))
+                                    { ?>
+                                        <?php foreach ($_SESSION['Commandes']->getCollection() as $commande)
+                                    {
+                                        echo 'N°'.$commande->getId().' - le '.$commande->getUnedate();
+                                        echo '<p class="margin">';
+                                        foreach ($commande->getLesArticles()->getCollection() as $article)
+                                        {
+                                            echo 'Article n°: '.$article->getNumArt().' - '.$article->getDesignation().' - Quantité : '.$article->getQte().'<br>';
+                                        }
+                                        echo '</p>';
+                                    } ?>
+                                    <?php }
+                                    else
+                                    {
+                                        echo 'Aucune commande';
+                                    } ?>
+                                </p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <br>
+                </div>
+            <?php } ?>
+        </div>
     </div>
-</div>
 </body>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

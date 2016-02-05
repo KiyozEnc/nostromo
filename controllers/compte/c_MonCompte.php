@@ -9,6 +9,8 @@ switch ($action)
     case 'voirMonCompte' :
         try
         {
+            $title = "Page principale";
+            include("views/compte/v_GabCompte.php");
             include("views/compte/v_VoirProfile.php");
         }
         catch (Exception $e)
@@ -61,6 +63,8 @@ switch ($action)
             }
             else
             {
+                $title = "Modifier mes informations";
+                include("views/compte/v_GabCompte.php");
                 include("views/compte/v_EditProfile.php");
             }
         }
@@ -80,6 +84,8 @@ switch ($action)
                 {
                     $uneCommande = MCommande::getUneCommande($_GET['cde']);
                 }
+                $title = "Mes commandes";
+                include("views/compte/v_GabCompte.php");
                 include("views/compte/v_VoirCommandes.php");
             }
             else
