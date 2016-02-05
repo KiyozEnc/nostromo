@@ -1,10 +1,6 @@
 div.rectangle p, div.rectangle a {
     font-size: 1em;
 }
-.rectangle {
-    border:1px solid #000;
-    border-radius: 2%;
-}
 
 .margin {
     padding-left: 5.5%;

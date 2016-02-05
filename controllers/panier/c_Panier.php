@@ -33,8 +33,8 @@ switch ($action)
 
                 $prod->setQte($_POST['qte']);
                 $_SESSION['Panier']->ajouterUnProduit($prod, $_POST['qte']);
-                Connexion::setFlashMessage("Produit ajouté au panier. <a href='?uc=monPanier'>Voir mon panier</a>","valid");
-                header('Location:?uc=materiel');
+//                Connexion::setFlashMessage("Produit ajouté au panier. <a href='?uc=monPanier'>Voir mon panier</a>","valid");
+//                header('Location:?uc=materiel');
             }
         }
         catch (Exception $e)
