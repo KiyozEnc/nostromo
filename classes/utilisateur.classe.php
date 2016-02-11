@@ -43,7 +43,7 @@ class Utilisateur
      */
     private $points;
 
-    public function Utilisateur ()
+    public function __construct ()
     {
     }
 

@@ -30,7 +30,7 @@ class Vol
     /**
      * Constructeur du vol
      */
-    public function Vol()
+    public function __construct()
     {
 
     }

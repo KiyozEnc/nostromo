@@ -23,7 +23,7 @@ class Panier
     /**
      * Panier constructor.
      */
-    public function Panier()
+    public function __construct()
     {
         $this->CollProduit = new Collection;
     }

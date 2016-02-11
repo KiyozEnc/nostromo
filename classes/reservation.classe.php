@@ -32,7 +32,7 @@ class Reservation
      */
     private $valid = false;
 
-    public function Reservation()
+    public function __construct()
     {
         $this->dateRes = new \DateTime();
     }

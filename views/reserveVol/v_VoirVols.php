@@ -15,49 +15,6 @@ require_once("models/m_Connexion.php");
         <?= $_SESSION['error'] ?>
     </div>
 <?php } ?>
-<!--
-<table class="table table-bordered table-hover table-condensed">
-    <h2>Vols disponibles</h2>
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>Heure</th>
-        <th>Nombre de place maximale</th>
-        <th>Nombre de place restantes</th>
-        <?php
-if(Connexion::sessionOuverte()) { ?><th>Actions</th><?php } ?>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-foreach ($lesVols->getCollection() as $unVol)
-{ ?>
-        <tr>
-            <td> <?php echo $unVol->getDateVol(); ?> </td>
-            <td> <?php echo $unVol->getHeureVol(); ?> </td>
-            <td><?php echo $unVol->getNbPlace(); ?></td>
-            <td><?php echo MVol::getPlaceRestante($unVol) ?></td>
-            <?php
-    if(Connexion::sessionOuverte()) { ?>
-                <td> <?php
-        if(MVol::getPlaceRestante($unVol) == 0)
-        { ?>
-                    COMPLET <?php
-        }
-        else
-        { ?>
-                    <a href="?uc=reserver&action=reserverVol&vol=<?php echo $unVol->getNumVol(); ?>" title="Réserver le vol n° <?= $unVol->getNumVol(); ?>">
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        Réserver
-                    </a> <?php
-        } ?>
-                </td><?php
-    } ?>
-        </tr>
-    <?php } ?>
-    </tbody>
-</table>
--->
 <div class="row">
     <h2 class="text-center text-info text-muted">Vols disponibles</h2>
     <?php foreach ($lesVols->getCollection() as $unVol)

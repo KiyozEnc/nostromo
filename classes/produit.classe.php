@@ -36,7 +36,7 @@ class Produit
      * @param int $reference
      * @param int $personnes
      */
-    public function Produit ($reference,$personnes) // Constructeur
+    public function __construct ($reference,$personnes) // Constructeur
     {
         $this->ref = $reference;
         $tab = MVol::getUnVol($reference);
