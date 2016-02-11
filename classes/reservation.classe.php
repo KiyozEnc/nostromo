@@ -10,31 +10,31 @@ class Reservation
     /**
      * @var int
      */
-    private $id;
+    private $_id;
     /**
      * @var Utilisateur
      */
-    private $unClient;
+    private $_unClient;
     /**
      * @var Vol
      */
-    private $unVol;
+    private $_unVol;
     /**
      * @var \DateTime
      */
-    private $dateRes;
+    private $_dateRes;
     /**
      * @var int
      */
-    private $nbPers;
+    private $_nbPers;
     /**
      * @var boolean
      */
-    private $valid = false;
+    private $_valid = false;
 
     public function __construct()
     {
-        $this->dateRes = new \DateTime();
+        $this->_dateRes = new \DateTime();
     }
 
     /**
@@ -42,16 +42,16 @@ class Reservation
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
 
     /**
-     * @param int $id
+     * @param int $_id
      * @return Reservation
      */
-    public function setId($id)
+    public function setId($_id)
     {
-        $this->id = (int) $id;
+        $this->_id = (int) $_id;
 
         return $this;
     }
@@ -61,16 +61,16 @@ class Reservation
      */
     public function getUnVol()
     {
-        return $this->unVol;
+        return $this->_unVol;
     }
 
     /**
-     * @param Vol $unVol
+     * @param Vol $_unVol
      * @return Reservation
      */
-    public function setUnVol($unVol)
+    public function setUnVol($_unVol)
     {
-        $this->unVol = $unVol;
+        $this->_unVol = $_unVol;
 
         return $this;
     }
@@ -80,16 +80,16 @@ class Reservation
      */
     public function getUnClient()
     {
-        return $this->unClient;
+        return $this->_unClient;
     }
 
     /**
-     * @param Utilisateur $unClient
+     * @param Utilisateur $_unClient
      * @return Reservation
      */
-    public function setUnClient($unClient)
+    public function setUnClient($_unClient)
     {
-        $this->unClient = $unClient;
+        $this->_unClient = $_unClient;
 
         return $this;
     }
@@ -99,16 +99,16 @@ class Reservation
      */
     public function getDateRes()
     {
-        return $this->dateRes;
+        return $this->_dateRes;
     }
 
     /**
-     * @param \DateTime $dateRes
+     * @param \DateTime $_dateRes
      * @return Reservation
      */
-    public function setDateRes($dateRes)
+    public function setDateRes($_dateRes)
     {
-        $this->dateRes = DateTime::createFromFormat('Y-m-d H:i:s', $dateRes);
+        $this->_dateRes = DateTime::createFromFormat('Y-m-d H:i:s', $_dateRes);
 
         return $this;
     }
@@ -118,16 +118,16 @@ class Reservation
      */
     public function getNbPers()
     {
-        return $this->nbPers;
+        return $this->_nbPers;
     }
 
     /**
-     * @param int $nbPers
+     * @param int $_nbPers
      * @return Reservation
      */
-    public function setNbPers($nbPers)
+    public function setNbPers($_nbPers)
     {
-        $this->nbPers = (int) $nbPers;
+        $this->_nbPers = (int) $_nbPers;
 
         return $this;
     }
@@ -137,23 +137,27 @@ class Reservation
      */
     public function isValid()
     {
-        return $this->valid;
+        return $this->_valid;
     }
 
     /**
-     * @param boolean $valid
+     * @param boolean $_valid
      * @return Reservation
      */
-    public function setValid($valid)
+    public function setValid($_valid)
     {
-        $this->valid = (boolean) $valid;
+        $this->_valid = (boolean) $_valid;
 
         return $this;
     }
 
     public function flushValid()
     {
-        MVol::validReservation($this->unClient,$this->unVol,$this);
+        MVol::validReservation(
+            $this->_unClient,
+            $this->_unVol,
+            $this
+        );
     }
 
 }

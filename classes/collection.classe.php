@@ -1,78 +1,96 @@
 <?php
 class Collection
 {
-	private $tab = array();
+    private $_tab = [];
 
-	/**
-	 *  Ajpouter un elément à la collection
-	 */
-	public function ajouter($obj, $key = null)
-	{
-		if ($key == null)
-		{
-			$this->tab[] = $obj;
-		}
-		else
-		{
-			if (isset($this->tab[$key]))
-			{
-				throw new KeyHasUseException("Key $key already in use.");
-			}
-			else
-			{
-				$this->tab[$key] = $obj;
-			}
-		}
-	}
+    /**
+     * Ajoute un élément à la collection
+     *
+     * @param mixed $obj
+     * @param null  $key
+     *
+     * @throws KeyHasUseException
+     */
+    public function ajouter($obj, $key = null)
+    {
+        if ($key === null) {
+            $this->_tab[] = $obj;
+        } else {
+            if (array_key_exists($key, $this->_tab)) {
+                throw new KeyHasUseException("Key $key already in use.");
+            } else {
+                $this->_tab[$key] = $obj;
+            }
+        }
+    }
 
-	public function getElement($key)
-	{
-		if (isset($this->tab[$key]))
-		{
-			return $this->tab[$key];
-		}
-		else
-		{
-			//throw new KeyInvalidException("Invalid key $key.");
-		}
-	}
+    /**
+     * Récupère l'élément $key
+     *
+     * @param mixed $key
+     *
+     * @return mixed
+     * @throws KeyInvalidException
+     */
+    public function getElement($key)
+    {
+        if (array_key_exists($key, $this->_tab)) {
+            return $this->_tab[$key];
+        } else {
+            throw new KeyInvalidException("Invalid key $key.");
+        }
+    }
 
+    /**
+     * @param mixed $key
+     *
+     * @throws KeyInvalidException
+     */
+    public function supprimer($key)
+    {
+        if (array_key_exists($key, $this->_tab)) {
+            unset($this->_tab[$key]);
+        } else {
+            throw new KeyInvalidException("Invalid key $key.");
+        }
+    }
 
-	public function supprimer($key)
-	{
-		if (isset($this->tab[$key]))
-		{
-			unset($this->tab[$key]);
-		}
-		else
-		{
-			throw new KeyInvalidException("Invalid key $key.");
-		}
-	}
+    /**
+     * @return array
+     */
+    public function getCollection()
+    {
+        return $this->_tab;
+    }
 
-	public function getCollection()
-	{
-		return $this->tab;
-	}
+    /**
+     * @return array
+     */
+    public function getCles()
+    {
+        return array_keys($this->_tab);
+    }
 
-	public function getCles()
-	{
-		return array_keys($this->tab);
-	}
+    /**
+     * @return int
+     */
+    public function taille()
+    {
+        return count($this->_tab);
+    }
 
-	public function taille()
-	{
-		return count($this->tab);
-	}
+    /**
+     * @param mixed $key
+     *
+     * @return bool
+     */
+    public function cleExiste($key)
+    {
+        return array_key_exists($key, $this->_tab);
+    }
 
-	public function cleExiste($key)
-	{
-		return isset($this->tab[$key]);
-	}
-
-	public function vider()
-	{
-		$this->tab = array();
-	}
+    public function vider()
+    {
+        $this->_tab = array();
+    }
 }
-?>

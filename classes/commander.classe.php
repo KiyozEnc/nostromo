@@ -11,16 +11,16 @@ class Commander
     /**
      * @var Article
      */
-    private $unArticle;
+    private $_unArticle;
     /**
      * @var Commande
      */
-    private $uneCommande;
+    private $_uneCommande;
     /**
      * @var int
      */
-    private $qte;
-
+    private $_qte;
+    
     /**
      * Commander constructor.
      */
@@ -33,7 +33,7 @@ class Commander
      */
     public function getUnArticle()
     {
-        return $this->unArticle;
+        return $this->_unArticle;
     }
 
     /**
@@ -42,7 +42,7 @@ class Commander
      */
     public function setUnArticle($unArticle)
     {
-        $this->unArticle = $unArticle;
+        $this->_unArticle = $unArticle;
         return $this;
     }
 
@@ -51,7 +51,7 @@ class Commander
      */
     public function getUneCommande()
     {
-        return $this->uneCommande;
+        return $this->_uneCommande;
     }
 
     /**
@@ -60,7 +60,7 @@ class Commander
      */
     public function setUneCommande($uneCommande)
     {
-        $this->uneCommande = $uneCommande;
+        $this->_uneCommande = $uneCommande;
         return $this;
     }
 
@@ -69,7 +69,7 @@ class Commander
      */
     public function getQte()
     {
-        return $this->qte;
+        return $this->_qte;
     }
 
     /**
@@ -78,7 +78,7 @@ class Commander
      */
     public function setQte($qte)
     {
-        $this->qte = $qte;
+        $this->_qte = $qte;
         return $this;
     }
 }

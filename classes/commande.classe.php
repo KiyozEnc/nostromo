@@ -11,49 +11,53 @@ class Commande
     /**
      * @var int
      */
-    private $id;
+    private $_id;
     /**
      * @var Utilisateur
      */
-    private $unClient;
+    private $_unClient;
     /**
      * @var string
      */
-    private $uneDate;
+    private $_uneDate;
     /**
      * @var Collection
      */
-    private $lesArticles;
+    private $_lesArticles;
 
     /**
      * Commande constructor.
-     * @param int $id
+     *
+     * @param int         $id
      * @param Utilisateur $unClient
-     * @param $uneDate
+     * @param string      $uneDate
      */
     public function __construct($id, Utilisateur $unClient, $uneDate)
     {
-        $this->id = $id;
-        $this->unClient = $unClient;
-        $this->uneDate = $uneDate;
-        $this->lesArticles = new Collection();
+        $this->_id = $id;
+        $this->_unClient = $unClient;
+        $this->_uneDate = $uneDate;
+        $this->_lesArticles = new Collection();
     }
 
     /**
+     * Get id
+     *
      * @return int
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
 
     /**
      * @param int $id
+     *
      * @return Commande
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->_id = $id;
         return $this;
     }
 
@@ -62,7 +66,7 @@ class Commande
      */
     public function getUnClient()
     {
-        return $this->unClient;
+        return $this->_unClient;
     }
 
     /**
@@ -71,7 +75,7 @@ class Commande
      */
     public function setUnClient($unClient)
     {
-        $this->unClient = $unClient;
+        $this->_unClient = $unClient;
         return $this;
     }
 
@@ -80,7 +84,7 @@ class Commande
      */
     public function getUneDate()
     {
-        return DateVol::formaterDateEtHeure($this->uneDate);
+        return DateVol::formaterDateEtHeure($this->_uneDate);
     }
 
     /**
@@ -89,7 +93,7 @@ class Commande
      */
     public function setUneDate($uneDate)
     {
-        $this->uneDate = $uneDate;
+        $this->_uneDate = $uneDate;
         return $this;
     }
 
@@ -98,7 +102,7 @@ class Commande
      */
     public function getLesArticles()
     {
-        return $this->lesArticles;
+        return $this->_lesArticles;
     }
 
     /**
@@ -107,17 +111,19 @@ class Commande
      */
     public function setLesArticles($lesArticles)
     {
-        $this->lesArticles = $lesArticles;
+        $this->_lesArticles = $lesArticles;
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getMontantTotal()
     {
         $montant = 0;
-         foreach ($this->getLesArticles()->getCollection() as $article)
-         {
-             $montant += $article->getPu() * $article->getQte();
-         }
+        foreach ($this->getLesArticles()->getCollection() as $article) {
+            $montant += $article->getPu() * $article->getQte();
+        }
         return $montant;
     }
 }

@@ -2,21 +2,20 @@
 
 class DateVol
 {
-
-	static public function formaterDate($dateDuVol)
-	{
-		$Year = substr($dateDuVol, 0, -6);
-		$Month = substr($dateDuVol, 5, -3);
-		$Day = substr($dateDuVol, 8);
-		$dateDuVol = $Day.'/'.$Month.'/'.$Year;
-		return $dateDuVol;
-	}
-	static public function formaterHeure($heureDuVol)
-	{
-		$Heure = substr($heureDuVol, 0, -3);
-		return $Heure;
-	}
-	static public function formaterDateEtHeure($var)
+    static public function formaterDate($dateDuVol)
+    {
+        $year = substr($dateDuVol, 0, -6);
+        $month = substr($dateDuVol, 5, -3);
+        $day = substr($dateDuVol, 8);
+        $dateDuVol = $day.'/'.$month.'/'.$year;
+        return $dateDuVol;
+    }
+    static public function formaterHeure($heureDuVol)
+    {
+        $heure = substr($heureDuVol, 0, -3);
+        return $heure;
+    }
+    static public function formaterDateEtHeure($var)
     {
         $year = substr($var, 0, -15);
         $month = substr($var, 5, -12);

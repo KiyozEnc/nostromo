@@ -1,6 +1,7 @@
 <?php
-require_once "produit.classe.php";
-require_once "collection.classe.php";
+require_once 'produit.classe.php';
+require_once 'collection.classe.php';
+
 /**
  * Classe Panier
  * Permet de gérer un panier d'objets Produit
@@ -13,7 +14,7 @@ class Panier
      * Collection de produits
      * @var Collection
      */
-    private $CollProduit;
+    private $_collProduit;
 
     /**
      *  Constructeur de la classe
@@ -25,7 +26,7 @@ class Panier
      */
     public function __construct()
     {
-        $this->CollProduit = new Collection;
+        $this->_collProduit = new Collection;
     }
 
     /**
@@ -34,7 +35,7 @@ class Panier
      */
     public function getNbProd()
     {
-        return $this->CollProduit->taille();
+        return $this->_collProduit->taille();
     }
 
     /**
@@ -45,8 +46,8 @@ class Panier
 
     public function augmenterQuantiteProduit($ref ,$qte)
     {
-        if($this->CollProduit->cleExiste($ref))
-            $this->CollProduit->getElement($ref)->augmenterQuantite($qte);
+        if($this->_collProduit->cleExiste($ref))
+            $this->_collProduit->getElement($ref)->augmenterQuantite($qte);
     }
 
     /**
@@ -56,55 +57,57 @@ class Panier
      */
     public function diminuerQuantiteProduit($ref ,$qte)
     {
-        if($this->CollProduit->cleExiste($ref))
-        {
-            $this->CollProduit->getElement($ref)->diminuerQuantite($qte);
-            if ($this->CollProduit->getElement($ref)->getQte()==0)
-            {
-                $this->CollProduit->supprimer($ref);
+        if ($this->_collProduit->cleExiste($ref)) {
+            $this->_collProduit->getElement($ref)->diminuerQuantite($qte);
+            if ($this->_collProduit->getElement($ref)->getQte() === 0) {
+                $this->_collProduit->supprimer($ref);
             }
         }
     }
+
     /**
-     * Ajoute un produit au panier s'il n'existe pas encore
-     * Sinon ajoute une unité à la quantité commandée
      * @param Article $unProduit
-     * @param int $qte
+     * @param int     $qte
+     *
+     * @throws KeyHasUseException
      */
-    public function ajouterUnProduit($unProduit,$qte)
+    public function ajouterUnProduit(Article $unProduit, $qte)
     {
-        if($this->CollProduit->cleExiste($unProduit->getNumArt()))
-            $this->augmenterQuantiteProduit($unProduit->getNumArt(),$qte);
+        if ($this->_collProduit->cleExiste($unProduit->getNumArt()))
+            $this->augmenterQuantiteProduit($unProduit->getNumArt(), $qte);
         else
-            $this->CollProduit->ajouter($unProduit, $unProduit->getNumArt());
+            $this->_collProduit->ajouter($unProduit, $unProduit->getNumArt());
     }
 
     /**
-     * Supprime le produit du panier
-     * @param int $refer  Référence du produit
+     * Supprime un produit
+     *
+     * @param int $refer
+     *
+     * @throws KeyInvalidException
      */
     public function supprimerUnProduit($refer)
     {
-        if($this->CollProduit->cleExiste($refer))
-        {
-            $this->CollProduit->supprimer($refer);
+        if ($this->_collProduit->cleExiste($refer)) {
+            $this->_collProduit->supprimer($refer);
         }
     }
 
     /**
      * Retourne l'ensemble des produits du panier
-     * @return array tableau
+     * @return array
      */
     public function getProduitsPanier()
     {
-        return $this->CollProduit->getCollection();
+        return $this->_collProduit->getCollection();
     }
+
     /**
      * Retirer l'ensemble des produits du panier
      */
     public function videPanier()
     {
-        $this->CollProduit->vider();
+        $this->_collProduit->vider();
     }
 
 

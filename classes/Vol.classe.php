@@ -8,24 +8,24 @@ class Vol
 {
     /**
      * Numéro du vol
-     * @var int $numVol
+     * @var int $_numVol
      */
-    private $numVol;
+    private $_numVol;
     /**
      * Date du vol
      * @var string $dateVol
      */
-    private $dateVol;
+    private $_dateVol;
     /**
      * Heure du vol
-     * @var string $dateVol
+     * @var string $_dateVol
      */
-    private $heureVol;
+    private $_heureVol;
     /**
      * Nombre de place du vol
      * @var int $nbPlace
      */
-    private $nbPlace;
+    private $_nbPlace;
 
     /**
      * Constructeur du vol
@@ -40,16 +40,16 @@ class Vol
      */
     public function getNumVol()
     {
-        return $this->numVol;
+        return $this->_numVol;
     }
 
     /**
-     * @param int $numVol
+     * @param int $_numVol
      * @return Vol
      */
-    public function setNumVol($numVol)
+    public function setNumVol($_numVol)
     {
-        $this->numVol = (int) $numVol;
+        $this->_numVol = (int) $_numVol;
 
         return $this;
     }
@@ -59,16 +59,16 @@ class Vol
      */
     public function getDateVol()
     {
-        return DateVol::formaterDate($this->dateVol);
+        return DateVol::formaterDate($this->_dateVol);
     }
 
     /**
-     * @param string $dateVol
+     * @param string $_dateVol
      * @return Vol
      */
-    public function setDateVol($dateVol)
+    public function setDateVol($_dateVol)
     {
-        $this->dateVol = $dateVol;
+        $this->_dateVol = $_dateVol;
 
         return $this;
     }
@@ -78,16 +78,16 @@ class Vol
      */
     public function getHeureVol()
     {
-        return DateVol::formaterHeure($this->heureVol);
+        return DateVol::formaterHeure($this->_heureVol);
     }
 
     /**
-     * @param string $heureVol
+     * @param string $_heureVol
      * @return Vol
      */
-    public function setHeureVol($heureVol)
+    public function setHeureVol($_heureVol)
     {
-        $this->heureVol = $heureVol;
+        $this->_heureVol = $_heureVol;
 
         return $this;
     }
@@ -97,16 +97,16 @@ class Vol
      */
     public function getNbPlace()
     {
-        return $this->nbPlace;
+        return $this->_nbPlace;
     }
 
     /**
-     * @param int $nbPlace
+     * @param int $_nbPlace
      * @return Vol
      */
-    public function setNbPlace($nbPlace)
+    public function setNbPlace($_nbPlace)
     {
-        $this->nbPlace = (int) $nbPlace;
+        $this->_nbPlace = (int) $_nbPlace;
 
         return $this;
     }

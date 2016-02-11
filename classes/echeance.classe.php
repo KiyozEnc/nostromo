@@ -11,86 +11,91 @@ class Echeance
     /**
      * @var Reservation
      */
-    protected $oReservation;
+    protected $_reservation;
     /**
      * @var int
      */
-    protected $iMontant;
+    protected $_montant;
     /**
      * @var string
      */
-    protected $sDate;
+    protected $_date;
 
     /**
      * Echeance constructor.
-     * @param Reservation $oReservation
-     * @param int $iMontant
-     * @param string $sDate
+     * @param Reservation $_reservation
+     * @param int $_montant
+     * @param string $_date
      */
-    public function __construct(Reservation $oReservation, $iMontant, $sDate)
+    public function __construct(Reservation $_reservation, $_montant, $_date)
     {
-        $this->oReservation = $oReservation;
-        $this->iMontant = $iMontant;
-        $this->sDate = $sDate;
+        $this->_reservation = $_reservation;
+        $this->_montant = $_montant;
+        $this->_date = $_date;
     }
 
     /**
      * @return Reservation
      */
-    public function getOReservation()
+    public function getReservation()
     {
-        return $this->oReservation;
+        return $this->_reservation;
     }
 
     /**
-     * @param Reservation $oReservation
+     * @param Reservation $reservation
+     *
      * @return Echeance
      */
-    public function setOReservation($oReservation)
+    public function setReservation($reservation)
     {
-        $this->oReservation = $oReservation;
+        $this->_reservation = $reservation;
+
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getIMontant()
+    public function getMontant()
     {
-        return $this->iMontant;
+        return $this->_montant;
     }
 
     /**
-     * @param int $iMontant
+     * @param int $montant
+     *
      * @return Echeance
      */
-    public function setIMontant($iMontant)
+    public function setMontant($montant)
     {
-        $this->iMontant = $iMontant;
+        $this->_montant = $montant;
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getSDate()
+    public function getDate()
     {
-        return DateVol::formaterDateEtHeure($this->sDate);
+        return $this->_date;
     }
 
     /**
-     * @param string $sDate
+     * @param string $date
+     *
      * @return Echeance
      */
-    public function setSDate($sDate)
+    public function setDate($date)
     {
-        $this->sDate = $sDate;
+        $this->_date = $date;
+
         return $this;
     }
 
     /**
      * Récupère le temps restant avant l'échéance
-     *
      * On récupéra la date en cours et la date de la réservation
      */
     public function getTimeLeft()

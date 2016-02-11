@@ -9,39 +9,39 @@ class Utilisateur
     /**
      * @var int
      */
-    private $id;
+    private $_id;
     /**
      * @var string
      */
-    private $nom;
+    private $_nom;
     /**
      * @var string
      */
-    private $prenom;
+    private $_prenom;
     /**
      * @var string
      */
-    private $adresse;
+    private $_adresse;
     /**
      * @var int
      */
-    private $cp;
+    private $_cp;
     /**
      * @var string
      */
-    private $ville;
+    private $_ville;
     /**
      * @var string
      */
-    private $mdp;
+    private $_mdp;
     /**
      * @var string
      */
-    private $mail;
+    private $_mail;
     /**
      * @var int
      */
-    private $points;
+    private $_points;
 
     public function __construct ()
     {
@@ -54,18 +54,18 @@ class Utilisateur
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
 
     /**
      * Set id
      *
-     * @param int $id
+     * @param int $_id
      * @return Utilisateur
      */
-    public function setId($id)
+    public function setId($_id)
     {
-        $this->id = (int) $id;
+        $this->_id = (int) $_id;
 
         return $this;
     }
@@ -76,18 +76,18 @@ class Utilisateur
      */
     public function getNom()
     {
-        return $this->nom;
+        return $this->_nom;
     }
 
     /**
      * Set nom
      *
-     * @param string $nom
+     * @param string $_nom
      * @return Utilisateur
      */
-    public function setNom($nom)
+    public function setNom($_nom)
     {
-        $this->nom = $nom;
+        $this->_nom = $_nom;
 
         return $this;
     }
@@ -99,18 +99,18 @@ class Utilisateur
      */
     public function getPrenom()
     {
-        return $this->prenom;
+        return $this->_prenom;
     }
 
     /**
      * Set prénom
      *
-     * @param string $prenom
+     * @param string $_prenom
      * @return Utilisateur
      */
-    public function setPrenom($prenom)
+    public function setPrenom($_prenom)
     {
-        $this->prenom = $prenom;
+        $this->_prenom = $_prenom;
 
         return $this;
     }
@@ -122,18 +122,18 @@ class Utilisateur
      */
     public function getAdresse()
     {
-        return $this->adresse;
+        return $this->_adresse;
     }
 
     /**
      * Set adresse
      *
-     * @param string $adresse
+     * @param string $_adresse
      * @return Utilisateur
      */
-    public function setAdresse($adresse)
+    public function setAdresse($_adresse)
     {
-        $this->adresse = $adresse;
+        $this->_adresse = $_adresse;
 
         return $this;
     }
@@ -145,18 +145,18 @@ class Utilisateur
      */
     public function getCp()
     {
-        return $this->cp;
+        return $this->_cp;
     }
 
     /**
      *
      * Set cp
-     * @param int $cp
+     * @param int $_cp
      * @return Utilisateur
      */
-    public function setCp($cp)
+    public function setCp($_cp)
     {
-        $this->cp = (int) $cp;
+        $this->_cp = (int) $_cp;
 
         return $this;
     }
@@ -168,18 +168,18 @@ class Utilisateur
      */
     public function getVille()
     {
-        return $this->ville;
+        return $this->_ville;
     }
 
     /**
      * Set ville
      *
-     * @param string $ville
+     * @param string $_ville
      * @return Utilisateur
      */
-    public function setVille($ville)
+    public function setVille($_ville)
     {
-        $this->ville = strtoupper($ville);
+        $this->_ville = strtoupper($_ville);
 
         return $this;
     }
@@ -191,18 +191,18 @@ class Utilisateur
      */
     public function getMdp()
     {
-        return $this->mdp;
+        return $this->_mdp;
     }
 
     /**
      * Set mdp
      *
-     * @param string $mdp
+     * @param string $_mdp
      * @return Utilisateur
      */
-    public function setMdp($mdp)
+    public function setMdp($_mdp)
     {
-        $this->mdp = $mdp;
+        $this->_mdp = $_mdp;
 
         return $this;
     }
@@ -214,18 +214,18 @@ class Utilisateur
      */
     public function getMail()
     {
-        return $this->mail;
+        return $this->_mail;
     }
 
     /**
      * Set mail
      *
-     * @param string $mail
+     * @param string $_mail
      * @return Utilisateur
      */
-    public function setMail($mail)
+    public function setMail($_mail)
     {
-        $this->mail = $mail;
+        $this->_mail = $_mail;
 
         return $this;
     }
@@ -237,18 +237,18 @@ class Utilisateur
      */
     public function getPoints()
     {
-        return $this->points;
+        return $this->_points;
     }
 
     /**
      * Set points
      *
-     * @param int $points
+     * @param int $_points
      * @return Utilisateur
      */
-    public function setPoints($points)
+    public function setPoints($_points)
     {
-        $this->points = (int) $points;
+        $this->_points = (int) $_points;
 
         return $this;
     }

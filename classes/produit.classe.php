@@ -1,5 +1,5 @@
 <?php
-require_once ('models/m_Vols.php');
+require_once('models/m_Vols.php');
 
 /**
  * Permet de créer un produit pour un ajout ultérieur dans une réservation
@@ -8,41 +8,41 @@ class Produit
 {
     /**
      * Référence du vol
-     * @var int $ref
+     * @var int $_ref
      */
-    private $ref;
+    private $_ref;
     /**
      * Date du vol
-     * @var string $date
+     * @var string $_date
      */
-    private $date;
+    private $_date;
     /**
      * Heure du vol
-     * @var string $heure
+     * @var string $_heure
      */
-    private $heure;
+    private $_heure;
     /**
      * Nombre de place du vol
-     * @var int $nbPlace
+     * @var int $_nbPlace
      */
-    private $nbPlace;
+    private $_nbPlace;
     /**
      * Est validé ou non
-     * @var bool $valid
+     * @var bool $_valid
      */
-    private $valid = false;
+    private $_valid = false;
 
     /**
-     * @param int $reference
+     * @param int $_reference
      * @param int $personnes
      */
-    public function __construct ($reference,$personnes) // Constructeur
+    public function __construct ($_reference,$personnes) // Constructeur
     {
-        $this->ref = $reference;
-        $tab = MVol::getUnVol($reference);
-        $this->date = $tab->getDateVol();
-        $this->heure = $tab->getHeureVol();
-        $this->nbPlace = $personnes;
+        $this->_ref = $_reference;
+        $tab = MVol::getUnVol($_reference);
+        $this->_date = $tab->getDateVol();
+        $this->_heure = $tab->getHeureVol();
+        $this->_nbPlace = $personnes;
     }
 
     /**
@@ -51,7 +51,7 @@ class Produit
      */
     public function getRef()
     {
-        return ($this->ref);
+        return $this->_ref;
     }
 
     /**
@@ -60,7 +60,7 @@ class Produit
      */
     public function getDate()
     {
-        return ($this->date);
+        return $this->_date;
     }
 
     /**
@@ -69,7 +69,7 @@ class Produit
      */
     public function getHeure()
     {
-        return ($this->heure);
+        return $this->_heure;
     }
 
     /**
@@ -78,7 +78,7 @@ class Produit
      */
     public function getNbPlace()
     {
-        return ($this->nbPlace);
+        return $this->_nbPlace;
     }
 
     /**
@@ -88,11 +88,11 @@ class Produit
     public function getProduit()
     {
         return array (
-            "ref" => $this->ref,
-            "date" => $this->date,
-            "heure" => $this->heure,
-            "nbPlace" => $this->nbPlace,
-            "valid" => $this->valid
+            'ref' => $this->_ref,
+            'date' => $this->_date,
+            'heure' => $this->_heure,
+            'nbPlace' => $this->_nbPlace,
+            'valid' => $this->_valid
         );
     }
 
@@ -102,16 +102,16 @@ class Produit
      */
     public function getValid()
     {
-        return $this->valid;
+        return $this->_valid;
     }
 
     /**
      * Setter de valid
-     * @param bool $valid
+     * @param bool $_valid
      */
-    public function setValider($valid)
+    public function setValider($_valid)
     {
-        $this->valid = $valid;
+        $this->_valid = $_valid;
     }
 
     /**
@@ -119,7 +119,12 @@ class Produit
      */
     public function enregistrerValid()
     {
-        $dateRes = date('Y-m-d H:i:s');
-        MVol::validReservation($_SESSION['numClt'],$this->getRef(),$dateRes,$this->getNbPlace());
+        $_dateRes = date('Y-m-d H:i:s');
+        MVol::validReservation(
+            $_SESSION['numClt'],
+            $this->getRef(),
+            $_dateRes,
+            $this->getNbPlace()
+        );
     }
 }
