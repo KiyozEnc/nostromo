@@ -87,7 +87,7 @@ session_start(); ?>
         <?php if (!Connexion::sessionOuverte()) { ?>
             <ul class='nav navbar-nav navbar-right'>
                 <li <?php
-                if (array_key_exists($_GET['uc'])) {
+                if (array_key_exists('uc', $_GET)) {
                     if ($_GET['uc'] === 'connexion') {
                         echo "class='active'";
                     }
@@ -95,7 +95,7 @@ session_start(); ?>
                 ?>>
                     <a href='?uc=connexion'>Connexion</a></li>
                 <li <?php
-                if (array_key_exists($_GET['uc'])) {
+                if (array_key_exists('uc', $_GET)) {
                     if ($_GET['uc'] === 'inscription') {
                         echo "class='active'";
                     }
@@ -106,7 +106,7 @@ session_start(); ?>
         <?php } else { ?>
             <ul class='nav navbar-nav navbar-right'>
                 <li <?php
-                if (array_key_exists($_GET['uc'])) {
+                if (array_key_exists('uc', $_GET)) {
                     if ($_GET['uc'] === 'maReservation') {
                         echo "class='active'";
                     }
@@ -117,7 +117,7 @@ session_start(); ?>
                     </a>
                 </li>
                 <li <?php
-                if (array_key_exists($_GET['uc'])) {
+                if (array_key_exists('uc', $_GET)) {
                     if ($_GET['uc'] === 'monPanier') {
                         echo "class='active'";
                     }
@@ -128,7 +128,7 @@ session_start(); ?>
                     </a>
                 </li>
                 <li <?php
-                if (array_key_exists($_GET['uc'])) {
+                if (array_key_exists('uc', $_GET)) {
                     if ($_GET['uc'] === 'monCompte') {
                         echo "class='active'";
                     }
@@ -205,7 +205,7 @@ session_start(); ?>
         <div class='col-md-3 col-xs-3 col-sm-3' id='leftCol'>
             <div class='row'>
                 <?php
-                if ($action != 'voirReservation') { ?>
+                if ($action !== 'voirReservation') { ?>
                     <div class='rectangle col-md-12'>
                         <h4 class='text-center'><a href='?uc=maReservation'>Réservation</a></h4>
                         <?php
