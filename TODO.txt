@@ -1,1 +1,2 @@
  - Mobile resolution fix
+ - Changer type d'Exception de tous les fichiers
