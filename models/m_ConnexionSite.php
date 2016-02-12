@@ -1,11 +1,21 @@
 <?php
-require_once "models/m_Connexion.php";
+require_once 'models/m_Connexion.php';
+
+/**
+ * Class ConnexionSite
+ *
+ * @category Models
+ * @package  Nostromo\Models
+ * @author   Nostromo <contact@nostromo.com>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     localhost
+ */
 class ConnexionSite
 {
     /**
      * @param string $email
      * @return Utilisateur
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     static public function getUser($email)
     {
@@ -13,7 +23,7 @@ class ConnexionSite
         try
         {
             $conn = Connexion::getBdd();
-            $reqPrepare = $conn->prepare("SELECT * FROM client WHERE mailClt = ?");
+            $reqPrepare = $conn->prepare('SELECT * FROM client WHERE mailClt = ?');
             $reqPrepare->execute(array($email));
             $reqPrepare = $reqPrepare->fetch();
             $unClient
@@ -25,28 +35,32 @@ class ConnexionSite
                 ->setVille($reqPrepare['villeClt'])
                 ->setMdp($reqPrepare['mdpClt'])
                 ->setMail($reqPrepare['mailClt'])
-                ->setPoints($reqPrepare['pointsClt'])
-            ;
+                ->setPoints($reqPrepare['pointsClt']);
             $conn = null;
         }
         catch(PDOException $ex)
         {
-            throw new Exception("L'utilisateur avec l'adresse mail '$email' n'existe pas.");
+            throw new InvalidArgumentException("L'utilisateur avec l'adresse mail $email n'existe pas.");
         }
         return $unClient;
     }
 
     /**
      * @param Utilisateur $unClient
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     static public function setAjoutUser(Utilisateur $unClient)
     {
         try
         {
             $conn = Connexion::getBdd();
-            $reqprepare2=$conn->prepare("INSERT INTO client (nomClt, prenomClt, adresseClt, cpClt, villeClt, mdpClt, mailClt, pointsClt) VALUES (?,?,?,?,?,?,?,?)");
-            $reqprepare2->execute(array(
+            $reqprepare = $conn->prepare(
+                'INSERT INTO client
+                (nomClt, prenomClt, adresseClt, cpClt, villeClt, mdpClt, mailClt, pointsClt)
+                VALUES (?,?,?,?,?,?,?,?)'
+            );
+            $reqprepare->execute(
+                array(
                     $unClient->getNom(),
                     $unClient->getPrenom(),
                     $unClient->getAdresse(),
@@ -60,14 +74,14 @@ class ConnexionSite
         }
         catch (PDOException $ex)
         {
-            throw new Exception("Erreur interne (Error code 1) :  merci de contacter un administrateur.");
+            throw new InvalidArgumentException('Impossible de continuer l\'inscription. Détails : '.$ex->getMessage());
         }
     }
 
     /**
      * @param int $id
      * @return Utilisateur
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     static public function getUnUser($id)
     {
@@ -75,7 +89,7 @@ class ConnexionSite
         try
         {
             $conn = Connexion::getBdd();
-            $reqPrepare = $conn->prepare("SELECT * FROM client WHERE numClt = ?");
+            $reqPrepare = $conn->prepare('SELECT * FROM client WHERE numClt = ?');
             $reqPrepare->execute(array($id));
             $reqPrepare = $reqPrepare->fetch();
             $unClient
@@ -87,13 +101,12 @@ class ConnexionSite
                 ->setVille($reqPrepare['villeClt'])
                 ->setMdp($reqPrepare['mdpClt'])
                 ->setMail($reqPrepare['mailClt'])
-                ->setPoints($reqPrepare['pointsClt'])
-            ;
+                ->setPoints($reqPrepare['pointsClt']);
             $conn = null;
         }
         catch(PDOException $ex)
         {
-            throw new Exception("L'utilisateur n°'$id' n'existe pas.");
+            throw new InvalidArgumentException("L'utilisateur n°$id n'existe pas.");
         }
         return $unClient;
     }
@@ -101,15 +114,27 @@ class ConnexionSite
     /**
      * Met à jour un utilisateur dans la base de données dont l'utilisateur est passé en paramètre
      * @param Utilisateur $user
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public static function updateUser(Utilisateur $user)
     {
         try
         {
             $conn = Connexion::getBdd();
-            $reqprepare2=$conn->prepare("UPDATE client SET nomClt = ?, prenomClt = ?, adresseClt = ?, cpClt = ?, villeClt = ?, mdpClt = ?, mailClt = ?, pointsClt = ? WHERE numClt = ?;");
-            $reqprepare2->execute(array(
+            $reqprepare = $conn->prepare(
+                'UPDATE client
+                SET nomClt = ?,
+                prenomClt = ?,
+                adresseClt = ?,
+                cpClt = ?,
+                villeClt = ?,
+                mdpClt = ?,
+                mailClt = ?,
+                pointsClt = ?
+                WHERE numClt = ?;'
+            );
+            $reqprepare->execute(
+                array(
                     $user->getNom(),
                     $user->getPrenom(),
                     $user->getAdresse(),
@@ -124,7 +149,7 @@ class ConnexionSite
         }
         catch (PDOException $e)
         {
-            throw new Exception ($e->getMessage());
+            throw new InvalidArgumentException($e->getMessage());
         }
     }
 }

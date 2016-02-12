@@ -156,37 +156,37 @@ session_start(); ?>
             switch ($_GET['uc'])
             {
                 case 'index' :
-                    include('controllers/index/c_Index.php');
+                    include_once('controllers/index/c_Index.php');
                     break;
                 case 'reserver' :
-                    include('controllers/reserveVol/c_ReserveVol.php');
+                    include_once('controllers/reserveVol/c_ReserveVol.php');
                     break;
                 case 'connexion' :
-                    include('controllers/connexion/c_ConnexionSite.php');
+                    include_once('controllers/connexion/c_ConnexionSite.php');
                     break;
                 case 'inscription' :
-                    include('controllers/inscription/c_InscriptionSite.php');
+                    include_once('controllers/inscription/c_InscriptionSite.php');
                     break;
                 case 'deconnexion' :
-                    include('controllers/deconnexion/c_Deconnexion.php');
+                    include_once('controllers/deconnexion/c_Deconnexion.php');
                     break;
                 case 'maReservation' :
-                    include('controllers/maReservation/c_MaReservation.php');
+                    include_once('controllers/maReservation/c_MaReservation.php');
                     break;
                 case 'monCompte' :
-                    include('controllers/compte/c_MonCompte.php');
+                    include_once('controllers/compte/c_MonCompte.php');
                     break;
                 case 'materiel' :
-                    include('controllers/boutique/c_Boutique.php');
+                    include_once('controllers/boutique/c_Boutique.php');
                     break;
                 case 'monPanier' :
-                    include('controllers/panier/c_Panier.php');
+                    include_once('controllers/panier/c_Panier.php');
                     break;
                 case 'aPropos' :
-                    include('views/aPropos/v_APropos.php');
+                    include_once('views/aPropos/v_APropos.php');
                     break;
                 default :
-                    include('views/index/v_Erreur.php');
+                    include_once('views/index/v_Erreur.php');
                     break;
             }
         } else {

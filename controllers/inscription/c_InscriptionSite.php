@@ -2,61 +2,45 @@
 require_once('models/m_Connexion.php');
 require_once('models/m_ConnexionSite.php');
 
-if(isset($_GET['action']))
-    $action = $_GET['action'];
-else
-    $action = "voirForm";
+$action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirForm';
 
 switch($action)
 {
     case 'voirForm' :
-        include("views/inscription/v_VoirInscription.php"); break;
+        include_once('views/inscription/v_VoirInscription.php');
+        break;
 
     case 'inscrire' :
         try
         {
-            if(isset($_POST['mailUser']))
-            {
+            if (array_key_exists('mailUser', $_POST)) {
                 $unUser = ConnexionSite::getUser($_POST['mailUser']);
-                if(empty($unUser->getMail())
-                    || empty($_POST['nomUser'])
-                    || empty($_POST['prenUser'])
-                    || empty($_POST['cpUser'])
-                    || empty($_POST['mdpUser'])
-                    || empty($_POST['mdpConfUser'])
-                    || empty($_POST['villeUser'])
-                    || empty($_POST['adrUser']))
-                {
-                    Connexion::setFlashMessage('Veuillez renseignez tous les champs.', "error");
-                    header("Location:?uc=inscription");
-                }
-                elseif($_POST['mailUser'] == $unUser->getMail())
-                {
-                    Connexion::setFlashMessage('Cette e-mail est déjà utilisée.', "error");
-                    header("Location:?uc=inscription");
-                }
-                elseif(strlen($_POST['nomUser']) > 20)
-                {
-                    Connexion::setFlashMessage('Le nom entré est trop long',"error");
-                    header("Location:?uc=inscription");
-                }
-                elseif(strlen($_POST['prenUser']) > 20)
-                {
-                    Connexion::setFlashMessage('Le prénom entré est trop long',"error");
-                    header("Location:?uc=inscription");
-                }
-                elseif(strlen($_POST['cpUser']) != 5)
-                {
-                    Connexion::setFlashMessage("Le code postal entré n'est pas au bon format (ex: 30000)","error");
-                    header("Location:?uc=inscription");
-                }
-                elseif($_POST['mdpUser'] != $_POST['mdpConfUser'])
-                {
-                    Connexion::setFlashMessage('Les mots de passes ne sont pas identiques',"error");
-                    header("Location:?uc=inscription");
-                }
-                else
-                {
+                if (null === $_POST['mailUser']
+                    || null === $_POST['prenUser']
+                    || null === $_POST['nomUser']
+                    || null === $_POST['cpUser']
+                    || null === $_POST['mdpUser']
+                    || null === $_POST['mdpConfUser']
+                    || null === $_POST['villeUser']
+                    || null === $_POST['adrUser']) {
+                    Connexion::setFlashMessage('Veuillez renseignez tous les champs.', 'error');
+                    header('Location:?uc=inscription');
+                } elseif ($_POST['mailUser'] === $unUser->getMail()) {
+                    Connexion::setFlashMessage('Cette e-mail est déjà utilisée.', 'error');
+                    header('Location:?uc=inscription');
+                } elseif (strlen($_POST['nomUser']) > 20) {
+                    Connexion::setFlashMessage('Le nom entré est trop long', 'error');
+                    header('Location:?uc=inscription');
+                } elseif (strlen($_POST['prenUser']) > 20) {
+                    Connexion::setFlashMessage('Le prénom entré est trop long', 'error');
+                    header('Location:?uc=inscription');
+                } elseif (strlen($_POST['cpUser']) !== 5) {
+                    Connexion::setFlashMessage('Le code postal entré n\'est pas au bon format (ex: 30000)', 'error');
+                    header('Location:?uc=inscription');
+                } elseif ($_POST['mdpUser'] !== $_POST['mdpConfUser']) {
+                    Connexion::setFlashMessage('Les mots de passes ne sont pas identiques', 'error');
+                    header('Location:?uc=inscription');
+                } else {
                     $unUser = new Utilisateur();
                     $unUser
                         ->setNom($_POST['nomUser'])
@@ -66,23 +50,21 @@ switch($action)
                         ->setVille($_POST['villeUser'])
                         ->setMdp(sha1($_POST['mdpUser']))
                         ->setMail($_POST['mailUser'])
-                        ->setPoints(10)
-                    ;
+                        ->setPoints(10);
                     ConnexionSite::setAjoutUser($unUser);
-                    Connexion::setFlashMessage("Inscription réussie, vous pouvez désormais vous connecter.","valid");
-                    header("Location:?uc=index");
+                    Connexion::setFlashMessage('Inscription réussie, vous pouvez désormais vous connecter.', 'valid');
+                    header('Location:?uc=index');
                 }
-            }
-            else
-            {
-                header("Location:?uc=index");
+            } else {
+                header('Location:?uc=index');
             }
         }
         catch (Exception $e)
         {
-            Connexion::setFlashMessage($e->getMessage(),"error");
-            header("Location:?uc=inscription");
-        } break;
+            Connexion::setFlashMessage($e->getMessage(), 'error');
+            header('Location:?uc=inscription');
+        }
+        break;
 
-    default : header("Location:?uc=index");
+    default : header('Location:?uc=index');
 }

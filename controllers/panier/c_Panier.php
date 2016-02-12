@@ -1,59 +1,54 @@
 <?php
-if (isset($_GET['action']))
-    $action = $_GET['action'];
-else
-    $action = "voirPanier";
+$action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirPanier';
 
 switch ($action)
 {
     case 'voirPanier' :
-        include("views/panier/v_VoirPanier.php"); break;
+        include_once('views/panier/v_VoirPanier.php');
+        break;
     case 'ajouterArticle' :
         try
         {
-            if($_POST['qte'] == 0)
-                throw new Exception ("Veuillez sélectionner une quantité");
-            if(!isset($_SESSION['Panier']))
-            {
+            if($_POST['qte'] === 0)
+                throw new InvalidArgumentException('Veuillez sélectionner une quantité');
+            if (!array_key_exists('Panier', $_SESSION)) {
                 $_SESSION['Panier'] = new Panier();
             }
             $prod = MArticle::getArticle($_GET['ref']);
-            if(($prod->getQteStock() - $_POST['qte']) < 0)
-            {
-                Connexion::setFlashMessage("Quantitée en stock insuffisante.", "error");
-                $ref = $_GET['ref'];
-                if($_SESSION['Panier']->getNbProd() == 0)
-                {
+            if (($prod->getQteStock() - $_POST['qte']) < 0) {
+                Connexion::setFlashMessage('Quantitée en stock insuffisante.', 'error');
+                if ($_SESSION['Panier']->getNbProd() === 0) {
                     unset($_SESSION['Panier']);
                 }
-                header("Location:?uc=materiel&action=voirArticle&article=$ref");
-            }
-            else
-            {
+                header('Location:?uc=materiel&action=voirArticle&article='.$_GET['ref']);
+            } else {
 
                 $prod->setQte($_POST['qte']);
                 $_SESSION['Panier']->ajouterUnProduit($prod, $_POST['qte']);
-//                Connexion::setFlashMessage("Produit ajouté au panier. <a href='?uc=monPanier'>Voir mon panier</a>","valid");
-//                header('Location:?uc=materiel');
+                Connexion::setFlashMessage(
+                    'Produit ajouté au panier. <a href=\'?uc=monPanier\'>Voir mon panier</a>',
+                    'valid'
+                );
+                header('Location:?uc=materiel');
             }
         }
         catch (Exception $e)
         {
-            Connexion::setFlashMessage($e->getMessage(), "error");
-            $ref = $_GET['ref'];
-            header("Location:?uc=materiel&action=voirArticle&article=$ref");
+            Connexion::setFlashMessage($e->getMessage(), 'error');
+            header('Location:?uc=materiel&action=voirArticle&article='.$_GET['ref']);
         }
 
 
-        ; break;
+        ;
+        break;
 
     case 'supprimerProduit' :
         $_SESSION['Panier']->supprimerUnProduit($_GET['article']);
-        if($_SESSION['Panier']->getNbProd() == 0)
-        {
+        if ($_SESSION['Panier']->getNbProd() === 0) {
             unset($_SESSION['Panier']);
         }
-        header('Location:?uc=monPanier');break;
+        header('Location:?uc=monPanier');
+        break;
 
     case 'augmenterProduit' :
         try
@@ -63,28 +58,26 @@ switch ($action)
         }
         catch (Exception $e)
         {
-            $_SESSION['error'] = $e->getMessage();
+            Connexion::setFlashMessage($e->getMessage(), 'error');
         }
         header('Location:?uc=monPanier');
         break;
 
     case 'diminuerProduit' :
         $_SESSION['Panier']->diminuerQuantiteProduit($_GET['article'], 1);
-        if($_SESSION['Panier']->getNbProd() == 0)
-        {
+        if ($_SESSION['Panier']->getNbProd() === 0) {
             unset($_SESSION['Panier']);
         }
         header('Location:?uc=monPanier');
         break;
 
     case 'validerPanier' :
-        include('views/panier/v_ValiderPanier.php');
-        ;break;
-
+        include_once('views/panier/v_ValiderPanier.php');
+        break;
 
     case 'viderPanier' :
         unset($_SESSION['Panier']);
-        include("views/panier/v_VoirPanier.php");
+        include_once('views/panier/v_VoirPanier.php');
         break;
 
     case 'enregistrerPanier' :
@@ -92,6 +85,7 @@ switch ($action)
         break;
 
     default :
-        $_SESSION['error'] = "Impossible d'accéder à la page demandé.";
-        header("Location:?uc=index");break;
+        Connexion::setFlashMessage('Impossible d\'accéder à la page demandé.', 'error');
+        header('Location:?uc=index');
+        break;
 }

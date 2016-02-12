@@ -1,11 +1,14 @@
 <?php
 
-require_once ("m_Connexion.php");
+require_once('m_Connexion.php');
 /**
- * Created by PhpStorm.
- * User: Kiyoz
- * Date: 25/01/2016
- * Time: 14:53
+ * Class MCommander
+ *
+ * @category Models
+ * @package  Nostromo\Models
+ * @author   Nostromo <contact@nostromo.com>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     localhost
  */
 class MCommander
 {
@@ -13,7 +16,7 @@ class MCommander
      * Récupère les articles d'un commande via la commande
      * @param Commande $uneCommande numéro d'une commande
      * @return Collection
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     static public function getUneCommande(Commande $uneCommande)
     {
@@ -22,11 +25,10 @@ class MCommander
         {
             $conn = Connexion::getBdd();
             $conn->beginTransaction();
-            $req = $conn->prepare("SELECT * FROM commander WHERE numCde = ? LIMIT 2");
+            $req = $conn->prepare('SELECT * FROM commander WHERE numCde = ? LIMIT 2');
             $req->execute(array($uneCommande->getId()));
             $req = $req->fetchAll();
-            foreach($req as $tabs)
-            {
+            foreach ($req as $tabs) {
                 $unArticle = MArticle::getArticle($tabs['numArt']);
                 $unArticle->setQte($tabs['qte']);
                 $lesArticles->ajouter($unArticle);
@@ -35,7 +37,9 @@ class MCommander
         }
         catch(PDOException $e)
         {
-            throw new Exception ("Impossible de récupérer la commande n°$uneCommande->getId(). Détails : ".$e->getMessage());
+            throw new InvalidArgumentException(
+                'Impossible de récupérer la commande n°'.$uneCommande->getId().' Détails : '.$e->getMessage()
+            );
         }
         return $lesArticles;
     }
