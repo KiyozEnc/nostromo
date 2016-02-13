@@ -51,7 +51,7 @@ class MCommande
         $lesCommandes = new Collection();
         try {
             $conn = MConnexion::getBdd();
-            $req = $conn->prepare('SELECT * FROM commande WHERE numClt = ?');
+            $req = $conn->prepare('SELECT * FROM commande WHERE numClt = ? ORDER BY numCde DESC LIMIT 2');
             $req->execute(array($unClient->getId()));
             $req = $req->fetchAll();
             foreach ($req as $tabs) {
