@@ -1,3 +1,5 @@
+USE `2014-nostromo_base`;
+
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE client;
@@ -25,6 +27,7 @@ CREATE TABLE article (
 	designation varchar(50) not null,
 	pu int not null,
 	qteStock int not null,
+    url varchar(200),
 	primary key (numArt)
 );
 DROP TABLE commander;
@@ -56,6 +59,7 @@ CREATE TABLE reservation (
 	foreign key (numVol) references vol(numVol)
 );
 DROP TABLE echeance;
+
 CREATE TABLE echeance (
 	numRes int not null primary key,
 	montant int not null,
@@ -68,9 +72,10 @@ INSERT INTO vol VALUES (2,"2015-10-09", "12:15:00",80);
 INSERT INTO vol VALUES (3,"2015-11-08", "18:10:00",90);
 INSERT INTO vol VALUES (4,"2016-01-10", "14:20:00",60);
 
-INSERT INTO article VALUES (1,"Gants astronaute",250,20);
-INSERT INTO article VALUES (2,"Pantaton astronaute",400,20);
-INSERT INTO article VALUES (3,"Casque astronaute",1200,5);
+INSERT INTO article VALUES (1,"Gants astronaute",250,20,'img/Basket/gauntlet.jpg');
+INSERT INTO article VALUES (2,"Pantaton astronaute",400,20,'img/Basket/down.jpg');
+INSERT INTO article VALUES (3,"Casque astronaute",1200,5,'img/Basket/helmet.png');
+INSERT INTO article VALUES (4,"Truc astronaute",600,5,null);
 
 INSERT INTO `client` VALUES (1,"Nostromo","Contact","7 rue de Mars",53100,"MAYENNE","ffb4761cba839470133bee36aeb139f58d7dbaa9","contact@nostromo.com",150);
 

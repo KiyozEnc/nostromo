@@ -16,42 +16,30 @@ if (array_key_exists('error', $_SESSION)) { ?>
         <?php echo $_SESSION['error'] ?>
     </div>
 <?php } ?>
-<table class="table table-bordered table-hover table-condensed">
-    <h2>Articles disponibles</h2>
-    <thead>
-    <tr>
-        <th>Numéro de l'article</th>
-        <th>Désignation</th>
-        <th>Prix unitaire</th>
-        <?php
-        if (Connexion::sessionOuverte()) { ?>
-            <th>Actions</th>
-        <?php
-        } ?>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-    foreach ($tabArt->getCollection() as $art => $unArt) { ?>
-        <tr>
-            <td><?php echo $unArt->getNumArt(); ?></td>
-            <td><?php echo $unArt->getDesignation(); ?></td>
-            <td><?php echo $unArt->getPu(); ?> €</td>
-            <?php
-            if (Connexion::sessionOuverte()) { ?>
-                <th>
-                    <a href="?uc=materiel&action=voirArticle&article=<?php echo $unArt->getNumArt(); ?>"
-                       type="button"
-                       class="btn btn-default">Détails
-                    </a>
-                </th>
-            <?php
-            } ?>
-        </tr>
-    <?php
-    } ?>
-    </tbody>
-</table>
+    <div class="row">
+        <h2 class="text-center text-info text-muted">Articles disponibles</h2>
+        <?php foreach ($tabArt->getCollection() as $unArt) { ?>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <br>
+                    <img width="100"
+                         height="100"
+                         class="img-responsive"
+                         src=<?php echo $unArt->getUrl(); ?> title="Article n°<?= $unArt->getNumArt() ?>">
+                    <div class="caption">
+                        <!-- <h3>Article n°<?php echo $unArt->getNumArt(); ?></h3> -->
+                            <?php
+                            if (Connexion::sessionOuverte()) { ?>
+                            <p><a href="?uc=materiel&action=voirArticle&article=<?= $unArt->getNumArt() ?>"><?php echo $unArt->getDesignation(); ?></a></p>
+                            <?php
+                            } else {
+                                 echo '<p>'.$unArt->getDesignation().'</p>';
+                            } ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
 <?php if (array_key_exists('valid', $_SESSION)) {
     unset($_SESSION['valid']);
 } ?>

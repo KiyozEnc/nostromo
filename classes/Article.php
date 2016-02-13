@@ -2,6 +2,7 @@
 namespace Nostromo\Classes;
 
 use \InvalidArgumentException;
+use MongoDB\Driver\Exception\UnexpectedValueException;
 use Nostromo\Models\MConnexion as Connexion;
 
 /**
@@ -35,6 +36,10 @@ class Article
      * @var int
      */
     private $qte;
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * Constructeur d'un Article, sa référence est passé en paramètre
@@ -99,6 +104,7 @@ class Article
     /**
      * Augment de $quantite la quantité de l'article
      * @param int $quantite
+     * @throws \UnexpectedValueException
      */
     public function augmenterQuantite($quantite)
     {
@@ -189,6 +195,30 @@ class Article
     public function setQteStock($qteStock)
     {
         $this->qteStock = (int) $qteStock;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        if ($this->url === null) {
+            return 'img/Basket/basket.png';
+        } else {
+            return $this->url;
+        }
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return Article
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
         return $this;
     }
 }

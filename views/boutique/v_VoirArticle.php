@@ -13,26 +13,32 @@ if (array_key_exists('error', $_SESSION)) { ?>
         <?php echo $_SESSION['error'] ?>
     </div>
 <?php } ?>
-<h2>
-    <?php echo $article->getDesignation(); ?>
-    — Référence : <?php echo $article->getNumArt() ?>
-</h2>
-<p>Prix unitaire : <?php echo $article->getPu(); ?> € TTC</p>
-<form action="?uc=monPanier&action=ajouterArticle&ref=<?php echo $article->getNumArt(); ?>"
-      method="POST"
-      role="form"
-      autocomplete="off">
     <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="">Quantité voulue</label>
-                <input name="qte" type="number" class="form-control" id="" placeholder="Quantité">
+        <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
+            <div class="thumbnail">
+                <br>
+                <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
+                    <img class="img-responsive" src=<?php echo $article->getUrl(); ?> title="Article n°<?= $article->getNumArt() ?>">
+                </div>
+                <div class="caption">
+                    <h3>Article n°<?= $article->getNumArt() ?></h3>
+                    <form action="?uc=monPanier&action=ajouterArticle&ref=<?php echo $article->getNumArt(); ?>" method="POST" role="form" autocomplete="off">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                <div class="form-group">
+                                    <label for="">Quantité voulue</label>
+                                    <input type="number" class="form-control" name="qte" placeholder="Quantité">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <a href="?uc=materiel" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <a href="?uc=materiel" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
-    <button type="submit" class="btn btn-primary">Ajouter au panier</button>
-</form>
 <?php if (array_key_exists('valid', $_SESSION)) {
     unset($_SESSION['valid']);
 } ?>

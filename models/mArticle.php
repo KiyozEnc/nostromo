@@ -2,6 +2,7 @@
 namespace Nostromo\Models;
 
 use Nostromo\Classes\Article;
+use Nostromo\Classes\Image;
 use InvalidArgumentException;
 use Nostromo\Classes\Collection;
 use PDOException;
@@ -36,7 +37,8 @@ class MArticle
                 ->setNumArt($reqPrepare['numArt'])
                 ->setDesignation($reqPrepare['designation'])
                 ->setPu($reqPrepare['pu'])
-                ->setQteStock($reqPrepare['qteStock']);
+                ->setQteStock($reqPrepare['qteStock'])
+                ->setUrl($reqPrepare['url']);
             $conn = null;
             return $unArt;
 
@@ -64,7 +66,8 @@ class MArticle
                     ->setNumArt($unArticle['numArt'])
                     ->setDesignation($unArticle['designation'])
                     ->setPu($unArticle['pu'])
-                    ->setQteStock($unArticle['qteStock']);
+                    ->setQteStock($unArticle['qteStock'])
+                    ->setUrl($unArticle['url']);
                 $lesArticles->ajouter($article);
             }
             $conn = null;

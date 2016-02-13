@@ -29,7 +29,7 @@ class MCommander
         try {
             $conn = MConnexion::getBdd();
             $conn->beginTransaction();
-            $req = $conn->prepare('SELECT * FROM commander WHERE numCde = ? LIMIT 2');
+            $req = $conn->prepare('SELECT * FROM commander WHERE numCde = ? ORDER BY numArt DESC LIMIT 2');
             $req->execute(array($uneCommande->getId()));
             $req = $req->fetchAll();
             foreach ($req as $tabs) {

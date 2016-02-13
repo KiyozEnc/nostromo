@@ -134,9 +134,7 @@ session_start(); ?>
                 ?>>
                     <a href='?uc=monCompte'>
                         <img src='img/user.png' height='20'> Mon Compte
-                        [<?php echo $_SESSION['Utilisateur']->getPrenom()
-                                .' '
-                                .$_SESSION['Utilisateur']->getNom() ?>]
+                        [<?php echo $_SESSION['Utilisateur']->getNom() ?>]
                     </a>
                 </li>
                 <li><a href='?uc=deconnexion'>Déconnexion</a></li>
@@ -207,7 +205,7 @@ session_start(); ?>
                         <h4 class='text-center'><a href='?uc=maReservation'>Réservation</a></h4>
                         <?php
                         if (array_key_exists('Reservation', $_SESSION)) {
-                            echo "<p class='text-justify'> Vol n° "
+                            echo "<p class='text-justify'> Vol n°"
                                     .$_SESSION['Reservation']->getUnVol()->getNumVol()
                                     .' - '
                                     .$_SESSION['Reservation']->getNbPers()

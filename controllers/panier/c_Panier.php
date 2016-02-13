@@ -12,7 +12,7 @@ switch ($action) {
         break;
     case 'ajouterArticle':
         try {
-            if ($_POST['qte'] === 0) {
+            if ($_POST['qte'] < 0) {
                 throw new InvalidArgumentException('Veuillez sélectionner une quantité');
             }
             if (!array_key_exists('Panier', $_SESSION)) {
