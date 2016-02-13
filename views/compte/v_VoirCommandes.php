@@ -6,11 +6,9 @@
                 <select name="cde" id="inputID" class="form-control" onchange="voirCommande(this.form)">
                     <option disabled selected>-- Sélectionner une commande --</option>
                     <?php
-                    if(isset($lesCommandes))
-                    {
-                        foreach ($lesCommandes->getCollection() as $commande)
-                        { ?>
-                            <option value="<?= $commande->getId() ?>"><?= "N°".$commande->getId()." le ".$commande->getUneDate() ?> - Montant : <?= $commande->getMontantTotal(); ?> €</option>
+                    if (isset($lesCommandes)) {
+                        foreach ($lesCommandes->getCollection() as $commande) { ?>
+                            <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' le '.$commande->getUneDate() ?> - Montant : <?= $commande->getMontantTotal(); ?> €</option>
                             <?php
                         }
                     } ?>
@@ -20,8 +18,7 @@
     </div>
 </form>
 <?php
-if(isset($uneCommande))
-{ ?>
+if (isset($uneCommande)) { ?>
     <h2>Commande n°<?= $uneCommande->getId() ?></h2>
     <table class="table table-hover table-stripped table-bordered">
         <thead>
@@ -33,8 +30,7 @@ if(isset($uneCommande))
         </thead>
         <tbody>
         <?php
-        foreach ($uneCommande->getLesArticles()->getCollection() as $article)
-        { ?>
+        foreach ($uneCommande->getLesArticles()->getCollection() as $article) { ?>
 
             <tr>
                 <td><?= $article->getDesignation() ?></td>
@@ -46,17 +42,11 @@ if(isset($uneCommande))
         </tbody>
     </table>
     <?php
-}
-else
-{
-    if(isset($lesCommandes))
-    {
-        if($lesCommandes->taille() == 0)
-        {
+} else {
+    if (isset($lesCommandes)) {
+        if ($lesCommandes->taille() === 0) {
             echo 'Aucune commande';
-        }
-        else
-        {
+        } else {
             echo '<h5 class="text-center">Veuillez sélectionner une commande</h5>';
         }
     }

@@ -1,19 +1,17 @@
 <?php
-require_once('classes/date.classe.php');
-require_once('models/m_Connexion.php');
-require_once('models/m_Vols.php');
-require_once('models/m_Article.php');
-require_once('models/m_Commande.php');
-require_once('models/m_Commander.php');
-require_once('classes/produit.classe.php');
-require_once('classes/utilisateur.classe.php');
-require_once('classes/reservation.classe.php');
-require_once('classes/article.classe.php');
-require_once('classes/panier.classe.php');
-require_once('classes/collection.classe.php');
-require_once('classes/commande.classe.php');
-require_once('classes/commander.classe.php');
+namespace Nostromo;
+
+use Nostromo\Models\MConnexion;
+
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', dirname(__FILE__).DS);
+
+require_once('Autoload.php');
+
+Autoloader::register();
+
 session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +82,7 @@ session_start(); ?>
                 </a>
             </li>
         </ul>
-        <?php if (!Connexion::sessionOuverte()) { ?>
+        <?php if (!MConnexion::sessionOuverte()) { ?>
             <ul class='nav navbar-nav navbar-right'>
                 <li <?php
                 if (array_key_exists('uc', $_GET)) {
@@ -149,43 +147,42 @@ session_start(); ?>
 <div class='jumbotron'>
     <div class='container'>
         <?php
-        if (Connexion::sessionOuverte()) {
+        if (MConnexion::sessionOuverte()) {
             echo "<div class='col-md-9 col-sm-9 col-xs-9 col-lg-9'>";
         }
         if (array_key_exists('uc', $_GET)) {
-            switch ($_GET['uc'])
-            {
-                case 'index' :
+            switch ($_GET['uc']) {
+                case 'index':
                     include_once('controllers/index/c_Index.php');
                     break;
-                case 'reserver' :
+                case 'reserver':
                     include_once('controllers/reserveVol/c_ReserveVol.php');
                     break;
-                case 'connexion' :
+                case 'connexion':
                     include_once('controllers/connexion/c_ConnexionSite.php');
                     break;
-                case 'inscription' :
+                case 'inscription':
                     include_once('controllers/inscription/c_InscriptionSite.php');
                     break;
-                case 'deconnexion' :
+                case 'deconnexion':
                     include_once('controllers/deconnexion/c_Deconnexion.php');
                     break;
-                case 'maReservation' :
+                case 'maReservation':
                     include_once('controllers/maReservation/c_MaReservation.php');
                     break;
-                case 'monCompte' :
+                case 'monCompte':
                     include_once('controllers/compte/c_MonCompte.php');
                     break;
-                case 'materiel' :
+                case 'materiel':
                     include_once('controllers/boutique/c_Boutique.php');
                     break;
-                case 'monPanier' :
+                case 'monPanier':
                     include_once('controllers/panier/c_Panier.php');
                     break;
-                case 'aPropos' :
+                case 'aPropos':
                     include_once('views/aPropos/v_APropos.php');
                     break;
-                default :
+                default:
                     include_once('views/index/v_Erreur.php');
                     break;
             }
@@ -194,13 +191,13 @@ session_start(); ?>
         } ?>
     </div>
     <?php
-    if (Connexion::sessionOuverte()) {
+    if (MConnexion::sessionOuverte()) {
+        $action = '';
         if (array_key_exists('action', $_GET)) {
             $action = $_GET['action'];
-        } else {
-            if ($_GET['uc'] === 'maReservation') {
-                $action = 'voirReservation';
-            }
+        }
+        if ($_GET['uc'] === 'maReservation') {
+            $action = 'voirReservation';
         } ?>
         <div class='col-md-3 col-xs-3 col-sm-3' id='leftCol'>
             <div class='row'>

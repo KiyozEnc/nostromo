@@ -1,7 +1,17 @@
 <?php
+namespace Nostromo\Classes;
+
+use \InvalidArgumentException;
+
+/**
+ * Class Collection
+ */
 class Collection
 {
-    private $_tab = [];
+    /**
+     * @var array
+     */
+    private $tab = [];
 
     /**
      * Ajoute un élément à la collection
@@ -9,17 +19,17 @@ class Collection
      * @param mixed $obj
      * @param null  $key
      *
-     * @throws KeyHasUseException
+     * @throws InvalidArgumentException
      */
     public function ajouter($obj, $key = null)
     {
         if ($key === null) {
-            $this->_tab[] = $obj;
+            $this->tab[] = $obj;
         } else {
-            if (array_key_exists($key, $this->_tab)) {
-                throw new KeyHasUseException("Key $key already in use.");
+            if (array_key_exists($key, $this->tab)) {
+                throw new InvalidArgumentException("Key $key already in use.");
             } else {
-                $this->_tab[$key] = $obj;
+                $this->tab[$key] = $obj;
             }
         }
     }
@@ -30,28 +40,28 @@ class Collection
      * @param mixed $key
      *
      * @return mixed
-     * @throws KeyInvalidException
+     * @throws InvalidArgumentException
      */
     public function getElement($key)
     {
-        if (array_key_exists($key, $this->_tab)) {
-            return $this->_tab[$key];
+        if (array_key_exists($key, $this->tab)) {
+            return $this->tab[$key];
         } else {
-            throw new KeyInvalidException("Invalid key $key.");
+            throw new InvalidArgumentException("Invalid key $key.");
         }
     }
 
     /**
      * @param mixed $key
      *
-     * @throws KeyInvalidException
+     * @throws InvalidArgumentException
      */
     public function supprimer($key)
     {
-        if (array_key_exists($key, $this->_tab)) {
-            unset($this->_tab[$key]);
+        if (array_key_exists($key, $this->tab)) {
+            unset($this->tab[$key]);
         } else {
-            throw new KeyInvalidException("Invalid key $key.");
+            throw new InvalidArgumentException("Invalid key $key.");
         }
     }
 
@@ -60,7 +70,7 @@ class Collection
      */
     public function getCollection()
     {
-        return $this->_tab;
+        return $this->tab;
     }
 
     /**
@@ -68,7 +78,7 @@ class Collection
      */
     public function getCles()
     {
-        return array_keys($this->_tab);
+        return array_keys($this->tab);
     }
 
     /**
@@ -76,7 +86,7 @@ class Collection
      */
     public function taille()
     {
-        return count($this->_tab);
+        return count($this->tab);
     }
 
     /**
@@ -86,11 +96,11 @@ class Collection
      */
     public function cleExiste($key)
     {
-        return array_key_exists($key, $this->_tab);
+        return array_key_exists($key, $this->tab);
     }
 
     public function vider()
     {
-        $this->_tab = array();
+        $this->tab = array();
     }
 }

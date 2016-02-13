@@ -1,4 +1,5 @@
 <?php
+namespace Nostromo\Classes;
 
 /**
  * Created by PhpStorm.
@@ -11,15 +12,15 @@ class Commander
     /**
      * @var Article
      */
-    private $_unArticle;
+    private $unArticle;
     /**
      * @var Commande
      */
-    private $_uneCommande;
+    private $uneCommande;
     /**
      * @var int
      */
-    private $_qte;
+    private $qte;
     
     /**
      * Commander constructor.
@@ -33,16 +34,16 @@ class Commander
      */
     public function getUnArticle()
     {
-        return $this->_unArticle;
+        return $this->unArticle;
     }
 
     /**
      * @param Article $unArticle
      * @return Commander
      */
-    public function setUnArticle($unArticle)
+    public function setUnArticle(Article $unArticle)
     {
-        $this->_unArticle = $unArticle;
+        $this->unArticle = $unArticle;
         return $this;
     }
 
@@ -51,7 +52,7 @@ class Commander
      */
     public function getUneCommande()
     {
-        return $this->_uneCommande;
+        return $this->uneCommande;
     }
 
     /**
@@ -60,7 +61,7 @@ class Commander
      */
     public function setUneCommande($uneCommande)
     {
-        $this->_uneCommande = $uneCommande;
+        $this->uneCommande = $uneCommande;
         return $this;
     }
 
@@ -69,7 +70,7 @@ class Commander
      */
     public function getQte()
     {
-        return $this->_qte;
+        return $this->qte;
     }
 
     /**
@@ -78,7 +79,7 @@ class Commander
      */
     public function setQte($qte)
     {
-        $this->_qte = $qte;
+        $this->qte = $qte;
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+namespace Nostromo\Classes;
 
 /**
  * Created by PhpStorm.
@@ -11,19 +12,19 @@ class Commande
     /**
      * @var int
      */
-    private $_id;
+    private $id;
     /**
      * @var Utilisateur
      */
-    private $_unClient;
+    private $unClient;
     /**
      * @var string
      */
-    private $_uneDate;
+    private $uneDate;
     /**
      * @var Collection
      */
-    private $_lesArticles;
+    private $lesArticles;
 
     /**
      * Commande constructor.
@@ -34,10 +35,10 @@ class Commande
      */
     public function __construct($id, Utilisateur $unClient, $uneDate)
     {
-        $this->_id = $id;
-        $this->_unClient = $unClient;
-        $this->_uneDate = $uneDate;
-        $this->_lesArticles = new Collection();
+        $this->id = $id;
+        $this->unClient = $unClient;
+        $this->uneDate = $uneDate;
+        $this->lesArticles = new Collection();
     }
 
     /**
@@ -47,7 +48,7 @@ class Commande
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -57,7 +58,7 @@ class Commande
      */
     public function setId($id)
     {
-        $this->_id = $id;
+        $this->id = $id;
         return $this;
     }
 
@@ -66,7 +67,7 @@ class Commande
      */
     public function getUnClient()
     {
-        return $this->_unClient;
+        return $this->unClient;
     }
 
     /**
@@ -75,7 +76,7 @@ class Commande
      */
     public function setUnClient($unClient)
     {
-        $this->_unClient = $unClient;
+        $this->unClient = $unClient;
         return $this;
     }
 
@@ -84,7 +85,7 @@ class Commande
      */
     public function getUneDate()
     {
-        return DateVol::formaterDateEtHeure($this->_uneDate);
+        return DateBuilder::formaterDateEtHeure($this->uneDate);
     }
 
     /**
@@ -93,7 +94,7 @@ class Commande
      */
     public function setUneDate($uneDate)
     {
-        $this->_uneDate = $uneDate;
+        $this->uneDate = $uneDate;
         return $this;
     }
 
@@ -102,7 +103,7 @@ class Commande
      */
     public function getLesArticles()
     {
-        return $this->_lesArticles;
+        return $this->lesArticles;
     }
 
     /**
@@ -111,7 +112,7 @@ class Commande
      */
     public function setLesArticles($lesArticles)
     {
-        $this->_lesArticles = $lesArticles;
+        $this->lesArticles = $lesArticles;
         return $this;
     }
 

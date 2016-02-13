@@ -1,5 +1,5 @@
 <?php
-require_once ('models/m_Vols.php');
+namespace Nostromo\Classes;
 
 /**
  * Permet de créer un vol pour un ajout ultérieur dans une réservation
@@ -8,24 +8,24 @@ class Vol
 {
     /**
      * Numéro du vol
-     * @var int $_numVol
+     * @var int $numVol
      */
-    private $_numVol;
+    private $numVol;
     /**
      * Date du vol
      * @var string $dateVol
      */
-    private $_dateVol;
+    private $dateVol;
     /**
      * Heure du vol
-     * @var string $_dateVol
+     * @var string $dateVol
      */
-    private $_heureVol;
+    private $heureVol;
     /**
      * Nombre de place du vol
      * @var int $nbPlace
      */
-    private $_nbPlace;
+    private $nbPlace;
 
     /**
      * Constructeur du vol
@@ -40,16 +40,16 @@ class Vol
      */
     public function getNumVol()
     {
-        return $this->_numVol;
+        return $this->numVol;
     }
 
     /**
-     * @param int $_numVol
+     * @param int $numVol
      * @return Vol
      */
-    public function setNumVol($_numVol)
+    public function setNumVol($numVol)
     {
-        $this->_numVol = (int) $_numVol;
+        $this->numVol = (int) $numVol;
 
         return $this;
     }
@@ -59,16 +59,16 @@ class Vol
      */
     public function getDateVol()
     {
-        return DateVol::formaterDate($this->_dateVol);
+        return DateBuilder::formaterDate($this->dateVol);
     }
 
     /**
-     * @param string $_dateVol
+     * @param string $dateVol
      * @return Vol
      */
-    public function setDateVol($_dateVol)
+    public function setDateVol($dateVol)
     {
-        $this->_dateVol = $_dateVol;
+        $this->dateVol = $dateVol;
 
         return $this;
     }
@@ -78,16 +78,16 @@ class Vol
      */
     public function getHeureVol()
     {
-        return DateVol::formaterHeure($this->_heureVol);
+        return DateBuilder::formaterHeure($this->heureVol);
     }
 
     /**
-     * @param string $_heureVol
+     * @param string $heureVol
      * @return Vol
      */
-    public function setHeureVol($_heureVol)
+    public function setHeureVol($heureVol)
     {
-        $this->_heureVol = $_heureVol;
+        $this->heureVol = $heureVol;
 
         return $this;
     }
@@ -97,20 +97,17 @@ class Vol
      */
     public function getNbPlace()
     {
-        return $this->_nbPlace;
+        return $this->nbPlace;
     }
 
     /**
-     * @param int $_nbPlace
+     * @param int $nbPlace
      * @return Vol
      */
-    public function setNbPlace($_nbPlace)
+    public function setNbPlace($nbPlace)
     {
-        $this->_nbPlace = (int) $_nbPlace;
+        $this->nbPlace = (int) $nbPlace;
 
         return $this;
     }
-
-
-
 }

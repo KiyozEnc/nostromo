@@ -1,14 +1,14 @@
 <?php
-require_once("classes/date.classe.php");
-require_once("models/m_Connexion.php");
-?>
-<?php if(isset($_SESSION['valid'])) { ?>
+
+use Nostromo\Models\MConnexion as Connexion;
+
+if (isset($_SESSION['valid'])) { ?>
     <div class="alert alert-success" role="alert">
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
         <?= $_SESSION['valid'] ?>
     </div>
 <?php } ?>
-<?php if(isset($_SESSION['error'])) { ?>
+<?php if (isset($_SESSION['error'])) { ?>
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>

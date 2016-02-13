@@ -1,11 +1,12 @@
 <?php
-require_once 'produit.classe.php';
-require_once 'collection.classe.php';
+namespace Nostromo\Classes;
+
+use \InvalidArgumentException;
 
 /**
  * Classe Panier
  * Permet de gérer un panier d'objets Produit
- * Nécéssite la classe produit.classe.php
+ * Nécéssite la classe Produit.php
  */
 class Panier
 {
@@ -14,7 +15,7 @@ class Panier
      * Collection de produits
      * @var Collection
      */
-    private $_collProduit;
+    private $collProduit;
 
     /**
      *  Constructeur de la classe
@@ -26,7 +27,7 @@ class Panier
      */
     public function __construct()
     {
-        $this->_collProduit = new Collection;
+        $this->collProduit = new Collection;
     }
 
     /**
@@ -35,32 +36,36 @@ class Panier
      */
     public function getNbProd()
     {
-        return $this->_collProduit->taille();
+        return $this->collProduit->taille();
     }
 
     /**
      * Augmenter le produit de référence $ref de la quantité $qte
+     *
      * @param int $ref  Reference du produit
      * @param int $qte  Nombre de produits à ajouter à la quantité
+     * @throws \InvalidArgumentException
      */
-
-    public function augmenterQuantiteProduit($ref ,$qte)
+    public function augmenterQuantiteProduit($ref, $qte)
     {
-        if($this->_collProduit->cleExiste($ref))
-            $this->_collProduit->getElement($ref)->augmenterQuantite($qte);
+        if ($this->collProduit->cleExiste($ref)) {
+            $this->collProduit->getElement($ref)->augmenterQuantite($qte);
+        }
     }
 
     /**
      * Diminuer le produit de référence $ref de la quantité $qte
+     *
      * @param int $ref  Reference du produit
      * @param int $qte  Nombre de produits à retirer à la quantité
+     * @throws InvalidArgumentException
      */
-    public function diminuerQuantiteProduit($ref ,$qte)
+    public function diminuerQuantiteProduit($ref, $qte)
     {
-        if ($this->_collProduit->cleExiste($ref)) {
-            $this->_collProduit->getElement($ref)->diminuerQuantite($qte);
-            if ($this->_collProduit->getElement($ref)->getQte() === 0) {
-                $this->_collProduit->supprimer($ref);
+        if ($this->collProduit->cleExiste($ref)) {
+            $this->collProduit->getElement($ref)->diminuerQuantite($qte);
+            if ($this->collProduit->getElement($ref)->getQte() === 0) {
+                $this->collProduit->supprimer($ref);
             }
         }
     }
@@ -69,14 +74,15 @@ class Panier
      * @param Article $unProduit
      * @param int     $qte
      *
-     * @throws KeyHasUseException
+     * @throws InvalidArgumentException
      */
     public function ajouterUnProduit(Article $unProduit, $qte)
     {
-        if ($this->_collProduit->cleExiste($unProduit->getNumArt()))
+        if ($this->collProduit->cleExiste($unProduit->getNumArt())) {
             $this->augmenterQuantiteProduit($unProduit->getNumArt(), $qte);
-        else
-            $this->_collProduit->ajouter($unProduit, $unProduit->getNumArt());
+        } else {
+            $this->collProduit->ajouter($unProduit, $unProduit->getNumArt());
+        }
     }
 
     /**
@@ -84,12 +90,12 @@ class Panier
      *
      * @param int $refer
      *
-     * @throws KeyInvalidException
+     * @throws InvalidArgumentException
      */
     public function supprimerUnProduit($refer)
     {
-        if ($this->_collProduit->cleExiste($refer)) {
-            $this->_collProduit->supprimer($refer);
+        if ($this->collProduit->cleExiste($refer)) {
+            $this->collProduit->supprimer($refer);
         }
     }
 
@@ -99,7 +105,7 @@ class Panier
      */
     public function getProduitsPanier()
     {
-        return $this->_collProduit->getCollection();
+        return $this->collProduit->getCollection();
     }
 
     /**
@@ -107,9 +113,6 @@ class Panier
      */
     public function videPanier()
     {
-        $this->_collProduit->vider();
+        $this->collProduit->vider();
     }
-
-
-
 }

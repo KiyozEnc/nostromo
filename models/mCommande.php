@@ -1,6 +1,11 @@
 <?php
-require_once 'm_Connexion.php';
-require_once 'm_ConnexionSite.php';
+namespace Nostromo\Models;
+
+use InvalidArgumentException;
+use Nostromo\Classes\Commande;
+use PDOException;
+use Nostromo\Classes\Utilisateur;
+use Nostromo\Classes\Collection;
 
 /**
  * Class MCommande
@@ -20,21 +25,18 @@ class MCommande
      * @return Commande $uneCommande
      * @throws InvalidArgumentException
      */
-    static public function getUneCommande($id)
+    public static function getUneCommande($id)
     {
-        try
-        {
-            $conn = Connexion::getBdd();
+        try {
+            $conn = MConnexion::getBdd();
             $req = $conn->prepare('SELECT * FROM commande WHERE numCde = ?');
             $req->execute(array($id));
             $req = $req->fetch();
-            $unClient = ConnexionSite::getUnUser($req['numClt']);
+            $unClient = MConnexionSite::getUnUser($req['numClt']);
             $uneCommande = new Commande($id, $unClient, $req['date']);
             $uneCommande->setLesArticles(MCommander::getUneCommande($uneCommande));
             return $uneCommande;
-        }
-        catch(PDOException $e)
-        {
+        } catch (PDOException $e) {
             throw new InvalidArgumentException($e->getMessage());
         }
     }
@@ -44,12 +46,11 @@ class MCommande
      * @return Collection $lesCommandes
      * @throws InvalidArgumentException
      */
-    static public function getCommandes(Utilisateur $unClient)
+    public static function getCommandes(Utilisateur $unClient)
     {
         $lesCommandes = new Collection();
-        try
-        {
-            $conn = Connexion::getBdd();
+        try {
+            $conn = MConnexion::getBdd();
             $req = $conn->prepare('SELECT * FROM commande WHERE numClt = ?');
             $req->execute(array($unClient->getId()));
             $req = $req->fetchAll();
@@ -58,9 +59,7 @@ class MCommande
                 $uneCommande->setLesArticles(MCommander::getUneCommande($uneCommande));
                 $lesCommandes->ajouter($uneCommande);
             }
-        }
-        catch(PDOException $e)
-        {
+        } catch (PDOException $e) {
             throw new InvalidArgumentException($e->getMessage());
         }
         return $lesCommandes;

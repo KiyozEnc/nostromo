@@ -1,17 +1,18 @@
 <?php
-require_once('models/m_Connexion.php');
-require_once('models/m_ConnexionSite.php');
+
+use Nostromo\Models\MConnexionSite as ConnexionSite;
+use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MVol;
+use Nostromo\Classes\Utilisateur;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirForm';
 
-switch($action)
-{
-    case 'voirForm' :
+switch ($action) {
+    case 'voirForm':
         include_once('views/connexion/v_VoirForm.php');
         break;
-    case 'seConnecter' :
-        try
-        {
+    case 'seConnecter':
+        try {
             if (array_key_exists('mailUser', $_POST)) {
                 $unUtilisateur = ConnexionSite::getUser($_POST['mailUser']);
                 if ($_POST['mailUser'] === $unUtilisateur->getMail()
@@ -39,13 +40,16 @@ switch($action)
                 );
                 header('Location:?uc=index');
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
+            header('Location:?uc=connexion');
+        } catch (UnexpectedValueException $e) {
+            Connexion::setFlashMessage($e->getMessage(), 'error');
+            header('Location:?uc=connexion');
         }
         break;
 
-    default : header('Location:?uc=index');
+    default:
+        header('Location:?uc=index');
         break;
 }

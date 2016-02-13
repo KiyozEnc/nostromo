@@ -1,7 +1,8 @@
 <?php
+namespace Nostromo\Classes;
 
-require_once ('models/m_Article.php');
-
+use \InvalidArgumentException;
+use Nostromo\Models\MConnexion as Connexion;
 
 /**
  * Permet de créer un Article pour un ajout ultérieur dans le panier
@@ -10,30 +11,30 @@ require_once ('models/m_Article.php');
  * @package Nostromo\Classes
  * @author Nostromo <contact@nostromo.com>
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link classes/article.classe.php
+ * @link classes/Article.php
  */
 class Article
 {
     /**
      * @var int
      */
-    private $_numArt;
+    private $numArt;
     /**
      * @var string
      */
-    private $_designation;
+    private $designation;
     /**
      * @var int
      */
-    private $_pu;
+    private $pu;
     /**
      * @var int
      */
-    private $_qteStock;
+    private $qteStock;
     /**
      * @var int
      */
-    private $_qte;
+    private $qte;
 
     /**
      * Constructeur d'un Article, sa référence est passé en paramètre
@@ -43,6 +44,12 @@ class Article
     {
 
     }
+
+    /**
+     * Récupère l'article sous forme de tableau
+     *
+     * @return array
+     */
     public function getArticles()
     {
         $numArt = $this->getNumArt();
@@ -63,7 +70,7 @@ class Article
      */
     public function getNumArt()
     {
-        return $this->_numArt;
+        return $this->numArt;
     }
     public function vider()
     {
@@ -76,33 +83,45 @@ class Article
      */
     public function getDesignation()
     {
-        return $this->_designation;
+        return $this->designation;
     }
+
+    /**
+     * Get Qte
+     *
+     * @return int
+     */
     public function getQte()
     {
-        return $this->_qte;
+        return $this->qte;
     }
+
+    /**
+     * Augment de $quantite la quantité de l'article
+     * @param int $quantite
+     */
     public function augmenterQuantite($quantite)
     {
-        try
-        {
-            if ($this->_qte < $this->_qteStock) {
-                $this->_qte += $quantite;
+        try {
+            if ($this->qte < $this->qteStock) {
+                $this->qte += $quantite;
             } else {
-                throw new LogicException('La quantité en stock est insuffisante.');
+                throw new \InvalidArgumentException('La quantité en stock est insuffisante.');
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (\InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
         }
 
     }
+
+    /**
+     * @param int $quantite
+     */
     public function diminuerQuantite($quantite)
     {
-        $this->_qte -= $quantite;
-        if ($this->_qte < 0) {
-            $this->_qte = 0;
+        $this->qte -= $quantite;
+        if ($this->qte < 0) {
+            $this->qte = 0;
         }
     }
     /**
@@ -111,7 +130,7 @@ class Article
      */
     public function getPu()
     {
-        return $this->_pu;
+        return $this->pu;
     }
 
     /**
@@ -120,7 +139,7 @@ class Article
      */
     public function getQteStock()
     {
-        return $this->_qteStock;
+        return $this->qteStock;
     }
 
     /**
@@ -129,7 +148,7 @@ class Article
      */
     public function setQte($qte)
     {
-        $this->_qte = (int) $qte;
+        $this->qte = (int) $qte;
         return $this;
     }
 
@@ -139,7 +158,7 @@ class Article
      */
     public function setNumArt($numArt)
     {
-        $this->_numArt = (int) $numArt;
+        $this->numArt = (int) $numArt;
         return $this;
     }
 
@@ -149,7 +168,7 @@ class Article
      */
     public function setDesignation($designation)
     {
-        $this->_designation = $designation;
+        $this->designation = $designation;
         return $this;
     }
 
@@ -159,7 +178,7 @@ class Article
      */
     public function setPu($pu)
     {
-        $this->_pu = (int) $pu;
+        $this->pu = (int) $pu;
         return $this;
     }
 
@@ -169,9 +188,7 @@ class Article
      */
     public function setQteStock($qteStock)
     {
-        $this->_qteStock = (int) $qteStock;
+        $this->qteStock = (int) $qteStock;
         return $this;
     }
-
-
 }

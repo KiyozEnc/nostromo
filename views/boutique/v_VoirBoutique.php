@@ -1,4 +1,7 @@
 <?php
+
+use Nostromo\Models\MConnexion as Connexion;
+
 if (array_key_exists('valid', $_SESSION)) { ?>
     <div class="alert alert-success" role="alert">
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -23,12 +26,13 @@ if (array_key_exists('error', $_SESSION)) { ?>
         <?php
         if (Connexion::sessionOuverte()) { ?>
             <th>Actions</th>
-        <?php } ?>
+        <?php
+        } ?>
     </tr>
     </thead>
     <tbody>
     <?php
-    foreach ($tabArt as $art => $unArt) { ?>
+    foreach ($tabArt->getCollection() as $art => $unArt) { ?>
         <tr>
             <td><?php echo $unArt->getNumArt(); ?></td>
             <td><?php echo $unArt->getDesignation(); ?></td>
@@ -41,9 +45,11 @@ if (array_key_exists('error', $_SESSION)) { ?>
                        class="btn btn-default">Détails
                     </a>
                 </th>
-            <?php } ?>
+            <?php
+            } ?>
         </tr>
-    <?php } ?>
+    <?php
+    } ?>
     </tbody>
 </table>
 <?php if (array_key_exists('valid', $_SESSION)) {

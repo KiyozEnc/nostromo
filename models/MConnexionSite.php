@@ -1,8 +1,12 @@
 <?php
-require_once 'models/m_Connexion.php';
+namespace Nostromo\Models;
+
+use Nostromo\Classes\Utilisateur;
+use InvalidArgumentException;
+use PDOException;
 
 /**
- * Class ConnexionSite
+ * Class MConnexionSite
  *
  * @category Models
  * @package  Nostromo\Models
@@ -10,19 +14,18 @@ require_once 'models/m_Connexion.php';
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     localhost
  */
-class ConnexionSite
+class MConnexionSite
 {
     /**
      * @param string $email
      * @return Utilisateur
      * @throws InvalidArgumentException
      */
-    static public function getUser($email)
+    public static function getUser($email)
     {
         $unClient = new Utilisateur();
-        try
-        {
-            $conn = Connexion::getBdd();
+        try {
+            $conn = MConnexion::getBdd();
             $reqPrepare = $conn->prepare('SELECT * FROM client WHERE mailClt = ?');
             $reqPrepare->execute(array($email));
             $reqPrepare = $reqPrepare->fetch();
@@ -37,9 +40,7 @@ class ConnexionSite
                 ->setMail($reqPrepare['mailClt'])
                 ->setPoints($reqPrepare['pointsClt']);
             $conn = null;
-        }
-        catch(PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             throw new InvalidArgumentException("L'utilisateur avec l'adresse mail $email n'existe pas.");
         }
         return $unClient;
@@ -49,11 +50,10 @@ class ConnexionSite
      * @param Utilisateur $unClient
      * @throws InvalidArgumentException
      */
-    static public function setAjoutUser(Utilisateur $unClient)
+    public static function setAjoutUser(Utilisateur $unClient)
     {
-        try
-        {
-            $conn = Connexion::getBdd();
+        try {
+            $conn = MConnexion::getBdd();
             $reqprepare = $conn->prepare(
                 'INSERT INTO client
                 (nomClt, prenomClt, adresseClt, cpClt, villeClt, mdpClt, mailClt, pointsClt)
@@ -71,9 +71,7 @@ class ConnexionSite
                     $unClient->getPoints())
             );
             $conn = null;
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             throw new InvalidArgumentException('Impossible de continuer l\'inscription. Détails : '.$ex->getMessage());
         }
     }
@@ -83,12 +81,11 @@ class ConnexionSite
      * @return Utilisateur
      * @throws InvalidArgumentException
      */
-    static public function getUnUser($id)
+    public static function getUnUser($id)
     {
         $unClient = new Utilisateur();
-        try
-        {
-            $conn = Connexion::getBdd();
+        try {
+            $conn = MConnexion::getBdd();
             $reqPrepare = $conn->prepare('SELECT * FROM client WHERE numClt = ?');
             $reqPrepare->execute(array($id));
             $reqPrepare = $reqPrepare->fetch();
@@ -103,9 +100,7 @@ class ConnexionSite
                 ->setMail($reqPrepare['mailClt'])
                 ->setPoints($reqPrepare['pointsClt']);
             $conn = null;
-        }
-        catch(PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             throw new InvalidArgumentException("L'utilisateur n°$id n'existe pas.");
         }
         return $unClient;
@@ -118,9 +113,8 @@ class ConnexionSite
      */
     public static function updateUser(Utilisateur $user)
     {
-        try
-        {
-            $conn = Connexion::getBdd();
+        try {
+            $conn = MConnexion::getBdd();
             $reqprepare = $conn->prepare(
                 'UPDATE client
                 SET nomClt = ?,
@@ -146,9 +140,7 @@ class ConnexionSite
                     $user->getId())
             );
             $conn = null;
-        }
-        catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             throw new InvalidArgumentException($e->getMessage());
         }
     }

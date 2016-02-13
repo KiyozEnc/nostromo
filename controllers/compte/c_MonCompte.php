@@ -1,24 +1,27 @@
 <?php
+
+use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MConnexionSite as ConnexionSite;
+use Nostromo\Models\MCommande;
+
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirMonCompte';
 
-switch ($action)
-{
-    case 'voirMonCompte' :
-        try
-        {
+switch ($action) {
+    case 'voirMonCompte':
+        try {
             $title = 'Page principale';
+            if (!array_key_exists('Utilisateur', $_SESSION)) {
+                throw new LogicException('Vous devez vous connecter');
+            }
             include_once('views/compte/v_GabCompte.php');
             include_once('views/compte/v_VoirProfile.php');
-        }
-        catch (Exception $e)
-        {
+        } catch (LogicException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=index');
+            header('Location:?uc=connexion');
         }
         break;
-    case 'edit' :
-        try
-        {
+    case 'edit':
+        try {
             if (array_key_exists('actualpwd', $_POST)) {
                 if (empty($_POST['pwd']) &&
                     empty($_POST['pwdconf']) &&
@@ -33,12 +36,13 @@ switch ($action)
                 }
                 if (sha1($_POST['actualpwd']) === $_SESSION['Utilisateur']->getMdp()) {
                     if (!empty($_POST['pwd']) && !empty($_POST['pwdconf'])) {
-                        if($_POST['pwd'] && $_POST['pwdconf'])
+                        if ($_POST['pwd'] && $_POST['pwdconf']) {
                             $_SESSION['Utilisateur']->setMdp(sha1($_POST['pwd']));
-                        else
+                        } else {
                             throw new InvalidArgumentException(
                                 'Les mots de passe ne sont pas identiques.'
                             );
+                        }
                     }
                     if (!empty($_POST['name'])) {
                         $_SESSION['Utilisateur']->setNom($_POST['name']);
@@ -59,10 +63,11 @@ switch ($action)
                         }
                     }
                     if (!empty($_POST['cp'])) {
-                        if (!is_numeric($_POST['cp']))
+                        if (!is_numeric($_POST['cp'])) {
                             throw new InvalidArgumentException(
                                 'Le code postal doit être au format numérique.'
                             );
+                        }
                     }
                 } else {
                     throw new InvalidArgumentException('Mot de passe incorrect.');
@@ -75,16 +80,13 @@ switch ($action)
                 include_once('views/compte/v_GabCompte.php');
                 include_once('views/compte/v_EditProfile.php');
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?uc=monCompte&action=edit');
         }
         break;
-    case 'voirCommandes' :
-        try
-        {
+    case 'voirCommandes':
+        try {
             if (array_key_exists('Utilisateur', $_SESSION)) {
                 $lesCommandes = MCommande::getCommandes($_SESSION['Utilisateur']);
                 if (array_key_exists('cde', $_GET)) {
@@ -96,9 +98,7 @@ switch ($action)
             } else {
                 header('Location:?uc=connexion');
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?uc=monCompte');
         }

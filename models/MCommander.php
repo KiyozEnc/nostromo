@@ -1,6 +1,11 @@
 <?php
+namespace Nostromo\Models;
 
-require_once('m_Connexion.php');
+use Nostromo\Classes\Commande;
+use Nostromo\Classes\Collection;
+use InvalidArgumentException;
+use PDOException;
+
 /**
  * Class MCommander
  *
@@ -18,12 +23,11 @@ class MCommander
      * @return Collection
      * @throws InvalidArgumentException
      */
-    static public function getUneCommande(Commande $uneCommande)
+    public static function getUneCommande(Commande $uneCommande)
     {
         $lesArticles = new Collection();
-        try
-        {
-            $conn = Connexion::getBdd();
+        try {
+            $conn = MConnexion::getBdd();
             $conn->beginTransaction();
             $req = $conn->prepare('SELECT * FROM commander WHERE numCde = ? LIMIT 2');
             $req->execute(array($uneCommande->getId()));
@@ -34,9 +38,7 @@ class MCommander
                 $lesArticles->ajouter($unArticle);
             }
             $conn->commit();
-        }
-        catch(PDOException $e)
-        {
+        } catch (PDOException $e) {
             throw new InvalidArgumentException(
                 'Impossible de récupérer la commande n°'.$uneCommande->getId().' Détails : '.$e->getMessage()
             );

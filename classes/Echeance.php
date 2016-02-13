@@ -1,4 +1,5 @@
 <?php
+namespace Nostromo\Classes;
 
 /**
  * Created by PhpStorm.
@@ -11,27 +12,27 @@ class Echeance
     /**
      * @var Reservation
      */
-    protected $_reservation;
+    protected $reservation;
     /**
      * @var int
      */
-    protected $_montant;
+    protected $montant;
     /**
      * @var string
      */
-    protected $_date;
+    protected $date;
 
     /**
      * Echeance constructor.
-     * @param Reservation $_reservation
-     * @param int $_montant
-     * @param string $_date
+     * @param Reservation $reservation
+     * @param int $montant
+     * @param string $date
      */
-    public function __construct(Reservation $_reservation, $_montant, $_date)
+    public function __construct(Reservation $reservation, $montant, $date)
     {
-        $this->_reservation = $_reservation;
-        $this->_montant = $_montant;
-        $this->_date = $_date;
+        $this->reservation = $reservation;
+        $this->montant = $montant;
+        $this->date = $date;
     }
 
     /**
@@ -39,7 +40,7 @@ class Echeance
      */
     public function getReservation()
     {
-        return $this->_reservation;
+        return $this->reservation;
     }
 
     /**
@@ -49,7 +50,7 @@ class Echeance
      */
     public function setReservation($reservation)
     {
-        $this->_reservation = $reservation;
+        $this->reservation = $reservation;
 
         return $this;
     }
@@ -59,7 +60,7 @@ class Echeance
      */
     public function getMontant()
     {
-        return $this->_montant;
+        return $this->montant;
     }
 
     /**
@@ -69,7 +70,7 @@ class Echeance
      */
     public function setMontant($montant)
     {
-        $this->_montant = $montant;
+        $this->montant = $montant;
 
         return $this;
     }
@@ -79,7 +80,7 @@ class Echeance
      */
     public function getDate()
     {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
@@ -89,7 +90,7 @@ class Echeance
      */
     public function setDate($date)
     {
-        $this->_date = $date;
+        $this->date = $date;
 
         return $this;
     }
@@ -102,5 +103,4 @@ class Echeance
     {
 
     }
-
 }

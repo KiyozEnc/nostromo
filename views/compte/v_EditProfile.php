@@ -1,17 +1,24 @@
-<?php if(isset($_SESSION['valid'])) { ?>
+<!-- Alerte valid -->
+<?php if (array_key_exists('valid', $_SESSION)) { ?>
     <div class="alert alert-success" role="alert">
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
         <?= $_SESSION['valid'] ?>
     </div>
 <?php } ?>
-<?php if(isset($_SESSION['error'])) { ?>
+<?php if (array_key_exists('error', $_SESSION)) { ?>
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
         <?= $_SESSION['error'] ?>
     </div>
 <?php } ?>
-<p class="text-center">Formulaire de modification</p>
+<?php if (array_key_exists('valid', $_SESSION)) {
+    unset($_SESSION['valid']);
+} ?>
+<?php if (array_key_exists('error', $_SESSION)) {
+    unset($_SESSION['error']);
+} ?>
+    <p class="text-center">Formulaire de modification</p>
 <form action="?uc=monCompte&action=edit" method="post">
     <div class="row">
         <div class="col-lg-6">
@@ -49,9 +56,3 @@
     <input type="submit" class="btn btn-primary" name="submit" value="Envoyer">
 </form>
 <small>Seulement les champs que vous renseignerez serons modifiés. Veuillez indiquer le mot de passe actuel de votre compte pour confirmer.</small>
-<?php
-if(isset($_SESSION['error']))
-    unset($_SESSION['error']);
-if(isset($_SESSION['valid']))
-    unset($_SESSION['valid']);
-?>

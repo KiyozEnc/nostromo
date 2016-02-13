@@ -1,4 +1,9 @@
 <?php
+namespace Nostromo\Models;
+
+use PDO;
+use PDOException;
+use UnexpectedValueException;
 
 /**
  * Class Connexion
@@ -11,28 +16,28 @@
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     localhost
  */
-class Connexion
+class MConnexion
 {
     /**
      * BDD Connexion
      *
-     * @return PDO
+     * @return \PDOStatement
      */
-    static public function getBdd()
+    public static function getBdd()
     {
         $host = 'localhost';
-        $dbname = 'dbname';
+        $dbname = '2014-nostromo_base';
         $user = 'user';
         $mdp = 'password';
-        try
-        {
+        try {
             $pdo = new PDO(
                 'mysql:host='.$host.';dbname='.$dbname.';charset=utf8',
-                $user, $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+                $user,
+                $mdp,
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
             return $pdo;
-        }
-        catch (PDOException $ex) {
+        } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
     }
@@ -42,12 +47,9 @@ class Connexion
      *
      * @return boolean
      */
-    static public function sessionOuverte()
+    public static function sessionOuverte()
     {
-        if(array_key_exists('Utilisateur', $_SESSION))
-            return true;
-        else
-            return false;
+        return array_key_exists('Utilisateur', $_SESSION);
     }
 
     /**
@@ -57,25 +59,25 @@ class Connexion
      * @param string $type    Type
      *
      * @return void
+     * @throws UnexpectedValueException
      */
     public static function setFlashMessage($message, $type)
     {
-        switch ($type)
-        {
-            case 'valid' :
+        switch ($type) {
+            case 'valid':
                 $_SESSION['valid'] = $message;
                 if (null !== $_SESSION['error']) {
                     unset($_SESSION['error']);
                 }
                 break;
-            case 'error' :
+            case 'error':
                 $_SESSION['error'] = $message;
                 if (null !== $_SESSION['valid']) {
                     unset($_SESSION['valid']);
                 }
                 break;
-            default :
-                $_SESSION['error'] = 'Erreur inconnue';
+            default:
+                throw new UnexpectedValueException('Valeur non reconnue');
                 break;
         }
 

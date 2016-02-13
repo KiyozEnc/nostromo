@@ -1,18 +1,18 @@
 <?php
-require_once('models/m_Connexion.php');
-require_once('models/m_ConnexionSite.php');
+
+use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MConnexionSite as ConnexionSite;
+use Nostromo\Classes\Utilisateur;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirForm';
 
-switch($action)
-{
-    case 'voirForm' :
+switch ($action) {
+    case 'voirForm':
         include_once('views/inscription/v_VoirInscription.php');
         break;
 
-    case 'inscrire' :
-        try
-        {
+    case 'inscrire':
+        try {
             if (array_key_exists('mailUser', $_POST)) {
                 $unUser = ConnexionSite::getUser($_POST['mailUser']);
                 if (null === $_POST['mailUser']
@@ -58,13 +58,13 @@ switch($action)
             } else {
                 header('Location:?uc=index');
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?uc=inscription');
         }
         break;
 
-    default : header('Location:?uc=index');
+    default:
+        header('Location:?uc=index');
+        break;
 }
