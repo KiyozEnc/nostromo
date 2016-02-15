@@ -45,7 +45,7 @@ switch ($action) {
                             break;
                     }
                 } else {
-                    //header('Location:?page=materiel');
+                    header('Location:?page=materiel');
                 }
             }
         } catch (Exception $e) {
