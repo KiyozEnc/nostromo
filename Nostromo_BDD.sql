@@ -71,9 +71,12 @@ INSERT INTO vol VALUES (1,"2015-12-05", "15:00:00",40);
 INSERT INTO vol VALUES (2,"2015-10-09", "12:15:00",80);
 INSERT INTO vol VALUES (3,"2015-11-08", "18:10:00",90);
 INSERT INTO vol VALUES (4,"2016-01-10", "14:20:00",60);
+INSERT INTO vol VALUES (5,"2016-02-28", "18:05:00",10);
+INSERT INTO vol VALUES (6,"2016-03-18", "14:05:00",10);
+INSERT INTO vol VALUES (7,"2016-10-10", "06:05:00",10);
 
 INSERT INTO article VALUES (1,"Gants astronaute",250,20,'img/Basket/gauntlet.jpg');
-INSERT INTO article VALUES (2,"Pantaton astronaute",400,20,'img/Basket/down.jpg');
+INSERT INTO article VALUES (2,"Pantalon astronaute",400,20,'img/Basket/down.jpg');
 INSERT INTO article VALUES (3,"Casque astronaute",1200,5,'img/Basket/helmet.png');
 INSERT INTO article VALUES (4,"Truc astronaute",600,5,null);
 

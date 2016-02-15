@@ -54,6 +54,19 @@ class Panier
     }
 
     /**
+     * Change la quantité de l'article $ref en $qte
+     * @param int $ref
+     * @param int $qte
+     * @throws \InvalidArgumentException
+     */
+    public function setQteProduit($ref, $qte)
+    {
+        if ($this->collProduit->cleExiste($ref)) {
+            $this->collProduit->getElement($ref)->setQte($qte);
+        }
+    }
+
+    /**
      * Diminuer le produit de référence $ref de la quantité $qte
      *
      * @param int $ref  Reference du produit
@@ -79,6 +92,10 @@ class Panier
     public function ajouterUnProduit(Article $unProduit, $qte)
     {
         if ($this->collProduit->cleExiste($unProduit->getNumArt())) {
+            $produitPanier = $this->collProduit->getElement($unProduit->getNumArt());
+            if (($unProduit->getQte() + $produitPanier->getQte()) > $unProduit->getQteStock()) {
+                throw new InvalidArgumentException('Quantité en stock insuffisante');
+            }
             $this->augmenterQuantiteProduit($unProduit->getNumArt(), $qte);
         } else {
             $this->collProduit->ajouter($unProduit, $unProduit->getNumArt());
@@ -114,5 +131,25 @@ class Panier
     public function videPanier()
     {
         $this->collProduit->vider();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCollProduit()
+    {
+        return $this->collProduit;
+    }
+
+    /**
+     * @param Collection $collProduit
+     *
+     * @return Panier
+     */
+    public function setCollProduit($collProduit)
+    {
+        $this->collProduit = $collProduit;
+
+        return $this;
     }
 }

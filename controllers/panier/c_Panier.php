@@ -12,7 +12,7 @@ switch ($action) {
         break;
     case 'ajouterArticle':
         try {
-            if ($_POST['qte'] < 0) {
+            if ($_POST['qte'] <= 0) {
                 throw new InvalidArgumentException('Veuillez sélectionner une quantité');
             }
             if (!array_key_exists('Panier', $_SESSION)) {
@@ -24,20 +24,33 @@ switch ($action) {
                 if ($_SESSION['Panier']->getNbProd() === 0) {
                     unset($_SESSION['Panier']);
                 }
-                header('Location:?uc=materiel&action=voirArticle&article='.$_GET['ref']);
+                header('Location:?page=materiel&action=voirArticle&article='.$_GET['ref']);
             } else {
-
                 $prod->setQte($_POST['qte']);
                 $_SESSION['Panier']->ajouterUnProduit($prod, $_POST['qte']);
                 Connexion::setFlashMessage(
-                    'Produit ajouté au panier. <a href=\'?uc=monPanier\'>Voir mon panier</a>',
+                    'Produit ajouté au panier. <a href=\'?page=monPanier\'>Voir mon panier</a>',
                     'valid'
                 );
-                header('Location:?uc=materiel');
+                if (array_key_exists('target', $_GET)) {
+                    switch ($_GET['target']) {
+                        case 'panier':
+                            header('Location:?page=monPanier');
+                            break;
+                        case 'reserver':
+                            header('Location:?page=reserver');
+                            break;
+                        default:
+                            header('Location:?page=materiel');
+                            break;
+                    }
+                } else {
+                    //header('Location:?page=materiel');
+                }
             }
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=materiel&action=voirArticle&article='.$_GET['ref']);
+            header('Location:?page=materiel&action=voirArticle&article='.$_GET['ref']);
         }
         break;
 
@@ -46,7 +59,7 @@ switch ($action) {
         if ($_SESSION['Panier']->getNbProd() === 0) {
             unset($_SESSION['Panier']);
         }
-        header('Location:?uc=monPanier');
+        header('Location:?page=monPanier');
         break;
 
     case 'augmenterProduit':
@@ -56,7 +69,7 @@ switch ($action) {
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
         }
-        header('Location:?uc=monPanier');
+        header('Location:?page=monPanier');
         break;
 
     case 'diminuerProduit':
@@ -64,7 +77,7 @@ switch ($action) {
         if ($_SESSION['Panier']->getNbProd() === 0) {
             unset($_SESSION['Panier']);
         }
-        header('Location:?uc=monPanier');
+        header('Location:?page=monPanier');
         break;
 
     case 'validerPanier':
@@ -76,8 +89,29 @@ switch ($action) {
         include_once('views/panier/v_VoirPanier.php');
         break;
 
+    case 'choisirQte':
+        try {
+            if (!array_key_exists('qte', $_GET) && !array_key_exists('article', $_GET) && !array_key_exists('Panier', $_SESSION)) {
+                throw new InvalidArgumentException('Invalid args');
+            }
+            if ($_GET['qte'] === '0') {
+                $_SESSION['Panier']->supprimerUnProduit($_GET['article']);
+                if ($_SESSION['Panier']->getNbProd() === 0) {
+                    unset($_SESSION['Panier']);
+                }
+            } else {
+                $_SESSION['Panier']->setQteProduit($_GET['article'], $_GET['qte']);
+            }
+            header('Location:?page=monPanier');
+
+        } catch (InvalidArgumentException $e) {
+            Connexion::setFlashMessage($e->getMessage(), 'error');
+            header('Location:?page=index');
+        }
+        break;
+
     default:
         Connexion::setFlashMessage('Impossible d\'accéder à la page demandé.', 'error');
-        header('Location:?uc=index');
+        header('Location:?page=index');
         break;
 }

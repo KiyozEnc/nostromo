@@ -14,7 +14,7 @@ switch ($action) {
             unset($_SESSION['Reservation']);
             $_SESSION['valid'] = 'Réservation annulée avec succès.';
         }
-        header('Location:?uc=maReservation');
+        header('Location:?page=maReservation');
         break;
 
     case 'validerReservation':
@@ -24,10 +24,10 @@ switch ($action) {
                 $_SESSION['Reservation']->flushValid();
                 $_SESSION['valid'] = 'Réservation validée avec succès.';
             }
-            header('Location:?uc=maReservation');
+            header('Location:?page=maReservation');
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=maReservation');
+            header('Location:?page=maReservation');
         }
         break;
 }

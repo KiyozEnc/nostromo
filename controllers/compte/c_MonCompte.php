@@ -17,7 +17,7 @@ switch ($action) {
             include_once('views/compte/v_VoirProfile.php');
         } catch (LogicException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=connexion');
+            header('Location:?page=connexion');
         }
         break;
     case 'edit':
@@ -74,7 +74,7 @@ switch ($action) {
                 }
                 ConnexionSite::updateUser($_SESSION['Utilisateur']);
                 Connexion::setFlashMessage('Données mise à jour avec succès', 'valid');
-                header('Location:?uc=monCompte&action=edit');
+                header('Location:?page=monCompte&action=edit');
             } else {
                 $title = 'Modifier mes informations';
                 include_once('views/compte/v_GabCompte.php');
@@ -82,7 +82,7 @@ switch ($action) {
             }
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=monCompte&action=edit');
+            header('Location:?page=monCompte&action=edit');
         }
         break;
     case 'voirCommandes':
@@ -96,11 +96,11 @@ switch ($action) {
                 include_once('views/compte/v_GabCompte.php');
                 include_once('views/compte/v_VoirCommandes.php');
             } else {
-                header('Location:?uc=connexion');
+                header('Location:?page=connexion');
             }
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=monCompte');
+            header('Location:?page=monCompte');
         }
         break;
 }

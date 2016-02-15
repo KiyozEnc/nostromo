@@ -19,20 +19,20 @@ switch ($action) {
                 if (!array_key_exists('Reservation', $_SESSION)) {
                     $_SESSION['Reservation'] = MVol::reservationExistante($_SESSION['Utilisateur']);
                 }
-                if (null === $_SESSION['Reservation']->getId()) {
+                if (0 === $_SESSION['Reservation']->getId()) {
                     unset($_SESSION['Reservation']);
                 }
                 if (!array_key_exists('Commandes', $_SESSION)) {
                     $_SESSION['Commandes'] = MCommande::getCommandes($_SESSION['Utilisateur']);
                 }
-                if (null === $_SESSION['Commandes']->getCollection()) {
+                if (0 === $_SESSION['Commandes']->taille()) {
                     unset($_SESSION['Commandes']);
                 }
             }
             include_once('views/index/v_Accueil.php');
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=error404');
+            header('Location:?page=error404');
         }
         break;
 }

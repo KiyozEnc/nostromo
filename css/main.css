@@ -1,8 +1,7 @@
 
 .background{
-    background-attachment:fixed;
-    background-image: url("http://puu.sh/l7R7a/c38cc933a5.jpg");
-    background-size: cover;
+    background      : url("http://puu.sh/l7R7a/c38cc933a5.jpg") fixed;
+    background-size : cover;
 }
 .Titre{
     vertical-align: middle;
@@ -11,4 +10,16 @@
 
 th, td {
     text-align: center;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
 }

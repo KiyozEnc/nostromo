@@ -21,35 +21,32 @@ switch ($action) {
                     $_SESSION['Utilisateur'] = new Utilisateur();
                     $_SESSION['Utilisateur'] = $unUtilisateur;
                     $_SESSION['Reservation'] = MVol::reservationExistante($_SESSION['Utilisateur']);
-                    if (null === $_SESSION['Reservation']->getId()) {
-                        unset($_SESSION['Reservation']);
-                    }
                     Connexion::setFlashMessage('Connecté avec succès', 'valid');
-                    header('Location:?uc=index');
+                    header('Location:?page=index');
                 } else {
                     Connexion::setFlashMessage(
                         'E-mail ou mot de passe incorrecte',
                         'error'
                     );
-                    header('Location:?uc=connexion');
+                    header('Location:?page=connexion');
                 }
             } else {
                 Connexion::setFlashMessage(
                     'Erreur 404 : Page introuvable',
                     'error'
                 );
-                header('Location:?uc=index');
+                header('Location:?page=index');
             }
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=connexion');
+            header('Location:?page=connexion');
         } catch (UnexpectedValueException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=connexion');
+            header('Location:?page=connexion');
         }
         break;
 
     default:
-        header('Location:?uc=index');
+        header('Location:?page=index');
         break;
 }

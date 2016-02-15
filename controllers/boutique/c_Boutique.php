@@ -11,7 +11,7 @@ switch ($action) {
             include_once('views/boutique/v_VoirBoutique.php');
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=error404');
+            header('Location:?page=error404');
         }
         break;
 
@@ -22,5 +22,5 @@ switch ($action) {
 
     default:
         $_SESSION['error'] = "Impossible d'accéder à la page demandé.";
-        header('Location:?uc=index');
+        header('Location:?page=index');
 }

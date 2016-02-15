@@ -24,22 +24,22 @@ switch ($action) {
                     || null === $_POST['villeUser']
                     || null === $_POST['adrUser']) {
                     Connexion::setFlashMessage('Veuillez renseignez tous les champs.', 'error');
-                    header('Location:?uc=inscription');
+                    header('Location:?page=inscription');
                 } elseif ($_POST['mailUser'] === $unUser->getMail()) {
                     Connexion::setFlashMessage('Cette e-mail est déjà utilisée.', 'error');
-                    header('Location:?uc=inscription');
+                    header('Location:?page=inscription');
                 } elseif (strlen($_POST['nomUser']) > 20) {
                     Connexion::setFlashMessage('Le nom entré est trop long', 'error');
-                    header('Location:?uc=inscription');
+                    header('Location:?page=inscription');
                 } elseif (strlen($_POST['prenUser']) > 20) {
                     Connexion::setFlashMessage('Le prénom entré est trop long', 'error');
-                    header('Location:?uc=inscription');
+                    header('Location:?page=inscription');
                 } elseif (strlen($_POST['cpUser']) !== 5) {
                     Connexion::setFlashMessage('Le code postal entré n\'est pas au bon format (ex: 30000)', 'error');
-                    header('Location:?uc=inscription');
+                    header('Location:?page=inscription');
                 } elseif ($_POST['mdpUser'] !== $_POST['mdpConfUser']) {
                     Connexion::setFlashMessage('Les mots de passes ne sont pas identiques', 'error');
-                    header('Location:?uc=inscription');
+                    header('Location:?page=inscription');
                 } else {
                     $unUser = new Utilisateur();
                     $unUser
@@ -53,18 +53,18 @@ switch ($action) {
                         ->setPoints(10);
                     ConnexionSite::setAjoutUser($unUser);
                     Connexion::setFlashMessage('Inscription réussie, vous pouvez désormais vous connecter.', 'valid');
-                    header('Location:?uc=index');
+                    header('Location:?page=index');
                 }
             } else {
-                header('Location:?uc=index');
+                header('Location:?page=index');
             }
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
-            header('Location:?uc=inscription');
+            header('Location:?page=inscription');
         }
         break;
 
     default:
-        header('Location:?uc=index');
+        header('Location:?page=index');
         break;
 }

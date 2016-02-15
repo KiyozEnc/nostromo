@@ -1,1 +1,1 @@
-<p>&timerRestant& avant le lancement</p>
+<div class="row row-centered"><p class="col-xs-12 col-sm-6 col-centered"><span id="time">&timerRestant&</span> avant le lancement</p></div>
