@@ -2,7 +2,6 @@
 namespace Nostromo\Models;
 
 use Nostromo\Classes\Article;
-use Nostromo\Classes\Image;
 use InvalidArgumentException;
 use Nostromo\Classes\Collection;
 use PDOException;
