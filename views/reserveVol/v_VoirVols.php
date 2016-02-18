@@ -6,7 +6,8 @@ require_once 'views/v_Alert.php'; ?>
 
 <div class="row row-centered">
     <h2 class="text-center text-info text-muted">Vols disponibles</h2>
-    <?php foreach ($lesVols->getCollection() as $unVol) { ?>
+    <?php foreach ($lesVols->getCollection() as $unVol) {
+    ?>
         <div class="col-sm-4 col-lg-3 col-centered">
             <div class="thumbnail">
                 <img class="img-responsive hidden-xs" height="50%" width="50%" src="img/avion.png" title="Vol n°<?= $unVol->getNumVol() ?>">
@@ -21,5 +22,6 @@ require_once 'views/v_Alert.php'; ?>
                 </div>
             </div>
         </div>
-    <?php } ?>
+    <?php 
+} ?>
 </div>

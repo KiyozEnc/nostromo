@@ -1,10 +1,12 @@
 <?php
-namespace Nostromo\Classes;
+
+namespace Nostromo\classes;
 
 class DateBuilder
 {
     /**
-     * Formate une chaine de caractère de type Time en format français
+     * Formate une chaine de caractère de type Time en format français.
+     *
      * @param string $dateDuVol
      *
      * @return string
@@ -14,11 +16,13 @@ class DateBuilder
         $year = substr($dateDuVol, 0, -6);
         $month = substr($dateDuVol, 5, -3);
         $day = substr($dateDuVol, 8);
+
         return $day.'/'.$month.'/'.$year;
     }
 
     /**
-     * Formate une chaine de caracètre de type date en format français
+     * Formate une chaine de caracètre de type date en format français.
+     *
      * @param string $heureDuVol
      *
      * @return string
@@ -29,7 +33,8 @@ class DateBuilder
     }
 
     /**
-     * Formate une chaine de caractères de type DateTime en format français
+     * Formate une chaine de caractères de type DateTime en format français.
+     *
      * @param string $var
      *
      * @return string
@@ -41,6 +46,7 @@ class DateBuilder
         $day = substr($var, 8, -9);
         $hour = substr($var, 10, -6);
         $min = substr($var, 14, -3);
+
         return $day.'/'.$month.'/'.$year.' à '.$hour.':'.$min;
     }
 }

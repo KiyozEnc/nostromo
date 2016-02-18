@@ -1,19 +1,20 @@
 <?php
-namespace Nostromo\Models;
+
+namespace Nostromo\models;
 
 use Nostromo\Classes\Article;
 use InvalidArgumentException;
 use Nostromo\Classes\Collection;
 use PDOException;
-use \PDO;
 
 /**
- * Class MArticle
+ * Class MArticle.
  *
  * @category Models
- * @package  Nostromo\Models
+ *
  * @author   Nostromo <contact@nostromo.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
  * @link     localhost
  */
 class MArticle
@@ -22,6 +23,7 @@ class MArticle
      * @param int $ref
      *
      * @return Article
+     *
      * @throws InvalidArgumentException
      */
     public static function getArticle($ref)
@@ -39,17 +41,18 @@ class MArticle
                 ->setQteStock($reqPrepare['qteStock'])
                 ->setUrl($reqPrepare['url']);
             $conn = null;
-            return $unArt;
 
+            return $unArt;
         } catch (PDOException $ex) {
             throw new InvalidArgumentException('Aucun article n\'existe sous cette référence.');
         }
     }
 
     /**
-     * Récupère les articles
+     * Récupère les articles.
      *
      * @return Collection
+     *
      * @throws InvalidArgumentException
      */
     public static function getArticles()
@@ -70,8 +73,8 @@ class MArticle
                 $lesArticles->ajouter($article);
             }
             $conn = null;
-            return $lesArticles;
 
+            return $lesArticles;
         } catch (PDOException $ex) {
             throw new InvalidArgumentException('Aucun article trouvé.');
         }

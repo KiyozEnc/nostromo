@@ -1,8 +1,9 @@
 <?php
-namespace Nostromo\Classes;
+
+namespace Nostromo\classes;
 
 /**
- * Est un utilisateur du site
+ * Est un utilisateur du site.
  *
  * Class Utilisateur
  */
@@ -53,7 +54,7 @@ class Utilisateur
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -63,9 +64,10 @@ class Utilisateur
     }
 
     /**
-     * Set id
+     * Set id.
      *
      * @param int $id
+     *
      * @return Utilisateur
      */
     public function setId($id)
@@ -75,7 +77,7 @@ class Utilisateur
         return $this;
     }
     /**
-     * Get nom
+     * Get nom.
      *
      * @return string
      */
@@ -85,9 +87,10 @@ class Utilisateur
     }
 
     /**
-     * Set nom
+     * Set nom.
      *
      * @param string $nom
+     *
      * @return Utilisateur
      */
     public function setNom($nom)
@@ -98,7 +101,7 @@ class Utilisateur
     }
 
     /**
-     * Get prénom
+     * Get prénom.
      *
      * @return string
      */
@@ -108,9 +111,10 @@ class Utilisateur
     }
 
     /**
-     * Set prénom
+     * Set prénom.
      *
      * @param string $prenom
+     *
      * @return Utilisateur
      */
     public function setPrenom($prenom)
@@ -121,7 +125,7 @@ class Utilisateur
     }
 
     /**
-     * Get adresse
+     * Get adresse.
      *
      * @return string
      */
@@ -131,9 +135,10 @@ class Utilisateur
     }
 
     /**
-     * Set adresse
+     * Set adresse.
      *
      * @param string $adresse
+     *
      * @return Utilisateur
      */
     public function setAdresse($adresse)
@@ -144,7 +149,7 @@ class Utilisateur
     }
 
     /**
-     * Get cp
+     * Get cp.
      *
      * @return int
      */
@@ -154,9 +159,10 @@ class Utilisateur
     }
 
     /**
+     * Set cp.
      *
-     * Set cp
      * @param int $cp
+     *
      * @return Utilisateur
      */
     public function setCp($cp)
@@ -167,7 +173,7 @@ class Utilisateur
     }
 
     /**
-     * Get ville
+     * Get ville.
      *
      * @return string
      */
@@ -177,9 +183,10 @@ class Utilisateur
     }
 
     /**
-     * Set ville
+     * Set ville.
      *
      * @param string $ville
+     *
      * @return Utilisateur
      */
     public function setVille($ville)
@@ -190,7 +197,7 @@ class Utilisateur
     }
 
     /**
-     * Get mdp
+     * Get mdp.
      *
      * @return string
      */
@@ -200,9 +207,10 @@ class Utilisateur
     }
 
     /**
-     * Set mdp
+     * Set mdp.
      *
      * @param string $mdp
+     *
      * @return Utilisateur
      */
     public function setMdp($mdp)
@@ -213,7 +221,7 @@ class Utilisateur
     }
 
     /**
-     * Get mail
+     * Get mail.
      *
      * @return string
      */
@@ -223,9 +231,10 @@ class Utilisateur
     }
 
     /**
-     * Set mail
+     * Set mail.
      *
      * @param string $mail
+     *
      * @return Utilisateur
      */
     public function setMail($mail)
@@ -236,7 +245,7 @@ class Utilisateur
     }
 
     /**
-     * Get points
+     * Get points.
      *
      * @return int
      */
@@ -246,9 +255,10 @@ class Utilisateur
     }
 
     /**
-     * Set points
+     * Set points.
      *
      * @param int $points
+     *
      * @return Utilisateur
      */
     public function setPoints($points)

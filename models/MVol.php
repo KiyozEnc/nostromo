@@ -1,5 +1,6 @@
 <?php
-namespace Nostromo\Models;
+
+namespace Nostromo\models;
 
 use Nostromo\Classes\Vol;
 use Nostromo\Classes\Collection;
@@ -9,18 +10,20 @@ use InvalidArgumentException;
 use PDOException;
 
 /**
- * Class MVol
+ * Class MVol.
  *
  * @category Models
- * @package  Nostromo\Models
+ *
  * @author   Nostromo <contact@nostromo.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
  * @link     localhost
  */
 class MVol
 {
     /**
      * @return Collection
+     *
      * @throws InvalidArgumentException
      */
     public static function getVols()
@@ -43,6 +46,7 @@ class MVol
         } catch (PDOException $ex) {
             throw new InvalidArgumentException('Aucun vol n\'est disponible');
         }
+
         return $lesVols;
     }
 
@@ -50,6 +54,7 @@ class MVol
      * @param $numVol
      *
      * @return Vol
+     *
      * @throws InvalidArgumentException
      */
     public static function getUnVol($numVol)
@@ -69,6 +74,7 @@ class MVol
         } catch (PDOException $e) {
             throw new InvalidArgumentException("Le vol $numVol n'existe pas.");
         }
+
         return $unVol;
     }
 
@@ -89,7 +95,7 @@ class MVol
                     $unClient->getId(),
                     $unVol->getNumVol(),
                     $uneReservation->getDateRes()->format('Y-m-d H:i:s'),
-                    $uneReservation->getNbPers())
+                    $uneReservation->getNbPers(), )
             );
             $conn = null;
         } catch (PDOException $e) {
@@ -104,6 +110,7 @@ class MVol
      * @param Utilisateur $unClient
      *
      * @return Reservation
+     *
      * @throws InvalidArgumentException
      */
     public static function reservationExistante(Utilisateur $unClient)
@@ -114,7 +121,7 @@ class MVol
             $reqPrepare = $conn->prepare('SELECT * FROM reservation WHERE NumClt = ?');
             $reqPrepare->execute(array($unClient->getId()));
             $reqPrepare = $reqPrepare->fetch();
-            $unVol = MVol::getUnVol($reqPrepare['numVol']);
+            $unVol = self::getUnVol($reqPrepare['numVol']);
             $uneReservation
                 ->setId($reqPrepare['numRes'])
                 ->setUnVol($unVol)
@@ -130,6 +137,7 @@ class MVol
                 .' Détails : '.$e->getMessage()
             );
         }
+
         return $uneReservation;
     }
 
@@ -137,6 +145,7 @@ class MVol
      * @param Vol $unVol
      *
      * @return int
+     *
      * @throws InvalidArgumentException
      */
     public static function getPlaceRestante(Vol $unVol)

@@ -8,7 +8,7 @@ $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirPanier';
 
 switch ($action) {
     case 'voirPanier':
-        include_once('views/panier/v_VoirPanier.php');
+        include_once 'views/panier/v_VoirPanier.php';
         break;
     case 'ajouterArticle':
         try {
@@ -81,12 +81,12 @@ switch ($action) {
         break;
 
     case 'validerPanier':
-        include_once('views/panier/v_ValiderPanier.php');
+        include_once 'views/panier/v_ValiderPanier.php';
         break;
 
     case 'viderPanier':
         unset($_SESSION['Panier']);
-        include_once('views/panier/v_VoirPanier.php');
+        include_once 'views/panier/v_VoirPanier.php';
         break;
 
     case 'choisirQte':
@@ -103,7 +103,6 @@ switch ($action) {
                 $_SESSION['Panier']->setQteProduit($_GET['article'], $_GET['qte']);
             }
             header('Location:?page=monPanier');
-
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=index');

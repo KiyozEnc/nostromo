@@ -1,11 +1,12 @@
 <?php
-namespace Nostromo\Classes;
+
+namespace Nostromo\classes;
 
 /**
  * Created by PhpStorm.
  * User: Kiyoz
  * Date: 25/01/2016
- * Time: 14:36
+ * Time: 14:36.
  */
 class Commande
 {
@@ -42,7 +43,7 @@ class Commande
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -59,6 +60,7 @@ class Commande
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -72,11 +74,13 @@ class Commande
 
     /**
      * @param Utilisateur $unClient
+     *
      * @return Commande
      */
     public function setUnClient($unClient)
     {
         $this->unClient = $unClient;
+
         return $this;
     }
 
@@ -90,11 +94,13 @@ class Commande
 
     /**
      * @param string $uneDate
+     *
      * @return Commande
      */
     public function setUneDate($uneDate)
     {
         $this->uneDate = $uneDate;
+
         return $this;
     }
 
@@ -108,11 +114,13 @@ class Commande
 
     /**
      * @param Collection $lesArticles
+     *
      * @return Commande
      */
     public function setLesArticles($lesArticles)
     {
         $this->lesArticles = $lesArticles;
+
         return $this;
     }
 
@@ -125,6 +133,7 @@ class Commande
         foreach ($this->getLesArticles()->getCollection() as $article) {
             $montant += $article->getPu() * $article->getQte();
         }
+
         return $montant;
     }
 }

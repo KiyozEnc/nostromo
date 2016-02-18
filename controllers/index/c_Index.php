@@ -4,7 +4,7 @@ use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MVol;
 use Nostromo\Models\MCommande;
 
-/**
+/*
  * Created by PhpStorm.
  * User: Kiyoz
  * Date: 25/01/2016
@@ -29,10 +29,13 @@ switch ($action) {
                     unset($_SESSION['Commandes']);
                 }
             }
-            include_once('views/index/v_Accueil.php');
+            include_once 'views/index/v_Accueil.php';
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=error404');
         }
+        break;
+    default:
+        header('Location:?page=index');
         break;
 }

@@ -1,11 +1,12 @@
 <?php
-namespace Nostromo\Classes;
+
+namespace Nostromo\classes;
 
 /**
  * Created by PhpStorm.
  * User: Kiyoz
  * Date: 25/01/2016
- * Time: 14:39
+ * Time: 14:39.
  */
 class Commander
 {
@@ -21,7 +22,7 @@ class Commander
      * @var int
      */
     private $qte;
-    
+
     /**
      * Commander constructor.
      */
@@ -39,11 +40,13 @@ class Commander
 
     /**
      * @param Article $unArticle
+     *
      * @return Commander
      */
     public function setUnArticle(Article $unArticle)
     {
         $this->unArticle = $unArticle;
+
         return $this;
     }
 
@@ -57,11 +60,13 @@ class Commander
 
     /**
      * @param Commande $uneCommande
+     *
      * @return Commander
      */
     public function setUneCommande($uneCommande)
     {
         $this->uneCommande = $uneCommande;
+
         return $this;
     }
 
@@ -75,11 +80,13 @@ class Commander
 
     /**
      * @param int $qte
+     *
      * @return Commander
      */
     public function setQte($qte)
     {
         $this->qte = $qte;
+
         return $this;
     }
 }

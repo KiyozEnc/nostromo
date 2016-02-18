@@ -3,9 +3,8 @@
  * Created by Kiyoz.
  * User : Kiyoz
  * Date : 05/02/2016
- * Time : 16:18
+ * Time : 16:18.
  */
-
 require_once 'views/v_Alert.php';
 
 if (array_key_exists('action', $_GET)) {

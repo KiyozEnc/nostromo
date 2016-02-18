@@ -1,11 +1,12 @@
 <?php
-namespace Nostromo\Classes;
 
-use \DateTime;
+namespace Nostromo\classes;
+
+use DateTime;
 use Nostromo\Models\MVol;
 
 /**
- * Est une réservation d'un vol
+ * Est une réservation d'un vol.
  *
  * Class Reservation
  */
@@ -32,7 +33,7 @@ class Reservation
      */
     private $nbPers;
     /**
-     * @var boolean
+     * @var bool
      */
     private $valid = false;
 
@@ -54,6 +55,7 @@ class Reservation
 
     /**
      * @param int $id
+     *
      * @return Reservation
      */
     public function setId($id)
@@ -73,6 +75,7 @@ class Reservation
 
     /**
      * @param Vol $unVol
+     *
      * @return Reservation
      */
     public function setUnVol($unVol)
@@ -92,6 +95,7 @@ class Reservation
 
     /**
      * @param Utilisateur $unClient
+     *
      * @return Reservation
      */
     public function setUnClient($unClient)
@@ -111,6 +115,7 @@ class Reservation
 
     /**
      * @param \DateTime $dateRes
+     *
      * @return Reservation
      */
     public function setDateRes($dateRes)
@@ -130,6 +135,7 @@ class Reservation
 
     /**
      * @param int $nbPers
+     *
      * @return Reservation
      */
     public function setNbPers($nbPers)
@@ -140,7 +146,7 @@ class Reservation
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {
@@ -148,7 +154,8 @@ class Reservation
     }
 
     /**
-     * @param boolean $valid
+     * @param bool $valid
+     *
      * @return Reservation
      */
     public function setValid($valid)
@@ -166,5 +173,4 @@ class Reservation
             $this
         );
     }
-
 }

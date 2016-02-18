@@ -1,17 +1,17 @@
 <?php
-namespace Nostromo\Classes;
 
-use \InvalidArgumentException;
-use MongoDB\Driver\Exception\UnexpectedValueException;
+namespace Nostromo\classes;
+
 use Nostromo\Models\MConnexion as Connexion;
 
 /**
- * Permet de créer un Article pour un ajout ultérieur dans le panier
+ * Permet de créer un Article pour un ajout ultérieur dans le panier.
  *
  * @category Classes
- * @package Nostromo\Classes
+ *
  * @author Nostromo <contact@nostromo.com>
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
  * @link classes/Article.php
  */
 class Article
@@ -43,15 +43,14 @@ class Article
 
     /**
      * Constructeur d'un Article, sa référence est passé en paramètre
-     * Les autres informations sont obtenues via la base de données
+     * Les autres informations sont obtenues via la base de données.
      */
     public function __construct()
     {
-
     }
 
     /**
-     * Récupère l'article sous forme de tableau
+     * Récupère l'article sous forme de tableau.
      *
      * @return array
      */
@@ -61,16 +60,18 @@ class Article
         $designation = $this->getDesignation();
         $pu = $this->getPu();
         $qteStock = $this->getQteStock();
-        $tab = array (
+        $tab = array(
             'numArt' => $numArt,
             'designatio' => $designation,
             'pu' => $pu,
-            'qteStock' => $qteStock
+            'qteStock' => $qteStock,
         );
+
         return $tab;
     }
     /**
-     * Retourne la référence du Article
+     * Retourne la référence du Article.
+     *
      * @return string
      */
     public function getNumArt()
@@ -79,11 +80,11 @@ class Article
     }
     public function vider()
     {
-
     }
 
     /**
-     * Retourne le libellé du Article
+     * Retourne le libellé du Article.
+     *
      * @return string
      */
     public function getDesignation()
@@ -92,7 +93,7 @@ class Article
     }
 
     /**
-     * Get Qte
+     * Get Qte.
      *
      * @return int
      */
@@ -102,8 +103,10 @@ class Article
     }
 
     /**
-     * Augment de $quantite la quantité de l'article
+     * Augment de $quantite la quantité de l'article.
+     *
      * @param int $quantite
+     *
      * @throws \UnexpectedValueException
      */
     public function augmenterQuantite($quantite)
@@ -117,7 +120,6 @@ class Article
         } catch (\InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
         }
-
     }
 
     /**
@@ -131,7 +133,8 @@ class Article
         }
     }
     /**
-     * Retourne la quantité commmandée
+     * Retourne la quantité commmandée.
+     *
      * @return int
      */
     public function getPu()
@@ -140,7 +143,8 @@ class Article
     }
 
     /**
-     * Retourne le prix du Article
+     * Retourne le prix du Article.
+     *
      * @return int
      */
     public function getQteStock()
@@ -150,51 +154,61 @@ class Article
 
     /**
      * @param int $qte
+     *
      * @return Article
      */
     public function setQte($qte)
     {
         $this->qte = (int) $qte;
+
         return $this;
     }
 
     /**
      * @param int $numArt
+     *
      * @return Article
      */
     public function setNumArt($numArt)
     {
         $this->numArt = (int) $numArt;
+
         return $this;
     }
 
     /**
      * @param string $designation
+     *
      * @return Article
      */
     public function setDesignation($designation)
     {
         $this->designation = $designation;
+
         return $this;
     }
 
     /**
      * @param int $pu
+     *
      * @return Article
      */
     public function setPu($pu)
     {
         $this->pu = (int) $pu;
+
         return $this;
     }
 
     /**
      * @param int $qteStock
+     *
      * @return Article
      */
     public function setQteStock($qteStock)
     {
         $this->qteStock = (int) $qteStock;
+
         return $this;
     }
 

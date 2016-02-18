@@ -1,11 +1,12 @@
 <?php
-namespace Nostromo\Classes;
+
+namespace Nostromo\classes;
 
 /**
  * Created by PhpStorm.
  * User: Kiyoz
  * Date: 11/02/2016
- * Time: 01:46
+ * Time: 01:46.
  */
 class Echeance
 {
@@ -24,9 +25,10 @@ class Echeance
 
     /**
      * Echeance constructor.
+     *
      * @param Reservation $reservation
-     * @param int $montant
-     * @param string $date
+     * @param int         $montant
+     * @param string      $date
      */
     public function __construct(Reservation $reservation, $montant, $date)
     {
@@ -97,10 +99,9 @@ class Echeance
 
     /**
      * Récupère le temps restant avant l'échéance
-     * On récupéra la date en cours et la date de la réservation
+     * On récupéra la date en cours et la date de la réservation.
      */
     public function getTimeLeft()
     {
-
     }
 }

@@ -1,24 +1,28 @@
 <?php
-namespace Nostromo\Models;
+
+namespace Nostromo\models;
 
 use Nostromo\Classes\Utilisateur;
 use InvalidArgumentException;
 use PDOException;
 
 /**
- * Class MConnexionSite
+ * Class MConnexionSite.
  *
  * @category Models
- * @package  Nostromo\Models
+ *
  * @author   Nostromo <contact@nostromo.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
  * @link     localhost
  */
 class MConnexionSite
 {
     /**
      * @param string $email
+     *
      * @return Utilisateur
+     *
      * @throws InvalidArgumentException
      */
     public static function getUser($email)
@@ -43,11 +47,13 @@ class MConnexionSite
         } catch (PDOException $ex) {
             throw new InvalidArgumentException("L'utilisateur avec l'adresse mail $email n'existe pas.");
         }
+
         return $unClient;
     }
 
     /**
      * @param Utilisateur $unClient
+     *
      * @throws InvalidArgumentException
      */
     public static function setAjoutUser(Utilisateur $unClient)
@@ -68,7 +74,7 @@ class MConnexionSite
                     $unClient->getVille(),
                     $unClient->getMdp(),
                     $unClient->getMail(),
-                    $unClient->getPoints())
+                    $unClient->getPoints(), )
             );
             $conn = null;
         } catch (PDOException $ex) {
@@ -78,7 +84,9 @@ class MConnexionSite
 
     /**
      * @param int $id
+     *
      * @return Utilisateur
+     *
      * @throws InvalidArgumentException
      */
     public static function getUnUser($id)
@@ -103,12 +111,15 @@ class MConnexionSite
         } catch (PDOException $ex) {
             throw new InvalidArgumentException("L'utilisateur n°$id n'existe pas.");
         }
+
         return $unClient;
     }
 
     /**
-     * Met à jour un utilisateur dans la base de données dont l'utilisateur est passé en paramètre
+     * Met à jour un utilisateur dans la base de données dont l'utilisateur est passé en paramètre.
+     *
      * @param Utilisateur $user
+     *
      * @throws InvalidArgumentException
      */
     public static function updateUser(Utilisateur $user)
@@ -137,7 +148,7 @@ class MConnexionSite
                     $user->getMdp(),
                     $user->getMail(),
                     $user->getPoints(),
-                    $user->getId())
+                    $user->getId(), )
             );
             $conn = null;
         } catch (PDOException $e) {

@@ -1,8 +1,12 @@
+/* DROP DATABASE IF EXISTS `2014-nostromo_base`; */
+
+/* CREATE DATABASE `2014-nostromo_base`; */
+
 USE `2014-nostromo_base`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
-DROP TABLE client;
+DROP TABLE IF EXISTS client;
 CREATE TABLE client (
 	numClt int not null auto_increment,
 	nomClt varchar(30) not null,
@@ -15,13 +19,13 @@ CREATE TABLE client (
 	pointsClt int not null,
 	primary key (numClt)
 );
-DROP TABLE commande;
+DROP TABLE IF EXISTS commande ;
 CREATE TABLE commande (
 	numCde int not null auto_increment primary key,
 	numClt int not null references client(numClt),
     date datetime not null
 );
-DROP TABLE article;
+DROP TABLE IF EXISTS article ;
 CREATE TABLE article (
 	numArt int not null,
 	designation varchar(50) not null,
@@ -30,7 +34,7 @@ CREATE TABLE article (
     url varchar(200),
 	primary key (numArt)
 );
-DROP TABLE commander;
+DROP TABLE IF EXISTS commander ;
 CREATE TABLE commander (
 	numArt int not null,
 	numCde int not null,
@@ -39,7 +43,7 @@ CREATE TABLE commander (
 	foreign key (numCde) references commande(numCde),
 	foreign key (numArt) references article(numArt)
 );
-DROP TABLE vol;
+DROP TABLE IF EXISTS vol ;
 CREATE TABLE vol (
 	numVol int not null,
 	dateVol date not null,
@@ -47,7 +51,7 @@ CREATE TABLE vol (
 	nbPlace int not null,
 	primary key (numVol)
 );
-DROP TABLE reservation;
+DROP TABLE IF EXISTS reservation ;
 CREATE TABLE reservation (
 	numRes int not null auto_increment,
 	numClt int not null,
@@ -58,7 +62,7 @@ CREATE TABLE reservation (
 	foreign key (numClt) references client(numClt),
 	foreign key (numVol) references vol(numVol)
 );
-DROP TABLE echeance;
+DROP TABLE IF EXISTS echeance ;
 
 CREATE TABLE echeance (
 	numRes int not null primary key,

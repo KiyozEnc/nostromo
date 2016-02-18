@@ -1,11 +1,11 @@
 <?php
+
 namespace Nostromo;
 
 /**
- * Class Autoloader
- * @package Nostromo
+ * Class Autoloader.
  */
-class Autoloader
+class Autoload
 {
     public static function register()
     {

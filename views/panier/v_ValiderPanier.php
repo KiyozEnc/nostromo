@@ -17,24 +17,24 @@ require_once 'views/v_Alert.php'; ?>
     <label for="">Date d'expiration</label><br>
     <select>
         <?php
-        $i=1;
+        $i = 1;
         while ($i < 13) {
             ?>
             <option  ?><?php echo $i ?></option>
             <?php
-            $i++;
+            ++$i;
         }
         ?>
     </select> Mois
 
     <select>
         <?php
-        $i=2014;
+        $i = 2014;
         while ($i < 2021) {
             ?>
             <option><?php echo $i ?></option>
             <?php
-            $i++;
+            ++$i;
         }
         ?>
     </select>

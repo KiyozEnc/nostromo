@@ -8,9 +8,12 @@
                         <option disabled selected>-- Sélectionner une commande --</option>
                         <?php
                         if (isset($lesCommandes)) {
-                            foreach ($lesCommandes->getCollection() as $commande) { ?>
-                                <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' le '.$commande->getUneDate() ?> - Montant : <?= $commande->getMontantTotal(); ?> €</option>
+                            foreach ($lesCommandes->getCollection() as $commande) {
+                                ?>
+                                <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' le '.$commande->getUneDate() ?> - Montant : <?= $commande->getMontantTotal();
+                                ?> €</option>
                                 <?php
+
                             }
                         } ?>
                     </select>
@@ -21,7 +24,8 @@
 </div>
 <div class="row row-centered">
     <?php
-    if (isset($uneCommande)) { ?>
+    if (isset($uneCommande)) {
+        ?>
         <h2>Commande n°<?= $uneCommande->getId() ?></h2>
         <table class="table table-hover table-stripped table-bordered">
             <thead>
@@ -33,7 +37,8 @@
             </thead>
             <tbody>
             <?php
-            foreach ($uneCommande->getLesArticles()->getCollection() as $article) { ?>
+            foreach ($uneCommande->getLesArticles()->getCollection() as $article) {
+                ?>
 
                 <tr>
                     <td><?= $article->getDesignation() ?></td>
@@ -41,10 +46,13 @@
                     <td><?= $article->getQte() ?></td>
                 </tr>
                 <?php
-            } ?>
+
+            }
+        ?>
             </tbody>
         </table>
         <?php
+
     } else {
         if (isset($lesCommandes)) {
             if ($lesCommandes->taille() === 0) {

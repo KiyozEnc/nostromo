@@ -1,25 +1,26 @@
 <?php
-namespace Nostromo\Classes;
 
-use \InvalidArgumentException;
+namespace Nostromo\classes;
+
+use InvalidArgumentException;
 
 /**
  * Classe Panier
  * Permet de gérer un panier d'objets Produit
- * Nécéssite la classe Produit.php
+ * Nécéssite la classe Produit.php.
  */
 class Panier
 {
-
     /**
-     * Collection de produits
+     * Collection de produits.
+     *
      * @var Collection
      */
     private $collProduit;
 
     /**
      *  Constructeur de la classe
-     *  Initialise la collection de produit
+     *  Initialise la collection de produit.
      */
 
     /**
@@ -27,11 +28,12 @@ class Panier
      */
     public function __construct()
     {
-        $this->collProduit = new Collection;
+        $this->collProduit = new Collection();
     }
 
     /**
-     * Retourne le nombre de produit
+     * Retourne le nombre de produit.
+     *
      * @return int Retourne un entier
      */
     public function getNbProd()
@@ -40,10 +42,11 @@ class Panier
     }
 
     /**
-     * Augmenter le produit de référence $ref de la quantité $qte
+     * Augmenter le produit de référence $ref de la quantité $qte.
      *
-     * @param int $ref  Reference du produit
-     * @param int $qte  Nombre de produits à ajouter à la quantité
+     * @param int $ref Reference du produit
+     * @param int $qte Nombre de produits à ajouter à la quantité
+     *
      * @throws \InvalidArgumentException
      */
     public function augmenterQuantiteProduit($ref, $qte)
@@ -54,9 +57,11 @@ class Panier
     }
 
     /**
-     * Change la quantité de l'article $ref en $qte
+     * Change la quantité de l'article $ref en $qte.
+     *
      * @param int $ref
      * @param int $qte
+     *
      * @throws \InvalidArgumentException
      */
     public function setQteProduit($ref, $qte)
@@ -67,10 +72,11 @@ class Panier
     }
 
     /**
-     * Diminuer le produit de référence $ref de la quantité $qte
+     * Diminuer le produit de référence $ref de la quantité $qte.
      *
-     * @param int $ref  Reference du produit
-     * @param int $qte  Nombre de produits à retirer à la quantité
+     * @param int $ref Reference du produit
+     * @param int $qte Nombre de produits à retirer à la quantité
+     *
      * @throws InvalidArgumentException
      */
     public function diminuerQuantiteProduit($ref, $qte)
@@ -103,7 +109,7 @@ class Panier
     }
 
     /**
-     * Supprime un produit
+     * Supprime un produit.
      *
      * @param int $refer
      *
@@ -117,7 +123,8 @@ class Panier
     }
 
     /**
-     * Retourne l'ensemble des produits du panier
+     * Retourne l'ensemble des produits du panier.
+     *
      * @return array
      */
     public function getProduitsPanier()
@@ -126,7 +133,7 @@ class Panier
     }
 
     /**
-     * Retirer l'ensemble des produits du panier
+     * Retirer l'ensemble des produits du panier.
      */
     public function videPanier()
     {

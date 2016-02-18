@@ -1,38 +1,42 @@
 <?php
-namespace Nostromo\Classes;
+
+namespace Nostromo\classes;
 
 /**
- * Permet de créer un vol pour un ajout ultérieur dans une réservation
+ * Permet de créer un vol pour un ajout ultérieur dans une réservation.
  */
 class Vol
 {
     /**
-     * Numéro du vol
-     * @var int $numVol
+     * Numéro du vol.
+     *
+     * @var int
      */
     private $numVol;
     /**
-     * Date du vol
-     * @var string $dateVol
+     * Date du vol.
+     *
+     * @var string
      */
     private $dateVol;
     /**
-     * Heure du vol
-     * @var string $dateVol
+     * Heure du vol.
+     *
+     * @var string
      */
     private $heureVol;
     /**
-     * Nombre de place du vol
-     * @var int $nbPlace
+     * Nombre de place du vol.
+     *
+     * @var int
      */
     private $nbPlace;
 
     /**
-     * Constructeur du vol
+     * Constructeur du vol.
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -45,6 +49,7 @@ class Vol
 
     /**
      * @param int $numVol
+     *
      * @return Vol
      */
     public function setNumVol($numVol)
@@ -64,6 +69,7 @@ class Vol
 
     /**
      * @param string $dateVol
+     *
      * @return Vol
      */
     public function setDateVol($dateVol)
@@ -83,6 +89,7 @@ class Vol
 
     /**
      * @param string $heureVol
+     *
      * @return Vol
      */
     public function setHeureVol($heureVol)
@@ -102,6 +109,7 @@ class Vol
 
     /**
      * @param int $nbPlace
+     *
      * @return Vol
      */
     public function setNbPlace($nbPlace)

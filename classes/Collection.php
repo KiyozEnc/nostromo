@@ -1,10 +1,11 @@
 <?php
-namespace Nostromo\Classes;
 
-use \InvalidArgumentException;
+namespace Nostromo\classes;
+
+use InvalidArgumentException;
 
 /**
- * Class Collection
+ * Class Collection.
  */
 class Collection
 {
@@ -14,7 +15,7 @@ class Collection
     private $tab = [];
 
     /**
-     * Ajoute un élément à la collection
+     * Ajoute un élément à la collection.
      *
      * @param mixed $obj
      * @param null  $key
@@ -35,11 +36,12 @@ class Collection
     }
 
     /**
-     * Récupère l'élément $key
+     * Récupère l'élément $key.
      *
      * @param mixed $key
      *
      * @return mixed
+     *
      * @throws InvalidArgumentException
      */
     public function getElement($key)

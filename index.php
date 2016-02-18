@@ -6,7 +6,7 @@ use Nostromo\Models\MConnexion;
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', __DIR__.DS);
 
-require_once('Autoload.php');
+require_once 'Autoload.php';
 
 Autoloader::register();
 
@@ -83,7 +83,8 @@ session_start(); ?>
                 </a>
             </li>
         </ul>
-        <?php if (!MConnexion::sessionOuverte()) { ?>
+        <?php if (!MConnexion::sessionOuverte()) {
+    ?>
             <ul class='nav navbar-nav navbar-right'>
                 <li <?php
                 if (array_key_exists('page', $_GET)) {
@@ -91,7 +92,7 @@ session_start(); ?>
                         echo "class='active'";
                     }
                 }
-                ?>>
+    ?>>
                     <a href='?page=connexion'>Connexion</a></li>
                 <li <?php
                 if (array_key_exists('page', $_GET)) {
@@ -99,10 +100,12 @@ session_start(); ?>
                         echo "class='active'";
                     }
                 }
-                ?>>
+    ?>>
                     <a href='?page=inscription'>Inscription</a></li>
             </ul>
-        <?php } else { ?>
+        <?php 
+} else {
+    ?>
             <ul class='nav navbar-nav navbar-right'>
                 <li <?php
                 if (array_key_exists('page', $_GET)) {
@@ -110,7 +113,7 @@ session_start(); ?>
                         echo "class='active'";
                     }
                 }
-                ?>>
+    ?>>
                     <a href='?page=maReservation'>
                         <img src='img/reservation.png' height='20'> Ma réservation
                     </a>
@@ -121,7 +124,7 @@ session_start(); ?>
                         echo "class='active'";
                     }
                 }
-                ?>>
+    ?>>
                     <a href='?page=monPanier'>
                         <img src='img/panier2.png' height='20'> Panier
                     </a>
@@ -132,7 +135,7 @@ session_start(); ?>
                         echo "class='active'";
                     }
                 }
-                ?>>
+    ?>>
                     <a href='?page=monCompte'>
                         <img src='img/user.png' height='20'> Mon Compte
                         [<?php echo $_SESSION['Utilisateur']->getNom() ?>]
@@ -140,7 +143,8 @@ session_start(); ?>
                 </li>
                 <li><a href='?page=deconnexion'>Déconnexion</a></li>
             </ul>
-        <?php } ?>
+        <?php 
+} ?>
     </div>
 </nav>
 <div class='jumbotron'>
@@ -152,37 +156,37 @@ session_start(); ?>
         if (array_key_exists('page', $_GET)) {
             switch ($_GET['page']) {
                 case 'index':
-                    include_once('controllers/index/c_Index.php');
+                    include_once 'controllers/index/c_Index.php';
                     break;
                 case 'reserver':
-                    include_once('controllers/reserveVol/c_ReserveVol.php');
+                    include_once 'controllers/reserveVol/c_ReserveVol.php';
                     break;
                 case 'connexion':
-                    include_once('controllers/connexion/c_ConnexionSite.php');
+                    include_once 'controllers/connexion/c_ConnexionSite.php';
                     break;
                 case 'inscription':
-                    include_once('controllers/inscription/c_InscriptionSite.php');
+                    include_once 'controllers/inscription/c_InscriptionSite.php';
                     break;
                 case 'deconnexion':
-                    include_once('controllers/deconnexion/c_Deconnexion.php');
+                    include_once 'controllers/deconnexion/c_Deconnexion.php';
                     break;
                 case 'maReservation':
-                    include_once('controllers/maReservation/c_MaReservation.php');
+                    include_once 'controllers/maReservation/c_MaReservation.php';
                     break;
                 case 'monCompte':
-                    include_once('controllers/compte/c_MonCompte.php');
+                    include_once 'controllers/compte/c_MonCompte.php';
                     break;
                 case 'materiel':
-                    include_once('controllers/boutique/c_Boutique.php');
+                    include_once 'controllers/boutique/c_Boutique.php';
                     break;
                 case 'monPanier':
-                    include_once('controllers/panier/c_Panier.php');
+                    include_once 'controllers/panier/c_Panier.php';
                     break;
                 case 'aPropos':
-                    include_once('views/aPropos/v_APropos.php');
+                    include_once 'views/aPropos/v_APropos.php';
                     break;
                 default:
-                    include_once('views/index/v_Erreur.php');
+                    include_once 'views/index/v_Erreur.php';
                     break;
             }
         } else {
@@ -197,11 +201,13 @@ session_start(); ?>
         }
         if ($_GET['page'] === 'maReservation') {
             $action = 'voirReservation';
-        } ?>
+        }
+        ?>
         <div class='col-lg-3 hidden-xs col-sm-4' id='leftCol'>
             <div class='row'>
                 <?php
-                if ($action !== 'voirReservation') { ?>
+                if ($action !== 'voirReservation') {
+                    ?>
                     <div class='rectangle col-sm-12'>
                         <ul class="list-unstyled">
                             <li>
@@ -213,24 +219,28 @@ session_start(); ?>
                         <?php
                         if (array_key_exists('Reservation', $_SESSION)) {
                             echo '<ul class="list-unstyled">
-                                        <li>Vol n°' . $_SESSION['Reservation']->getUnVol()->getNumVol() . '
-                                            le ' . $_SESSION['Reservation']->getUnVol()->getDateVol() . '
-                                            à ' . $_SESSION['Reservation']->getUnVol()->getHeureVol() . '
+                                        <li>Vol n°'.$_SESSION['Reservation']->getUnVol()->getNumVol().'
+                                            le '.$_SESSION['Reservation']->getUnVol()->getDateVol().'
+                                            à '.$_SESSION['Reservation']->getUnVol()->getHeureVol().'
                                         </li>
                                         <ul>
-                                            <li>Réservé pour ' . $_SESSION['Reservation']->getNbPers() . ' personnes</li>
+                                            <li>Réservé pour '.$_SESSION['Reservation']->getNbPers().' personnes</li>
                                         </ul>
                                       </ul>';
                         } else {
-                                echo '<ul class="list-unstyled"><li><h5>Aucune réservation.</h5></li></ul>';
-                        } ?>
+                            echo '<ul class="list-unstyled"><li><h5>Aucune réservation.</h5></li></ul>';
+                        }
+                    ?>
                     </div>
                     <?php
-                } ?>
+
+                }
+        ?>
             </div>
             <div class='row'>
                 <?php
-                if ($action !== 'voirCommandes') { ?>
+                if ($action !== 'voirCommandes') {
+                    ?>
                     <div class='rectangle col-sm-12'>
                         <ul class="list-unstyled">
                             <li>
@@ -251,13 +261,17 @@ session_start(); ?>
                             }
                         } else {
                             echo '<ul class="list-unstyled"><li><h5>Aucune commande.</h5></li></ul>';
-                        } ?>
+                        }
+                    ?>
                     </div>
                     <?php
-                } ?>
+
+                }
+        ?>
             </div>
         </div>
         <?php
+
     } ?>
 </div>
 </body>

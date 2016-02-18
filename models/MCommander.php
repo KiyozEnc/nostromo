@@ -1,5 +1,6 @@
 <?php
-namespace Nostromo\Models;
+
+namespace Nostromo\models;
 
 use Nostromo\Classes\Commande;
 use Nostromo\Classes\Collection;
@@ -7,20 +8,24 @@ use InvalidArgumentException;
 use PDOException;
 
 /**
- * Class MCommander
+ * Class MCommander.
  *
  * @category Models
- * @package  Nostromo\Models
+ *
  * @author   Nostromo <contact@nostromo.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
  * @link     localhost
  */
 class MCommander
 {
     /**
-     * Récupère les articles d'un commande via la commande
+     * Récupère les articles d'un commande via la commande.
+     *
      * @param Commande $uneCommande numéro d'une commande
+     *
      * @return Collection
+     *
      * @throws InvalidArgumentException
      */
     public static function getUneCommande(Commande $uneCommande)
@@ -43,6 +48,7 @@ class MCommander
                 'Impossible de récupérer la commande n°'.$uneCommande->getId().' Détails : '.$e->getMessage()
             );
         }
+
         return $lesArticles;
     }
 }

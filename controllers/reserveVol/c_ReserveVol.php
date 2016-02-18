@@ -1,4 +1,5 @@
 <?php
+
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirVols';
 
 use Nostromo\Classes\Reservation;
@@ -8,7 +9,7 @@ use Nostromo\Models\MVol;
 switch ($action) {
     case 'voirVols':
         $lesVols = MVol::getVols();
-        include_once('views/reserveVol/v_VoirVols.php');
+        include_once 'views/reserveVol/v_VoirVols.php';
         break;
     case 'reserverVol':
         try {
@@ -17,7 +18,7 @@ switch ($action) {
             }
             $vol = MVol::getUnVol($_GET['vol']);
             $nbPlaceRestante = MVol::getPlaceRestante($vol);
-            include_once('views/reserveVol/v_VoirFormulaire.php');
+            include_once 'views/reserveVol/v_VoirFormulaire.php';
         } catch (LogicException $e) {
             MConnexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=connexion');

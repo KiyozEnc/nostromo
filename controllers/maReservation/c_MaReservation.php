@@ -6,7 +6,7 @@ $action = array_key_exists('action', $_REQUEST) ? $_REQUEST['action'] : 'voirRes
 
 switch ($action) {
     case 'voirReservation':
-        include_once('views/maReservation/v_VoirReservation.php');
+        include_once 'views/maReservation/v_VoirReservation.php';
         break;
 
     case 'annulerReservation':

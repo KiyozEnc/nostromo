@@ -1,36 +1,42 @@
 <?php
-namespace Nostromo\Classes;
+
+namespace Nostromo\classes;
 
 use Nostromo\Models\MVol;
 
 /**
- * Permet de créer un produit pour un ajout ultérieur dans une réservation
+ * Permet de créer un produit pour un ajout ultérieur dans une réservation.
  */
 class Produit
 {
     /**
-     * Référence du vol
-     * @var int $ref
+     * Référence du vol.
+     *
+     * @var int
      */
     private $ref;
     /**
-     * Date du vol
-     * @var string $date
+     * Date du vol.
+     *
+     * @var string
      */
     private $date;
     /**
-     * Heure du vol
-     * @var string $heure
+     * Heure du vol.
+     *
+     * @var string
      */
     private $heure;
     /**
-     * Nombre de place du vol
-     * @var int $nbPlace
+     * Nombre de place du vol.
+     *
+     * @var int
      */
     private $nbPlace;
     /**
-     * Est validé ou non
-     * @var bool $valid
+     * Est validé ou non.
+     *
+     * @var bool
      */
     private $valid = false;
 
@@ -52,7 +58,8 @@ class Produit
     }
 
     /**
-     * Retourne la référence du vol
+     * Retourne la référence du vol.
+     *
      * @return int
      */
     public function getRef()
@@ -61,7 +68,8 @@ class Produit
     }
 
     /**
-     * Retourne la date du vol
+     * Retourne la date du vol.
+     *
      * @return string
      */
     public function getDate()
@@ -70,7 +78,8 @@ class Produit
     }
 
     /**
-     * Retourne l'heure du vol
+     * Retourne l'heure du vol.
+     *
      * @return string
      */
     public function getHeure()
@@ -79,7 +88,8 @@ class Produit
     }
 
     /**
-     * Retourne le nombre de place du vol
+     * Retourne le nombre de place du vol.
+     *
      * @return int
      */
     public function getNbPlace()
@@ -88,22 +98,24 @@ class Produit
     }
 
     /**
-     * Retourne l'objet en forme de tableau
+     * Retourne l'objet en forme de tableau.
+     *
      * @return array
      */
     public function getProduit()
     {
-        return array (
+        return array(
             'ref' => $this->ref,
             'date' => $this->date,
             'heure' => $this->heure,
             'nbPlace' => $this->nbPlace,
-            'valid' => $this->valid
+            'valid' => $this->valid,
         );
     }
 
     /**
-     * Retourne est valid
+     * Retourne est valid.
+     *
      * @return bool
      */
     public function getValid()
@@ -112,7 +124,8 @@ class Produit
     }
 
     /**
-     * Setter de valid
+     * Setter de valid.
+     *
      * @param bool $valid
      */
     public function setValider($valid)
