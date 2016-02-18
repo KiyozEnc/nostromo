@@ -1,6 +1,6 @@
 <?php
 
-namespace Nostromo\models;
+namespace Nostromo\Models;
 
 use Nostromo\Classes\Utilisateur;
 use InvalidArgumentException;

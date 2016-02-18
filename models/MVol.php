@@ -1,7 +1,8 @@
 <?php
 
-namespace Nostromo\models;
+namespace Nostromo\Models;
 
+use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Vol;
 use Nostromo\Classes\Collection;
 use Nostromo\Classes\Utilisateur;
@@ -112,13 +113,14 @@ class MVol
      * @return Reservation
      *
      * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function reservationExistante(Utilisateur $unClient)
     {
         $uneReservation = new Reservation();
         try {
             $conn = MConnexion::getBdd();
-            $reqPrepare = $conn->prepare('SELECT * FROM reservation WHERE NumClt = ?');
+            $reqPrepare = $conn->prepare('SELECT numVol, reservation.numRes, dateRes, nbPers, montant, dateEcheance FROM reservation INNER JOIN echeance ON reservation.numRes = echeance.numRes WHERE NumClt = ?');
             $reqPrepare->execute(array($unClient->getId()));
             $reqPrepare = $reqPrepare->fetch();
             $unVol = self::getUnVol($reqPrepare['numVol']);
@@ -129,7 +131,9 @@ class MVol
                 ->setDateRes($reqPrepare['dateRes'])
                 ->setNbPers($reqPrepare['nbPers'])
                 ->setValid(true);
+            $lesEcheances = MEcheance::getEcheances($uneReservation);
             $conn = null;
+            var_dump($lesEcheances);
         } catch (PDOException $e) {
             echo $e->getMessage();
             throw new InvalidArgumentException(

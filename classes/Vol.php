@@ -1,6 +1,6 @@
 <?php
 
-namespace Nostromo\classes;
+namespace Nostromo\Classes;
 
 /**
  * Permet de créer un vol pour un ajout ultérieur dans une réservation.
@@ -31,12 +31,24 @@ class Vol
      * @var int
      */
     private $nbPlace;
+    /**
+     * Prix d'un vol
+     *
+     * @var int
+     */
+    private $price;
+
+    /**
+     * @var bool
+     */
+    private $paye = false;
 
     /**
      * Constructeur du vol.
      */
-    public function __construct()
+    public function __construct($price = 0)
     {
+        $this->price = $price;
     }
 
     /**
@@ -117,5 +129,60 @@ class Vol
         $this->nbPlace = (int) $nbPlace;
 
         return $this;
+    }
+
+    public function getNonFormatDate()
+    {
+        return $this->dateVol;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param int $price
+     *
+     * @return Vol
+     */
+    public function setPrice($price)
+    {
+        $this->price = (int) $price;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPaye()
+    {
+        return $this->paye;
+    }
+
+    /**
+     * @param boolean $paye
+     *
+     * @return Vol
+     */
+    public function setPaye($paye)
+    {
+        $this->paye = $paye;
+
+        return $this;
+    }
+
+    /**
+     * Récupère le prix au format EURO
+     *
+     * @return string
+     */
+    public function getFormattedPrice()
+    {
+        return 'EUR '.$this->price;
     }
 }

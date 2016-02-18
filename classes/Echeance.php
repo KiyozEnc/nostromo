@@ -1,6 +1,6 @@
 <?php
 
-namespace Nostromo\classes;
+namespace Nostromo\Classes;
 
 /**
  * Created by PhpStorm.
@@ -19,18 +19,18 @@ class Echeance
      */
     protected $montant;
     /**
-     * @var string
+     * @var \DateTime
      */
     protected $date;
 
     /**
      * Echeance constructor.
      *
-     * @param Reservation $reservation
-     * @param int         $montant
-     * @param string      $date
+     * @param Reservation    $reservation
+     * @param int            $montant
+     * @param \DateTime      $date
      */
-    public function __construct(Reservation $reservation, $montant, $date)
+    public function __construct(Reservation $reservation, $montant, \DateTime $date)
     {
         $this->reservation = $reservation;
         $this->montant = $montant;
@@ -100,8 +100,23 @@ class Echeance
     /**
      * Récupère le temps restant avant l'échéance
      * On récupéra la date en cours et la date de la réservation.
+     *
+     * @return int
      */
     public function getTimeLeft()
     {
+        $dateEnCours = new \DateTime();
+        $dateVol = new \DateTime($this->reservation->getUnVol()->getNonFormatDate());
+        return $dateVol->diff($dateEnCours)->format('%a');
+    }
+
+    /**
+     * Récupère le montant au format EUR
+     *
+     * @return string
+     */
+    public function getPrice()
+    {
+        return 'EUR '.$this->montant;
     }
 }

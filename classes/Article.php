@@ -1,6 +1,6 @@
 <?php
 
-namespace Nostromo\classes;
+namespace Nostromo\Classes;
 
 use Nostromo\Models\MConnexion as Connexion;
 

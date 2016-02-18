@@ -1,8 +1,8 @@
 <?php
 
-namespace Nostromo\classes;
+namespace Nostromo\Classes;
 
-use DateTime;
+use \DateTime;
 use Nostromo\Models\MVol;
 
 /**
@@ -36,6 +36,10 @@ class Reservation
      * @var bool
      */
     private $valid = false;
+    /**
+     * @var Collection
+     */
+    private $lesEcheance;
 
     /**
      * Reservation constructor.
@@ -43,6 +47,7 @@ class Reservation
     public function __construct()
     {
         $this->dateRes = new \DateTime();
+        $this->lesEcheance = new Collection();
     }
 
     /**
@@ -161,6 +166,26 @@ class Reservation
     public function setValid($valid)
     {
         $this->valid = (boolean) $valid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getLesEcheance()
+    {
+        return $this->lesEcheance;
+    }
+
+    /**
+     * @param Collection $lesEcheance
+     *
+     * @return Reservation
+     */
+    public function setLesEcheance($lesEcheance)
+    {
+        $this->lesEcheance = $lesEcheance;
 
         return $this;
     }
