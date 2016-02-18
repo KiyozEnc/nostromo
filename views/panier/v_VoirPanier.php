@@ -13,12 +13,12 @@ if (array_key_exists('Panier', $_SESSION)) {
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                 <?php echo '<span class="text-uppercase"><a href="?page=materiel&action=voirArticle&article='.$art->getNumArt().'&target=panier">'.$art->getDesignation().'</a></span>';
-        ?>
+                ?>
             </div>
             <div class="col-xs-12 col-sm-3">
                 <?php
                 echo 'EUR '.number_format($art->getPu(), 2, ',', '');
-        ?>
+                ?>
             </div>
             <div class="col-xs-12 col-sm-3">
                 <?php
@@ -27,14 +27,14 @@ if (array_key_exists('Panier', $_SESSION)) {
                 } else {
                     echo '<span class="text-danger">Rupture de stock !</span>';
                 }
-        ?>
+                ?>
             </div>
             <div class="col-xs-12 col-sm-3">
                 <span class="sr-only" data-attr="<?php echo $art->getNumArt();
-        ?>"></span>
+                ?>"></span>
                 <select name="qte" id="qte" class="form-control" onchange="setQte(<?php echo $art->getNumArt();
-        ?>, <?php echo $art->getQte();
-        ?>)">
+                ?>, <?php echo $art->getQte();
+                ?>)">
                     <?php
                     for ($i = 0; $i <= $art->getQteStock(); ++$i) {
                         ?>
@@ -43,21 +43,21 @@ if (array_key_exists('Panier', $_SESSION)) {
                                 if ($art->getQte() === $i) {
                                     echo 'selected=\'\'';
                                 }
-                        ?>
+                                ?>
                                 value="<?php echo $i;
-                        ?>">
+                                ?>">
                             <?php
                             if ($i === 0) {
                                 echo 'Supprimer';
                             } else {
                                 echo $i;
                             }
-                        ?>
+                            ?>
                         </option>
                         <?php
 
                     }
-        ?>
+                    ?>
                 </select>
             </div>
             <br><br>
@@ -67,7 +67,7 @@ if (array_key_exists('Panier', $_SESSION)) {
     }
     ?>
     <h4>Total à payer : <?php echo 'EUR '.number_format($total, 2, ',', ' ');
-    ?></h4>
+        ?></h4>
     <div class="row">
         <div class="col-xs-12">
             <a href ="?page=monPanier&action=viderPanier" onclick="return etesVousSur('Voulez-vous vider le panier ?')" class="btn btn-primary">Vider</a>
@@ -79,5 +79,5 @@ if (array_key_exists('Panier', $_SESSION)) {
 } else {
     ?>
     <p class="text-muted text-center">Votre panier est vide. <a href="?page=materiel">Commandez maintenant !</a></p>
-<?php 
+    <?php
 } ?>

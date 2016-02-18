@@ -1,5 +1,5 @@
 <?php
-require_once 'views/v_Alert.php'; ?>
+require_once ROOT.'views/v_Alert.php'; ?>
 <div class="row">
     <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
         <div class="thumbnail">
@@ -10,12 +10,12 @@ require_once 'views/v_Alert.php'; ?>
                 <h3>Vol n°<?= $vol->getNumVol() ?></h3>
                 <p>Date et heure : <?= $vol->getDateVol() ?> à <?= $vol->getHeureVol() ?></p>
                 <form action="?page=reserver&action=validReserverVol&vol=<?= $vol->getNumVol(); ?>" method="POST" role="form" autocomplete="off">
-                    <p class="text-info"><?= $nbPlaceRestante ?> places disponibles !</p>
+                    <p class="text-info"><?= $nbPlaceRestante ?> places disponibles ! Vol à partir de <?php echo $vol->getFormattedPrice(); ?></p>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                             <div class="form-group">
                                 <label for="">Nombre de personnes</label>
-                                <input type="text" class="form-control" id="nbPers" name="nbPers" placeholder="Nombre de personnes" value="1">
+                                <input type="number" class="form-control" id="nbPers" name="nbPers" placeholder="Nombre de personnes" value="1">
                             </div>
                         </div>
                     </div>

@@ -15,7 +15,7 @@ if (array_key_exists('Reservation', $_SESSION)) {
                     ?> <legend>Vol réservé</legend> <?php
 
                 }
-    ?>
+                ?>
 
                 <thead>
                 <tr>
@@ -23,35 +23,36 @@ if (array_key_exists('Reservation', $_SESSION)) {
                     <th>Date</th>
                     <th>Heure</th>
                     <th>Nombre de personnes</th>
-                    <?php if (!$_SESSION['Reservation']->isValid()) {
-    ?>
+                    <th>Prix</th>
+                    <?php
+                    if (!$_SESSION['Reservation']->isValid()) {
+                        ?>
                         <th>Actions</th>
-                    <?php 
-}
-    ?>
+                        <?php
+                    }
+                    ?>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td><?php echo $_SESSION['Reservation']->getUnVol()->getNumVol();
-    ?></td>
+                        ?></td>
                     <td><?php echo $_SESSION['Reservation']->getUnVol()->getDateVol() ?></td>
                     <td><?php echo $_SESSION['Reservation']->getUnVol()->getHeureVol() ?></td>
-                    <td><?php echo $_SESSION['Reservation']->getNbPers();
-    ?></td>
+                    <td><?php echo $_SESSION['Reservation']->getNbPers(); ?></td>
+                    <td><?php echo number_format($_SESSION['Reservation']->getNbPers()*$_SESSION['Reservation']->getUnVol()->getPrice(), 2, ',', ' ').' €'; ?></td>
                     <?php
                     if (!$_SESSION['Reservation']->isValid()) {
                         ?>
                         <td><a href="?page=maReservation&action=annulerReservation"
-                               title="Annuler la réservation du vol n°<?= $_SESSION['Reservation']->getUnVol()->getNumVol();
-                        ?>">
+                               title="Annuler la réservation du vol n°<?php echo $_SESSION['Reservation']->getUnVol()->getNumVol(); ?>">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler
                             </a>
                         </td>
                         <?php
 
                     }
-    ?>
+                    ?>
                 </tr>
                 </tbody>
             </table>
@@ -59,7 +60,7 @@ if (array_key_exists('Reservation', $_SESSION)) {
             if (!$_SESSION['Reservation']->isValid()) {
                 ?>
                 <a class="btn btn-primary"
-                   href="?page=maReservation&action=validerReservation"
+                   href="?page=maReservation&action=payment"
                    role="button">Valider la réservation
                 </a>
                 <?php
@@ -67,7 +68,7 @@ if (array_key_exists('Reservation', $_SESSION)) {
             } else {
                 echo '<small>Pour retirer votre réservation, contacter Nostromo</small>';
             }
-    ?>
+            ?>
         </div>
     </div>
     <?php
@@ -76,5 +77,5 @@ if (array_key_exists('Reservation', $_SESSION)) {
     ?> <p>Aucun vol actuellement réservé</p>
 
     <a class="btn btn-default" href="?page=index" role="button">Revenir à l'accueil</a>
-<?php 
+    <?php
 } ?>

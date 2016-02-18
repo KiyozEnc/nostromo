@@ -183,6 +183,6 @@ class Vol
      */
     public function getFormattedPrice()
     {
-        return 'EUR '.$this->price;
+        return $this->price.' €';
     }
 }

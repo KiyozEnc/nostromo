@@ -2,6 +2,7 @@
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirVols';
 
+use Nostromo\Classes\Exception\NotConnectedException;
 use Nostromo\Classes\Reservation;
 use Nostromo\Models\MConnexion;
 use Nostromo\Models\MVol;
@@ -9,17 +10,17 @@ use Nostromo\Models\MVol;
 switch ($action) {
     case 'voirVols':
         $lesVols = MVol::getVols();
-        include_once 'views/reserveVol/v_VoirVols.php';
+        include_once ROOT.'views/reserveVol/v_VoirVols.php';
         break;
     case 'reserverVol':
         try {
             if (!MConnexion::sessionOuverte()) {
-                throw new LogicException('Vous devez être connecté.');
+                throw new NotConnectedException('Vous devez être connecté.');
             }
             $vol = MVol::getUnVol($_GET['vol']);
             $nbPlaceRestante = MVol::getPlaceRestante($vol);
-            include_once 'views/reserveVol/v_VoirFormulaire.php';
-        } catch (LogicException $e) {
+            include_once ROOT.'views/reserveVol/v_VoirFormulaire.php';
+        } catch (NotConnectedException $e) {
             MConnexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=connexion');
         } catch (Exception $e) {

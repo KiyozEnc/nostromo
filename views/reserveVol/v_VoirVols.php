@@ -2,7 +2,7 @@
 
 use Nostromo\Models\MConnexion as Connexion;
 
-require_once 'views/v_Alert.php'; ?>
+require_once ROOT.'views/v_Alert.php'; ?>
 
 <div class="row row-centered">
     <h2 class="text-center text-info text-muted">Vols disponibles</h2>
@@ -14,6 +14,7 @@ require_once 'views/v_Alert.php'; ?>
                 <div class="caption">
                     <h3>Vol n°<?= $unVol->getNumVol() ?></h3>
                     <p>Date et heure : <?= $unVol->getDateVol() ?> à <?= $unVol->getHeureVol() ?></p>
+                    <p>Prix : <?php echo number_format($unVol->getPrice(), 2, ',', ' ').' €'; ?></p>
                     <?php
                     if (Connexion::sessionOuverte()) : ?>
                         <p><a href="?page=reserver&action=reserverVol&vol=<?= $unVol->getNumVol() ?>" class="btn btn-primary" role="button">Réserver</a></p>
@@ -22,6 +23,6 @@ require_once 'views/v_Alert.php'; ?>
                 </div>
             </div>
         </div>
-    <?php 
+    <?php
 } ?>
 </div>

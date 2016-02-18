@@ -41,6 +41,8 @@ class Reservation
      */
     private $lesEcheance;
 
+    const INTERET = 0.0674;
+
     /**
      * Reservation constructor.
      */
@@ -197,5 +199,20 @@ class Reservation
             $this->unVol,
             $this
         );
+    }
+
+    public function getPriceReservation()
+    {
+        return $this->unVol->getPrice()*$this->nbPers;
+    }
+
+    public function getDateEcheance($months)
+    {
+        return new \DateTime('+'.$months.' months +1 day');
+    }
+
+    public function getPercentInteret()
+    {
+        return round(self::INTERET, 2).'%';
     }
 }

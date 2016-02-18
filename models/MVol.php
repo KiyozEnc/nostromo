@@ -39,6 +39,7 @@ class MVol
                 $unVol = new Vol();
                 $unVol
                     ->setNumVol($tabVol['numVol'])
+                    ->setPrice($tabVol['prix'])
                     ->setDateVol($tabVol['dateVol'])
                     ->setHeureVol($tabVol['heureVol'])
                     ->setNbPlace($tabVol['nbPlace']);
@@ -70,7 +71,8 @@ class MVol
                 ->setNumVol($reqPrepare['numVol'])
                 ->setDateVol($reqPrepare['dateVol'])
                 ->setHeureVol($reqPrepare['heureVol'])
-                ->setNbPlace($reqPrepare['nbPlace']);
+                ->setNbPlace($reqPrepare['nbPlace'])
+                ->setPrice($reqPrepare['prix']);
             $conn = null;
         } catch (PDOException $e) {
             throw new InvalidArgumentException("Le vol $numVol n'existe pas.");
@@ -120,7 +122,7 @@ class MVol
         $uneReservation = new Reservation();
         try {
             $conn = MConnexion::getBdd();
-            $reqPrepare = $conn->prepare('SELECT numVol, reservation.numRes, dateRes, nbPers, montant, dateEcheance FROM reservation INNER JOIN echeance ON reservation.numRes = echeance.numRes WHERE NumClt = ?');
+            $reqPrepare = $conn->prepare('SELECT numVol, reservation.numRes, dateRes, nbPers, montant, dateEcheance FROM reservation LEFT JOIN echeance ON reservation.numRes = echeance.numRes WHERE NumClt = ?');
             $reqPrepare->execute(array($unClient->getId()));
             $reqPrepare = $reqPrepare->fetch();
             $unVol = self::getUnVol($reqPrepare['numVol']);
@@ -132,8 +134,8 @@ class MVol
                 ->setNbPers($reqPrepare['nbPers'])
                 ->setValid(true);
             $lesEcheances = MEcheance::getEcheances($uneReservation);
+            $uneReservation->setLesEcheance($lesEcheances);
             $conn = null;
-            var_dump($lesEcheances);
         } catch (PDOException $e) {
             echo $e->getMessage();
             throw new InvalidArgumentException(
@@ -141,7 +143,6 @@ class MVol
                 .' Détails : '.$e->getMessage()
             );
         }
-
         return $uneReservation;
     }
 
