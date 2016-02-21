@@ -259,6 +259,11 @@ class Reservation
         return $this->getPriceReservation()/3;
     }
 
+    /**
+     * Récupère le nombre d'échéances de la réservation
+     *
+     * @return int
+     */
     public function getNbEcheance()
     {
         return $this->lesEcheance->taille();

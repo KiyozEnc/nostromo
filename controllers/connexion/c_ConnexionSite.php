@@ -3,7 +3,6 @@
 use Nostromo\Models\MConnexionSite as ConnexionSite;
 use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MReservation;
-use Nostromo\Models\MVol;
 use Nostromo\Classes\Utilisateur;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirForm';

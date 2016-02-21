@@ -28,7 +28,7 @@ class Collection
             $this->tab[] = $obj;
         } else {
             if (array_key_exists($key, $this->tab)) {
-                throw new InvalidArgumentException("Key $key already in use.");
+                throw new InvalidArgumentException("Key {$key} already in use.");
             } else {
                 $this->tab[$key] = $obj;
             }
@@ -103,6 +103,6 @@ class Collection
 
     public function vider()
     {
-        $this->tab = array();
+        $this->tab = [];
     }
 }

@@ -1,5 +1,5 @@
 <?php
-use Nostromo\Classes\Factory;
+use Nostromo\Classes\Build;
 
 require_once ROOT.'views/v_Alert.php'; ?>
 
@@ -172,22 +172,22 @@ if (array_key_exists('type', $_GET)) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                         <?php echo
-                                Factory::formaterEuro($_SESSION['Reservation']->getFirstEcheancePrice()); ?>
+                                Build::formaterEuro($_SESSION['Reservation']->getFirstEcheancePrice()); ?>
                         - aujourd'hui (<?php echo $_SESSION['Reservation']->getInteret().' supplémentaires'; ?>)
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                         <?php echo
-                                Factory::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
-                        - le <?php echo Factory::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(1)); ?>
+                                Build::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
+                        - le <?php echo Build::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(1)); ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                         <?php echo
-                                Factory::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
-                        - le <?php echo Factory::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(2)); ?>
+                                Build::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
+                        - le <?php echo Build::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(2)); ?>
                     </div>
                 </div>
             </div>

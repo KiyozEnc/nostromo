@@ -2,7 +2,7 @@
 
 namespace Nostromo\Classes;
 
-class Factory
+class Build
 {
     /**
      * Formate une chaîne de caractère de type Time en format français.

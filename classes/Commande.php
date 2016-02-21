@@ -89,7 +89,7 @@ class Commande
      */
     public function getUneDate()
     {
-        return Factory::formaterDateEtHeure($this->uneDate);
+        return Build::formaterDateEtHeure($this->uneDate);
     }
 
     /**

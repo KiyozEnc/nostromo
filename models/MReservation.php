@@ -33,11 +33,12 @@ class MReservation
             $conn->beginTransaction();
             $reqPrepare = $conn->prepare('INSERT INTO reservation (numClt,numVol,dateRes,nbPers) VALUES (?,?,?,?)');
             $reqPrepare->execute(
-                array(
+                [
                     $unClient->getId(),
                     $unVol->getNumVol(),
                     $uneReservation->getDateRes()->format('Y-m-d H:i:s'),
-                    $uneReservation->getNbPers(),)
+                    $uneReservation->getNbPers(),
+                ]
             );
             $conn->commit();
             $uneReservation->setValid(true);
@@ -102,18 +103,22 @@ class MReservation
     {
         $uneReservation = new Reservation();
         try {
+            //TODO: Gérer plusieurs réservations, voir TODO.txt
             $conn = MConnexion::getBdd();
             $reqPrepare = $conn->prepare('SELECT numVol, reservation.numRes, dateRes, nbPers, montant, dateEcheance FROM reservation LEFT JOIN echeance ON reservation.numRes = echeance.numRes WHERE NumClt = ?');
-            $reqPrepare->execute(array($unClient->getId()));
-            $reqPrepare = $reqPrepare->fetch();
-            $unVol = MVol::getUnVol($reqPrepare['numVol']);
-            $uneReservation
-                ->setId($reqPrepare['numRes'])
-                ->setUnVol($unVol)
-                ->setUnClient($unClient)
-                ->setDateRes($reqPrepare['dateRes'])
-                ->setNbPers($reqPrepare['nbPers'])
-                ->setValid(true);
+            $reqPrepare->execute([$unClient->getId()]);
+            $fetchAll = $reqPrepare->fetchAll();
+            $unVol = MVol::getUnVol($fetchAll['numVol']);
+            foreach ($fetchAll as $fetch) {
+                $uneReservation
+                    ->setId($fetch['numRes'])
+                    ->setUnVol($unVol)
+                    ->setUnClient($unClient)
+                    ->setDateRes($fetch['dateRes'])
+                    ->setNbPers($fetch['nbPers'])
+                    ->setValid(true)
+                ;
+            }
             $lesEcheances = MEcheance::getEcheances($uneReservation);
             $uneReservation->setLesEcheance($lesEcheances);
             $conn = null;

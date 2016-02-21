@@ -18,7 +18,7 @@ switch ($action) {
         try {
             if (array_key_exists('Utilisateur', $_SESSION)) {
                 if (!array_key_exists('Reservation', $_SESSION)) {
-                    $_SESSION['Reservation'] = Connexion::getReservationClient($_SESSION['Utilisateur']);
+                    $_SESSION['Reservation'] = MReservation::getReservationClient($_SESSION['Utilisateur']);
                 }
                 if (0 === $_SESSION['Reservation']->getId()) {
                     unset($_SESSION['Reservation']);
@@ -30,7 +30,7 @@ switch ($action) {
                     unset($_SESSION['Commandes']);
                 }
             }
-            include_once 'views/index/v_Accueil.php';
+            include_once ROOT.'views/index/v_Accueil.php';
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=error404');

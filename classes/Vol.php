@@ -72,7 +72,7 @@ class Vol
      */
     public function getDateVol()
     {
-        return Factory::formaterDate($this->dateVol);
+        return Build::formaterDate($this->dateVol);
     }
 
     /**
@@ -92,7 +92,7 @@ class Vol
      */
     public function getHeureVol()
     {
-        return Factory::formaterHeure($this->heureVol);
+        return Build::formaterHeure($this->heureVol);
     }
 
     /**
