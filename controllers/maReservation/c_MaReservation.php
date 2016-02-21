@@ -1,9 +1,9 @@
 <?php
 
 use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MReservation;
 
 $action = array_key_exists('action', $_REQUEST) ? $_REQUEST['action'] : 'voirReservation';
-
 switch ($action) {
     case 'voirReservation':
         include_once ROOT.'views/maReservation/v_VoirReservation.php';
@@ -20,8 +20,7 @@ switch ($action) {
     case 'validerReservation':
         try {
             if (array_key_exists('Reservation', $_SESSION)) {
-                $_SESSION['Reservation']->setValid(true);
-                $_SESSION['Reservation']->flushValid();
+                MReservation::validerReservation($_SESSION['Utilisateur'], $_SESSION['Reservation']->getUnVol(), $_SESSION['Reservation']);
                 $_SESSION['valid'] = 'Réservation validée avec succès.';
             }
             header('Location:?page=maReservation');
@@ -45,16 +44,16 @@ switch ($action) {
                 if (strlen($_POST['CBSecret']) > 4 || strlen($_POST['CBSecret']) < 3) {
                     throw new \UnexpectedValueException('Le code CVC est incorrecte.');
                 }
-                $dateNow = new \DateTime();
                 $datePost = new \DateTime($_POST['CBYear'].'-'.$_POST['CBMonth'].'-01');
-                if ($dateNow > $datePost) {
+                if (new \DateTime() > $datePost) {
                     throw new \UnexpectedValueException('Votre carte a expirée.');
                 }
                 switch ($_GET['type']) {
                     case '3fois':
-                        //TODO: Action d'enregistrement lors 3 fois valide
+                        header('Location:?page=maReservation&action=validerReservation&type=3fois');
                         break;
                     case 'comptant':
+                        header('Location:?page=maReservation&action=validerReservation&type=comptant');
                         break;
                     default:
                         throw new \UnexpectedValueException('Veuillez choisir un mode de paiement.');
@@ -75,6 +74,10 @@ switch ($action) {
             }
             header('Location:?page=maReservation&action=payment&type='.$type);
         } catch (\LogicException $e) {
-            echo 'Reservation doesn\'t exists';
+            $_SESSION['Reservation'] = MReservation::getReservationClient($_SESSION['Utilisateur']);
+            header('Location:?page=maReservation&payment');
+        } catch (\Nostromo\Classes\Exception\ErrorSQLException $e) {
+            Connexion::setFlashMessage($e->getMessage());
+            header('Location:?page=maReservation&payment');
         }
 }

@@ -272,7 +272,6 @@ session_start(); ?>
             </div>
         </div>
         <?php
-
     } ?>
 </div>
 </body>

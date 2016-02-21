@@ -2,17 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: Kiyoz
- * Date: 18/02/2016
- * Time: 20:54
+ * Date: 20/02/2016
+ * Time: 10:57
  */
 
 namespace Nostromo\Classes\Exception;
 
 /**
- * Class NotConnectedException
+ * Class AccessDeniedException
  * @package Nostromo\Classes\Exception
  */
-class NotConnectedException extends \Exception
+class AccessDeniedException extends \Exception
 {
     /**
      * NotConnectedException constructor.
@@ -23,7 +23,7 @@ class NotConnectedException extends \Exception
      */
     public function __construct($message, $code = 0, \Exception $previous = null)
     {
-        $message = 'Vous n\'êtes pas connecté';
+        $message = 'Accès refusé : '.$message;
         parent::__construct($message, $code, $previous);
     }
 

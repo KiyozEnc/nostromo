@@ -1,6 +1,7 @@
 <?php
 
 use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MReservation;
 use Nostromo\Models\MVol;
 use Nostromo\Models\MCommande;
 
@@ -17,7 +18,7 @@ switch ($action) {
         try {
             if (array_key_exists('Utilisateur', $_SESSION)) {
                 if (!array_key_exists('Reservation', $_SESSION)) {
-                    $_SESSION['Reservation'] = MVol::reservationExistante($_SESSION['Utilisateur']);
+                    $_SESSION['Reservation'] = Connexion::getReservationClient($_SESSION['Utilisateur']);
                 }
                 if (0 === $_SESSION['Reservation']->getId()) {
                     unset($_SESSION['Reservation']);

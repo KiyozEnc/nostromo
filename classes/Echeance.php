@@ -11,6 +11,10 @@ namespace Nostromo\Classes;
 class Echeance
 {
     /**
+     * @var int
+     */
+    private $id;
+    /**
      * @var Reservation
      */
     protected $reservation;
@@ -37,6 +41,22 @@ class Echeance
         $this->date = $date;
     }
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * @param int $id
+     * @return Echeance
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
     /**
      * @return Reservation
      */
@@ -78,7 +98,7 @@ class Echeance
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -86,7 +106,7 @@ class Echeance
     }
 
     /**
-     * @param string $date
+     * @param \DateTime $date
      *
      * @return Echeance
      */

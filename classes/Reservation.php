@@ -3,6 +3,7 @@
 namespace Nostromo\Classes;
 
 use \DateTime;
+use Nostromo\Models\MReservation;
 use Nostromo\Models\MVol;
 
 /**
@@ -41,7 +42,7 @@ class Reservation
      */
     private $lesEcheance;
 
-    const INTERET = 0.0674;
+    const INTERET = 0.0140;
 
     /**
      * Reservation constructor.
@@ -194,7 +195,7 @@ class Reservation
 
     public function flushValid()
     {
-        MVol::validReservation(
+        MReservation::validerReservation(
             $this->unClient,
             $this->unVol,
             $this
@@ -211,8 +212,23 @@ class Reservation
         return new \DateTime('+'.$months.' months +1 day');
     }
 
-    public function getPercentInteret()
+    public function getInteret()
     {
-        return round(self::INTERET, 2).'%';
+        return round(self::INTERET*100, 2).'%';
+    }
+
+    public function getFirstEcheancePrice()
+    {
+        return ($this->getPriceReservation()/3)*(1+self::INTERET);
+    }
+
+    public function getOtherEcheancePrice()
+    {
+        return $this->getPriceReservation()/3;
+    }
+
+    public function getNbEcheance()
+    {
+        return $this->lesEcheance->taille();
     }
 }

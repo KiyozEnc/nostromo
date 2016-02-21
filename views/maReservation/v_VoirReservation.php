@@ -9,7 +9,7 @@ if (array_key_exists('Reservation', $_SESSION)) {
             <table class="table table-bordered table-hover table-condensed">
                 <?php
                 if (!$_SESSION['Reservation']->isValid()) {
-                    ?> <legend>Vol demandé</legend> <?php
+                    ?> <legend>Vol souhaité</legend> <?php
 
                 } else {
                     ?> <legend>Vol réservé</legend> <?php
@@ -19,11 +19,10 @@ if (array_key_exists('Reservation', $_SESSION)) {
 
                 <thead>
                 <tr>
-                    <th>Code</th>
-                    <th>Date</th>
-                    <th>Heure</th>
-                    <th>Nombre de personnes</th>
-                    <th>Prix</th>
+                    <th>Numéro</th>
+                    <th>Date du vol</th>
+                    <th>Heure du vol</th>
+                    <th>Réservé pour</th>
                     <?php
                     if (!$_SESSION['Reservation']->isValid()) {
                         ?>
@@ -39,8 +38,8 @@ if (array_key_exists('Reservation', $_SESSION)) {
                         ?></td>
                     <td><?php echo $_SESSION['Reservation']->getUnVol()->getDateVol() ?></td>
                     <td><?php echo $_SESSION['Reservation']->getUnVol()->getHeureVol() ?></td>
-                    <td><?php echo $_SESSION['Reservation']->getNbPers(); ?></td>
-                    <td><?php echo number_format($_SESSION['Reservation']->getNbPers()*$_SESSION['Reservation']->getUnVol()->getPrice(), 2, ',', ' ').' €'; ?></td>
+                    <td><?php echo $_SESSION['Reservation']->getNbPers().' personnes'; ?></td>
+
                     <?php
                     if (!$_SESSION['Reservation']->isValid()) {
                         ?>
@@ -56,6 +55,30 @@ if (array_key_exists('Reservation', $_SESSION)) {
                 </tr>
                 </tbody>
             </table>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <?php
+                    if ($_SESSION['Reservation']->getNbEcheance() === 1) {
+                        echo '<h3>Échéances :</h3>';
+                        echo 'Payé : '.number_format($_SESSION['Reservation']->getPriceReservation(), 2, ',', ' ').' € - le '.$_SESSION['Reservation']->getDateRes()->format('d/m/Y');
+                    } elseif ($_SESSION['Reservation']->getNbEcheance() === 3) {
+                        /* @var \Nostromo\Classes\Echeance $echeance */
+                        echo '<h3>Échéances :</h3>';
+                        foreach ($_SESSION['Reservation']->getLesEcheance()->getCollection() as $echeance) {
+                            $now = new \DateTime();
+                            if ($echeance->getDate() > new \DateTime() ||
+                                $echeance->getDate()->format('d/m/Y') === $now->format('d/m/Y')) {
+                                echo ' '.number_format($echeance->getMontant(), 2, ',', ' ').' €';
+                                echo ' pour le : '.$echeance->getDate()->format('d/m/Y').'<br>';
+                            }
+                        }
+                    } else {
+                        echo '<h4>A payer : '.number_format($_SESSION['Reservation']->getPriceReservation(), 2, ',', ' ').' €</h4>';
+                    }
+                    ?>
+                </div>
+            </div>
             <?php
             if (!$_SESSION['Reservation']->isValid()) {
                 ?>
@@ -65,8 +88,6 @@ if (array_key_exists('Reservation', $_SESSION)) {
                 </a>
                 <?php
 
-            } else {
-                echo '<small>Pour retirer votre réservation, contacter Nostromo</small>';
             }
             ?>
         </div>
@@ -78,4 +99,4 @@ if (array_key_exists('Reservation', $_SESSION)) {
 
     <a class="btn btn-default" href="?page=index" role="button">Revenir à l'accueil</a>
     <?php
-} ?>
+}

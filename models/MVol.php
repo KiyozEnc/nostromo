@@ -2,6 +2,7 @@
 
 namespace Nostromo\Models;
 
+use Nostromo\Classes\Echeance;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Vol;
 use Nostromo\Classes\Collection;
@@ -57,7 +58,7 @@ class MVol
      *
      * @return Vol
      *
-     * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function getUnVol($numVol)
     {
@@ -75,76 +76,12 @@ class MVol
                 ->setPrice($reqPrepare['prix']);
             $conn = null;
         } catch (PDOException $e) {
-            throw new InvalidArgumentException("Le vol $numVol n'existe pas.");
+            throw new ErrorSQLException("Le vol $numVol n'existe pas.");
         }
 
         return $unVol;
     }
 
-    /**
-     * @param Utilisateur $unClient
-     * @param Vol         $unVol
-     * @param Reservation $uneReservation
-     *
-     * @throws InvalidArgumentException
-     */
-    public static function validReservation(Utilisateur $unClient, Vol $unVol, Reservation $uneReservation)
-    {
-        try {
-            $conn = MConnexion::getBdd();
-            $reqPrepare = $conn->prepare('INSERT INTO reservation (numClt,numVol,dateRes,nbPers) VALUES (?,?,?,?)');
-            $reqPrepare->execute(
-                array(
-                    $unClient->getId(),
-                    $unVol->getNumVol(),
-                    $uneReservation->getDateRes()->format('Y-m-d H:i:s'),
-                    $uneReservation->getNbPers(), )
-            );
-            $conn = null;
-        } catch (PDOException $e) {
-            throw new InvalidArgumentException(
-                'Vous avez déjà une réservation.
-                Veuillez contacter Nostromo pour annuler votre réservation.'
-            );
-        }
-    }
-
-    /**
-     * @param Utilisateur $unClient
-     *
-     * @return Reservation
-     *
-     * @throws InvalidArgumentException
-     * @throws ErrorSQLException
-     */
-    public static function reservationExistante(Utilisateur $unClient)
-    {
-        $uneReservation = new Reservation();
-        try {
-            $conn = MConnexion::getBdd();
-            $reqPrepare = $conn->prepare('SELECT numVol, reservation.numRes, dateRes, nbPers, montant, dateEcheance FROM reservation LEFT JOIN echeance ON reservation.numRes = echeance.numRes WHERE NumClt = ?');
-            $reqPrepare->execute(array($unClient->getId()));
-            $reqPrepare = $reqPrepare->fetch();
-            $unVol = self::getUnVol($reqPrepare['numVol']);
-            $uneReservation
-                ->setId($reqPrepare['numRes'])
-                ->setUnVol($unVol)
-                ->setUnClient($unClient)
-                ->setDateRes($reqPrepare['dateRes'])
-                ->setNbPers($reqPrepare['nbPers'])
-                ->setValid(true);
-            $lesEcheances = MEcheance::getEcheances($uneReservation);
-            $uneReservation->setLesEcheance($lesEcheances);
-            $conn = null;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            throw new InvalidArgumentException(
-                'Impossible de récupérer la réservation de '.$unClient->getMail()
-                .' Détails : '.$e->getMessage()
-            );
-        }
-        return $uneReservation;
-    }
 
     /**
      * @param Vol $unVol

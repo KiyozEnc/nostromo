@@ -60,13 +60,12 @@ class Article
         $designation = $this->getDesignation();
         $pu = $this->getPu();
         $qteStock = $this->getQteStock();
-        $tab = array(
+        $tab = [
             'numArt' => $numArt,
-            'designatio' => $designation,
+            'designation' => $designation,
             'pu' => $pu,
-            'qteStock' => $qteStock,
-        );
-
+            'qteStock' => $qteStock
+        ];
         return $tab;
     }
     /**
@@ -133,7 +132,7 @@ class Article
         }
     }
     /**
-     * Retourne la quantité commmandée.
+     * Retourne la quantité commandée.
      *
      * @return int
      */
@@ -234,5 +233,16 @@ class Article
         $this->url = $url;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return __CLASS__ .
+        ' numArt = '.$this->numArt.
+        ' designation = '.$this->designation.
+        ' pu = '.$this->pu.
+        ' qteStock = '.$this->qteStock.
+        ' qte = '.$this->qte.
+        ' url = '.$this->url;
     }
 }

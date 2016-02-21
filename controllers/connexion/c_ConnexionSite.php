@@ -2,6 +2,7 @@
 
 use Nostromo\Models\MConnexionSite as ConnexionSite;
 use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MReservation;
 use Nostromo\Models\MVol;
 use Nostromo\Classes\Utilisateur;
 
@@ -20,7 +21,7 @@ switch ($action) {
                 ) {
                     $_SESSION['Utilisateur'] = new Utilisateur();
                     $_SESSION['Utilisateur'] = $unUtilisateur;
-                    $_SESSION['Reservation'] = MVol::reservationExistante($_SESSION['Utilisateur']);
+                    $_SESSION['Reservation'] = MReservation::getReservationClient($_SESSION['Utilisateur']);
                     Connexion::setFlashMessage('Connecté avec succès', 'valid');
                     header('Location:?page=index');
                 } else {

@@ -18,7 +18,7 @@ class Collection
      * Ajoute un élément à la collection.
      *
      * @param mixed $obj
-     * @param null  $key
+     * @param null $key
      *
      * @throws InvalidArgumentException
      */

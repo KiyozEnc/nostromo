@@ -2,8 +2,8 @@
 
 namespace Nostromo\Models;
 
+use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Utilisateur;
-use InvalidArgumentException;
 use PDOException;
 
 /**
@@ -23,29 +23,29 @@ class MConnexionSite
      *
      * @return Utilisateur
      *
-     * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function getUser($email)
     {
         $unClient = new Utilisateur();
         try {
             $conn = MConnexion::getBdd();
-            $reqPrepare = $conn->prepare('SELECT * FROM client WHERE mailClt = ?');
-            $reqPrepare->execute(array($email));
-            $reqPrepare = $reqPrepare->fetch();
+            $result = $conn->prepare('SELECT * FROM client WHERE mailClt = ?');
+            $result->execute([$email]);
+            $result = $result->fetch();
             $unClient
-                ->setId($reqPrepare['numClt'])
-                ->setNom($reqPrepare['nomClt'])
-                ->setPrenom($reqPrepare['prenomClt'])
-                ->setAdresse($reqPrepare['adresseClt'])
-                ->setCp($reqPrepare['cpClt'])
-                ->setVille($reqPrepare['villeClt'])
-                ->setMdp($reqPrepare['mdpClt'])
-                ->setMail($reqPrepare['mailClt'])
-                ->setPoints($reqPrepare['pointsClt']);
+                ->setId($result['numClt'])
+                ->setNom($result['nomClt'])
+                ->setPrenom($result['prenomClt'])
+                ->setAdresse($result['adresseClt'])
+                ->setCp($result['cpClt'])
+                ->setVille($result['villeClt'])
+                ->setMdp($result['mdpClt'])
+                ->setMail($result['mailClt'])
+                ->setPoints($result['pointsClt']);
             $conn = null;
         } catch (PDOException $ex) {
-            throw new InvalidArgumentException("L'utilisateur avec l'adresse mail $email n'existe pas.");
+            throw new ErrorSQLException("L'utilisateur avec l'adresse mail $email n'existe pas.");
         }
 
         return $unClient;
@@ -54,18 +54,18 @@ class MConnexionSite
     /**
      * @param Utilisateur $unClient
      *
-     * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function setAjoutUser(Utilisateur $unClient)
     {
         try {
             $conn = MConnexion::getBdd();
-            $reqprepare = $conn->prepare(
+            $reqPrepare = $conn->prepare(
                 'INSERT INTO client
                 (nomClt, prenomClt, adresseClt, cpClt, villeClt, mdpClt, mailClt, pointsClt)
                 VALUES (?,?,?,?,?,?,?,?)'
             );
-            $reqprepare->execute(
+            $reqPrepare->execute(
                 array(
                     $unClient->getNom(),
                     $unClient->getPrenom(),
@@ -78,7 +78,7 @@ class MConnexionSite
             );
             $conn = null;
         } catch (PDOException $ex) {
-            throw new InvalidArgumentException('Impossible de continuer l\'inscription. Détails : '.$ex->getMessage());
+            throw new ErrorSQLException('Impossible de continuer l\'inscription. Détails : '.$ex->getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ class MConnexionSite
      *
      * @return Utilisateur
      *
-     * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function getUnUser($id)
     {
@@ -95,7 +95,7 @@ class MConnexionSite
         try {
             $conn = MConnexion::getBdd();
             $reqPrepare = $conn->prepare('SELECT * FROM client WHERE numClt = ?');
-            $reqPrepare->execute(array($id));
+            $reqPrepare->execute([$id]);
             $reqPrepare = $reqPrepare->fetch();
             $unClient
                 ->setId($reqPrepare['numClt'])
@@ -109,7 +109,7 @@ class MConnexionSite
                 ->setPoints($reqPrepare['pointsClt']);
             $conn = null;
         } catch (PDOException $ex) {
-            throw new InvalidArgumentException("L'utilisateur n°$id n'existe pas.");
+            throw new ErrorSQLException("L'utilisateur n°$id n'existe pas.");
         }
 
         return $unClient;
@@ -120,13 +120,13 @@ class MConnexionSite
      *
      * @param Utilisateur $user
      *
-     * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function updateUser(Utilisateur $user)
     {
         try {
             $conn = MConnexion::getBdd();
-            $reqprepare = $conn->prepare(
+            $result = $conn->prepare(
                 'UPDATE client
                 SET nomClt = ?,
                 prenomClt = ?,
@@ -138,8 +138,8 @@ class MConnexionSite
                 pointsClt = ?
                 WHERE numClt = ?;'
             );
-            $reqprepare->execute(
-                array(
+            $result->execute(
+                [
                     $user->getNom(),
                     $user->getPrenom(),
                     $user->getAdresse(),
@@ -148,11 +148,12 @@ class MConnexionSite
                     $user->getMdp(),
                     $user->getMail(),
                     $user->getPoints(),
-                    $user->getId(), )
+                    $user->getId(),
+                ]
             );
             $conn = null;
         } catch (PDOException $e) {
-            throw new InvalidArgumentException($e->getMessage());
+            throw new ErrorSQLException($e->getMessage());
         }
     }
 }
