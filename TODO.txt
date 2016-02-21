@@ -1,2 +1,2 @@
 - Update MonCompte Design
-- Tet
+- Passer une commande - valider le panier (Par Anthony)

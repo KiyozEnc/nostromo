@@ -4,7 +4,7 @@ namespace Nostromo\Classes;
 
 use \DateTime;
 use Nostromo\Models\MReservation;
-use Nostromo\Models\MVol;
+use Nostromo\Classes\Exception\ErrorSQLException;
 
 /**
  * Est une réservation d'un vol.
@@ -193,6 +193,12 @@ class Reservation
         return $this;
     }
 
+    /**
+     * Valide la réservation en l'enregistrant dans la base de données
+     *
+     * @throws ErrorSQLException
+     * @throws \InvalidArgumentException
+     */
     public function flushValid()
     {
         MReservation::validerReservation(
@@ -202,26 +208,52 @@ class Reservation
         );
     }
 
+    /**
+     * Récupère le prix de la réservation
+     *
+     * @return int
+     */
     public function getPriceReservation()
     {
         return $this->unVol->getPrice()*$this->nbPers;
     }
 
+    /**
+     * Récupère la date des échéances en + $months
+     *
+     * @param $months
+     * @return DateTime
+     */
     public function getDateEcheance($months)
     {
         return new \DateTime('+'.$months.' months +1 day');
     }
 
+    /**
+     * Récupère les intérêts du paiement en plusieurs fois en pourcentage
+     *
+     * @return string
+     */
     public function getInteret()
     {
         return round(self::INTERET*100, 2).'%';
     }
 
+    /**
+     * Récupère le prix de la première échéance
+     *
+     * @return float
+     */
     public function getFirstEcheancePrice()
     {
         return ($this->getPriceReservation()/3)*(1+self::INTERET);
     }
 
+    /**
+     * Récupère le prix des autres échéances que la première
+     *
+     * @return float
+     */
     public function getOtherEcheancePrice()
     {
         return $this->getPriceReservation()/3;

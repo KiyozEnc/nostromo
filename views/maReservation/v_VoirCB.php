@@ -1,4 +1,6 @@
 <?php
+use Nostromo\Classes\Factory;
+
 require_once ROOT.'views/v_Alert.php'; ?>
 
     <h2>Mode de paiement</h2>
@@ -170,22 +172,22 @@ if (array_key_exists('type', $_GET)) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                         <?php echo
-                                number_format(($_SESSION['Reservation']->getPriceReservation()/3)*(1+\Nostromo\Classes\Reservation::INTERET), 2, ',', ' ').' €'; ?>
-                        - le jour de la réservation (<?php echo $_SESSION['Reservation']->getInteret().' supplémentaires'; ?>)
+                                Factory::formaterEuro($_SESSION['Reservation']->getFirstEcheancePrice()); ?>
+                        - aujourd'hui (<?php echo $_SESSION['Reservation']->getInteret().' supplémentaires'; ?>)
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                         <?php echo
-                                number_format($_SESSION['Reservation']->getPriceReservation()/3, 2, ',', ' ').' €'; ?>
-                        - le <?php echo $_SESSION['Reservation']->getDateEcheance(1)->format('d/m/Y'); ?>
+                                Factory::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
+                        - le <?php echo Factory::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(1)); ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                         <?php echo
-                                number_format($_SESSION['Reservation']->getPriceReservation()/3, 2, ',', ' ').' €'; ?>
-                        - le <?php echo $_SESSION['Reservation']->getDateEcheance(2)->format('d/m/Y'); ?>
+                                Factory::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
+                        - le <?php echo Factory::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(2)); ?>
                     </div>
                 </div>
             </div>

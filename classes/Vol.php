@@ -39,12 +39,8 @@ class Vol
     private $price;
 
     /**
-     * @var bool
-     */
-    private $paye = false;
-
-    /**
      * Constructeur du vol.
+     * @param int $price
      */
     public function __construct($price = 0)
     {
@@ -76,7 +72,7 @@ class Vol
      */
     public function getDateVol()
     {
-        return DateBuilder::formaterDate($this->dateVol);
+        return Factory::formaterDate($this->dateVol);
     }
 
     /**
@@ -96,7 +92,7 @@ class Vol
      */
     public function getHeureVol()
     {
-        return DateBuilder::formaterHeure($this->heureVol);
+        return Factory::formaterHeure($this->heureVol);
     }
 
     /**
@@ -152,26 +148,6 @@ class Vol
     public function setPrice($price)
     {
         $this->price = (int) $price;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isPaye()
-    {
-        return $this->paye;
-    }
-
-    /**
-     * @param boolean $paye
-     *
-     * @return Vol
-     */
-    public function setPaye($paye)
-    {
-        $this->paye = $paye;
 
         return $this;
     }

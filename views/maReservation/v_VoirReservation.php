@@ -1,5 +1,7 @@
 <?php
-require_once 'views/v_Alert.php';
+use Nostromo\Classes\Factory;
+
+require_once ROOT.'views/v_Alert.php';
 if (array_key_exists('Reservation', $_SESSION)) {
     ?>
 
@@ -61,20 +63,20 @@ if (array_key_exists('Reservation', $_SESSION)) {
                     <?php
                     if ($_SESSION['Reservation']->getNbEcheance() === 1) {
                         echo '<h3>Échéances :</h3>';
-                        echo 'Payé : '.number_format($_SESSION['Reservation']->getPriceReservation(), 2, ',', ' ').' € - le '.$_SESSION['Reservation']->getDateRes()->format('d/m/Y');
+                        echo 'Payé : '.Factory::formaterEuro($_SESSION['Reservation']->getPriceReservation()).' - le '.Factory::formaterDateTimeWithDate($_SESSION['Reservation']->getDateRes());
                     } elseif ($_SESSION['Reservation']->getNbEcheance() === 3) {
                         /* @var \Nostromo\Classes\Echeance $echeance */
                         echo '<h3>Échéances :</h3>';
                         foreach ($_SESSION['Reservation']->getLesEcheance()->getCollection() as $echeance) {
                             $now = new \DateTime();
                             if ($echeance->getDate() > new \DateTime() ||
-                                $echeance->getDate()->format('d/m/Y') === $now->format('d/m/Y')) {
-                                echo ' '.number_format($echeance->getMontant(), 2, ',', ' ').' €';
-                                echo ' pour le : '.$echeance->getDate()->format('d/m/Y').'<br>';
+                                Factory::formaterDateTimeWithDate($echeance->getDate()) === Factory::formaterDateTimeWithDate($now)) {
+                                echo ' '. Factory::formaterEuro($echeance->getMontant());
+                                echo ' pour le : '.Factory::formaterDateTimeWithDate($echeance->getDate()).'<br>';
                             }
                         }
                     } else {
-                        echo '<h4>A payer : '.number_format($_SESSION['Reservation']->getPriceReservation(), 2, ',', ' ').' €</h4>';
+                        echo '<h4>A payer : '.Factory::formaterEuro($_SESSION['Reservation']->getPriceReservation()).'</h4>';
                     }
                     ?>
                 </div>

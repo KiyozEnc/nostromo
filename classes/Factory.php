@@ -2,10 +2,10 @@
 
 namespace Nostromo\Classes;
 
-class DateBuilder
+class Factory
 {
     /**
-     * Formate une chaine de caractère de type Time en format français.
+     * Formate une chaîne de caractère de type Time en format français.
      *
      * @param string $dateDuVol
      *
@@ -21,7 +21,7 @@ class DateBuilder
     }
 
     /**
-     * Formate une chaine de caracètre de type date en format français.
+     * Formate une chaine de caractères de type date en format français.
      *
      * @param string $heureDuVol
      *
@@ -48,5 +48,18 @@ class DateBuilder
         $min = substr($var, 14, -3);
 
         return $day.'/'.$month.'/'.$year.' à '.$hour.':'.$min;
+    }
+
+    public static function formaterEuro($arg)
+    {
+        return number_format($arg, 2, ',', ' ').' €';
+    }
+    public static function formaterDateTimeWithDate(\DateTime $arg)
+    {
+        return $arg->format('d/m/Y');
+    }
+    public static function formaterDateTimeWithTime(\DateTime $arg)
+    {
+        return $arg->format('d/m/Y H:i:s');
     }
 }
