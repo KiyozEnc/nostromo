@@ -33,7 +33,10 @@ class MVol
         $lesVols = new Collection();
         try {
             $conn = MConnexion::getBdd();
-            $reqPrepare = $conn->query('SELECT * FROM vol');
+            $reqPrepare = $conn->query('SELECT * FROM vol
+                                        WHERE DATE_ADD(CURDATE(), INTERVAL -1 DAY) < dateVol
+                                        ORDER BY dateVol DESC')
+            ;
             $conn = null;
             $reqPrepare = $reqPrepare->fetchAll();
             foreach ($reqPrepare as $tabVol) {

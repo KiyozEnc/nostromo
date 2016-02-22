@@ -55,7 +55,11 @@ class MEcheance
         try {
             $conn->beginTransaction();
             $req = $conn->prepare('INSERT INTO echeance (numRes, montant, dateEcheance) VALUES (?,?,?)');
-            $req->execute([$echeance->getReservation()->getId(), $echeance->getMontant(), $echeance->getDate()->format('Y-m-d H:i:s')]);
+            $req->execute([
+                $echeance->getReservation()->getId(),
+                $echeance->getMontant(),
+                $echeance->getDate()->format('Y-m-d H:i:s')])
+            ;
             $conn->commit();
         } catch (\PDOException $e) {
             $conn->rollBack();

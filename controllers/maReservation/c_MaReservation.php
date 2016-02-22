@@ -23,9 +23,9 @@ switch ($action) {
                 MReservation::validerReservation($_SESSION['Utilisateur'], $_SESSION['Reservation']->getUnVol(), $_SESSION['Reservation']);
                 $_SESSION['valid'] = 'Réservation validée avec succès.';
             }
-            header('Location:?page=maReservation');
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
+        } finally {
             header('Location:?page=maReservation');
         }
         break;

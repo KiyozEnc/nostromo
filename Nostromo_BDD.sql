@@ -78,10 +78,10 @@ CREATE TABLE reservation (
 DROP TABLE IF EXISTS echeance ;
 
 CREATE TABLE echeance (
-  id INT NOT NULL PRIMARY KEY,
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   montant int not null,
   dateEcheance date not null,
-  numRes int not null primary key,
+  numRes int not null,
   foreign key (numRes) references reservation(numRes)
 );
 
