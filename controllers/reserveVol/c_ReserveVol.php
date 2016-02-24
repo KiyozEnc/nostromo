@@ -30,10 +30,8 @@ switch ($action) {
         break;
     case 'validReserverVol':
         try {
-            if (array_key_exists('Reservation', $_SESSION)) {
-                if ($_SESSION['Reservation']->isValid()) {
+            if (array_key_exists('Reservation', $_SESSION) && $_SESSION['Reservation']->isValid()) {
                     throw new InvalidArgumentException('Vous avez déjà une réservation.');
-                }
             }
             if (array_key_exists('vol', $_GET) && array_key_exists('nbPers', $_POST)) {
                 $unVol = MVol::getUnVol($_GET['vol']);
