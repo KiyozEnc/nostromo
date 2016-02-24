@@ -2,3 +2,4 @@
 - Passer une commande - valider le panier (Par Anthony)
 - Plusieurs réservations une fois que le vol de la réservation en cours est terminé
 - Problème d'affichage des vols (réserver)
+- Classe Produit deprecated
