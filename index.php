@@ -37,10 +37,8 @@ session_start(); ?>
     <div class='collapse navbar-collapse navbar-ex1-collapse'>
         <ul class='nav navbar-nav'>
             <li <?php
-            if (array_key_exists('page', $_GET)) {
-                if ($_GET['page'] === 'index') {
-                    echo "class='active'";
-                }
+            if (array_key_exists('page', $_GET) && $_GET['page'] === 'index') {
+                echo "class='active'";
             }
             ?>>
                 <a href='?page=index'>
@@ -48,10 +46,8 @@ session_start(); ?>
                 </a>
             </li>
             <li <?php
-            if (array_key_exists('page', $_GET)) {
-                if ($_GET['page'] === 'reserver') {
-                    echo "class='active'";
-                }
+            if (array_key_exists('page', $_GET) && $_GET['page'] === 'reserver') {
+                echo "class='active'";
             }
             ?>>
                 <a href='?page=reserver'>
@@ -59,10 +55,8 @@ session_start(); ?>
                 </a>
             </li>
             <li <?php
-            if (array_key_exists('page', $_GET)) {
-                if ($_GET['page'] === 'materiel') {
-                    echo "class='active'";
-                }
+            if (array_key_exists('page', $_GET) && $_GET['page'] === 'materiel') {
+                echo "class='active'";
             }
             ?>>
                 <a href='?page=materiel'>
@@ -70,10 +64,8 @@ session_start(); ?>
                 </a>
             </li>
             <li <?php
-            if (array_key_exists('page', $_GET)) {
-                if ($_GET['page'] === 'aPropos') {
-                    echo "class='active'";
-                }
+            if (array_key_exists('page', $_GET) && $_GET['page'] === 'aPropos') {
+                echo "class='active'";
             }
             ?>>
                 <a href='?page=aPropos'>
@@ -86,18 +78,14 @@ session_start(); ?>
             ?>
             <ul class='nav navbar-nav navbar-right'>
                 <li <?php
-                if (array_key_exists('page', $_GET)) {
-                    if ($_GET['page'] === 'connexion') {
-                        echo "class='active'";
-                    }
+                if (array_key_exists('page', $_GET) && $_GET['page'] === 'connexion') {
+                    echo "class='active'";
                 }
                 ?>>
                     <a href='?page=connexion'>Connexion</a></li>
                 <li <?php
-                if (array_key_exists('page', $_GET)) {
-                    if ($_GET['page'] === 'inscription') {
-                        echo "class='active'";
-                    }
+                if (array_key_exists('page', $_GET) && $_GET['page'] === 'inscription') {
+                    echo "class='active'";
                 }
                 ?>>
                     <a href='?page=inscription'>Inscription</a></li>
@@ -107,10 +95,8 @@ session_start(); ?>
             ?>
             <ul class='nav navbar-nav navbar-right'>
                 <li <?php
-                if (array_key_exists('page', $_GET)) {
-                    if ($_GET['page'] === 'maReservation') {
-                        echo "class='active'";
-                    }
+                if (array_key_exists('page', $_GET) && $_GET['page'] === 'maReservation') {
+                    echo "class='active'";
                 }
                 ?>>
                     <a href='?page=maReservation'>
@@ -118,10 +104,8 @@ session_start(); ?>
                     </a>
                 </li>
                 <li <?php
-                if (array_key_exists('page', $_GET)) {
-                    if ($_GET['page'] === 'monPanier') {
-                        echo "class='active'";
-                    }
+                if (array_key_exists('page', $_GET) && $_GET['page'] === 'monPanier') {
+                    echo "class='active'";
                 }
                 ?>>
                     <a href='?page=monPanier'>
@@ -129,10 +113,8 @@ session_start(); ?>
                     </a>
                 </li>
                 <li <?php
-                if (array_key_exists('page', $_GET)) {
-                    if ($_GET['page'] === 'monCompte') {
-                        echo "class='active'";
-                    }
+                if (array_key_exists('page', $_GET) && $_GET['page'] === 'monCompte') {
+                    echo "class='active'";
                 }
                 ?>>
                     <a href='?page=monCompte'>
@@ -155,37 +137,37 @@ session_start(); ?>
         if (array_key_exists('page', $_GET)) {
             switch ($_GET['page']) {
                 case 'index':
-                    include_once ROOT . 'Controllers/Index/c_Index.php';
+                    require_once ROOT . 'src/Controllers/Index/c_Index.php';
                     break;
                 case 'reserver':
-                    include_once ROOT . 'Controllers/ReserveVol/c_ReserveVol.php';
+                    require_once ROOT . 'src/Controllers/ReserveVol/c_ReserveVol.php';
                     break;
                 case 'connexion':
-                    include_once ROOT . 'Controllers/Connexion/c_ConnexionSite.php';
+                    require_once ROOT . 'src/Controllers/Connexion/c_ConnexionSite.php';
                     break;
                 case 'inscription':
-                    include_once ROOT . 'Controllers/Inscription/c_InscriptionSite.php';
+                    require_once ROOT . 'src/Controllers/Inscription/c_InscriptionSite.php';
                     break;
                 case 'deconnexion':
-                    include_once ROOT . 'Controllers/Deconnexion/c_Deconnexion.php';
+                    require_once ROOT . 'src/Controllers/Deconnexion/c_Deconnexion.php';
                     break;
                 case 'maReservation':
-                    include_once ROOT . 'Controllers/MaReservation/c_MaReservation.php';
+                    require_once ROOT . 'src/Controllers/MaReservation/c_MaReservation.php';
                     break;
                 case 'monCompte':
-                    include_once ROOT . 'Controllers/Compte/c_MonCompte.php';
+                    require_once ROOT . 'src/Controllers/Compte/c_MonCompte.php';
                     break;
                 case 'materiel':
-                    include_once ROOT . 'Controllers/Boutique/c_Boutique.php';
+                    require_once ROOT . 'src/Controllers/Boutique/c_Boutique.php';
                     break;
                 case 'monPanier':
-                    include_once ROOT . 'Controllers/Panier/c_Panier.php';
+                    require_once ROOT . 'src/Controllers/Panier/c_Panier.php';
                     break;
                 case 'aPropos':
-                    include_once ROOT . 'Views/APropos/v_APropos.php';
+                    require_once ROOT . 'src/Views/APropos/v_APropos.php';
                     break;
                 default:
-                    include_once ROOT . 'Views/Index/v_Erreur.php';
+                    require_once ROOT . 'src/Views/Index/v_Erreur.php';
                     break;
             }
         } else {
@@ -275,8 +257,8 @@ session_start(); ?>
 </body>
 <script src='https://code.jquery.com/jquery-2.2.0.min.js' type='text/javascript'></script>
 <script
-        src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
-        crossorigin='anonymous'>
+    src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
+    crossorigin='anonymous'>
 </script>
 <script src='public/Resources/js/main.js' type='text/javascript'></script>
 </html>
