@@ -28,12 +28,12 @@ class MConnexion
     public static function getBdd()
     {
         $host = 'localhost';
-        $dbname = '2014-nostromo_base';
-        $user = 'user';
-        $mdp = 'password';
+        $dbname = 'myDbName';
+        $user = 'myUser';
+        $mdp = 'myPassword';
         try {
             $pdo = new PDO(
-                'mysql:host='.$host.';dbname='.$dbname.';charset=utf8',
+                'mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8',
                 $user,
                 $mdp,
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
@@ -63,7 +63,7 @@ class MConnexion
      *
      * @throws UnexpectedValueException
      */
-    public static function setFlashMessage($message, $type)
+    public static function setFlashMessage($message = 'Erreur inconnue', $type = 'error')
     {
         switch ($type) {
             case 'valid':

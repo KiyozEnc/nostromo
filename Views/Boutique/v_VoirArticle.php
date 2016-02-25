@@ -1,5 +1,5 @@
 <?php
-require_once 'views/v_Alert.php'; ?>
+require_once 'Views/v_Alert.php'; ?>
 <div class="row row-centered">
     <div class="col-xs-12 col-sm-8 col-centered">
         <div class="thumbnail">

@@ -8,7 +8,7 @@ $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirPanier';
 
 switch ($action) {
     case 'voirPanier':
-        include_once 'views/Panier/v_VoirPanier.php';
+        include_once ROOT.'Views/Panier/v_VoirPanier.php';
         break;
     case 'ajouterArticle':
         try {
@@ -81,12 +81,12 @@ switch ($action) {
         break;
 
     case 'validerPanier':
-        include_once 'views/Panier/v_ValiderPanier.php';
+        include_once 'Views/Panier/v_ValiderPanier.php';
         break;
 
     case 'viderPanier':
         unset($_SESSION['Panier']);
-        include_once 'views/Panier/v_VoirPanier.php';
+        include_once 'Views/Panier/v_VoirPanier.php';
         break;
 
     case 'choisirQte':

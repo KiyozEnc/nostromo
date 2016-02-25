@@ -6,6 +6,7 @@ use Nostromo\Models\MVol;
 
 /**
  * Permet de créer un produit pour un ajout ultérieur dans une réservation.
+ * @deprecated Use class Article instead
  */
 class Produit
 {

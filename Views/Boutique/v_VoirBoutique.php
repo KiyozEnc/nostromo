@@ -2,7 +2,7 @@
 
 use Nostromo\Models\MConnexion as Connexion;
 
-require_once 'views/v_Alert.php'; ?>
+require_once 'Views/v_Alert.php'; ?>
     <div class="row row-centered">
         <h2 class="text-center text-info text-muted">Articles disponibles</h2>
         <?php foreach ($tabArt->getCollection() as $unArt) {

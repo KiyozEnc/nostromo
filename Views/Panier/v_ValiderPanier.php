@@ -1,5 +1,5 @@
 <?php
-require_once 'views/v_Alert.php'; ?>
+require_once 'Views/v_Alert.php'; ?>
 <p>Validation de Votre Commande</p>
 
 

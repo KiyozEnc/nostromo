@@ -1,7 +1,7 @@
 <?php
 
 
-require_once 'views/v_Alert.php';
+require_once 'Views/v_Alert.php';
 
 if (array_key_exists('Panier', $_SESSION)) {
     ?>

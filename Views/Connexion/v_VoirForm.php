@@ -1,5 +1,5 @@
 <?php
-require_once 'views/v_Alert.php'; ?>
+require_once 'Views/v_Alert.php'; ?>
 <form action="?page=connexion&action=seConnecter" method="POST" role="form">
     <div class="row row-centered">
         <h2 class="text-center text-muted">Connexion</h2>
