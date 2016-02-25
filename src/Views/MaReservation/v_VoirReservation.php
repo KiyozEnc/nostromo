@@ -96,8 +96,8 @@ if (array_key_exists('Reservation', $_SESSION)) {
     <?php
 
 } else {
-    ?> <p>Aucun vol actuellement réservé</p>
-
-    <a class="btn btn-default" href="?page=index" role="button">Revenir à l'accueil</a>
+    ?> <div class="row">
+        <p class="col-xs-12 col-sm-6 col-sm-offset-2 text-muted">Vous n'avez aucune réservation. <a href="?page=reserver" role="button">Réserver un vol</a></p>
+    </div>
     <?php
 }

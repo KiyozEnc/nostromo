@@ -78,6 +78,9 @@ if (array_key_exists('Panier', $_SESSION)) {
 
 } else {
     ?>
-    <p class="text-muted text-center">Votre panier est vide. <a href="?page=materiel">Commandez maintenant !</a></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-2"><p class="text-muted">Votre panier est vide. <a
+                    href="?page=materiel">Commandez maintenant !</a></p></div>
+    </div>
     <?php
 } ?>

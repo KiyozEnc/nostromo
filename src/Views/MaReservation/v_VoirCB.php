@@ -8,17 +8,13 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="col-xs-12 col-sm-6">
             <ul class="nav nav-pills">
                 <li <?php
-                if (array_key_exists('type', $_GET)) {
-                    if ($_GET['type'] === 'comptant') {
-                        echo 'class="active"';
-                    }
+                if (array_key_exists('type', $_GET) && $_GET['type'] === 'comptant') {
+                    echo 'class="active"';
                 }
                 ?>><a href="?page=maReservation&action=payment&type=comptant">Paiement comptant</a></li>
                 <li <?php
-                if (array_key_exists('type', $_GET)) {
-                    if ($_GET['type'] === '3fois') {
-                        echo 'class="active"';
-                    }
+                if (array_key_exists('type', $_GET) && $_GET['type'] === '3fois') {
+                    echo 'class="active"';
                 }
                 ?>><a href="?page=maReservation&action=payment&type=3fois">Paiement en trois fois</a></li>
             </ul>
@@ -85,6 +81,10 @@ if (array_key_exists('type', $_GET)) {
                                     <option value="2022">2022</option>
                                 </select>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-xs-12 col-sm-4">
                                 <label>CVC</label>
                                 <input name="CBSecret" type="number" class="form-control" required>
@@ -100,7 +100,7 @@ if (array_key_exists('type', $_GET)) {
                     <div class="col-xs-12 col-sm-12">
                         <?php echo
                             number_format($_SESSION['Reservation']->getPriceReservation(), 2, ',', ' ').' €'; ?>
-                        - le jour de la réservation
+                        - aujourd'hui
                     </div>
                 </div>
             </div>

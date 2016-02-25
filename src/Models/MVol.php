@@ -2,12 +2,10 @@
 
 namespace Nostromo\Models;
 
-use Nostromo\Classes\Echeance;
+use Nostromo\Classes\Build;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Vol;
 use Nostromo\Classes\Collection;
-use Nostromo\Classes\Utilisateur;
-use Nostromo\Classes\Reservation;
 use InvalidArgumentException;
 use PDOException;
 
@@ -109,5 +107,30 @@ class MVol
         }
 
         return $nbPlace;
+    }
+
+    /**
+     * @param Vol $unVol
+     * @return string
+     *
+     * @throws ErrorSQLException
+     * @throws InvalidArgumentException
+     */
+    public static function getTimer(Vol $unVol)
+    {
+        if (null === $unVol) {
+            throw new InvalidArgumentException('Le vol ne peut pas être null');
+        }
+        try {
+            $conn = MConnexion::getBdd();
+            $req = $conn->prepare('SELECT * FROM vol WHERE dateVol = ?');
+            $req->execute([$unVol->getNonFormatDate()]);
+            $fetch = $req->fetch();
+            $tmp = new \DateTime($fetch['dateVol'].' '.$fetch['heureVol']);
+            $tmp->modify('-1 months');
+            return $tmp->format('Y, m, d, H, i, s');
+        } catch (PDOException $e) {
+            throw new ErrorSQLException($e->getMessage());
+        }
     }
 }

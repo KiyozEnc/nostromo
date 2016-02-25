@@ -3,6 +3,7 @@
 use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MUtilisateur as ConnexionSite;
 use Nostromo\Models\MCommande;
+use Nostromo\Models\MVol;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirMonCompte';
 
@@ -62,12 +63,10 @@ switch ($action) {
                             );
                         }
                     }
-                    if (!empty($_POST['cp'])) {
-                        if (!is_numeric($_POST['cp'])) {
-                            throw new InvalidArgumentException(
-                                'Le code postal doit être au format numérique.'
-                            );
-                        }
+                    if (!empty($_POST['cp']) && !is_numeric($_POST['cp'])) {
+                        throw new InvalidArgumentException(
+                            'Le code postal doit être au format numérique.'
+                        );
                     }
                 } else {
                     throw new InvalidArgumentException('Mot de passe incorrect.');
@@ -102,5 +101,14 @@ switch ($action) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=monCompte');
         }
+        break;
+    case 'getTimer':
+        if (array_key_exists('Reservation', $_SESSION)) {
+            $monTimer = MVol::getTimer($_SESSION['Reservation']->getUnVol());
+            require_once ROOT.'src/Views/Compte/v_Timer.php';
+        }
+        break;
+    default:
+        header('Location:?page=compte');
         break;
 }
