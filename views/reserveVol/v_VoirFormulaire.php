@@ -1,10 +1,10 @@
 <?php
-require_once ROOT.'views/v_Alert.php'; ?>
+require_once ROOT . 'Views/v_Alert.php'; ?>
 <div class="row">
     <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
         <div class="thumbnail">
             <div class="col-md-3 col-sm-3">
-                <img class="img-responsive" src="img/avion.png" title="Vol n°<?= $vol->getNumVol() ?>">
+                <img class="img-responsive" src="public/Resources/img/avion.png" title="Vol n°<?= $vol->getNumVol() ?>">
             </div>
             <div class="caption">
                 <h3>Vol n°<?= $vol->getNumVol() ?></h3>

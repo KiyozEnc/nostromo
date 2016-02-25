@@ -8,7 +8,7 @@ switch ($action) {
     case 'voirBoutique':
         try {
             $tabArt = MArticle::getArticles();
-            include_once 'views/boutique/v_VoirBoutique.php';
+            include_once 'views/Boutique/v_VoirBoutique.php';
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=error404');
@@ -17,7 +17,7 @@ switch ($action) {
 
     case 'voirArticle':
         $article = MArticle::getArticle($_GET['article']);
-        include_once 'views/boutique/v_VoirArticle.php';
+        include_once 'views/Boutique/v_VoirArticle.php';
         break;
 
     default:

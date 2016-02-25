@@ -6,7 +6,7 @@ use Nostromo\Models\MReservation;
 $action = array_key_exists('action', $_REQUEST) ? $_REQUEST['action'] : 'voirReservation';
 switch ($action) {
     case 'voirReservation':
-        include_once ROOT.'views/maReservation/v_VoirReservation.php';
+        include_once ROOT . 'Views/MaReservation/v_VoirReservation.php';
         break;
 
     case 'annulerReservation':
@@ -65,7 +65,7 @@ switch ($action) {
                         header('Location:?page=maReservation&action=payment');
                     }
                 }
-                require_once ROOT.'views/maReservation/v_VoirCB.php';
+                require_once ROOT . 'Views/MaReservation/v_VoirCB.php';
             }
         } catch (\UnexpectedValueException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');

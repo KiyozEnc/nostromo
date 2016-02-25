@@ -8,7 +8,7 @@ $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirForm';
 
 switch ($action) {
     case 'voirForm':
-        include_once 'views/inscription/v_VoirInscription.php';
+        include_once 'views/Inscription/v_VoirInscription.php';
         break;
 
     case 'inscrire':

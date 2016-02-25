@@ -1,7 +1,7 @@
 <?php
 use Nostromo\Classes\Build;
 
-require_once ROOT.'views/v_Alert.php'; ?>
+require_once ROOT . 'Views/v_Alert.php'; ?>
 
     <h2>Mode de paiement</h2>
     <div class="row">

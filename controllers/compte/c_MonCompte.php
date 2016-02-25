@@ -13,8 +13,8 @@ switch ($action) {
             if (!array_key_exists('Utilisateur', $_SESSION)) {
                 throw new LogicException('Vous devez vous connecter');
             }
-            include_once ROOT.'views/compte/v_GabCompte.php';
-            include_once ROOT.'views/compte/v_VoirProfile.php';
+            include_once ROOT . 'Views/Compte/v_GabCompte.php';
+            include_once ROOT . 'Views/Compte/v_VoirProfile.php';
         } catch (LogicException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=connexion');
@@ -77,8 +77,8 @@ switch ($action) {
                 header('Location:?page=monCompte&action=edit');
             } else {
                 $title = 'Modifier mes informations';
-                include_once ROOT.'views/compte/v_GabCompte.php';
-                include_once ROOT.'views/compte/v_EditProfile.php';
+                include_once ROOT . 'Views/Compte/v_GabCompte.php';
+                include_once ROOT . 'Views/Compte/v_EditProfile.php';
             }
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
@@ -93,8 +93,8 @@ switch ($action) {
                     $uneCommande = MCommande::getUneCommande($_GET['cde']);
                 }
                 $title = 'Mes commandes';
-                include_once ROOT.'views/compte/v_GabCompte.php';
-                include_once ROOT.'views/compte/v_VoirCommandes.php';
+                include_once ROOT . 'Views/Compte/v_GabCompte.php';
+                include_once ROOT . 'Views/Compte/v_VoirCommandes.php';
             } else {
                 header('Location:?page=connexion');
             }

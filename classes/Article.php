@@ -12,7 +12,7 @@ use Nostromo\Models\MConnexion as Connexion;
  * @author Nostromo <contact@nostromo.com>
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  *
- * @link classes/Article.php
+ * @link Classes/Article.php
  */
 class Article
 {

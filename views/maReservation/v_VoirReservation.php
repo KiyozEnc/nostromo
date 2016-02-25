@@ -1,7 +1,7 @@
 <?php
 use Nostromo\Classes\Build;
 
-require_once ROOT.'views/v_Alert.php';
+require_once ROOT . 'Views/v_Alert.php';
 if (array_key_exists('Reservation', $_SESSION)) {
     ?>
     <!-- COMPTEUR VOL DANS XX TEMPS EN JS ICI -->

@@ -2,7 +2,7 @@
 
 use Nostromo\Models\MConnexion as Connexion;
 
-include_once ROOT.'views/v_Alert.php'; ?>
+include_once ROOT . 'Views/v_Alert.php'; ?>
 
 <div class="row row-centered">
     <?php
@@ -18,7 +18,7 @@ include_once ROOT.'views/v_Alert.php'; ?>
                         class="img-responsive hidden-xs"
                         height="50%"
                         width="50%"
-                        src="img<?= DS ?>avion.png"
+                        src="public/Resources/img<?= DS ?>avion.png"
                         title="Vol n°<?= $unVol->getNumVol() ?>"
                     >
                     <div class="caption">

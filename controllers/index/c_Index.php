@@ -30,7 +30,7 @@ switch ($action) {
                     unset($_SESSION['Commandes']);
                 }
             }
-            include_once ROOT.'views/index/v_Accueil.php';
+            include_once ROOT . 'Views/Index/v_Accueil.php';
         } catch (Exception $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=error404');

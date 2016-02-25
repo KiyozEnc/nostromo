@@ -6,9 +6,7 @@ use Nostromo\Models\MConnexion;
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', __DIR__.DS);
 
-require_once ROOT.'Autoload.php';
-
-Autoload::register();
+require_once ROOT.'vendor/autoload.php';
 
 session_start(); ?>
 
@@ -16,8 +14,8 @@ session_start(); ?>
 <html>
 <head>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet'>
-    <link type='text/css' rel='stylesheet' href='css/main.css'/>
-    <link type='text/css' rel='stylesheet' href='css/index.css'>
+    <link type='text/css' rel='stylesheet' href='public/Resources/css/main.css'/>
+    <link type='text/css' rel='stylesheet' href='public/Resources/css/index.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Nostromo</title>
 </head>
@@ -46,7 +44,7 @@ session_start(); ?>
             }
             ?>>
                 <a href='?page=index'>
-                    <img src='img/home.png' height='20'> Accueil
+                    <img src='public/Resources/img/home.png' height='20'> Accueil
                 </a>
             </li>
             <li <?php
@@ -57,7 +55,7 @@ session_start(); ?>
             }
             ?>>
                 <a href='?page=reserver'>
-                    <img src='img/avion.png' height='20'> Réserver un vol
+                    <img src='public/Resources/img/avion.png' height='20'> Réserver un vol
                 </a>
             </li>
             <li <?php
@@ -68,7 +66,7 @@ session_start(); ?>
             }
             ?>>
                 <a href='?page=materiel'>
-                    <img src='img/boutique.png' height='20'> Achats de matériel
+                    <img src='public/Resources/img/boutique.png' height='20'> Achats de matériel
                 </a>
             </li>
             <li <?php
@@ -79,7 +77,7 @@ session_start(); ?>
             }
             ?>>
                 <a href='?page=aPropos'>
-                    <img src='img/information.png' height='20'> A propos
+                    <img src='public/Resources/img/information.png' height='20'> A propos
                 </a>
             </li>
         </ul>
@@ -116,7 +114,7 @@ session_start(); ?>
                 }
                 ?>>
                     <a href='?page=maReservation'>
-                        <img src='img/reservation.png' height='20'> Ma réservation
+                        <img src='public/Resources/img/reservation.png' height='20'> Ma réservation
                     </a>
                 </li>
                 <li <?php
@@ -127,7 +125,7 @@ session_start(); ?>
                 }
                 ?>>
                     <a href='?page=monPanier'>
-                        <img src='img/panier2.png' height='20'> Panier
+                        <img src='public/Resources/img/panier2.png' height='20'> Panier
                     </a>
                 </li>
                 <li <?php
@@ -138,7 +136,7 @@ session_start(); ?>
                 }
                 ?>>
                     <a href='?page=monCompte'>
-                        <img src='img/user.png' height='20'> Mon Compte
+                        <img src='public/Resources/img/user.png' height='20'> Mon Compte
                         [<?php echo $_SESSION['Utilisateur']->getNom() ?>]
                     </a>
                 </li>
@@ -157,37 +155,37 @@ session_start(); ?>
         if (array_key_exists('page', $_GET)) {
             switch ($_GET['page']) {
                 case 'index':
-                    include_once ROOT.'controllers/index/c_Index.php';
+                    include_once ROOT . 'Controllers/Index/c_Index.php';
                     break;
                 case 'reserver':
-                    include_once ROOT.'controllers/reserveVol/c_ReserveVol.php';
+                    include_once ROOT . 'Controllers/ReserveVol/c_ReserveVol.php';
                     break;
                 case 'connexion':
-                    include_once ROOT.'controllers/connexion/c_ConnexionSite.php';
+                    include_once ROOT . 'Controllers/Connexion/c_ConnexionSite.php';
                     break;
                 case 'inscription':
-                    include_once ROOT.'controllers/inscription/c_InscriptionSite.php';
+                    include_once ROOT . 'Controllers/Inscription/c_InscriptionSite.php';
                     break;
                 case 'deconnexion':
-                    include_once ROOT.'controllers/deconnexion/c_Deconnexion.php';
+                    include_once ROOT . 'Controllers/Deconnexion/c_Deconnexion.php';
                     break;
                 case 'maReservation':
-                    include_once ROOT.'controllers/maReservation/c_MaReservation.php';
+                    include_once ROOT . 'Controllers/MaReservation/c_MaReservation.php';
                     break;
                 case 'monCompte':
-                    include_once ROOT.'controllers/compte/c_MonCompte.php';
+                    include_once ROOT . 'Controllers/Compte/c_MonCompte.php';
                     break;
                 case 'materiel':
-                    include_once ROOT.'controllers/boutique/c_Boutique.php';
+                    include_once ROOT . 'Controllers/Boutique/c_Boutique.php';
                     break;
                 case 'monPanier':
-                    include_once ROOT.'controllers/panier/c_Panier.php';
+                    include_once ROOT . 'Controllers/Panier/c_Panier.php';
                     break;
                 case 'aPropos':
-                    include_once ROOT.'views/aPropos/v_APropos.php';
+                    include_once ROOT . 'Views/APropos/v_APropos.php';
                     break;
                 default:
-                    include_once ROOT.'views/index/v_Erreur.php';
+                    include_once ROOT . 'Views/Index/v_Erreur.php';
                     break;
             }
         } else {
@@ -280,5 +278,5 @@ session_start(); ?>
         src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
         crossorigin='anonymous'>
 </script>
-<script src='js/main.js' type='text/javascript'></script>
+<script src='public/Resources/js/main.js' type='text/javascript'></script>
 </html>

@@ -9,7 +9,7 @@ $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirForm';
 
 switch ($action) {
     case 'voirForm':
-        include_once ROOT.'views/connexion/v_VoirForm.php';
+        include_once ROOT . 'Views/Connexion/v_VoirForm.php';
         break;
     case 'seConnecter':
         try {
