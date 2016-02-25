@@ -7,7 +7,6 @@ Pour utiliser le code source de notre projet Nostromo, il vous faut créer votre
  - Indiquer les informations demandées
  - Implémenter notre script SQL 'Nostromo_BDD.sql' dans votre base de données liée aux informations indiquées ultérieurement
  - Initialiser Composer
- - Suivez les étapes 2 et 3 de l'installation normale
  
 #### Initialiser Composer :
  - Pour terminer l'installation, il vous faut [composer].
