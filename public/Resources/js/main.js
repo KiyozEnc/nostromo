@@ -33,10 +33,11 @@ $(document).ready(function () {
             $(this).remove();
         });
     });
-    if ($(location).attr('href') === 'http://localhost/nostromo/?page=monCompte' || $(location).attr('href') === 'http://localhost/nostromo/?page=monCompte&action=voirMonCompte') {
+    var hrefActuel = $(location).attr('href');
+    if (hrefActuel.indexOf('?page=monCompte') > 0 || hrefActuel.indexOf('?page=monCompte&action=voirMonCompte') > 0) {
         $.ajax({
             type: 'GET',
-            url: 'index.php?page=monCompte&action=getTimer',
+            url: '?page=monCompte&action=getTimer',
             timeout: 3000,
             success: function (data) {
                 var timer = $(data).find('span#timer');
