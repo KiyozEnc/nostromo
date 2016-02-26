@@ -81,16 +81,17 @@ session_start(); ?>
                 if (array_key_exists('page', $_GET) && $_GET['page'] === 'connexion') {
                     echo "class='active'";
                 }
-                ?>>
+            ?>>
                     <a href='?page=connexion'>Connexion</a></li>
                 <li <?php
                 if (array_key_exists('page', $_GET) && $_GET['page'] === 'inscription') {
                     echo "class='active'";
                 }
-                ?>>
+            ?>>
                     <a href='?page=inscription'>Inscription</a></li>
             </ul>
             <?php
+
         } else {
             ?>
             <ul class='nav navbar-nav navbar-right'>
@@ -98,7 +99,7 @@ session_start(); ?>
                 if (array_key_exists('page', $_GET) && $_GET['page'] === 'maReservation') {
                     echo "class='active'";
                 }
-                ?>>
+            ?>>
                     <a href='?page=maReservation'>
                         <img src='public/Resources/img/reservation.png' height='20'> Ma réservation
                     </a>
@@ -107,7 +108,7 @@ session_start(); ?>
                 if (array_key_exists('page', $_GET) && $_GET['page'] === 'monPanier') {
                     echo "class='active'";
                 }
-                ?>>
+            ?>>
                     <a href='?page=monPanier'>
                         <img src='public/Resources/img/panier2.png' height='20'> Panier
                     </a>
@@ -116,7 +117,7 @@ session_start(); ?>
                 if (array_key_exists('page', $_GET) && $_GET['page'] === 'monCompte') {
                     echo "class='active'";
                 }
-                ?>>
+            ?>>
                     <a href='?page=monCompte'>
                         <img src='public/Resources/img/user.png' height='20'> Mon Compte
                         [<?php echo $_SESSION['Utilisateur']->getNom() ?>]
@@ -125,6 +126,7 @@ session_start(); ?>
                 <li><a href='?page=deconnexion'>Déconnexion</a></li>
             </ul>
             <?php
+
         } ?>
     </div>
 </nav>
@@ -211,12 +213,12 @@ session_start(); ?>
                         } else {
                             echo '<ul class="list-unstyled"><li><h5>Aucune réservation.</h5></li></ul>';
                         }
-                        ?>
+                    ?>
                     </div>
                     <?php
 
                 }
-                ?>
+        ?>
             </div>
             <div class='row'>
                 <?php
@@ -243,15 +245,16 @@ session_start(); ?>
                         } else {
                             echo '<ul class="list-unstyled"><li><h5>Aucune commande.</h5></li></ul>';
                         }
-                        ?>
+                    ?>
                     </div>
                     <?php
 
                 }
-                ?>
+        ?>
             </div>
         </div>
         <?php
+
     } ?>
 </div>
 </body>

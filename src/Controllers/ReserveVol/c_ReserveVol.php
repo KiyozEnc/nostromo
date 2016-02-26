@@ -1,11 +1,11 @@
 <?php
 
-$action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirVols';
-
-use Nostromo\Classes\Exception\NotConnectedException;
 use Nostromo\Classes\Reservation;
-use Nostromo\Models\MConnexion;
+use Nostromo\Classes\Exception\NotConnectedException;
 use Nostromo\Models\MVol;
+use Nostromo\Models\MConnexion;
+
+$action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirVols';
 
 switch ($action) {
     case 'voirVols':
@@ -31,7 +31,7 @@ switch ($action) {
     case 'validReserverVol':
         try {
             if (array_key_exists('Reservation', $_SESSION) && $_SESSION['Reservation']->isValid()) {
-                    throw new InvalidArgumentException('Vous avez déjà une réservation.');
+                throw new InvalidArgumentException('Vous avez déjà une réservation.');
             }
             if (array_key_exists('vol', $_GET) && array_key_exists('nbPers', $_POST)) {
                 $unVol = MVol::getUnVol($_GET['vol']);
