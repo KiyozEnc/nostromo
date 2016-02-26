@@ -1,1 +1,5 @@
 AddDefaultCharset UTF-8
+Options +FollowSymlinks
+RewriteEngine on
+
+RewriteRule src index.php?page=404 [F]

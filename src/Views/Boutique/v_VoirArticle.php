@@ -23,8 +23,8 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <p class="text-info">
-                                    <?php echo $article->getDescription(); ?>
+                                <p class="text-info rectangle">
+                                    <?php echo '<br>'.$article->getDescription(); ?>
                                 </p>
                             </div>
                         </div>

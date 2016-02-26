@@ -22,7 +22,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                         class="img-responsive hidden-xs"
                         height="50%"
                         width="50%"
-                        src="public/Resources/img<?= DS ?>avion.png"
+                        src="public/Resources/img/avion.png"
                         title="Vol n°<?= $unVol->getNumVol() ?>"
                     >
                     <div class="caption">

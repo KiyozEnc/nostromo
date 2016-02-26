@@ -13,6 +13,7 @@ session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" href="public/Resources/img/favicon.ico" />
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet'>
     <link type='text/css' rel='stylesheet' href='public/Resources/css/main.css'/>
     <link type='text/css' rel='stylesheet' href='public/Resources/css/index.css'>
