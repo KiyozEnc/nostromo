@@ -1,6 +1,7 @@
 <?php
 
 use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MVol;
 
 require_once ROOT.'src/Views/v_Alert.php'; ?>
 
@@ -8,9 +9,12 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
     <?php
     if ($lesVols->taille() === 0) {
         echo '<h2>Aucun vol actuellement. Revenez ultérieurement.</h2>';
-    } else { ?>
+    } else {
+        ?>
         <h2 class="text-center text-info text-muted">Vols disponibles</h2>
-        <?php foreach ($lesVols->getCollection() as $unVol) { ?>
+        <?php
+        foreach ($lesVols->getCollection() as $unVol) {
+            ?>
             <?php /* @var $unVol \Nostromo\Classes\Vol */ ?>
             <div class="col-sm-4 col-lg-3 col-centered">
                 <div class="thumbnail">
@@ -22,13 +26,24 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                         title="Vol n°<?= $unVol->getNumVol() ?>"
                     >
                     <div class="caption">
-                        <h3>Vol n°<?= $unVol->getNumVol() ?></h3>
+                        <h3>Vol n°<?= $unVol->getNumVol() ?>
+                            <?php
+                            if (MVol::getPlaceRestante($unVol) === 0) {
+                                echo ' - <span class="text-danger">COMPLET</span>';
+                            }
+                            ?></h3>
                         <p>Date et heure : <?= $unVol->getDateVol() ?> à <?= $unVol->getHeureVol() ?></p>
-                        <p>Prix : <?php echo number_format($unVol->getPrice(), 2, ',', ' ').' €'; ?></p>
+                        <p>Prix : <?php echo number_format($unVol->getPrice(), 2, ',', ' ').' €';
+                            ?>
+                        </p>
                         <?php
                         if (Connexion::sessionOuverte()) : ?>
                             <p><a
                                     href="?page=reserver&action=reserverVol&vol=<?= $unVol->getNumVol() ?>"
+                                    <?php
+                                    if (MVol::getPlaceRestante($unVol) === 0) {
+                                        echo 'disabled';
+                                    } ?>
                                     class="btn btn-primary"
                                     role="button">Réserver
                                 </a>
@@ -38,7 +53,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                     </div>
                 </div>
             </div>
-        <?php } ?>
-        <?php
+            <?php
+        }
     } ?>
 </div>

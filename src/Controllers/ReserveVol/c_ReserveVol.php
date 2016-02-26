@@ -27,7 +27,6 @@ switch ($action) {
             MConnexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=reserver');
         }
-
         break;
     case 'validReserverVol':
         try {

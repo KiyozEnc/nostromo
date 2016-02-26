@@ -1,3 +1,2 @@
 ﻿- Update MonCompte Design
 - Passer une commande - valider le panier (Par Anthony)
-- Si un vol n'a plus de place, l'indiquer sur la liste des vols
