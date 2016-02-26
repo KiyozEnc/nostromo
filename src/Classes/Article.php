@@ -23,6 +23,10 @@ class Article
     /**
      * @var string
      */
+    private $description;
+    /**
+     * @var string
+     */
     private $designation;
     /**
      * @var int
@@ -244,5 +248,23 @@ class Article
         ' qteStock = '.$this->qteStock.
         ' qte = '.$this->qte.
         ' url = '.$this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Article
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
     }
 }

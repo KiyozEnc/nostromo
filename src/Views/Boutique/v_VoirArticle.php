@@ -21,6 +21,13 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                         <div class="col-xs-6 col-sm-2">
                             <input type="number" class="form-control" name="qte" placeholder="Quantité" value="1">
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <p class="text-info">
+                                    <?php echo $article->getDescription(); ?>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <a href="?page=materiel" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>

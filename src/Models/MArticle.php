@@ -35,6 +35,7 @@ class MArticle
             $unArt
                 ->setNumArt($reqPrepare['numArt'])
                 ->setDesignation($reqPrepare['designation'])
+                ->setDescription($reqPrepare['description'])
                 ->setPu($reqPrepare['pu'])
                 ->setQteStock($reqPrepare['qteStock'])
                 ->setUrl($reqPrepare['url']);
@@ -65,6 +66,7 @@ class MArticle
                 $article
                     ->setNumArt($unArticle['numArt'])
                     ->setDesignation($unArticle['designation'])
+                    ->setDescription($unArticle['description'])
                     ->setPu($unArticle['pu'])
                     ->setQteStock($unArticle['qteStock'])
                     ->setUrl($unArticle['url']);
