@@ -17,9 +17,14 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                             echo '&target='.$_GET['target'];
                         } ?>" method="POST" role="form" autocomplete="off">
                     <div class="form-group">
+                        <?php /* @var \Nostromo\Classes\Article $article */ ?>
+                            <h5 class="col-xs-12 col-sm-8">Prix
+                                : <?php echo '<span id="priceContainer">'.\Nostromo\Classes\Build::formaterEuro($article->getPu()).'</span>'; ?>
+                            </h5>
                         <label class="control-label col-xs-4 col-sm-1">Quantité</label>
                         <div class="col-xs-6 col-sm-2">
-                            <input type="number" class="form-control" name="qte" placeholder="Quantité" value="1">
+                            <input id="qte" type="number" class="form-control" name="qte" placeholder="Quantité" value="1">
+                            <input type="hidden" id="price" readonly disabled value="<?php echo $article->getPu() ?>">
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
@@ -37,3 +42,6 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         </div>
     </div>
 </div>
+<?php ob_start(); ?>
+<script src="/public/Resources/js/price-manager.js"></script>
+<?php $scripts = ob_get_clean(); ?>

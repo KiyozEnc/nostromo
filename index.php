@@ -265,4 +265,8 @@ session_start(); ?>
     crossorigin='anonymous'>
 </script>
 <script src='public/Resources/js/main.js' type='text/javascript'></script>
+<?php
+if (isset($scripts)) {
+    echo $scripts;
+} ?>
 </html>
