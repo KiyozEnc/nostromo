@@ -43,5 +43,5 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
     </div>
 </div>
 <?php ob_start(); ?>
-<script src="/public/Resources/js/price-manager.js"></script>
+<script src="public/Resources/js/price-manager.js"></script>
 <?php $scripts = ob_get_clean(); ?>
