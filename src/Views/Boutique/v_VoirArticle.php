@@ -5,7 +5,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="thumbnail">
             <br>
             <div class="col-xs-12 col-sm-3">
-                <img class="img-responsive" src=<?php echo 'public/Resources/'.$article->getUrl(); ?> title="Article n°<?= $article->getNumArt() ?>">
+                <img class="img-responsive" height="512" width="512" src=<?php echo $article->getUrl(); ?> title="Article n°<?= $article->getNumArt() ?>">
                 <br>
             </div>
             <div class="caption">

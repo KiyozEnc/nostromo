@@ -221,7 +221,7 @@ class Article
     public function getUrl()
     {
         if ($this->url === null) {
-            return 'img/Basket/basket.png';
+            return 'public/Resources/img/Basket/basket.png';
         } else {
             return $this->url;
         }

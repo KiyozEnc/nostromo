@@ -14,7 +14,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                 <img width="20%"
                      height="20%"
                      class="img-responsive"
-                     src=<?php echo 'public/Resources/'.$unArt->getUrl(); ?>
+                     src=<?php echo $unArt->getUrl(); ?>
                      title="Article n°<?= $unArt->getNumArt() ?>">
                 <div class="caption">
                     <?php

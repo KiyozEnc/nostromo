@@ -94,9 +94,9 @@ INSERT INTO vol VALUES (5,"2016-02-28", "18:05:00",10, 3000);
 INSERT INTO vol VALUES (6,"2016-03-18", "14:05:00",10, 3000);
 INSERT INTO vol VALUES (7,"2016-10-10", "06:05:00",10, 3000);
 
-INSERT INTO article VALUES (1,"Gants astronaute","Default description",250,20,'img/Basket/gauntlet.jpg');
-INSERT INTO article VALUES (2,"Pantalon astronaute","Default description",400,20,'img/Basket/down.jpg');
-INSERT INTO article VALUES (3,"Casque astronaute","Default description",1200,5,'img/Basket/helmet.png');
+INSERT INTO article VALUES (1,"Gants astronaute","Default description",250,20,'public/Resources/img/Basket/gauntlet.jpg');
+INSERT INTO article VALUES (2,"Pantalon astronaute","Default description",400,20,'public/Resources/img/Basket/down.jpg');
+INSERT INTO article VALUES (3,"Casque astronaute","Default description",1200,5,'public/Resources/img/Basket/helmet.png');
 INSERT INTO article VALUES (4,"Truc astronaute","Default description",600,5,null);
 
 INSERT INTO `client` VALUES (1,"Nostromo","Contact","7 rue de Mars",53100,"MAYENNE","ffb4761cba839470133bee36aeb139f58d7dbaa9","contact@nostromo.com",150);
