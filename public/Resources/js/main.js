@@ -111,4 +111,6 @@ $(document).ready(function () {
     setTitle('?page=maReservation', 'Ma Réservation', '&action=payment', 'Finalisation', '&type=3fois', '3 fois', '&type=comptant', 'comptant');
     setTitle('?page=monCompte', 'Mon Compte', '&action=edit', 'Modifications', '&action=voirCommandes', 'Commandes');
     setTitle('?page=monPanier', 'Panier', '&action=validerPanier', 'Finalisation commande');
+    setTitle('?page=connexion', 'Connexion');
+    setTitle('?page=inscription', 'Inscription');
 });
