@@ -68,4 +68,29 @@ $(document).ready(function () {
             }
         })
     }
+    var title = $('title');
+    if (hrefActuel.indexOf('?page=reserver') > 0) {
+        title.text(title.text() + ' - Vols');
+        if (hrefActuel.indexOf('&action=reserverVol') > 0) {
+            title.text(title.text() + ' - Réserver');
+        }
+    }
+    var setTitle = function ($path, $title) {
+        if (hrefActuel.indexOf($path) > 0) {
+            title.text(title.text() + ' - ' + $title);
+        }
+    }
+    setTitle('?page=materiel', 'Boutique');
+    setTitle('?page=index', 'Accueil');
+    setTitle('?page=aPropos', 'Infos');
+    setTitle('?page=maReservation', 'Ma Réservation');
+    setTitle('?page=monCompte', 'Mon Compte');
+    setTitle('?page=monPanier', 'Panier');
+    setTitle('&action=voirArticle', 'Achat');
+    setTitle('&action=edit', 'Modifications');
+    setTitle('&action=voirCommandes', 'Commandes');
+    setTitle('&action=payment', 'Finalisation');
+    setTitle('&action=validerPanier', 'Finalisation commande');
+    setTitle('&type=3fois', '3 fois');
+    setTitle('&type=comptant', 'Comptant');
 });

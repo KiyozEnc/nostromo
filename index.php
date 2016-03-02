@@ -143,37 +143,37 @@ session_start(); ?>
         if (array_key_exists('page', $_GET)) {
             switch ($_GET['page']) {
                 case 'index':
-                    require_once ROOT . 'src/Controllers/Index/c_Index.php';
+                    require_once ROOT.'src/Controllers/Index/c_Index.php';
                     break;
                 case 'reserver':
-                    require_once ROOT . 'src/Controllers/ReserveVol/c_ReserveVol.php';
+                    require_once ROOT.'src/Controllers/ReserveVol/c_ReserveVol.php';
                     break;
                 case 'connexion':
-                    require_once ROOT . 'src/Controllers/Connexion/c_ConnexionSite.php';
+                    require_once ROOT.'src/Controllers/Connexion/c_ConnexionSite.php';
                     break;
                 case 'inscription':
-                    require_once ROOT . 'src/Controllers/Inscription/c_InscriptionSite.php';
+                    require_once ROOT.'src/Controllers/Inscription/c_InscriptionSite.php';
                     break;
                 case 'deconnexion':
-                    require_once ROOT . 'src/Controllers/Deconnexion/c_Deconnexion.php';
+                    require_once ROOT.'src/Controllers/Deconnexion/c_Deconnexion.php';
                     break;
                 case 'maReservation':
-                    require_once ROOT . 'src/Controllers/MaReservation/c_MaReservation.php';
+                    require_once ROOT.'src/Controllers/MaReservation/c_MaReservation.php';
                     break;
                 case 'monCompte':
-                    require_once ROOT . 'src/Controllers/Compte/c_MonCompte.php';
+                    require_once ROOT.'src/Controllers/Compte/c_MonCompte.php';
                     break;
                 case 'materiel':
-                    require_once ROOT . 'src/Controllers/Boutique/c_Boutique.php';
+                    require_once ROOT.'src/Controllers/Boutique/c_Boutique.php';
                     break;
                 case 'monPanier':
-                    require_once ROOT . 'src/Controllers/Panier/c_Panier.php';
+                    require_once ROOT.'src/Controllers/Panier/c_Panier.php';
                     break;
                 case 'aPropos':
-                    require_once ROOT . 'src/Views/APropos/v_APropos.php';
+                    require_once ROOT.'src/Views/APropos/v_APropos.php';
                     break;
                 default:
-                    require_once ROOT . 'src/Views/Index/v_Erreur.php';
+                    require_once ROOT.'src/Views/Index/v_Erreur.php';
                     break;
             }
         } else {
