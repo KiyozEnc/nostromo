@@ -75,22 +75,40 @@ $(document).ready(function () {
             title.text(title.text() + ' - Réserver');
         }
     }
-    var setTitle = function ($path, $title) {
+    var setTitle = function ($path, $title, $secondPath, $secondTitle, $thirdPath, $thirdTitle, $fourthPath, $fourthTitle) {
+        if ($secondPath === undefined) {
+            $secondPath = null;
+            $thirdPath = null;
+            $fourthPath = null;
+        }
+        if ($secondTitle === undefined) {
+            $secondTitle = null;
+            $thirdTitle = null;
+            $fourthTitle = null;
+        }
         if (hrefActuel.indexOf($path) > 0) {
             title.text(title.text() + ' - ' + $title);
+            if ($secondPath !== null && $secondTitle !== null) {
+                if (hrefActuel.indexOf($secondPath) > 0) {
+                    title.text(title.text() + ' - ' + $secondTitle)
+                }
+            }
+            if ($thirdPath !== null && $thirdTitle !== null) {
+                if (hrefActuel.indexOf($thirdPath) > 0) {
+                    title.text(title.text() + ' - ' + $thirdTitle)
+                }
+            }
+            if ($fourthPath !== null && $fourthTitle !== null) {
+                if (hrefActuel.indexOf($fourthPath) > 0) {
+                    title.text(title.text() + ' - ' + $fourthTitle)
+                }
+            }
         }
     }
-    setTitle('?page=materiel', 'Boutique');
+    setTitle('?page=materiel', 'Boutique', '&action=voirArticle', 'Achat');
     setTitle('?page=index', 'Accueil');
     setTitle('?page=aPropos', 'Infos');
-    setTitle('?page=maReservation', 'Ma Réservation');
-    setTitle('?page=monCompte', 'Mon Compte');
-    setTitle('?page=monPanier', 'Panier');
-    setTitle('&action=voirArticle', 'Achat');
-    setTitle('&action=edit', 'Modifications');
-    setTitle('&action=voirCommandes', 'Commandes');
-    setTitle('&action=payment', 'Finalisation');
-    setTitle('&action=validerPanier', 'Finalisation commande');
-    setTitle('&type=3fois', '3 fois');
-    setTitle('&type=comptant', 'Comptant');
+    setTitle('?page=maReservation', 'Ma Réservation', '&action=payment', 'Finalisation', '&type=3fois', '3 fois', '&type=comptant', 'comptant');
+    setTitle('?page=monCompte', 'Mon Compte', '&action=edit', 'Modifications', '&action=voirCommandes', 'Commandes');
+    setTitle('?page=monPanier', 'Panier', '&action=validerPanier', 'Finalisation commande');
 });
