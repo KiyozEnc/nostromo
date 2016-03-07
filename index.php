@@ -67,15 +67,6 @@ session_start(); ?>
                         <img src='public/Resources/img/boutique.png' height='20'> Achats de matériel
                     </a>
                 </li>
-                <li <?php
-                if (array_key_exists('page', $_GET) && $_GET['page'] === 'aPropos') {
-                    echo "class='active'";
-                }
-                ?>>
-                    <a href='?page=aPropos'>
-                        <img src='public/Resources/img/information.png' height='20'> A propos
-                    </a>
-                </li>
             </ul>
             <?php
             if (!MConnexion::sessionOuverte()) {
@@ -134,6 +125,14 @@ session_start(); ?>
             } ?>
         </div>
     </nav>
+    <?php
+    if (array_key_exists('page', $_GET) && $_GET['page'] === 'index') {
+        echo '
+<div class="carousel">
+    <img src="public/Resources/img/bg.png" alt="" width="100%">
+</div>';
+    }
+    ?>
     <div class='jumbotron'>
         <div class='container-fluid'>
             <?php
@@ -168,9 +167,6 @@ session_start(); ?>
                         break;
                     case 'monPanier':
                         require_once ROOT.'src/Controllers/Panier/c_Panier.php';
-                        break;
-                    case 'aPropos':
-                        require_once ROOT.'src/Views/APropos/v_APropos.php';
                         break;
                     default:
                         require_once ROOT.'src/Views/Index/v_Erreur.php';

@@ -33,7 +33,7 @@ class MVol
             $conn = MConnexion::getBdd();
             $reqPrepare = $conn->query('SELECT * FROM vol
                                         WHERE DATE_ADD(CURDATE(), INTERVAL -1 DAY) < dateVol
-                                        ORDER BY dateVol DESC')
+                                        ORDER BY dateVol')
             ;
             $conn = null;
             $reqPrepare = $reqPrepare->fetchAll();

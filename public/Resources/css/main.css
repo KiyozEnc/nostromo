@@ -23,3 +23,7 @@ th, td {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.small div {
+    font-size: 1.2em;
+}
