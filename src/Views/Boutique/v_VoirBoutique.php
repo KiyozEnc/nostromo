@@ -11,8 +11,8 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="col-xs-12 col-sm-3 col-centered">
             <div class="thumbnail">
                 <br>
-                <img width="20%"
-                     height="20%"
+                <img width="40%"
+                     height="40%"
                      class="img-responsive"
                      src=<?php echo $unArt->getUrl(); ?>
                      title="Article n°<?= $unArt->getNumArt() ?>">
