@@ -48,9 +48,37 @@ class Utilisateur
 
     /**
      * Utilisateur constructor.
+     * @param int       $id
+     * @param string    $nom
+     * @param string    $prenom
+     * @param string    $adresse
+     * @param int       $cp
+     * @param string    $ville
+     * @param string    $mdp
+     * @param string    $mail
+     * @param int       $points
      */
-    public function __construct()
-    {
+    public function __construct(
+        $id = null,
+        $nom = null,
+        $prenom = null,
+        $adresse = null,
+        $cp = null,
+        $ville = null,
+        $mdp = null,
+        $mail = null,
+        $points = null
+    ) {
+
+        $this->id = $id;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->adresse = $adresse;
+        $this->cp = $cp;
+        $this->ville = $ville;
+        $this->mdp = $mdp;
+        $this->mail = $mail;
+        $this->points = $points;
     }
 
     /**

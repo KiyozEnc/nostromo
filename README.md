@@ -1,4 +1,4 @@
-# Nostromo BETA 1.1
+# Nostromo BETA 1.3
 ### Vol dans l'espace
 Pour utiliser le code source de notre projet Nostromo, il vous faut suivre les instructions suivantes :
  

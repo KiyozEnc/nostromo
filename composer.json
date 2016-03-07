@@ -9,9 +9,13 @@
             "email": "nostromo@contact.com"
         }
     ],
+    "require-dev": {
+        "phpunit/phpunit": "~5.2"
+    },
     "autoload": {
         "psr-4": {
-            "Nostromo\\": "src"
+            "Nostromo\\": "src",
+            "Nostromo\\Test\\": "tests"
         }
     }
 }
