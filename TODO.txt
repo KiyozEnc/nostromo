@@ -1,2 +1,3 @@
 ﻿- Update MonCompte Design
 - Passer une commande - valider le panier (Par Anthony)
+- Réduction par rapport aux points
