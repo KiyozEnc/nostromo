@@ -6,7 +6,7 @@ Pour utiliser le code source de notre projet Nostromo, il vous faut suivre les i
  - Exécuter install.bat sous Windows
  - Indiquer les informations demandées
  - Implémenter notre script SQL 'Nostromo_BDD.sql' dans votre base de données liée aux informations indiquées ultérieurement
- - Changer l'encodage du fichier src/Models/MConnexion.php en UTF8 SANS BOM
+ - Changer l'encodage du fichier src/Models/MConnexion.php en UTF8 SANS BOM sans quoi vous obtiendrez une erreur de namespace sur n'importe quelle page
  - Initialiser Composer
  
 #### Initialiser Composer :
