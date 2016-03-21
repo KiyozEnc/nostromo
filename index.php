@@ -268,5 +268,4 @@ session_start(); ?>
 if (isset($scripts)) {
     echo $scripts;
 } ?>
-<<<<<<< HEAD
 </html>
