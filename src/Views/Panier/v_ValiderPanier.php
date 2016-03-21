@@ -7,11 +7,13 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
 <div class="form-group">
     <label for="">Nom du titulaire de la carte</label>
     <input type="nomTitulaire" class="form-control" id="nomTitulaire" name="nomTitulaire" placeholder="François Dupont" required>
+
 </div>
 
 <div class="form-group">
     <label for="">Numéro de votre carte</label>
     <input type="numCarte" class="form-control" id="numCarte" name="numCarte" placeholder="0000000000000000" maxlength="16" required>
+
 </div>
 
 <div class="form-group">
@@ -27,7 +29,6 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         }
         ?>
     </select> Mois
-
     <select required>
         <?php
         $i = 2014;

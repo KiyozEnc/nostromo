@@ -12,4 +12,8 @@ $(document).ready(function () {
     qte.change(function () {
         priceContainer.text(formatToEuro(parseInt(price.val()) * parseInt($(this).val())));
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> origin/master
