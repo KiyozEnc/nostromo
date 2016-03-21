@@ -2,7 +2,6 @@
 
 namespace Nostromo\Models;
 
-use Nostromo\Classes\Build;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Vol;
 use Nostromo\Classes\Collection;
