@@ -49,4 +49,26 @@ class MCommander
 
         return $lesArticles;
     }
+
+    public static function setAjoutCommander(Commander $commander)
+    {
+        try {
+            $conn = MConnexion::getBdd();
+            $reqPrepare = $conn->prepare(
+                'INSERT INTO commander
+                (numArt,numCde,qte)
+                VALUES (?,?,?)'
+            );
+            $reqPrepare->execute(
+                array(
+                    $commander->getUnArticle(),
+                    $commander->getUneCommande(),
+                    $commander->getQte()
+                    )
+            );
+            $conn = null;
+        } catch (PDOException $ex) {
+            throw new ErrorSQLException('Impossible de continuer la validation de la commande. Détails : '.$ex->getMessage());
+        }
+    }
 }

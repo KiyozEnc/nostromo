@@ -85,7 +85,6 @@ CREATE TABLE echeance (
   numRes int not null,
   foreign key (numRes) references reservation(numRes)
 );
-
 INSERT INTO vol VALUES (1,"2015-12-05", "15:00:00",40, 15000);
 INSERT INTO vol VALUES (2,"2015-10-09", "12:15:00",80, 15000);
 INSERT INTO vol VALUES (3,"2015-11-08", "18:10:00",90, 15000);
@@ -106,6 +105,7 @@ INSERT INTO `client` VALUES (1,"Nostromo","Contact","7 rue de Mars",53100,"MAYEN
 
 INSERT INTO reservation VALUES (1,1,3,'2014-12-10 15:14:30',50);
 
+
 INSERT INTO echeance VALUES (1, 10140, '2016-02-21', 1);
 INSERT INTO echeance VALUES (2, 10000, '2016-03-22', 1);
 INSERT INTO echeance VALUES (3, 10000, '2016-04-22', 1);
@@ -116,5 +116,6 @@ INSERT INTO commande VALUES (2,1,"2015-10-20 10:00:00");
 INSERT INTO commander VALUES (1,1,2);
 INSERT INTO commander VALUES (2,1,1);
 INSERT INTO commander VALUES (1,2,4);
+
 
 SET FOREIGN_KEY_CHECKS = 1;

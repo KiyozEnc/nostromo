@@ -71,4 +71,25 @@ class MCommande
 
         return $lesCommandes;
     }
+
+    public static function setAjoutCommande(Commande $uneCommande)
+    {
+        try {
+            $conn = MConnexion::getBdd();
+            $reqPrepare = $conn->prepare(
+                'INSERT INTO commander
+                (numClt,date)
+                VALUES (?,?)'
+            );
+            $reqPrepare->execute(
+                array(
+                    $uneCommande->getUneClient(),
+                    $uneCommande->getUneDate()
+                    )
+            );
+            $conn = null;
+        } catch (PDOException $ex) {
+            throw new ErrorSQLException('Impossible de continuer la validation de la commande. Détails : '.$ex->getMessage());
+        }
+    }
 }

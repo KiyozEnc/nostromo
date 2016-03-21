@@ -9,8 +9,6 @@
             "email": "nostromo@contact.com"
         }
     ],
-    "require-dev": {
-    },
     "autoload": {
         "psr-4": {
             "Nostromo\\": "src",

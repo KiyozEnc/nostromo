@@ -1,12 +1,44 @@
 <?php
 
 use Nostromo\Classes\Panier;
+use Nostromo\Classes\Collection;
+use Nostromo\Classes\Commande;
+use Nostromo\Classes\Commander;
 use Nostromo\Models\MArticle;
+use Nostromo\Models\MCommande;
+use Nostromo\Models\MCommander;
 use Nostromo\Models\MConnexion as Connexion;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirPanier';
 
 switch ($action) {
+    case 'enregistrerPanier':
+
+        if (strlen($_POST['numCarte'])==16) {
+            $datePost = new \DateTime($_POST['CBYear'].'-'.$_POST['CBMonth'].'-01');
+            if (new \DateTime() > $datePost) {
+                throw new \UnexpectedValueException('Votre carte a expirée.');
+            }
+            $commande=new Commande(0,$_SESSION['Utilisateur'],date('Y-m-d H:m:s'));
+            $coll=new Collection();
+            foreach ($_SESSION['Panier']->getProduitsPanier() as $article)
+            {
+                $commander=new Commander();
+                $commander->setUnArticle($article);
+                $commander->setQte($article->getQte());
+                $commander->setUneCommande($commande);
+                $coll->ajouter($commander);
+            }
+            MCommande::setAjoutCommande($commande);
+            foreach ($coll->getCllection() as $commander) {
+                MCommander::setAjoutCommander($commander);
+            }
+        }
+        else{
+            require_once ROOT.'src/Views/Panier/v_VoirPanier.php';
+        }
+        break;
+
     case 'voirPanier':
         require_once ROOT.'src/Views/Panier/v_VoirPanier.php';
         break;
