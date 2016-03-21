@@ -96,8 +96,8 @@ INSERT INTO vol VALUES (7,"2016-10-10", "06:05:00",60, 15000);
 INSERT INTO vol VALUES (8,"2016-11-02", "12:05:00",120, 15000);
 INSERT INTO vol VALUES (9,"2016-10-26", "16:05:00",30, 15000);
 
-INSERT INTO article VALUES (1,"Gants astronaute","Default description",250,20,'public/Resources/img/Basket/gauntlet.jpg');
-INSERT INTO article VALUES (2,"Pantalon astronaute","Default description",400,20,'public/Resources/img/Basket/down.jpg');
+INSERT INTO article VALUES (1,"Gants astronaute","Default description",250,20,'public/Resources/img/Basket/gauntlet.png');
+INSERT INTO article VALUES (2,"Pantalon astronaute","Default description",400,20,'public/Resources/img/Basket/down.png');
 INSERT INTO article VALUES (3,"Casque astronaute","Default description",1200,5,'public/Resources/img/Basket/helmet.png');
 INSERT INTO article VALUES (4,"Truc astronaute","Default description",600,5,null);
 INSERT INTO article VALUES (5,"Haut astronaute","Default description",1500,5,'public/Resources/img/Basket/tenue.png');
