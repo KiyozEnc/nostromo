@@ -60,15 +60,16 @@ class Article
      */
     public function getArticles()
     {
-        $numArt = $this->getNumArt();
-        $designation = $this->getDesignation();
-        $pu = $this->getPu();
-        $qteStock = $this->getQteStock();
+        $numArt = $this->numArt;
+        $designation = $this->designation;
+        $pu = $this->pu;
+        $qteStock = $this->qteStock;
         $tab = [
             'numArt' => $numArt,
             'designation' => $designation,
             'pu' => $pu,
-            'qteStock' => $qteStock
+            'qteStock' => $qteStock,
+            'qte' => $this->qte
         ];
         return $tab;
     }

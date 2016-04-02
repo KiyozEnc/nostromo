@@ -14,5 +14,8 @@
             "Nostromo\\": "src",
             "Nostromo\\Test\\": "tests"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.3"
     }
 }
