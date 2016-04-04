@@ -25,7 +25,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                         </div>
                         <div class="col-xs-12 col-sm-3">
                             <div class="form-group">
-                                <label for="">Réduction</label>
+                                <label for="">Réduction (-2.5% par 75 points)</label>
                                 <input
                                     id="pointsUtilise"
                                     type="number"

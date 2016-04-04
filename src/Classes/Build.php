@@ -71,7 +71,7 @@ class Build
     public static function getNewPoints($price)
     {
         $points = 0;
-        for ($i = 0; $i < $price; $i += 1000) {
+        for ($i = 0; $i < $price; $i += 2000) {
             $points++;
         }
         return $points;

@@ -45,8 +45,8 @@ switch ($action) {
                     throw new \UnexpectedValueException('Le code CVC est incorrecte.');
                 }
                 $datePost = new \DateTime($_POST['CBYear'].'-'.$_POST['CBMonth'].'-01');
-                if (new \DateTime() > $datePost) {
-                    throw new \UnexpectedValueException('Votre carte a expirée.');
+                if (new \DateTime() > $datePost || new \DateTime('+3 months') > $datePost) {
+                    throw new \UnexpectedValueException('Votre carte a expirée ou votre carte sera expirée lors de la 3ème échéance.');
                 }
                 switch ($_GET['type']) {
                     case '3fois':

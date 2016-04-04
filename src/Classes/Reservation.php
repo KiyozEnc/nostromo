@@ -221,8 +221,11 @@ class Reservation
     public function getPriceReservation()
     {
         $reduc = 1;
-        for ($i = 0; $i < $this->reduction; $i += 75) {
-            $reduc -= 0.05;
+        for ($i = 0; $i <= $this->reduction - 75; $i += 75) {
+            $reduc -= 0.025;
+        }
+        if ($this->reduction < 75) {
+            $reduc = 1;
         }
         return ($this->unVol->getPrice()*$this->nbPers)*$reduc;
     }
