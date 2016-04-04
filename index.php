@@ -115,7 +115,7 @@ session_start(); ?>
                     ?>>
                         <a href='?page=monCompte'>
                             <img src='public/Resources/img/user.png' height='20'> Mon Compte
-                            [<?php echo $_SESSION['Utilisateur']->getNom() ?>]
+                            [<?php echo $_SESSION['Utilisateur']->getPoints().' points' ?>]
                         </a>
                     </li>
                     <li><a href='?page=deconnexion'>Déconnexion</a></li>
