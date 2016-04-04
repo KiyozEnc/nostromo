@@ -156,4 +156,39 @@ class MUtilisateur
             throw new ErrorSQLException($e->getMessage());
         }
     }
+    public static function getPoints(Utilisateur $user)
+    {
+        $points = 0;
+        try {
+            $conn = MConnexion::getBdd();
+            $reqPrepare = $conn->prepare('SELECT pointsClt FROM client WHERE numClt = ?');
+            $reqPrepare->execute([$user->getId()]);
+            $reqPrepare = $reqPrepare->fetch();
+            $points = $reqPrepare['pointsClt'];
+            $conn = null;
+        } catch (PDOException $ex) {
+            throw new ErrorSQLException("L'utilisateur n°{$user->getId()} n'existe pas.");
+        }
+
+        return $points;
+    }
+
+    /**
+     * @param Utilisateur $user
+     * @param int $points
+     *
+     * @throws ErrorSQLException
+     */
+    public static function setPoints(Utilisateur $user, $points)
+    {
+        try {
+            $conn = MConnexion::getBdd();
+            $reqPrepare = $conn->prepare('UPDATE client SET pointsClt = ? WHERE numClt = ?');
+            $reqPrepare->execute([$points, $user->getId()]);
+            $user->setPoints($points);
+            $conn = null;
+        } catch (PDOException $ex) {
+            throw new ErrorSQLException("L'utilisateur n°{$user->getId()} n'existe pas.");
+        }
+    }
 }

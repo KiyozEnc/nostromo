@@ -8,6 +8,7 @@
 namespace Nostromo\Models;
 
 use InvalidArgumentException;
+use Nostromo\Classes\Build;
 use Nostromo\Classes\Collection;
 use Nostromo\Classes\Echeance;
 use Nostromo\Classes\Exception\ErrorSQLException;
@@ -80,6 +81,8 @@ class MReservation
             }
             $conn->commit();
             $uneReservation->setLesEcheance($lesEcheances);
+            $points = $unClient->getPoints() - $uneReservation->getReduction();
+            MUtilisateur::setPoints($unClient, $points + Build::getNewPoints($uneReservation->getPriceReservation()));
             $conn = null;
         } catch (PDOException $e) {
             $conn->rollBack();

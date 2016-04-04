@@ -28,6 +28,12 @@ if (!array_key_exists('type', $_GET)) { ?>
     <?php
 } ?>
 <?php
+if ($_SESSION['Reservation']->getReduction() === 0) {
+    echo '<br><p>Vous avez choisi de ne pas appliquer vos points de fidélité</p>';
+} else {
+    echo '<br><p>Vous avez  choisi d\'utiliser '.$_SESSION['Reservation']->getReduction().' points de fidélité</p>';
+}
+
 if (array_key_exists('type', $_GET)) {
     if ($_GET['type'] === 'comptant') { ?>
         <br>
@@ -53,7 +59,7 @@ if (array_key_exists('type', $_GET)) {
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6 col-sm-4">
-                                <label>Mois</label>
+                                <label for="CBMonth">Mois</label>
                                 <select name="CBMonth" class="form-control" required>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -70,7 +76,7 @@ if (array_key_exists('type', $_GET)) {
                                 </select>
                             </div>
                             <div class="col-xs-6 col-sm-4">
-                                <label>Année</label>
+                                <label for="CBYear">Année</label>
                                 <select name="CBYear" class="form-control" required>
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
@@ -81,12 +87,8 @@ if (array_key_exists('type', $_GET)) {
                                     <option value="2022">2022</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-xs-12 col-sm-4">
-                                <label>CVC</label>
+                                <label for="CBSecret">CVC</label>
                                 <input name="CBSecret" type="number" class="form-control" required>
                             </div>
                         </div>
@@ -130,7 +132,7 @@ if (array_key_exists('type', $_GET)) {
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6 col-sm-4">
-                                <label>Mois</label>
+                                <label for="CBMonth">Mois</label>
                                 <select name="CBMonth" class="form-control" required>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -147,7 +149,7 @@ if (array_key_exists('type', $_GET)) {
                                 </select>
                             </div>
                             <div class="col-xs-6 col-sm-4">
-                                <label>Année</label>
+                                <label for="CBYear">Année</label>
                                 <select name="CBYear" class="form-control" required>
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
@@ -159,7 +161,7 @@ if (array_key_exists('type', $_GET)) {
                                 </select>
                             </div>
                             <div class="col-xs-12 col-sm-4">
-                                <label>CVC</label>
+                                <label for="CBSecret">CVC</label>
                                 <input name="CBSecret" type="number" class="form-control" required>
                             </div>
                         </div>

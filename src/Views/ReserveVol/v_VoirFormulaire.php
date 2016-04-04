@@ -18,6 +18,23 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                                 <input type="number" class="form-control" id="nbPers" name="nbPers" placeholder="Nombre de personnes" value="1">
                             </div>
                         </div>
+                        <div class="col-xs-12 col-sm-2">
+                            <div class="checkbox">
+                                <label><input id="reduction" type="checkbox" name="reduction">Appliqué une réduction ?</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="form-group">
+                                <label for="">Réduction</label>
+                                <input
+                                    id="pointsUtilise"
+                                    type="number"
+                                    class="form-control"
+                                    name="pointsUtilise"
+                                    placeholder="Combien de points ?"
+                                    disabled>
+                            </div>
+                        </div>
                     </div>
                     <a href="?page=reserver" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
                     <button type="submit" class="btn btn-primary">Valider</button>
@@ -26,3 +43,6 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         </div>
     </div>
 </div>
+<?php ob_start(); ?>
+    <script src="public/Resources/js/flight-manager.js"></script>
+<?php $scripts = ob_get_clean(); ?>

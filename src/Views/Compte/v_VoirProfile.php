@@ -10,4 +10,9 @@
         <?php
     }
     ?>
+    <p class="col-xs-12 col-sm-8 col-sm-offset-2 col-centered">
+        <?php
+        echo "Vous avez {$_SESSION['Utilisateur']->getPoints()} points.";
+        ?>
+    </p>
 </div>

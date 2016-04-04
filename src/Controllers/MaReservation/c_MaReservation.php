@@ -60,10 +60,8 @@ switch ($action) {
                         break;
                 }
             } else {
-                if (array_key_exists('type', $_GET)) {
-                    if (empty($_GET['type'])) {
-                        header('Location:?page=maReservation&action=payment');
-                    }
+                if (array_key_exists('type', $_GET) && empty($_GET['type'])) {
+                    header('Location:?page=maReservation&action=payment');
                 }
                 require_once ROOT.'src/Views/MaReservation/v_VoirCB.php';
             }

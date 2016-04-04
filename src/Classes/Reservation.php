@@ -41,6 +41,10 @@ class Reservation
      * @var Collection
      */
     private $lesEcheance;
+    /**
+     * @var float
+     */
+    private $reduction;
 
     const INTERET = 0.0140;
 
@@ -51,6 +55,7 @@ class Reservation
     {
         $this->dateRes = new \DateTime();
         $this->lesEcheance = new Collection();
+        $this->reduction = 0;
     }
 
     /**
@@ -215,7 +220,11 @@ class Reservation
      */
     public function getPriceReservation()
     {
-        return $this->unVol->getPrice()*$this->nbPers;
+        $reduc = 1;
+        for ($i = 0; $i < $this->reduction; $i += 75) {
+            $reduc -= 0.05;
+        }
+        return ($this->unVol->getPrice()*$this->nbPers)*$reduc;
     }
 
     /**
@@ -267,5 +276,23 @@ class Reservation
     public function getNbEcheance()
     {
         return $this->lesEcheance->taille();
+    }
+
+    /**
+     * @return float
+     */
+    public function getReduction()
+    {
+        return $this->reduction;
+    }
+
+    /**
+     * @param float $reduction
+     * @return Reservation
+     */
+    public function setReduction($reduction)
+    {
+        $this->reduction = $reduction;
+        return $this;
     }
 }

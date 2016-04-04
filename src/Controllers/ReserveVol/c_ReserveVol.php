@@ -2,6 +2,7 @@
 
 use Nostromo\Classes\Reservation;
 use Nostromo\Classes\Exception\NotConnectedException;
+use Nostromo\Models\MUtilisateur;
 use Nostromo\Models\MVol;
 use Nostromo\Models\MConnexion;
 
@@ -38,12 +39,18 @@ switch ($action) {
                 if ($_POST['nbPers'] !== 0 ||
                     $_POST['nbPers'] <= MVol::getPlaceRestante($unVol)
                 ) {
+                    if (array_key_exists('pointsUtilise', $_POST) && $_POST['pointsUtilise'] > MUtilisateur::getPoints($_SESSION['Utilisateur'])) {
+                        throw new UnexpectedValueException('Vous n\'avez pas assez de points');
+                    }
                     $_SESSION['Reservation'] = new Reservation();
                     $_SESSION['Reservation']
                         ->setNbPers($_POST['nbPers'])
                         ->setValid(false)
                         ->setUnClient($_SESSION['Utilisateur'])
                         ->setUnVol($unVol);
+                    if (array_key_exists('pointsUtilise', $_POST)) {
+                        $_SESSION['Reservation']->setReduction($_POST['pointsUtilise']);
+                    }
                 } else {
                     MConnexion::setFlashMessage(
                         'Il n\'y a plus assez de place pour ce vol, veuillez réduire le nombre de personnes',
@@ -75,6 +82,9 @@ switch ($action) {
         } catch (InvalidArgumentException $e) {
             MConnexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=maReservation');
+        } catch (UnexpectedValueException $e) {
+            MConnexion::setFlashMessage($e->getMessage().', actuellement '.MUtilisateur::getPoints($_SESSION['Utilisateur']). ' points', 'error');
+            header('Location:?page=reserver&action=reserverVol&vol='.$_GET['vol']);
         } catch (Exception $e) {
             MConnexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?reserver');
