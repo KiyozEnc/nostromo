@@ -268,4 +268,9 @@ class Article
         $this->description = $description;
         return $this;
     }
+
+    public function getMontant()
+    {
+        return $this->pu*$this->qte;
+    }
 }

@@ -35,7 +35,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="col-xs-5 col-sm-2 col-centered">
             <div class="form-group">
                 <label for="cpUser">Code postal</label>
-                <input type="number" class="form-control" id="cpUser" name="cpUser" placeholder="Code postal" required>
+                <input type="number" min="10000" max="99999" class="form-control" id="cpUser" name="cpUser" placeholder="Code postal" required>
             </div>
         </div>
         <div class="col-xs-7 col-sm-4 col-centered">

@@ -4,6 +4,8 @@ namespace Nostromo\Models;
 
 use InvalidArgumentException;
 use Nostromo\Classes\Commande;
+use Nostromo\Classes\Commander;
+use Nostromo\Classes\Exception\ErrorSQLException;
 use PDOException;
 use Nostromo\Classes\Utilisateur;
 use Nostromo\Classes\Collection;
@@ -26,6 +28,7 @@ class MCommande
      * @return Commande $uneCommande
      *
      * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function getUneCommande($id)
     {
@@ -76,19 +79,17 @@ class MCommande
     {
         try {
             $conn = MConnexion::getBdd();
+            $conn->beginTransaction();
             $reqPrepare = $conn->prepare(
-                'INSERT INTO commander
+                'INSERT INTO commande
                 (numClt,date)
                 VALUES (?,?)'
             );
-            $reqPrepare->execute(
-                array(
-                    $uneCommande->getUneClient(),
-                    $uneCommande->getUneDate()
-                    )
-            );
+            $reqPrepare->execute([$uneCommande->getUnClient()->getId(), $uneCommande->getUneDate()]);
+            $conn->commit();
             $conn = null;
         } catch (PDOException $ex) {
+            $conn->rollBack();
             throw new ErrorSQLException('Impossible de continuer la validation de la commande. Détails : '.$ex->getMessage());
         }
     }

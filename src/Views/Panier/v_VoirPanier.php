@@ -70,8 +70,8 @@ if (array_key_exists('Panier', $_SESSION)) {
         ?></h4>
     <div class="row">
         <div class="col-xs-12">
-            <a href ="?page=monPanier&action=viderPanier" onclick="return etesVousSur('Voulez-vous vider le panier ?')" class="btn btn-primary">Vider</a>
-            <a href ="?page=monPanier&action=validerPanier" class="btn btn-primary">Passer la commande</a>
+            <a href ="?page=monPanier&action=viderPanier" onclick="return etesVousSur('Voulez-vous vider le panier ?')" class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span> Vider</a>
+            <a href ="?page=monPanier&action=validerPanier" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Passer la commande</a>
         </div>
     </div>
     <?php

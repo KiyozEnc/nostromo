@@ -12,35 +12,44 @@ use Nostromo\Models\MConnexion as Connexion;
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirPanier';
 
 switch ($action) {
+    case 'voirPanier':
+        require_once ROOT.'src/Views/Panier/v_VoirPanier.php';
+        break;
     case 'enregistrerPanier':
-
-        if (strlen($_POST['numCarte'])==16) {
+        try {
+            if (!array_key_exists('numCarte', $_POST)) {
+                throw new \UnexpectedValueException('Les données saisies sont invalides. pas de post');
+            }
+            if (strlen($_POST['numCarte']) !== 16) {
+                throw new \UnexpectedValueException('Les données saisies sont invalides. 16 numéros carte');
+            }
             $datePost = new \DateTime($_POST['CBYear'].'-'.$_POST['CBMonth'].'-01');
             if (new \DateTime() > $datePost) {
                 throw new \UnexpectedValueException('Votre carte a expirée.');
             }
-            $commande=new Commande(0,$_SESSION['Utilisateur'],date('Y-m-d H:m:s'));
-            $coll=new Collection();
-            foreach ($_SESSION['Panier']->getProduitsPanier() as $article)
-            {
-                $commander=new Commander();
-                $commander->setUnArticle($article);
-                $commander->setQte($article->getQte());
-                $commander->setUneCommande($commande);
-                $coll->ajouter($commander);
+            $uneCommande = new Commande(Connexion::getLastIdCommande(), $_SESSION['Utilisateur'], date('Y-m-d H:m:s'));
+            $lesCommander = new Collection();
+            foreach ($_SESSION['Panier']->getProduitsPanier() as $unArticle) {
+                $unCommander = new Commander();
+                $unCommander->setUnArticle($unArticle);
+                $unCommander->setQte($unArticle->getQte());
+                $unCommander->setUneCommande($uneCommande);
+                $lesCommander->ajouter($unCommander);
             }
-            MCommande::setAjoutCommande($commande);
-            foreach ($coll->getCllection() as $commander) {
-                MCommander::setAjoutCommander($commander);
+            $uneCommande->setLesArticles($lesCommander);
+            //MCommande::setAjoutCommande($uneCommande);
+            foreach ($uneCommande->getLesArticles()->getCollection() as $unCommander) {
+                var_dump($unCommander);
+                //MCommander::setAjoutCommander($unCommander);
             }
+            header('Location:?page=monCompte&action=voirCommandes');
+        } catch (\InvalidArgumentException $e) {
+            Connexion::setFlashMessage($e->getMessage());
+            header('Location:?page=monPanier');
+        } catch (\UnexpectedValueException $e) {
+            Connexion::setFlashMessage($e->getMessage());
+            header('Location:?page=monPanier&action=validerPanier');
         }
-        else{
-            require_once ROOT.'src/Views/Panier/v_VoirPanier.php';
-        }
-        break;
-
-    case 'voirPanier':
-        require_once ROOT.'src/Views/Panier/v_VoirPanier.php';
         break;
     case 'ajouterArticle':
         try {
@@ -52,7 +61,7 @@ switch ($action) {
             }
             $prod = MArticle::getArticle($_GET['ref']);
             if (($prod->getQteStock() - $_POST['qte']) < 0) {
-                Connexion::setFlashMessage('Quantitée en stock insuffisante.', 'error');
+                Connexion::setFlashMessage('Quantitée en stock insuffisante.');
                 if ($_SESSION['Panier']->getNbProd() === 0) {
                     unset($_SESSION['Panier']);
                 }

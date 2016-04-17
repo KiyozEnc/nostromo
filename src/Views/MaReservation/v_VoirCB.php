@@ -85,11 +85,12 @@ if (array_key_exists('type', $_GET)) {
                                     <option value="2020">2020</option>
                                     <option value="2021">2021</option>
                                     <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
                                 </select>
                             </div>
                             <div class="col-xs-12 col-sm-4">
                                 <label for="CBSecret">CVC</label>
-                                <input name="CBSecret" type="number" class="form-control" required>
+                                <input min="100" maxlength="3" max="999" name="CBSecret" type="number" class="form-control" required>
                             </div>
                         </div>
                     </div>

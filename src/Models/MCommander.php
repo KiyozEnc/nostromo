@@ -3,6 +3,7 @@
 namespace Nostromo\Models;
 
 use Nostromo\Classes\Commande;
+use Nostromo\Classes\Commander;
 use Nostromo\Classes\Collection;
 use InvalidArgumentException;
 use PDOException;
@@ -50,24 +51,27 @@ class MCommander
         return $lesArticles;
     }
 
-    public static function setAjoutCommander(Commander $commander)
+    public static function setAjoutCommander(Commander $unCommander)
     {
         try {
             $conn = MConnexion::getBdd();
+            $conn->beginTransaction();
             $reqPrepare = $conn->prepare(
                 'INSERT INTO commander
-                (numArt,numCde,qte)
+                (numArt, numCde, qte)
                 VALUES (?,?,?)'
             );
             $reqPrepare->execute(
-                array(
-                    $commander->getUnArticle(),
-                    $commander->getUneCommande(),
-                    $commander->getQte()
-                    )
+                [
+                    $unCommander->getUnArticle()->getNumArt(),
+                    $unCommander->getUneCommande()->getId(),
+                    $unCommander->getQte()
+                ]
             );
+            $conn->commit();
             $conn = null;
         } catch (PDOException $ex) {
+            $conn->rollBack();
             throw new ErrorSQLException('Impossible de continuer la validation de la commande. Détails : '.$ex->getMessage());
         }
     }

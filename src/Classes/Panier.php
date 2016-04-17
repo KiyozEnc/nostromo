@@ -158,4 +158,17 @@ class Panier
 
         return $this;
     }
+
+    /**
+     * @return float
+     */
+    public function getPrixTotal()
+    {
+        $prix = (float) 0;
+        foreach ($this->collProduit->getCollection() as $unArticle) {
+            /** @var Article $unArticle */
+            $prix += $unArticle->getMontant();
+        }
+        return $prix;
+    }
 }
