@@ -4,7 +4,6 @@ namespace Nostromo\Models;
 
 use InvalidArgumentException;
 use Nostromo\Classes\Commande;
-use Nostromo\Classes\Commander;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use PDOException;
 use Nostromo\Classes\Utilisateur;
@@ -27,7 +26,7 @@ class MCommande
      *
      * @return Commande $uneCommande
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws ErrorSQLException
      */
     public static function getUneCommande($id)
@@ -43,7 +42,7 @@ class MCommande
 
             return $uneCommande;
         } catch (PDOException $e) {
-            throw new InvalidArgumentException($e->getMessage());
+            throw new ErrorSQLException($e->getMessage());
         }
     }
     /**
@@ -53,7 +52,8 @@ class MCommande
      *
      * @return Collection $lesCommandes
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function getCommandes(Utilisateur $unClient)
     {
@@ -69,13 +69,13 @@ class MCommande
                 $lesCommandes->ajouter($uneCommande);
             }
         } catch (PDOException $e) {
-            throw new InvalidArgumentException($e->getMessage());
+            throw new ErrorSQLException($e->getMessage());
         }
 
         return $lesCommandes;
     }
 
-    public static function setAjoutCommande(Commande $uneCommande)
+    public static function ajouterCommande(Commande $uneCommande)
     {
         try {
             $conn = MConnexion::getBdd();

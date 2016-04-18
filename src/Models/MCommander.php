@@ -51,7 +51,7 @@ class MCommander
         return $lesArticles;
     }
 
-    public static function setAjoutCommander(Commander $unCommander)
+    public static function ajouterArticleCommande(Commander $unCommander)
     {
         try {
             $conn = MConnexion::getBdd();

@@ -37,12 +37,12 @@ switch ($action) {
                 $lesCommander->ajouter($unCommander);
             }
             $uneCommande->setLesArticles($lesCommander);
-            //MCommande::setAjoutCommande($uneCommande);
+            MCommande::ajouterCommande($uneCommande);
             foreach ($uneCommande->getLesArticles()->getCollection() as $unCommander) {
-                var_dump($unCommander);
-                //MCommander::setAjoutCommander($unCommander);
+                MCommander::ajouterArticleCommande($unCommander);
             }
-            header('Location:?page=monCompte&action=voirCommandes');
+            echo '<script>window.location.replace("?page=monCompte&action=voirCommandes");</script>';
+            //header('Location:?page=monCompte&action=voirCommandes');
         } catch (\InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage());
             header('Location:?page=monPanier');
