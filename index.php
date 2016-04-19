@@ -137,7 +137,7 @@ session_start(); ?>
         <div class='container-fluid'>
             <?php
             if (MConnexion::sessionOuverte()) {
-                echo "<div class='col-sm-8 col-xs-12 col-lg-9'>";
+                echo "<div class='col-md-8 col-xs-12 col-lg-9'>";
             }
             if (array_key_exists('page', $_GET)) {
                 switch ($_GET['page']) {
@@ -186,12 +186,12 @@ session_start(); ?>
                 $action = 'voirReservation';
             }
             ?>
-            <div class='col-lg-3 hidden-xs col-sm-4' id='leftCol'>
+            <div class='col-lg-3 hidden-xs hidden-sm col-md-4' id='leftCol'>
                 <div class='row'>
                     <?php
                     if ($action !== 'voirReservation') {
                         ?>
-                        <div class='rectangle col-sm-12'>
+                        <div class='rectangle col-md-12'>
                             <ul class="list-unstyled">
                                 <li>
                                     <h4>
@@ -224,7 +224,7 @@ session_start(); ?>
                     <?php
                     if ($action !== 'voirCommandes') {
                         ?>
-                        <div class='rectangle col-sm-12'>
+                        <div class='rectangle col-md-12'>
                             <ul class="list-unstyled">
                                 <li>
                                     <h4>

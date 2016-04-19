@@ -4,6 +4,8 @@ namespace Nostromo\Classes;
 
 class Build
 {
+    const TYPE_RESERVATION = 1500;
+    const TYPE_COMMANDE = 300;
     /**
      * Formate une chaîne de caractère de type Time en format français.
      *
@@ -65,15 +67,21 @@ class Build
 
     /**
      * @param float $price
+     * @param int $type
      *
      * @return int
      */
-    public static function getNewPoints($price)
+    public static function getNewPoints($price, $type = self::TYPE_RESERVATION)
     {
         $points = 0;
-        for ($i = 0; $i < $price; $i += 2000) {
+        for ($i = 0; $i < $price; $i += $type) {
             $points++;
         }
         return $points;
+    }
+
+    public static function genererUrlImgAvion()
+    {
+        return 'public/Resources/img/avion.png';
     }
 }

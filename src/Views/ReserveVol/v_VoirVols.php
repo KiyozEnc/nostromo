@@ -2,6 +2,7 @@
 
 use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MVol;
+use Nostromo\Classes\Build;
 
 require_once ROOT.'src/Views/v_Alert.php'; ?>
 
@@ -16,26 +17,26 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         foreach ($lesVols->getCollection() as $unVol) {
             ?>
             <?php /* @var $unVol \Nostromo\Classes\Vol */ ?>
-            <div class="col-sm-4 col-lg-3 col-centered">
+            <div class="col-md-4 col-lg-3 col-centered">
                 <div class="thumbnail">
                     <img
                         class="img-responsive hidden-xs"
-                        height="50%"
-                        width="50%"
-                        src="public/Resources/img/avion.png"
+                        height="128"
+                        width="128"
+                        src=<?= \Nostromo\Classes\Build::genererUrlImgAvion() ?>
                         title="Vol n°<?= $unVol->getNumVol() ?>"
                     >
                     <div class="caption">
-                        <h3>Vol n°<?= $unVol->getNumVol() ?>
+                        <h2>Vol n°<?= $unVol->getNumVol() ?>
                             <?php
                             if (MVol::getPlaceRestante($unVol) === 0) {
                                 echo ' - <span class="text-danger">COMPLET</span>';
                             }
-                            ?></h3>
-                        <p>Date et heure : <?= $unVol->getDateVol() ?> à <?= $unVol->getHeureVol() ?></p>
-                        <p>Prix : <?php echo number_format($unVol->getPrice(), 2, ',', ' ').' €';
+                            ?></h2>
+                        <h4>Date et heure : <?= $unVol->getDateVol() ?> à <?= $unVol->getHeureVol() ?></h4>
+                        <h5>Prix : <?php echo Build::formaterEuro($unVol->getPrice());
                             ?>
-                        </p>
+                        </h5>
                         <?php
                         if (Connexion::sessionOuverte()) : ?>
                             <p><a

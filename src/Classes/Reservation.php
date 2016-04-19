@@ -47,6 +47,8 @@ class Reservation
     private $reduction;
 
     const INTERET = 0.0140;
+    const STEP_POINTS = 25;
+    const STEP_REDUCTION = 0.0125;
 
     /**
      * Reservation constructor.
@@ -55,7 +57,7 @@ class Reservation
     {
         $this->dateRes = new \DateTime();
         $this->lesEcheance = new Collection();
-        $this->reduction = 0;
+        $this->reduction = (float) 0;
     }
 
     /**
@@ -214,20 +216,30 @@ class Reservation
     }
 
     /**
-     * Récupère le prix de la réservation
+     * Récupère le prix de la réservation (comprend la remise lié aux points)
      *
      * @return int
      */
     public function getPriceReservation()
     {
         $reduc = 1;
-        for ($i = 0; $i <= $this->reduction - 75; $i += 75) {
-            $reduc -= 0.025;
+        for ($i = 0; $i <= $this->reduction - self::STEP_POINTS; $i += self::STEP_POINTS) {
+            $reduc -= self::STEP_REDUCTION;
         }
-        if ($this->reduction < 75) {
+        if ($this->reduction < self::STEP_POINTS) {
             $reduc = 1;
         }
         return ($this->unVol->getPrice()*$this->nbPers)*$reduc;
+    }
+
+    /**
+     * Retourne le montant de la remise
+     *
+     * @return float
+     */
+    public function getPriceRemise()
+    {
+        return ($this->nbPers * $this->getUnVol()->getPrice()) - $this->getPriceReservation();
     }
 
     /**
@@ -297,5 +309,14 @@ class Reservation
     {
         $this->reduction = $reduction;
         return $this;
+    }
+
+    public function getPercentReduction()
+    {
+        $percent = (float) 0;
+        for ($i = 0; $i < $this->reduction; $i += self::STEP_POINTS) {
+            $percent += self::STEP_REDUCTION;
+        }
+        return $percent * 100;
     }
 }

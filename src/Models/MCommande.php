@@ -49,18 +49,21 @@ class MCommande
      * Récupère les commandes dont l'utilisateur est passé en paramètre.
      *
      * @param Utilisateur $unClient
+     * @param bool $index
      *
      * @return Collection $lesCommandes
      *
      * @throws \InvalidArgumentException
      * @throws ErrorSQLException
      */
-    public static function getCommandes(Utilisateur $unClient)
+    public static function getCommandes(Utilisateur $unClient, $index = false)
     {
         $lesCommandes = new Collection();
         try {
             $conn = MConnexion::getBdd();
-            $req = $conn->prepare('SELECT * FROM commande WHERE numClt = ? ORDER BY numCde DESC LIMIT 2');
+            $req = !$index ?
+                $conn->prepare('SELECT * FROM commande WHERE numClt = ? ORDER BY date DESC') :
+                $conn->prepare('SELECT * FROM commande WHERE numClt = ? ORDER BY date DESC LIMIT 2');
             $req->execute(array($unClient->getId()));
             $req = $req->fetchAll();
             foreach ($req as $tabs) {

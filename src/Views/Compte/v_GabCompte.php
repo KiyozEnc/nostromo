@@ -17,7 +17,7 @@ if (array_key_exists('action', $_GET)) {
 }
 ?>
 <div class="row row-centered">
-    <div class="col-xs-12 col-sm-6 col-centered">
+    <div class="col-xs-12 col-md-6 col-centered">
         <ul class="nav nav-pills">
             <li id="home" <?php
             if ($action === 'voirMonCompte') {

@@ -11,16 +11,16 @@ if (array_key_exists('Panier', $_SESSION)) {
     foreach ($_SESSION['Panier']->getProduitsPanier() as $art) {
         ?>
         <div class="row">
-            <div class="col-xs-12 col-sm-3">
+            <div class="col-xs-12 col-md-3">
                 <?php echo '<span class="text-uppercase"><a href="?page=materiel&action=voirArticle&article='.$art->getNumArt().'&target=panier">'.$art->getDesignation().'</a></span>';
                 ?>
             </div>
-            <div class="col-xs-12 col-sm-3">
+            <div class="col-xs-12 col-md-3">
                 <?php
                 echo 'EUR '.number_format($art->getPu(), 2, ',', '');
                 ?>
             </div>
-            <div class="col-xs-12 col-sm-3">
+            <div class="col-xs-12 col-md-3">
                 <?php
                 if ($art->getQteStock() !== 0 && $art->getQte() <= $art->getQteStock()) {
                     echo '<span class="text-success">En stock</span>';
@@ -29,7 +29,7 @@ if (array_key_exists('Panier', $_SESSION)) {
                 }
                 ?>
             </div>
-            <div class="col-xs-12 col-sm-3">
+            <div class="col-xs-12 col-md-3">
                 <span class="sr-only" data-attr="<?php echo $art->getNumArt();
                 ?>"></span>
                 <select name="qte" id="qte" class="form-control" onchange="setQte(<?php echo $art->getNumArt();
@@ -79,7 +79,7 @@ if (array_key_exists('Panier', $_SESSION)) {
 } else {
     ?>
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-sm-offset-2"><p class="text-muted">Votre panier est vide. <a
+        <div class="col-xs-12 col-md-6 col-md-offset-2"><p class="text-muted">Votre panier est vide. <a
                     href="?page=materiel">Commandez maintenant !</a></p></div>
     </div>
     <?php

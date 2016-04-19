@@ -1,6 +1,6 @@
 <!-- Alerte valid -->
 <div class="row row-centered">
-    <div class="col-sm-6 col-xs-12 col-centered">
+    <div class="col-md-6 col-xs-12 col-centered">
         <?php
         if (array_key_exists('valid', $_SESSION)) {
             ?>

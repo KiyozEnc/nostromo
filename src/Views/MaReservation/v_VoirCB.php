@@ -5,7 +5,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
 
     <h2>Mode de paiement</h2>
     <div class="row">
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-md-6">
             <ul class="nav nav-pills">
                 <li <?php
                 if (array_key_exists('type', $_GET) && $_GET['type'] === 'comptant') {
@@ -21,28 +21,27 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         </div>
     </div>
 <?php
-if (!array_key_exists('type', $_GET)) { ?>
-    <div class="row">
-        <div class="col-xs-12 col-sm-6"><small>Veuillez choisir un mode de paiement.</small></div>
-    </div>
-    <?php
-} ?>
-<?php
 if ($_SESSION['Reservation']->getReduction() === 0) {
     echo '<br><p>Vous avez choisi de ne pas appliquer vos points de fidélité</p>';
 } else {
-    echo '<br><p>Vous avez  choisi d\'utiliser '.$_SESSION['Reservation']->getReduction().' points de fidélité</p>';
+    echo '<br><p>Vous avez  choisi d\'utiliser '.$_SESSION['Reservation']->getReduction().' points de fidélité (soit '.$_SESSION['Reservation']->getPercentReduction().'% de réduction)</p>';
+}
+if (!array_key_exists('type', $_GET)) { ?>
+    <div class="row">
+        <div class="col-xs-12 col-md-6"><small>Veuillez choisir un mode de paiement.</small></div>
+    </div>
+    <?php
 }
 
 if (array_key_exists('type', $_GET)) {
     if ($_GET['type'] === 'comptant') { ?>
         <br>
         <div class="row">
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-md-4">
                 <form action="?page=maReservation&action=payment&type=comptant" method="post" role="form" autocomplete="off">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12">
+                            <div class="col-xs-12 col-md-12">
                                 <label>Nom du titulaire de la carte</label>
                                 <input type="text" class="form-control" name="CBName" placeholder="Nom du titulaire" maxlength="50" required>
                             </div>
@@ -50,7 +49,7 @@ if (array_key_exists('type', $_GET)) {
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12">
+                            <div class="col-xs-12 col-md-12">
                                 <label>Numéro de carte (16 chiffres)</label>
                                 <input type="text" class="form-control" name="CBNumber" placeholder="16 chiffres de votre carte bancaire" maxlength="16" required>
                             </div>
@@ -58,7 +57,7 @@ if (array_key_exists('type', $_GET)) {
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-6 col-sm-4">
+                            <div class="col-xs-6 col-md-4">
                                 <label for="CBMonth">Mois</label>
                                 <select name="CBMonth" class="form-control" required>
                                     <option value="1">1</option>
@@ -75,7 +74,7 @@ if (array_key_exists('type', $_GET)) {
                                     <option value="12">12</option>
                                 </select>
                             </div>
-                            <div class="col-xs-6 col-sm-4">
+                            <div class="col-xs-6 col-md-4">
                                 <label for="CBYear">Année</label>
                                 <select name="CBYear" class="form-control" required>
                                     <option value="2016">2016</option>
@@ -88,7 +87,7 @@ if (array_key_exists('type', $_GET)) {
                                     <option value="2023">2023</option>
                                 </select>
                             </div>
-                            <div class="col-xs-12 col-sm-4">
+                            <div class="col-xs-12 col-md-4">
                                 <label for="CBSecret">CVC</label>
                                 <input min="100" maxlength="3" max="999" name="CBSecret" type="number" class="form-control" required>
                             </div>
@@ -97,13 +96,18 @@ if (array_key_exists('type', $_GET)) {
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </form>
             </div>
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-md-4">
                 <h2>Total TTC <small>paiement comptant</small></h2>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12">
+                    <div class="col-xs-12 col-md-12">
                         <?php echo
-                            number_format($_SESSION['Reservation']->getPriceReservation(), 2, ',', ' ').' €'; ?>
+                            Build::formaterEuro($_SESSION['Reservation']->getPriceReservation()); ?>
                         - aujourd'hui
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        Dont <?= Build::formaterEuro($_SESSION['Reservation']->getPriceRemise()); ?> de remise lié aux points de fidélité.
                     </div>
                 </div>
             </div>
@@ -112,11 +116,11 @@ if (array_key_exists('type', $_GET)) {
     } else { ?>
         <br>
         <div class="row">
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-md-4">
                 <form action="?page=maReservation&action=payment&type=3fois" method="post" role="form" autocomplete="off">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12">
+                            <div class="col-xs-12 col-md-12">
                                 <label>Nom du titulaire de la carte</label>
                                 <input type="text" class="form-control" name="CBName" placeholder="Nom du titulaire" maxlength="50" required>
                             </div>
@@ -124,7 +128,7 @@ if (array_key_exists('type', $_GET)) {
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12">
+                            <div class="col-xs-12 col-md-12">
                                 <label>Numéro de carte (16 chiffres)</label>
                                 <input type="text" class="form-control" name="CBNumber" placeholder="16 chiffres de votre carte bancaire" maxlength="16" required>
                             </div>
@@ -132,7 +136,7 @@ if (array_key_exists('type', $_GET)) {
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-6 col-sm-4">
+                            <div class="col-xs-6 col-md-4">
                                 <label for="CBMonth">Mois</label>
                                 <select name="CBMonth" class="form-control" required>
                                     <option value="1">1</option>
@@ -149,7 +153,7 @@ if (array_key_exists('type', $_GET)) {
                                     <option value="12">12</option>
                                 </select>
                             </div>
-                            <div class="col-xs-6 col-sm-4">
+                            <div class="col-xs-6 col-md-4">
                                 <label for="CBYear">Année</label>
                                 <select name="CBYear" class="form-control" required>
                                     <option value="2016">2016</option>
@@ -161,7 +165,7 @@ if (array_key_exists('type', $_GET)) {
                                     <option value="2022">2022</option>
                                 </select>
                             </div>
-                            <div class="col-xs-12 col-sm-4">
+                            <div class="col-xs-12 col-md-4">
                                 <label for="CBSecret">CVC</label>
                                 <input name="CBSecret" type="number" class="form-control" required>
                             </div>
@@ -169,28 +173,36 @@ if (array_key_exists('type', $_GET)) {
                     </div>
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </form>
+                <h5 class="text-center">
+                    <small>Votre carte devra être valide au moins pendant 3 mois pour le paiement en plusieurs fois.</small>
+                </h5>
             </div>
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-md-4">
                 <h2>Échéances <small>paiement en plusieurs fois</small></h2>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12">
+                    <div class="col-xs-12 col-md-12">
                         <?php echo
                                 Build::formaterEuro($_SESSION['Reservation']->getFirstEcheancePrice()); ?>
                         - aujourd'hui (<?php echo $_SESSION['Reservation']->getInteret().' supplémentaires'; ?>)
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12">
+                    <div class="col-xs-12 col-md-12">
                         <?php echo
                                 Build::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
                         - le <?php echo Build::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(1)); ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12">
+                    <div class="col-xs-12 col-md-12">
                         <?php echo
                                 Build::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
                         - le <?php echo Build::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(2)); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        Dont <?= Build::formaterEuro($_SESSION['Reservation']->getPriceRemise()); ?> de remise lié aux points de fidélité.
                     </div>
                 </div>
             </div>

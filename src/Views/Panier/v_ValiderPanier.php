@@ -2,7 +2,7 @@
 require_once ROOT.'src/Views/v_Alert.php'; ?>
 <h3>Validation de Votre Commande</h3>
 <form action="?page=monPanier&action=enregistrerPanier" autocomplete="off" method="post">
-    <div class="col-xs-12 col-sm-4">
+    <div class="col-xs-12 col-md-4">
         <div class="form-group">
             <label for="nomTitulaire">Nom du titulaire de la carte</label>
             <input
@@ -31,7 +31,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="form-group">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-4 col-sm-4">
+                    <div class="col-xs-4 col-md-4">
                         <label for="CBMonth">Mois</label>
                         <select name="CBMonth" class="form-control" required>
                             <option value="1">1</option>
@@ -48,7 +48,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                             <option value="12">12</option>
                         </select>
                     </div>
-                    <div class="col-xs-4 col-sm-4">
+                    <div class="col-xs-4 col-md-4">
                         <label for="CBYear">Année</label>
                         <select name="CBYear" class="form-control" required>
                             <option value="2016">2016</option>
@@ -62,7 +62,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                             <option value="2023">2023</option>
                         </select>
                     </div>
-                    <div class="col-xs-4 col-sm-4">
+                    <div class="col-xs-4 col-md-4">
                         <label for="CBSecret">Code CVC</label>
                         <input
                             type="number"
@@ -81,7 +81,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <button type="submit" class="btn btn-primary">Finaliser la commande</button>
     </div>
 </form>
-<div class="col-xs-12 col-sm-4">
+<div class="col-xs-12 col-md-4">
     <h3>Montant TTC à payer aujourd'hui : </h3>
     <h4><?php echo \Nostromo\Classes\Build::formaterEuro($_SESSION['Panier']->getPrixTotal()); ?></h4>
 </div>

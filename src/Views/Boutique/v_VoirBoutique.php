@@ -7,8 +7,9 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
     <h2 class="text-center text-info text-muted">Articles disponibles</h2>
     <?php
     foreach ($tabArt->getCollection() as $unArt) {
+        /** @var \Nostromo\Classes\Article $unArt */
         ?>
-        <div class="col-xs-12 col-sm-3 col-centered">
+        <div class="col-md-4 col-lg-3 col-centered">
             <div class="thumbnail">
                 <br>
                 <img width="40%"
@@ -18,18 +19,22 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                      title="Article n°<?= $unArt->getNumArt() ?>">
                 <div class="caption">
                     <?php
-                    if (Connexion::sessionOuverte()) {
+                    if (Connexion::sessionOuverte() && $unArt->getQteStock() > 0) {
                         ?>
-                        <p class="text-center">
+                        <h3 class="text-center">
                             <a href="?page=materiel&action=voirArticle&article=<?= $unArt->getNumArt() ?>">
                                 <?php echo $unArt->getDesignation();
                                 ?>
                             </a>
-                        </p>
+                        </h3>
                         <?php
 
                     } else {
-                        echo '<p class="text-center">'.$unArt->getDesignation().'</p>';
+                        echo '<h3 class="text-center">'.$unArt->getDesignation();
+                        if ($unArt->getQteStock() === 0) {
+                            echo ' <small class="text-danger">PLUS EN STOCK</small>';
+                        }
+                        echo '</h3>';
                     }
                     ?>
                 </div>

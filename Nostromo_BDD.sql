@@ -85,37 +85,31 @@ CREATE TABLE echeance (
   numRes int not null,
   foreign key (numRes) references reservation(numRes)
 );
-INSERT INTO vol VALUES (1,"2015-12-05", "15:00:00",40, 15000);
-INSERT INTO vol VALUES (2,"2015-10-09", "12:15:00",80, 15000);
-INSERT INTO vol VALUES (3,"2015-11-08", "18:10:00",90, 15000);
-INSERT INTO vol VALUES (4,"2016-01-10", "14:20:00",60, 15000);
-INSERT INTO vol VALUES (5,"2016-02-28", "18:05:00",40, 15000);
-INSERT INTO vol VALUES (6,"2016-03-18", "14:05:00",35, 15000);
-INSERT INTO vol VALUES (7,"2016-10-10", "06:05:00",60, 15000);
-INSERT INTO vol VALUES (8,"2016-11-02", "12:05:00",120, 15000);
-INSERT INTO vol VALUES (9,"2016-10-26", "16:05:00",30, 15000);
 
-INSERT INTO article VALUES (1,"Gants astronaute","Default description",250,20,'public/Resources/img/Basket/gauntlet.png');
-INSERT INTO article VALUES (2,"Pantalon astronaute","Default description",400,20,'public/Resources/img/Basket/down.png');
-INSERT INTO article VALUES (3,"Casque astronaute","Default description",1200,5,'public/Resources/img/Basket/helmet.png');
-INSERT INTO article VALUES (4,"Truc astronaute","Default description",600,5,null);
-INSERT INTO article VALUES (5,"Haut astronaute","Default description",1500,5,'public/Resources/img/Basket/tenue.png');
+INSERT INTO vol VALUES (1, "2015-12-05", "15:00:00", 40, 15000);
+INSERT INTO vol VALUES (2, "2015-10-09", "12:15:00", 80, 15000);
+INSERT INTO vol VALUES (3, "2015-11-08", "18:10:00", 90, 15000);
+INSERT INTO vol VALUES (4, "2016-01-10", "14:20:00", 60, 15000);
+INSERT INTO vol VALUES (5, "2016-02-28", "18:05:00", 40, 15000);
+INSERT INTO vol VALUES (6, "2016-03-18", "14:05:00", 35, 15000);
+INSERT INTO vol VALUES (7, "2016-10-10", "06:05:00", 60, 15000);
+INSERT INTO vol VALUES (8, "2016-11-02", "12:05:00", 120, 15000);
+INSERT INTO vol VALUES (9, "2016-10-26", "16:05:00", 30, 15000);
+INSERT INTO vol VALUES (10, "2016-11-10", "11:24:00", 60, 24000);
 
-INSERT INTO `client` VALUES (1,"Nostromo","Contact","7 rue de Mars",53100,"MAYENNE","ffb4761cba839470133bee36aeb139f58d7dbaa9","contact@nostromo.com",150);
+INSERT INTO article VALUES (1, "Gants astronaute", "Ces gants de l’espace pour les cosmonautes en herbe sont les répliques de ceux utilisés par les vrais astronautes. Une pièce incontournable pour les missions spatiales…", 250, 20, 'public/Resources/img/Basket/gauntlet.png');
+INSERT INTO article VALUES (2, "Pantalon astronaute", "Élastique à la taille, s'ajustera parfaitement à votre taille.", 400, 20, 'public/Resources/img/Basket/down.png');
+INSERT INTO article VALUES (3, "Casque astronaute", "Paré au lancement ! Vous qui avez toujours rêvé de quitter l'atmosphère et découvrir de nouvelles planètes, prenez votre casque de cosmonaute et décollez pour de nouveaux horizons !", 1200, 5, 'public/Resources/img/Basket/helmet.png');
+INSERT INTO article VALUES (5, "Haut astronaute", "Haut de couleur blanc, possède des éléments argentés au niveau des épaules et de la taille. Il possède également le drapeau de l'Amérique sur le torse. Il se ferme dans le dos par un scratch.", 1500, 5, 'public/Resources/img/Basket/tenue.png');
 
-INSERT INTO reservation VALUES (1,1,3,'2014-12-10 15:14:30',50);
+INSERT INTO `client` VALUES (1, "Nostromo", "Contact", "7 rue de Mars", 53100, "MAYENNE", "ffb4761cba839470133bee36aeb139f58d7dbaa9", "contact@nostromo.com", 150);
 
+INSERT INTO commande VALUES (1, 1, "2015-11-28 12:00:00");
+INSERT INTO commande VALUES (2, 1, "2015-10-20 10:00:00");
 
-INSERT INTO echeance VALUES (1, 10140, '2016-02-21', 1);
-INSERT INTO echeance VALUES (2, 10000, '2016-03-22', 1);
-INSERT INTO echeance VALUES (3, 10000, '2016-04-22', 1);
-
-INSERT INTO commande VALUES (1,1,"2015-11-28 12:00:00");
-INSERT INTO commande VALUES (2,1,"2015-10-20 10:00:00");
-
-INSERT INTO commander VALUES (1,1,2);
-INSERT INTO commander VALUES (2,1,1);
-INSERT INTO commander VALUES (1,2,4);
+INSERT INTO commander VALUES (1, 1, 2);
+INSERT INTO commander VALUES (2, 1, 1);
+INSERT INTO commander VALUES (1, 2, 4);
 
 
 SET FOREIGN_KEY_CHECKS = 1;

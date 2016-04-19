@@ -1,16 +1,18 @@
 <div class="row row-centered">
-    <div class="col-xs-12 col-sm-6 col-centered">
+    <div class="col-xs-12 col-md-6 col-centered">
         <form class="form-horizontal" action="?page=monCompte&action=voirCommandes" method="post" role="form">
             <div class="form-group">
-                <label for="inputID" class="col-sm-2 control-label">Commandes</label>
-                <div class="col-xs-12 col-sm-10 col-centered">
+                <label for="inputID" class="col-md-2 control-label">Commandes</label>
+                <div class="col-xs-12 col-md-10 col-centered">
                     <select name="cde" id="inputID" class="form-control" onchange="voirCommande(this.form)">
                         <option disabled selected>-- Sélectionner une commande --</option>
                         <?php
+                        use Nostromo\Classes\Build;
+
                         if (isset($lesCommandes)) {
                             foreach ($lesCommandes->getCollection() as $commande) {
                                 ?>
-                                <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' le '.$commande->getUneDate() ?> - Montant : <?= $commande->getMontantTotal();
+                                <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' le '. Build::formaterDateTimeWithTime(new DateTime($commande->getUneDate())) ?> - Montant : <?= $commande->getMontantTotal();
                                     ?> €</option>
                                 <?php
 
@@ -23,7 +25,7 @@
     </div>
 </div>
 <div class="row row-centered">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
         <?php
         if (isset($uneCommande)) {
             ?>
@@ -34,6 +36,7 @@
                     <th>Désignation</th>
                     <th>Prix unitaire</th>
                     <th>Quantité commandé</th>
+                    <th>Sous-total</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,8 +46,9 @@
 
                     <tr>
                         <td><?= $article->getDesignation() ?></td>
-                        <td><?= $article->getPu() ?> €</td>
+                        <td><?= Build::formaterEuro($article->getPu()) ?></td>
                         <td><?= $article->getQte() ?></td>
+                        <td><?= Build::formaterEuro($article->getMontant()); ?></td>
                     </tr>
                     <?php
 
@@ -52,6 +56,7 @@
                 ?>
                 </tbody>
             </table>
+            <h3>Total : <span class="text-warning"><?= Build::formaterEuro($uneCommande->getMontantTotal()) ?></span></h3>
             <?php
 
         } else {
@@ -67,7 +72,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-3 col-sm-offset-3">
+    <div class="col-xs-12 col-md-3 col-md-offset-3">
         <a href="?page=monCompte" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
     </div>
 </div>

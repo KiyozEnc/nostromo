@@ -89,7 +89,7 @@ class Commande
      */
     public function getUneDate()
     {
-        return Build::formaterDateEtHeure($this->uneDate);
+        return $this->uneDate;
     }
 
     /**
@@ -125,7 +125,7 @@ class Commande
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getMontantTotal()
     {

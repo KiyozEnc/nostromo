@@ -6,7 +6,7 @@ if (array_key_exists('Reservation', $_SESSION)) {
     ?>
     <!-- COMPTEUR VOL DANS XX TEMPS EN JS ICI -->
     <div class="row row-centered">
-        <div class="col-sm-6 col-xs-12 col-centered">
+        <div class="col-md-6 col-xs-12 col-centered">
             <table class="table table-bordered table-hover table-condensed">
                 <?php
                 if (!$_SESSION['Reservation']->isValid()) {
@@ -58,7 +58,7 @@ if (array_key_exists('Reservation', $_SESSION)) {
             </table>
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-md-7">
                     <?php
                     if ($_SESSION['Reservation']->getNbEcheance() === 1) {
                         echo '<h3>Échéances :</h3>';
@@ -76,6 +76,9 @@ if (array_key_exists('Reservation', $_SESSION)) {
                         }
                     } else {
                         echo '<h4>A payer : '.Build::formaterEuro($_SESSION['Reservation']->getPriceReservation()).'</h4>';
+                        if ($_SESSION['Reservation']->getReduction() > 0) {
+                            echo '<h5>Dont : '.Build::formaterEuro($_SESSION['Reservation']->getPriceRemise()).' de remise lié aux points de fidélité.</h5>';
+                        }
                     }
                     ?>
                 </div>
@@ -97,7 +100,7 @@ if (array_key_exists('Reservation', $_SESSION)) {
 
 } else {
     ?> <div class="row">
-        <p class="col-xs-12 col-sm-6 col-sm-offset-2 text-muted">Vous n'avez aucune réservation. <a href="?page=reserver" role="button">Réserver un vol</a></p>
+        <p class="col-xs-12 col-md-6 col-md-offset-2 text-muted">Vous n'avez aucune réservation. <a href="?page=reserver" role="button">Réserver un vol</a></p>
     </div>
     <?php
 }

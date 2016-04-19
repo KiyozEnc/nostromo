@@ -24,7 +24,7 @@ switch ($action) {
                     unset($_SESSION['Reservation']);
                 }
                 if (!array_key_exists('Commandes', $_SESSION)) {
-                    $_SESSION['Commandes'] = MCommande::getCommandes($_SESSION['Utilisateur']);
+                    $_SESSION['Commandes'] = MCommande::getCommandes($_SESSION['Utilisateur'], true);
                 }
                 if (0 === $_SESSION['Commandes']->taille()) {
                     unset($_SESSION['Commandes']);

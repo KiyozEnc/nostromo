@@ -27,7 +27,7 @@ switch ($action) {
             if (new \DateTime() > $datePost) {
                 throw new \UnexpectedValueException('Votre carte a expirée.');
             }
-            $uneCommande = new Commande(Connexion::getLastIdCommande(), $_SESSION['Utilisateur'], date('Y-m-d H:m:s'));
+            $uneCommande = new Commande(Connexion::getLastIdCommande(), $_SESSION['Utilisateur'], date('Y-m-d H:i:s'));
             $lesCommander = new Collection();
             foreach ($_SESSION['Panier']->getProduitsPanier() as $unArticle) {
                 $unCommander = new Commander();
@@ -40,9 +40,11 @@ switch ($action) {
             MCommande::ajouterCommande($uneCommande);
             foreach ($uneCommande->getLesArticles()->getCollection() as $unCommander) {
                 MCommander::ajouterArticleCommande($unCommander);
+                MArticle::updateQteStock($unCommander->getUnArticle(), $unCommander->getQte());
             }
-            echo '<script>window.location.replace("?page=monCompte&action=voirCommandes");</script>';
-            //header('Location:?page=monCompte&action=voirCommandes');
+            \Nostromo\Models\MUtilisateur::setPoints($_SESSION['Utilisateur'], $_SESSION['Utilisateur']->getPoints() + \Nostromo\Classes\Build::getNewPoints($_SESSION['Panier']->getPrixTotal(), \Nostromo\Classes\Build::TYPE_COMMANDE));
+            unset($_SESSION['Panier']);
+            header('Location:?page=monCompte&action=voirCommandes');
         } catch (\InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage());
             header('Location:?page=monPanier');
