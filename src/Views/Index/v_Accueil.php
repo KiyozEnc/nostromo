@@ -23,9 +23,9 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
     <br>
     <div class="row row-centered">
         <div class="col-xs-12 col-md-6 col-centered">
-            La durée de des vols est compris entre 2 et 3 heures et vous permettra de passer cinq minutes en apesanteur,
+            La durée des vols est comprise entre 2 et 3 heures et vous permettra de passer cinq minutes en apesanteur,
             avec
-            seulement quatre heures d'entraînement, pour une somme de 15 000 euros (sans option).
+            seulement quatre heures d'entraînement, pour une somme de 15 000 euros minimum (sans option).
         </div>
     </div>
     <br>

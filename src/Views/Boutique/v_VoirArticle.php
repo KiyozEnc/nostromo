@@ -27,26 +27,6 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                     <input id="qte" type="number" min="1" max=<?= $article->getQteStock() ?> class="form-control" name="qte" placeholder="Quantité" value="1">
                     <input type="hidden" id="price" readonly disabled value="<?php echo $article->getPu() ?>">
                 </div>
-                <div class="col-xs-12 col-md-2">
-                    <div class="checkbox">
-                        <label><input id="reduction" type="checkbox" name="reduction">Appliqué une réduction ?</label>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-2">
-                    <div class="form-group">
-                        <label for="">Réduction (-<span id="percent"><?= Reservation::STEP_REDUCTION * 100 * 2 ?></span>% par <span id="step"><?= Reservation::STEP_POINTS ?></span> points)</label>
-                        <input
-                            id="pointsUtilise"
-                            type="number"
-                            class="form-control"
-                            name="pointsUtilise"
-                            min="<?= Reservation::STEP_POINTS ?>"
-                            step="<?= Reservation::STEP_POINTS ?>"
-                            max="<?= Reservation::STEP_POINTS * 14 ?>"
-                            placeholder="Combien de points ?"
-                            disabled>
-                    </div>
-                </div>
                 <div class="col-xs-12 col-md-5">
                     <h3>Prix : <span class="text-info"><?php echo '<span id="priceContainer">'.\Nostromo\Classes\Build::formaterEuro($article->getPu()).'</span>'; ?></span></h3>
                 </div>
@@ -59,5 +39,4 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
 </div>
 <?php ob_start(); ?>
 <script src="public/Resources/js/price-manager.js"></script>
-<script src="public/Resources/js/flight-manager.js"></script>
 <?php $scripts = ob_get_clean(); ?>

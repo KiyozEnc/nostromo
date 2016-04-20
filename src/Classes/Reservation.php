@@ -48,7 +48,7 @@ class Reservation
 
     const INTERET = 0.0140;
     const STEP_POINTS = 25;
-    const STEP_REDUCTION = 0.0175;
+    const STEP_REDUCTION = 0.0125;
 
     /**
      * Reservation constructor.

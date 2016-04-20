@@ -1,6 +1,9 @@
 <?php
 
 
+use Nostromo\Classes\Build;
+use Nostromo\Classes\Reservation;
+
 require_once ROOT.'src/Views/v_Alert.php';
 
 if (array_key_exists('Panier', $_SESSION)) {
@@ -17,7 +20,7 @@ if (array_key_exists('Panier', $_SESSION)) {
             </div>
             <div class="col-xs-12 col-md-3">
                 <?php
-                echo 'EUR '.number_format($art->getPu(), 2, ',', '');
+                echo Build::formaterEuro($art->getPu());
                 ?>
             </div>
             <div class="col-xs-12 col-md-3">
@@ -39,13 +42,13 @@ if (array_key_exists('Panier', $_SESSION)) {
                     for ($i = 0; $i <= $art->getQteStock(); ++$i) {
                         ?>
                         <option
-                                <?php
-                                if ($art->getQte() === $i) {
-                                    echo 'selected=\'\'';
-                                }
-                                ?>
-                                value="<?php echo $i;
-                                ?>">
+                            <?php
+                            if ($art->getQte() === $i) {
+                                echo 'selected=\'\'';
+                            }
+                            ?>
+                            value="<?php echo $i;
+                            ?>">
                             <?php
                             if ($i === 0) {
                                 echo 'Supprimer';
@@ -66,14 +69,55 @@ if (array_key_exists('Panier', $_SESSION)) {
         $total += $art->getPu() * $art->getQte();
     }
     ?>
-    <h4>Total à payer : <?php echo 'EUR '.number_format($total, 2, ',', ' ');
-        ?></h4>
     <div class="row">
-        <div class="col-xs-12">
-            <a href ="?page=monPanier&action=viderPanier" onclick="return etesVousSur('Voulez-vous vider le panier ?')" class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span> Vider</a>
-            <a href ="?page=monPanier&action=validerPanier" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Passer la commande</a>
+        <div class="col-xs-12 col-md-5">
+            <div class="checkbox">
+                <label><input id="reduction" type="checkbox" name="reduction"
+                    <?php
+                    if ($_SESSION['Panier']->getPointsUtilise() > 0) {
+                        echo 'checked=checked';
+                    } ?>
+                    >Appliqué une réduction ?</label>
+            </div>
         </div>
     </div>
+    <form action="?page=monPanier&action=validerPanier" method="post" autocomplete="off">
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label for="">Réduction (-<span id="percent"><?= round(Reservation::STEP_REDUCTION * 100 * 1.3, 2) ?></span>% par <span id="step"><?= Reservation::STEP_POINTS ?></span> points)</label>
+                    <input
+                        id="pointsUtilise"
+                        type="number"
+                        class="form-control"
+                        name="pointsUtilise"
+                        min="<?= Reservation::STEP_POINTS ?>"
+                        step="<?= Reservation::STEP_POINTS ?>"
+                        max="<?= Reservation::STEP_POINTS * 9 ?>"
+                        <?php
+                        if ($_SESSION['Panier']->getPointsUtilise() > 0) {
+                            echo "value='{$_SESSION['Panier']->getPointsUtilise()}'";
+                        } else {
+                            echo 'disabled';
+                        } ?>
+                        placeholder="Combien de points ?">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-5">
+                <h4>Total à payer : <span id="total"><?php echo Build::formaterEuro($_SESSION['Panier']->getPrixTotal());
+                        ?></span></h4>
+                <h5>Total remise (en %) : <span id="remise">0%</span></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a href ="?page=monPanier&action=viderPanier" onclick="return etesVousSur('Voulez-vous vider le panier ?')" class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span> Vider</a>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Passer la commande</button>
+            </div>
+        </div>
+    </form>
     <?php
 
 } else {
@@ -84,3 +128,7 @@ if (array_key_exists('Panier', $_SESSION)) {
     </div>
     <?php
 } ?>
+<?php ob_start(); ?>
+<script src="public/Resources/js/flight-manager.js"></script>
+<script src="public/Resources/js/basket-manager.js"></script>
+<?php $scripts = ob_get_clean(); ?>

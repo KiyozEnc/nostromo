@@ -16,6 +16,10 @@ class Panier
      * @var Collection
      */
     private $collProduit;
+    /**
+     * @var int
+     */
+    private $pointsUtilise;
 
     /**
      *  Constructeur de la classe
@@ -169,6 +173,36 @@ class Panier
             /** @var Article $unArticle */
             $prix += $unArticle->getMontant();
         }
-        return $prix;
+        return $prix * $this->getMultiplicateurRemise();
+    }
+
+    public function getMultiplicateurRemise()
+    {
+        $reduc = 1;
+        for ($i = 0; $i <= $this->pointsUtilise - Reservation::STEP_POINTS; $i += Reservation::STEP_POINTS) {
+            $reduc -= Reservation::STEP_REDUCTION * 1.3;
+        }
+        if ($this->pointsUtilise < Reservation::STEP_POINTS) {
+            $reduc = 1;
+        }
+        return $reduc;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsUtilise()
+    {
+        return $this->pointsUtilise;
+    }
+
+    /**
+     * @param int $pointsUtilise
+     * @return Panier
+     */
+    public function setPointsUtilise($pointsUtilise)
+    {
+        $this->pointsUtilise = $pointsUtilise;
+        return $this;
     }
 }

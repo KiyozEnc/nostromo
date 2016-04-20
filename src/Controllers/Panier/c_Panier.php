@@ -124,7 +124,12 @@ switch ($action) {
         break;
 
     case 'validerPanier':
-        require_once ROOT.'src/Views/Panier/v_ValiderPanier.php';
+        if (array_key_exists('pointsUtilise', $_POST)) {
+            $_SESSION['Panier']->setPointsUtilise($_POST['pointsUtilise']);
+            echo "<script>window.location.replace('?page=monPanier&action=validerPanier')</script>";
+        } else {
+            require_once ROOT.'src/Views/Panier/v_ValiderPanier.php';
+        }
         break;
 
     case 'viderPanier':

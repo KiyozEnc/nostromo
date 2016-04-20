@@ -26,6 +26,10 @@ class Commande
      * @var Collection
      */
     private $lesArticles;
+    /**
+     * @var int
+     */
+    private $pointsUtilise;
 
     /**
      * Commande constructor.
@@ -40,6 +44,7 @@ class Commande
         $this->unClient = $unClient;
         $this->uneDate = $uneDate;
         $this->lesArticles = new Collection();
+        $this->pointsUtilise = 0;
     }
 
     /**
@@ -135,5 +140,40 @@ class Commande
         }
 
         return $montant;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsUtilise()
+    {
+        return $this->pointsUtilise;
+    }
+
+    /**
+     * @param int $pointsUtilise
+     * @return Commande
+     */
+    public function setPointsUtilise($pointsUtilise)
+    {
+        $this->pointsUtilise = $pointsUtilise;
+        return $this;
+    }
+
+    /**
+     * Donne le multiplicateur à appliquer au prix à remiser
+     *
+     * @return float
+     */
+    public function calculPourcentRemise()
+    {
+        $reduc = 1;
+        for ($i = 0; $i < $this->pointsUtilise; $i += Reservation::STEP_POINTS) {
+            $reduc -= Reservation::STEP_REDUCTION * 2;
+        }
+        if ($this->pointsUtilise < Reservation::STEP_POINTS) {
+            $reduc = 1;
+        }
+        return (float) $reduc;
     }
 }

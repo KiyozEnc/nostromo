@@ -84,4 +84,20 @@ class Build
     {
         return 'public/Resources/img/avion.png';
     }
+
+    /**
+     * Retourne le mois au format string de la date (en string) passée en paramètre (format Y-m-d)
+     *
+     * @param $dateString
+     * @return string
+     */
+    public static function formaterFr($dateString)
+    {
+        $lesMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai'];
+        $mois = substr($dateString, 5, -3);
+        if (substr($mois, 0, 1) === '0') {
+            $mois = substr($mois, 1, 2);
+        }
+        return $lesMois[$mois - 1];
+    }
 }

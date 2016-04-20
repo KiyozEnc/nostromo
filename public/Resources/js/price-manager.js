@@ -22,6 +22,9 @@ $(document).ready(function () {
         for (var i = 0; i < parseInt(points.val()); i += parseInt(step.text())) {
             reduc -= parseFloat(percent.text())/100;
         }
+        if (parseInt(points.val()) < parseInt(step.text())) {
+            reduc = 1;
+        }
         return parseFloat(reduc);
     };
     var isChecked = function (elem) {
@@ -46,5 +49,5 @@ $(document).ready(function () {
     });
     reduction.change(function () {
         priceContainer.text(genererPrix());
-    })
+    });
 });
