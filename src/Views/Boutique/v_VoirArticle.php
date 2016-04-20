@@ -34,7 +34,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                 </div>
                 <div class="col-xs-12 col-md-2">
                     <div class="form-group">
-                        <label for="">Réduction (-<?= Reservation::STEP_REDUCTION * 100 ?>% par <?= Reservation::STEP_POINTS ?> points)</label>
+                        <label for="">Réduction (-<span id="percent"><?= Reservation::STEP_REDUCTION * 100 * 2 ?></span>% par <span id="step"><?= Reservation::STEP_POINTS ?></span> points)</label>
                         <input
                             id="pointsUtilise"
                             type="number"

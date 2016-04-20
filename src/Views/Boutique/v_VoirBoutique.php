@@ -12,11 +12,13 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="col-md-4 col-lg-3 col-centered">
             <div class="thumbnail">
                 <br>
-                <img width="40%"
-                     height="40%"
-                     class="img-responsive"
-                     src=<?php echo $unArt->getUrl(); ?>
-                     title="Article n°<?= $unArt->getNumArt() ?>">
+                <a href="?page=materiel&action=voirArticle&article=<?= $unArt->getNumArt() ?>">
+                    <img width="40%"
+                         height="40%"
+                         class="img-responsive"
+                         src=<?php echo $unArt->getUrl(); ?>
+                         title="Article n°<?= $unArt->getNumArt() ?>">
+                </a>
                 <div class="caption">
                     <?php
                     if (Connexion::sessionOuverte() && $unArt->getQteStock() > 0) {
