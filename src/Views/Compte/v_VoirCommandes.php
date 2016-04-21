@@ -27,7 +27,7 @@
 <div class="row row-centered">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
         <?php
-        if (isset($uneCommande)) {
+        if (isset($uneCommande) && $uneCommande->getLesArticles()->taille() > 0) {
             ?>
             <h2>Commande n°<?= $uneCommande->getId() ?></h2>
             <table class="table table-hover table-stripped table-bordered">
@@ -56,6 +56,19 @@
                 ?>
                 </tbody>
             </table>
+            <?php
+            if ($uneCommande->getPointsUtilise() > 0) {
+                echo "
+                    <h5 class='text-left'>
+                        Vous avez utilisé {$uneCommande->getPointsUtilise()} points de fidélité
+                        (<span class=\"text-warning\">- ".Build::formaterEuro($uneCommande->getMontantRemise()).'</span>)
+                        et gagner '.
+                        Build::getNewPoints($uneCommande->getMontantTotalNoRemise(), Build::TYPE_COMMANDE).
+                        ' nouveau points avec cette commande.
+                    </h5>'
+                ;
+            }
+            ?>
             <h3>Total : <span class="text-warning"><?= Build::formaterEuro($uneCommande->getMontantTotal()) ?></span></h3>
             <?php
 

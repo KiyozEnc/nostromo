@@ -11,11 +11,12 @@ $(document).ready(function () {
         return Math.round(number * 100)/100+ '%';
     };
 
+    var isChecked = function (elem) {
+        return elem.prop('checked');
+    };
+
     var generatePercent = function () {
         var reduc = 0;
-        if (points.val() == null || points.val() == '') {
-            points.val(25);
-        }
         for (var i = 0; i < parseInt(points.val()); i += parseInt(step.text())) {
             reduc += parseFloat(percent.text())/100;
         }
@@ -24,10 +25,18 @@ $(document).ready(function () {
         }
         return parseFloat(reduc);
     };
+    if (isChecked(reduction)) {
+        remise.text(percentFormate(generatePercent()));
+    } else {
+        points.val('');
+        points.attr('value', '');
+        remise.text('0%');
+    }
     reduction.change(function () {
-        if ($(this).prop('checked')) {
+        if (isChecked($(this))) {
             remise.text(percentFormate(generatePercent()));
         } else {
+            points.val('');
             remise.text('0%');
         }
     });

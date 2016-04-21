@@ -1,22 +1,33 @@
 <?php
 
+use Nostromo\Classes\Exception\ErrorSQLException;
+use Nostromo\Classes\Exception\NotConnectedException;
 use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MUtilisateur as ConnexionSite;
 use Nostromo\Models\MCommande;
 use Nostromo\Models\MVol;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirMonCompte';
+try {
+    if (!Connexion::sessionOuverte()) {
+        throw new NotConnectedException();
+    }
+} catch (NotConnectedException $e) {
+    Connexion::setFlashMessage($e->getMessage());
+    header('Location:?page=connexion');
+    exit();
+}
 
 switch ($action) {
     case 'voirMonCompte':
         try {
             $title = 'Page principale';
-            if (!array_key_exists('Utilisateur', $_SESSION)) {
-                throw new LogicException('Vous devez vous connecter');
+            if (!Connexion::sessionOuverte()) {
+                throw new NotConnectedException();
             }
             require_once ROOT.'src/Views/Compte/v_GabCompte.php';
             require_once ROOT.'src/Views/Compte/v_VoirProfile.php';
-        } catch (LogicException $e) {
+        } catch (NotConnectedException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=connexion');
         }
@@ -88,7 +99,7 @@ switch ($action) {
         try {
             if (array_key_exists('Utilisateur', $_SESSION)) {
                 $lesCommandes = MCommande::getCommandes($_SESSION['Utilisateur']);
-                if (array_key_exists('cde', $_GET)) {
+                if (array_key_exists('cde', $_GET) && !empty($_GET['cde'])) {
                     $uneCommande = MCommande::getUneCommande($_GET['cde']);
                 }
                 $title = 'Mes commandes';
@@ -98,7 +109,7 @@ switch ($action) {
                 header('Location:?page=connexion');
             }
         } catch (InvalidArgumentException $e) {
-            Connexion::setFlashMessage($e->getMessage(), 'error');
+            Connexion::setFlashMessage($e->getMessage());
             header('Location:?page=monCompte');
         }
         break;

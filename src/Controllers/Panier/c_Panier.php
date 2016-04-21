@@ -1,5 +1,7 @@
 <?php
 
+use Nostromo\Classes\Build;
+use Nostromo\Classes\Exception\NotConnectedException;
 use Nostromo\Classes\Panier;
 use Nostromo\Classes\Collection;
 use Nostromo\Classes\Commande;
@@ -8,8 +10,18 @@ use Nostromo\Models\MArticle;
 use Nostromo\Models\MCommande;
 use Nostromo\Models\MCommander;
 use Nostromo\Models\MConnexion as Connexion;
+use Nostromo\Models\MUtilisateur;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirPanier';
+try {
+    if (!Connexion::sessionOuverte()) {
+        throw new NotConnectedException();
+    }
+} catch (NotConnectedException $e) {
+    Connexion::setFlashMessage($e->getMessage());
+    header('Location:?page=connexion');
+    exit();
+}
 
 switch ($action) {
     case 'voirPanier':
@@ -37,12 +49,22 @@ switch ($action) {
                 $lesCommander->ajouter($unCommander);
             }
             $uneCommande->setLesArticles($lesCommander);
+            if ($_SESSION['Panier']->getPointsUtilise() > 0) {
+                $uneCommande->setPointsUtilise($_SESSION['Panier']->getPointsUtilise());
+            }
             MCommande::ajouterCommande($uneCommande);
             foreach ($uneCommande->getLesArticles()->getCollection() as $unCommander) {
                 MCommander::ajouterArticleCommande($unCommander);
                 MArticle::updateQteStock($unCommander->getUnArticle(), $unCommander->getQte());
             }
-            \Nostromo\Models\MUtilisateur::setPoints($_SESSION['Utilisateur'], $_SESSION['Utilisateur']->getPoints() + \Nostromo\Classes\Build::getNewPoints($_SESSION['Panier']->getPrixTotal(), \Nostromo\Classes\Build::TYPE_COMMANDE));
+            MUtilisateur::setPoints(
+                $_SESSION['Utilisateur'],
+                $_SESSION['Utilisateur']->getPoints() +
+                Build::getNewPoints(
+                    $_SESSION['Panier']->getPrixTotal(),
+                    Build::TYPE_COMMANDE
+                )
+            );
             unset($_SESSION['Panier']);
             header('Location:?page=monCompte&action=voirCommandes');
         } catch (\InvalidArgumentException $e) {
@@ -92,7 +114,7 @@ switch ($action) {
                 }
             }
         } catch (Exception $e) {
-            Connexion::setFlashMessage($e->getMessage(), 'error');
+            Connexion::setFlashMessage($e->getMessage());
             header('Location:?page=materiel&action=voirArticle&article='.$_GET['ref']);
         }
         break;
@@ -124,11 +146,22 @@ switch ($action) {
         break;
 
     case 'validerPanier':
-        if (array_key_exists('pointsUtilise', $_POST)) {
-            $_SESSION['Panier']->setPointsUtilise($_POST['pointsUtilise']);
-            echo "<script>window.location.replace('?page=monPanier&action=validerPanier')</script>";
-        } else {
-            require_once ROOT.'src/Views/Panier/v_ValiderPanier.php';
+        try {
+            if (array_key_exists('pointsUtilise', $_POST)) {
+                if ($_POST['pointsUtilise'] > MUtilisateur::getPoints($_SESSION['Utilisateur'])) {
+                    throw new \InvalidArgumentException('Vous n\'avez pas assez de points');
+                }
+                $_SESSION['Panier']->setPointsUtilise($_POST['pointsUtilise']);
+                if (empty($_POST['pointsUtilise'])) {
+                    $_SESSION['Panier']->setPointsUtilise(null);
+                }
+                echo "<script>window.location.replace('?page=monPanier&action=validerPanier')</script>";
+            } else {
+                require_once ROOT.'src/Views/Panier/v_ValiderPanier.php';
+            }
+        } catch (\InvalidArgumentException $e) {
+            Connexion::setFlashMessage($e->getMessage());
+            echo "<script>window.location.replace('?page=monPanier&action=voirPanier')</script>";
         }
         break;
 

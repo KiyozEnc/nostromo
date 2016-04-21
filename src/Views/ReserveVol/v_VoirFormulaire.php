@@ -38,7 +38,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                                     step="<?= Reservation::STEP_POINTS ?>"
                                     max="<?= Reservation::STEP_POINTS * 14 ?>"
                                     placeholder="Combien de points ?"
-                                    disabled>
+                                readonly>
                             </div>
                         </div>
                     </div>

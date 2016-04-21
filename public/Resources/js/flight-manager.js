@@ -3,11 +3,12 @@ $(document).ready(function () {
     var points = $('#pointsUtilise');
     reduction.change(function () {
         if (this.checked) {
-            points.prop('disabled', false);
+            points.prop('readonly', false);
             points.val(25);
         } else {
-            points.prop('disabled', true);
+            points.prop('readonly', true);
             points.val('');
+            points.attr('value', '');
         }
     });
 });

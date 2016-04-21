@@ -162,11 +162,23 @@ class Panier
 
         return $this;
     }
-
     /**
      * @return float
      */
     public function getPrixTotal()
+    {
+        $prix = (float) 0;
+        foreach ($this->collProduit->getCollection() as $unArticle) {
+            /** @var Article $unArticle */
+            $prix += $unArticle->getMontant();
+        }
+        return $prix;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrixTotalWithRemise()
     {
         $prix = (float) 0;
         foreach ($this->collProduit->getCollection() as $unArticle) {
@@ -180,7 +192,7 @@ class Panier
     {
         $reduc = 1;
         for ($i = 0; $i <= $this->pointsUtilise - Reservation::STEP_POINTS; $i += Reservation::STEP_POINTS) {
-            $reduc -= Reservation::STEP_REDUCTION * 1.3;
+            $reduc -= Reservation::STEP_REDUCTION * 1.5;
         }
         if ($this->pointsUtilise < Reservation::STEP_POINTS) {
             $reduc = 1;

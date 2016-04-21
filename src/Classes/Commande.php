@@ -37,14 +37,15 @@ class Commande
      * @param int         $id
      * @param Utilisateur $unClient
      * @param string      $uneDate
+     * @param int         $pointsUtilise
      */
-    public function __construct($id, Utilisateur $unClient, $uneDate)
+    public function __construct($id, Utilisateur $unClient, $uneDate, $pointsUtilise = 0)
     {
         $this->id = $id;
         $this->unClient = $unClient;
         $this->uneDate = $uneDate;
         $this->lesArticles = new Collection();
-        $this->pointsUtilise = 0;
+        $this->pointsUtilise = $pointsUtilise;
     }
 
     /**
@@ -139,6 +140,32 @@ class Commande
             $montant += $article->getPu() * $article->getQte();
         }
 
+        return $montant * $this->calculPourcentRemise();
+    }
+
+    /**
+     * @return float
+     */
+    public function getMontantTotalNoRemise()
+    {
+        $montant = 0;
+        foreach ($this->getLesArticles()->getCollection() as $article) {
+            $montant += $article->getPu() * $article->getQte();
+        }
+
+        return $montant;
+    }
+
+    /**
+     * @return float
+     */
+    public function getMontantRemise()
+    {
+        $montant = 0;
+        foreach ($this->getLesArticles()->getCollection() as $article) {
+            $montant += ($article->getPu() * $article->getQte()) - ($article->getPu() * $article->getQte())*$this->calculPourcentRemise();
+        }
+
         return $montant;
     }
 
@@ -169,7 +196,7 @@ class Commande
     {
         $reduc = 1;
         for ($i = 0; $i < $this->pointsUtilise; $i += Reservation::STEP_POINTS) {
-            $reduc -= Reservation::STEP_REDUCTION * 2;
+            $reduc -= round(Reservation::STEP_REDUCTION * 1.5, 2);
         }
         if ($this->pointsUtilise < Reservation::STEP_POINTS) {
             $reduc = 1;

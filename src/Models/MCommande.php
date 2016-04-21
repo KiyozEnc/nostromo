@@ -34,12 +34,11 @@ class MCommande
         try {
             $conn = MConnexion::getBdd();
             $req = $conn->prepare('SELECT * FROM commande WHERE numCde = ?');
-            $req->execute(array($id));
+            $req->execute([$id]);
             $req = $req->fetch();
             $unClient = MUtilisateur::getUnUser($req['numClt']);
-            $uneCommande = new Commande($id, $unClient, $req['date']);
+            $uneCommande = new Commande($id, $unClient, $req['date'], $req['pointsUtilise']);
             $uneCommande->setLesArticles(MCommander::getUneCommande($uneCommande));
-
             return $uneCommande;
         } catch (PDOException $e) {
             throw new ErrorSQLException($e->getMessage());
@@ -67,7 +66,7 @@ class MCommande
             $req->execute(array($unClient->getId()));
             $req = $req->fetchAll();
             foreach ($req as $tabs) {
-                $uneCommande = new Commande($tabs['numCde'], $unClient, $tabs['date']);
+                $uneCommande = new Commande($tabs['numCde'], $unClient, $tabs['date'], $tabs['pointsUtilise']);
                 $uneCommande->setLesArticles(MCommander::getUneCommande($uneCommande));
                 $lesCommandes->ajouter($uneCommande);
             }
@@ -85,10 +84,16 @@ class MCommande
             $conn->beginTransaction();
             $reqPrepare = $conn->prepare(
                 'INSERT INTO commande
-                (numClt,date)
-                VALUES (?,?)'
+                (numClt,date,pointsUtilise)
+                VALUES (?,?,?)'
             );
-            $reqPrepare->execute([$uneCommande->getUnClient()->getId(), $uneCommande->getUneDate()]);
+            $reqPrepare->execute(
+                [
+                    $uneCommande->getUnClient()->getId(),
+                    $uneCommande->getUneDate(),
+                    $uneCommande->getPointsUtilise()
+                ]
+            );
             $conn->commit();
             $conn = null;
         } catch (PDOException $ex) {

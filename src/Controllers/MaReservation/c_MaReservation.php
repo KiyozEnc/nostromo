@@ -1,9 +1,22 @@
 <?php
 
+use Nostromo\Classes\Exception\NotConnectedException;
 use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MReservation;
 
 $action = array_key_exists('action', $_REQUEST) ? $_REQUEST['action'] : 'voirReservation';
+
+try {
+    if (!Connexion::sessionOuverte()) {
+        throw new NotConnectedException();
+    }
+} catch (NotConnectedException $e) {
+    Connexion::setFlashMessage($e->getMessage());
+    header('?page=connexion');
+    echo "<script>window.location.replace('?page=connexion')</script>";
+    exit();
+}
+
 switch ($action) {
     case 'voirReservation':
         require_once ROOT.'src/Views/MaReservation/v_VoirReservation.php';

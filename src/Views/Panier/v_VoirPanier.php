@@ -85,20 +85,19 @@ if (array_key_exists('Panier', $_SESSION)) {
         <div class="row">
             <div class="col-xs-12 col-md-3">
                 <div class="form-group">
-                    <label for="">Réduction (-<span id="percent"><?= round(Reservation::STEP_REDUCTION * 100 * 1.3, 2) ?></span>% par <span id="step"><?= Reservation::STEP_POINTS ?></span> points)</label>
+                    <label for="">Réduction (-<span id="percent"><?= round(Reservation::STEP_REDUCTION * 100 * 1.5, 2) ?></span>% par <span id="step"><?= Reservation::STEP_POINTS ?></span> points)</label>
                     <input
                         id="pointsUtilise"
                         type="number"
                         class="form-control"
                         name="pointsUtilise"
-                        min="<?= Reservation::STEP_POINTS ?>"
                         step="<?= Reservation::STEP_POINTS ?>"
                         max="<?= Reservation::STEP_POINTS * 9 ?>"
                         <?php
                         if ($_SESSION['Panier']->getPointsUtilise() > 0) {
                             echo "value='{$_SESSION['Panier']->getPointsUtilise()}'";
                         } else {
-                            echo 'disabled';
+                            echo 'readonly';
                         } ?>
                         placeholder="Combien de points ?">
                 </div>

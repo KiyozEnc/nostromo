@@ -83,6 +83,6 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
 </form>
 <div class="col-xs-12 col-md-4">
     <h3>Montant TTC à payer aujourd'hui : </h3>
-    <h4><?php echo \Nostromo\Classes\Build::formaterEuro($_SESSION['Panier']->getPrixTotal()); ?></h4>
+    <h4><?php echo \Nostromo\Classes\Build::formaterEuro($_SESSION['Panier']->getPrixTotalWithRemise()); ?></h4>
     <h5>Dont <?= round((1 - $_SESSION['Panier']->getMultiplicateurRemise()) * 100, 2) ?>% de remise immédiate liée aux points de fidélité.</h5>
 </div>

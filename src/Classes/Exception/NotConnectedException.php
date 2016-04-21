@@ -23,7 +23,7 @@ class NotConnectedException extends \Exception
      */
     public function __construct($message = '', $code = 0, \Exception $previous = null)
     {
-        $message = 'Vous n\'êtes pas connecté';
+        $message = 'Vous devez vous connecter pour accéder à cette page.';
         parent::__construct($message, $code, $previous);
     }
 

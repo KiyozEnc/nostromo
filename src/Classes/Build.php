@@ -5,7 +5,7 @@ namespace Nostromo\Classes;
 class Build
 {
     const TYPE_RESERVATION = 1500;
-    const TYPE_COMMANDE = 300;
+    const TYPE_COMMANDE = 125;
     /**
      * Formate une chaîne de caractère de type Time en format français.
      *
@@ -74,8 +74,12 @@ class Build
     public static function getNewPoints($price, $type = self::TYPE_RESERVATION)
     {
         $points = 0;
-        for ($i = 0; $i < $price; $i += $type) {
-            $points++;
+        if ($type === self::TYPE_COMMANDE) {
+            $points = (int) $price / 100;
+        } else {
+            for ($i = 0; $i < $price; $i += $type) {
+                $points++;
+            }
         }
         return $points;
     }
@@ -93,7 +97,7 @@ class Build
      */
     public static function formaterFr($dateString)
     {
-        $lesMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai'];
+        $lesMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         $mois = substr($dateString, 5, -3);
         if (substr($mois, 0, 1) === '0') {
             $mois = substr($mois, 1, 2);

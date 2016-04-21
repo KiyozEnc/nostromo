@@ -16,9 +16,6 @@ $(document).ready(function () {
     };
     var genererPercent = function () {
         var reduc = 1;
-        if (points.val() == null || points.val() == '') {
-            points.val(25);
-        }
         for (var i = 0; i < parseInt(points.val()); i += parseInt(step.text())) {
             reduc -= parseFloat(percent.text())/100;
         }

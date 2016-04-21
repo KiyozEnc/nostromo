@@ -16,7 +16,7 @@ switch ($action) {
     case 'reserverVol':
         try {
             if (!MConnexion::sessionOuverte()) {
-                throw new NotConnectedException('Vous devez être connecté.');
+                throw new NotConnectedException();
             }
             $vol = MVol::getUnVol($_GET['vol']);
             $nbPlaceRestante = MVol::getPlaceRestante($vol);
@@ -31,6 +31,9 @@ switch ($action) {
         break;
     case 'validReserverVol':
         try {
+            if (!MConnexion::sessionOuverte()) {
+                throw new NotConnectedException();
+            }
             if (array_key_exists('Reservation', $_SESSION) && $_SESSION['Reservation']->isValid()) {
                 throw new InvalidArgumentException('Vous avez déjà une réservation.');
             }
@@ -59,7 +62,7 @@ switch ($action) {
                     if ($_POST['nbPers'] === 0) {
                         MConnexion::setFlashMessage('La valeur ne peut être zéro, veuillez recommencer', 'error');
                     }
-                    header('Location:?page=reserver&action=reserverVol&vol='.$unVol->getNumVol());
+                    header('Location:?page=reserver&action=reserverVol&vol=' . $unVol->getNumVol());
                 }
                 if (array_key_exists('Reservation', $_SESSION)) {
                     header('Location:?page=maReservation');
@@ -79,6 +82,9 @@ switch ($action) {
                 );
                 header('Location:?page=reserver');
             }
+        } catch (NotConnectedException $e) {
+            MConnexion::setFlashMessage($e->getMessage());
+            header('Location:?page=connexion');
         } catch (InvalidArgumentException $e) {
             MConnexion::setFlashMessage($e->getMessage(), 'error');
             header('Location:?page=maReservation');

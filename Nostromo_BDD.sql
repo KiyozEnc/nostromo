@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS commande ;
 CREATE TABLE commande (
   numCde int not null auto_increment primary key,
   numClt int not null references client(numClt),
+  pointsUtilise int not null,
   date datetime not null
 );
 
@@ -104,8 +105,8 @@ INSERT INTO article VALUES (5, "Haut astronaute", "Haut de couleur blanc, possè
 
 INSERT INTO `client` VALUES (1, "Nostromo", "Contact", "7 rue de Mars", 53100, "MAYENNE", "ffb4761cba839470133bee36aeb139f58d7dbaa9", "contact@nostromo.com", 150);
 
-INSERT INTO commande VALUES (1, 1, "2015-11-28 12:00:00");
-INSERT INTO commande VALUES (2, 1, "2015-10-20 10:00:00");
+INSERT INTO commande VALUES (1, 1, 0, "2015-11-28 12:00:00");
+INSERT INTO commande VALUES (2, 1, 0, "2015-10-20 10:00:00");
 
 INSERT INTO commander VALUES (1, 1, 2);
 INSERT INTO commander VALUES (2, 1, 1);
