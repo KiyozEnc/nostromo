@@ -98,4 +98,20 @@ class MConnexion
             throw new ErrorSQLException($e->getMessage());
         }
     }
+
+    public static function getLastIdReservation()
+        {
+            $conn = self::getBdd();
+            try {
+                $req = "SELECT `AUTO_INCREMENT` as AI
+                FROM  INFORMATION_SCHEMA.TABLES
+                WHERE TABLE_SCHEMA = '2014-nostromo_base'
+                AND   TABLE_NAME   = 'reservation';";
+                $req = $conn->query($req);
+                $req = $req->fetch();
+                return (int) $req['AI'];
+            } catch (PDOException $e) {
+                throw new ErrorSQLException($e->getMessage());
+            }
+        }
 }

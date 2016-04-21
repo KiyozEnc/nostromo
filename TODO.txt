@@ -1,2 +1,3 @@
 - Test unitaire classes
 - Peaufiner certaines pages et faire des tests fonctionnelles
+- Revoir le code de toutes les pages
