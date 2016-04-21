@@ -12,8 +12,8 @@
                         if (isset($lesCommandes)) {
                             foreach ($lesCommandes->getCollection() as $commande) {
                                 ?>
-                                <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' le '. Build::formaterDateTimeWithTime(new DateTime($commande->getUneDate())) ?> - Montant : <?= $commande->getMontantTotal();
-                                    ?> €</option>
+                                <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' - '. Build::formaterDateTimeWithTime(new DateTime($commande->getUneDate())) ?> - <?= Build::formaterEuro($commande->getMontantTotal());
+                                    ?></option>
                                 <?php
 
                             }
@@ -64,7 +64,7 @@
                         (<span class=\"text-warning\">- ".Build::formaterEuro($uneCommande->getMontantRemise()).'</span>)
                         et gagner '.
                         Build::getNewPoints($uneCommande->getMontantTotalNoRemise(), Build::TYPE_COMMANDE).
-                        ' nouveau points avec cette commande.
+                        ' nouveaux points avec cette commande.
                     </h5>'
                 ;
             }

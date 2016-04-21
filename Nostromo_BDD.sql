@@ -98,10 +98,10 @@ INSERT INTO vol VALUES (8, "2016-11-02", "12:05:00", 120, 15000);
 INSERT INTO vol VALUES (9, "2016-10-26", "16:05:00", 30, 15000);
 INSERT INTO vol VALUES (10, "2016-11-10", "11:24:00", 60, 24000);
 
-INSERT INTO article VALUES (1, "Gants astronaute", "Ces gants de l’espace pour les cosmonautes en herbe sont les répliques de ceux utilisés par les vrais astronautes. Une pièce incontournable pour les missions spatiales…", 250, 20, 'public/Resources/img/Basket/gauntlet.png');
-INSERT INTO article VALUES (2, "Pantalon astronaute", "Élastique à la taille, s'ajustera parfaitement à votre taille.", 400, 20, 'public/Resources/img/Basket/down.png');
-INSERT INTO article VALUES (3, "Casque astronaute", "Paré au lancement ! Vous qui avez toujours rêvé de quitter l'atmosphère et découvrir de nouvelles planètes, prenez votre casque de cosmonaute et décollez pour de nouveaux horizons !", 1200, 5, 'public/Resources/img/Basket/helmet.png');
-INSERT INTO article VALUES (5, "Haut astronaute", "Haut de couleur blanc, possède des éléments argentés au niveau des épaules et de la taille. Il possède également le drapeau de l'Amérique sur le torse. Il se ferme dans le dos par un scratch.", 1500, 5, 'public/Resources/img/Basket/tenue.png');
+INSERT INTO article VALUES (1, "Gants astronaute", "Ces gants de l’espace pour les cosmonautes en herbe sont les répliques de ceux utilisés par les vrais astronautes. Une pièce incontournable pour les missions spatiales…", 250, 100, 'public/Resources/img/Basket/gauntlet.png');
+INSERT INTO article VALUES (2, "Pantalon astronaute", "Élastique à la taille, s'ajustera parfaitement à votre taille.", 400, 100, 'public/Resources/img/Basket/down.png');
+INSERT INTO article VALUES (3, "Casque astronaute", "Paré au lancement ! Vous qui avez toujours rêvé de quitter l'atmosphère et découvrir de nouvelles planètes, prenez votre casque de cosmonaute et décollez pour de nouveaux horizons !", 1200, 50, 'public/Resources/img/Basket/helmet.png');
+INSERT INTO article VALUES (5, "Haut astronaute", "Haut de couleur blanc, possède des éléments argentés au niveau des épaules et de la taille. Il possède également le drapeau de l'Amérique sur le torse. Il se ferme dans le dos par un scratch.", 1500, 50, 'public/Resources/img/Basket/tenue.png');
 
 INSERT INTO `client` VALUES (1, "Nostromo", "Contact", "7 rue de Mars", 53100, "MAYENNE", "ffb4761cba839470133bee36aeb139f58d7dbaa9", "contact@nostromo.com", 150);
 

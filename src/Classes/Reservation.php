@@ -42,7 +42,7 @@ class Reservation
      */
     private $lesEcheance;
     /**
-     * @var float
+     * @var int
      */
     private $reduction;
 
@@ -57,7 +57,7 @@ class Reservation
     {
         $this->dateRes = new \DateTime();
         $this->lesEcheance = new Collection();
-        $this->reduction = (float) 0;
+        $this->reduction = 0;
     }
 
     /**
@@ -294,7 +294,7 @@ class Reservation
     }
 
     /**
-     * @return float
+     * @return int
      */
     public function getReduction()
     {
@@ -302,7 +302,7 @@ class Reservation
     }
 
     /**
-     * @param float $reduction
+     * @param int $reduction
      * @return Reservation
      */
     public function setReduction($reduction)

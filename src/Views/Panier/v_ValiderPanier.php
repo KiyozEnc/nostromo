@@ -17,15 +17,13 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="form-group">
             <label for="numCarte">Numéro de votre carte</label>
             <input
-                type="number"
+                type="text"
                 class="form-control"
                 id="numCarte"
                 name="numCarte"
                 placeholder="16 numéros"
                 maxlength="16"
                 minlength="16"
-                min="1000000000000000"
-                max="9999999999999999"
                 required>
         </div>
         <div class="form-group">
@@ -65,11 +63,9 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                     <div class="col-xs-4 col-md-4">
                         <label for="CBSecret">Code CVC</label>
                         <input
-                            type="number"
+                            type="text"
                             class="form-control"
                             name="CBSecret"
-                            min="100"
-                            max="999"
                             maxlength="3"
                             required
                             placeholder="ex : 845">
@@ -84,5 +80,5 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
 <div class="col-xs-12 col-md-4">
     <h3>Montant TTC à payer aujourd'hui : </h3>
     <h4><?php echo \Nostromo\Classes\Build::formaterEuro($_SESSION['Panier']->getPrixTotalWithRemise()); ?></h4>
-    <h5>Dont <?= round((1 - $_SESSION['Panier']->getMultiplicateurRemise()) * 100, 2) ?>% de remise immédiate liée aux points de fidélité.</h5>
+    <h5>Dont <?= round((1 - $_SESSION['Panier']->getMultiplicateurRemise()) * 100, 2) ?>% (<?= \Nostromo\Classes\Build::formaterEuro($_SESSION['Panier']->getMontantRemise()) ?>) de remise immédiate liée aux points de fidélité.</h5>
 </div>

@@ -92,7 +92,7 @@ if (array_key_exists('Panier', $_SESSION)) {
                         class="form-control"
                         name="pointsUtilise"
                         step="<?= Reservation::STEP_POINTS ?>"
-                        max="<?= Reservation::STEP_POINTS * 9 ?>"
+                        max="<?= Reservation::STEP_POINTS * 11 ?>"
                         <?php
                         if ($_SESSION['Panier']->getPointsUtilise() > 0) {
                             echo "value='{$_SESSION['Panier']->getPointsUtilise()}'";

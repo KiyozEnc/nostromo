@@ -1,2 +1,2 @@
-- Passer une commande - valider le panier (Par Anthony) - PAS TERMINÉ
-- Réduction par rapport aux points - DONE
+- Test unitaire classes
+- Peaufiner certaines pages et faire des tests fonctionnelles

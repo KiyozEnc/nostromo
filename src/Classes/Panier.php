@@ -201,6 +201,19 @@ class Panier
     }
 
     /**
+     * @return float
+     */
+    public function getMontantRemise()
+    {
+        $montant = 0;
+        foreach ($this->collProduit->getCollection() as $article) {
+            $montant += ($article->getPu() * $article->getQte()) - ($article->getPu() * $article->getQte())*$this->getMultiplicateurRemise();
+        }
+
+        return $montant;
+    }
+
+    /**
      * @return int
      */
     public function getPointsUtilise()

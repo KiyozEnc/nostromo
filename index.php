@@ -2,6 +2,7 @@
 namespace Nostromo;
 
 use Nostromo\Models\MConnexion;
+use Nostromo\Models\MUtilisateur;
 
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', __DIR__.DS);
@@ -138,6 +139,7 @@ session_start(); ?>
         <div class='container-fluid'>
             <?php
             if (MConnexion::sessionOuverte()) {
+                $_SESSION['Utilisateur']->setPoints(MUtilisateur::getPoints($_SESSION['Utilisateur']));
                 echo "<div class='col-md-8 col-xs-12 col-lg-9'>";
             }
             if (array_key_exists('page', $_GET)) {

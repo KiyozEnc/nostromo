@@ -94,13 +94,15 @@ class MReservation
         }
     }
     
-    public function annulerReservationValidee(Reservation $uneReservation)
+    public static function annulerReservationValidee(Reservation $uneReservation)
     {
         $conn = MConnexion::getBdd();
         try {
             $conn->beginTransaction();
             $req = $conn->prepare('DELETE FROM echeance WHERE numRes = ?');
             $req->execute([$uneReservation->getId()]);
+            $conn->commit();
+            $conn->beginTransaction();
             $reqPrepare = $conn->prepare('DELETE FROM reservation WHERE numRes = ?');
             $reqPrepare->execute(
                 [
@@ -108,15 +110,14 @@ class MReservation
                 ]
             );
             $conn->commit();
-            $points = MUtilisateur::getPoints($uneReservation->getUnClient()) - Build::getNewPoints($uneReservation->getPriceReservation());
+            $points = MUtilisateur::getPoints($uneReservation->getUnClient()) - Build::getNewPoints($uneReservation->getPriceReservation()) + $uneReservation->getReduction();
             MUtilisateur::setPoints($uneReservation->getUnClient(), $points);
             $conn = null;
         } catch (PDOException $e) {
             $conn->rollBack();
             $uneReservation->setValid(false);
             throw new ErrorSQLException(
-                'Vous avez déjà une réservation.
-                Veuillez contacter Nostromo pour annuler votre réservation.'
+                $e->getMessage()
             );
         }
     }

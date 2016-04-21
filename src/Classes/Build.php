@@ -4,8 +4,8 @@ namespace Nostromo\Classes;
 
 class Build
 {
-    const TYPE_RESERVATION = 1500;
-    const TYPE_COMMANDE = 125;
+    const TYPE_RESERVATION = 1200;
+    const TYPE_COMMANDE = 'Commande';
     /**
      * Formate une chaîne de caractère de type Time en format français.
      *

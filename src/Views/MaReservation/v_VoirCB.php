@@ -21,10 +21,13 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         </div>
     </div>
 <?php
-if ($_SESSION['Reservation']->getReduction() === 0) {
+if ($_SESSION['Reservation']->getReduction() === 0 || $_SESSION['Reservation']->getReduction() === null) {
     echo '<br><p>Vous avez choisi de ne pas appliquer vos points de fidélité</p>';
 } else {
-    echo '<br><p>Vous avez  choisi d\'utiliser '.$_SESSION['Reservation']->getReduction().' points de fidélité (soit '.$_SESSION['Reservation']->getPercentReduction().'% de réduction)</p>';
+    echo '<br>
+            <p>Vous avez  choisi d\'utiliser '.$_SESSION['Reservation']->getReduction().'
+                points de fidélité (soit '.$_SESSION['Reservation']->getPercentReduction().'% de réduction)
+            </p>';
 }
 if (!array_key_exists('type', $_GET)) { ?>
     <div class="row">
@@ -43,7 +46,13 @@ if (array_key_exists('type', $_GET)) {
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
                                 <label>Nom du titulaire de la carte</label>
-                                <input type="text" class="form-control" name="CBName" placeholder="Nom du titulaire" maxlength="50" required>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="CBName"
+                                    placeholder="Nom du titulaire"
+                                    maxlength="50"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -51,14 +60,20 @@ if (array_key_exists('type', $_GET)) {
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
                                 <label>Numéro de carte (16 chiffres)</label>
-                                <input type="text" class="form-control" name="CBNumber" placeholder="16 chiffres de votre carte bancaire" maxlength="16" required>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="CBNumber"
+                                    placeholder="16 chiffres de votre carte bancaire"
+                                    maxlength="16"
+                                    required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6 col-md-4">
-                                <label for="CBMonth">Mois</label>
+                                <label for="CBMonth">Mois d'expiration</label>
                                 <select name="CBMonth" class="form-control" required>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -75,7 +90,7 @@ if (array_key_exists('type', $_GET)) {
                                 </select>
                             </div>
                             <div class="col-xs-6 col-md-4">
-                                <label for="CBYear">Année</label>
+                                <label for="CBYear">et Année</label>
                                 <select name="CBYear" class="form-control" required>
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
@@ -89,7 +104,13 @@ if (array_key_exists('type', $_GET)) {
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <label for="CBSecret">CVC</label>
-                                <input min="100" maxlength="3" max="999" name="CBSecret" type="number" class="form-control" required>
+                                <input
+                                    placeholder="Ex : 486"
+                                    maxlength="3"
+                                    name="CBSecret"
+                                    type="text"
+                                    class="form-control"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -122,7 +143,13 @@ if (array_key_exists('type', $_GET)) {
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
                                 <label>Nom du titulaire de la carte</label>
-                                <input type="text" class="form-control" name="CBName" placeholder="Nom du titulaire" maxlength="50" required>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="CBName"
+                                    placeholder="Nom du titulaire"
+                                    maxlength="50"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -130,14 +157,20 @@ if (array_key_exists('type', $_GET)) {
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
                                 <label>Numéro de carte (16 chiffres)</label>
-                                <input type="text" class="form-control" name="CBNumber" placeholder="16 chiffres de votre carte bancaire" maxlength="16" required>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="CBNumber"
+                                    placeholder="16 chiffres de votre carte bancaire"
+                                    maxlength="16"
+                                    required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6 col-md-4">
-                                <label for="CBMonth">Mois</label>
+                                <label for="CBMonth">Mois d'expiration</label>
                                 <select name="CBMonth" class="form-control" required>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -154,7 +187,7 @@ if (array_key_exists('type', $_GET)) {
                                 </select>
                             </div>
                             <div class="col-xs-6 col-md-4">
-                                <label for="CBYear">Année</label>
+                                <label for="CBYear">et Année</label>
                                 <select name="CBYear" class="form-control" required>
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
@@ -167,14 +200,23 @@ if (array_key_exists('type', $_GET)) {
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <label for="CBSecret">CVC</label>
-                                <input name="CBSecret" type="number" class="form-control" required>
+                                <input
+                                    placeholder="Ex : 486"
+                                    name="CBSecret"
+                                    maxlength="3"
+                                    type="text"
+                                    class="form-control"
+                                    required>
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </form>
                 <h5 class="text-center">
-                    <small>Votre carte devra être valide au moins pendant 3 mois pour le paiement en plusieurs fois.</small>
+                    <small>
+                        Votre carte devra être valide au
+                        moins pendant 3 mois pour le paiement en plusieurs fois.
+                    </small>
                 </h5>
             </div>
             <div class="col-xs-12 col-md-4">

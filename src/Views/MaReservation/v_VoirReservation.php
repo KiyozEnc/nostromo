@@ -56,7 +56,6 @@ if (array_key_exists('Reservation', $_SESSION)) {
                 </tr>
                 </tbody>
             </table>
-
             <div class="row">
                 <div class="col-xs-12 col-md-7">
                     <?php
@@ -91,7 +90,14 @@ if (array_key_exists('Reservation', $_SESSION)) {
                    role="button">Valider la réservation
                 </a>
                 <?php
-
+            } else { ?>
+                <div class="row">
+                    <div class="col-xs-12 col-md-2">
+                        <br>
+                        <a href="?page=maReservation&action=annulerReservationValidee" class="btn btn-primary">Annuler la réservation</a>
+                    </div>
+                </div>
+            <?php
             }
             ?>
         </div>

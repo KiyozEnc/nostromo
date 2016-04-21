@@ -47,11 +47,12 @@ switch ($action) {
                     }
                     $_SESSION['Reservation'] = new Reservation();
                     $_SESSION['Reservation']
+                        ->setId(MConnexion::getLastIdReservation())
                         ->setNbPers($_POST['nbPers'])
                         ->setValid(false)
                         ->setUnClient($_SESSION['Utilisateur'])
                         ->setUnVol($unVol);
-                    if (array_key_exists('pointsUtilise', $_POST)) {
+                    if (array_key_exists('pointsUtilise', $_POST) && !empty($_POST['pointsUtilise'])) {
                         $_SESSION['Reservation']->setReduction($_POST['pointsUtilise']);
                     }
                 } else {

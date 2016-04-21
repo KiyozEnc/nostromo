@@ -19,8 +19,8 @@
         <small>
             Calcul de vos points de fidélité (+10 points à votre inscription)
             <ul>
-                <li>1 point/<?= \Nostromo\Classes\Build::TYPE_COMMANDE ?> € pour les commandes</li>
-                <li>1 point/<?= \Nostromo\Classes\Build::TYPE_RESERVATION ?> € pour les réservations de vols</li>
+                <li>10% du prix transformé en points pour les commandes</li>
+                <li>1 point = <?= \Nostromo\Classes\Build::TYPE_RESERVATION ?> € pour les réservations de vols</li>
             </ul>
         </small>
     </h3>

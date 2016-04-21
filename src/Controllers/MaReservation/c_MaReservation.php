@@ -1,5 +1,6 @@
 <?php
 
+use Nostromo\Classes\Exception\AccessDeniedException;
 use Nostromo\Classes\Exception\NotConnectedException;
 use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MReservation;
@@ -91,4 +92,27 @@ switch ($action) {
             Connexion::setFlashMessage($e->getMessage());
             header('Location:?page=maReservation&payment');
         }
+        break;
+    case 'annulerReservationValidee':
+        try {
+            if ($_SESSION['Reservation']->isValid()) {
+                if ($_SESSION['Reservation']->getId() === null) {
+                    $_SESSION['Reservation']->setId(Connexion::getLastIdReservation());
+                }
+                MReservation::annulerReservationValidee($_SESSION['Reservation']);
+                Connexion::setFlashMessage('Réservation annulée.', 'valid');
+                unset($_SESSION['Reservation']);
+                header('Location:?page=maReservation');
+            } else {
+                throw new AccessDeniedException('Cette page n\'est pas disponible.');
+            }
+        } catch (AccessDeniedException $e) {
+            Connexion::setFlashMessage($e->getMessage());
+            header('Location:?page=maReservation');
+        }
+        break;
+    default:
+        Connexion::setFlashMessage('Page introuvable.');
+        header('Location:?page=index');
+        break;
 }
