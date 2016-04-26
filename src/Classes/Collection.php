@@ -5,7 +5,8 @@ namespace Nostromo\Classes;
 use InvalidArgumentException;
 
 /**
- * Class Collection.
+ * Class Collection
+ * @package Nostromo\Classes
  */
 class Collection
 {

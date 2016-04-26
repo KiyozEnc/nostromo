@@ -5,14 +5,9 @@ namespace Nostromo\Classes;
 use Nostromo\Models\MConnexion as Connexion;
 
 /**
+ * Class Article
  * Permet de créer un Article pour un ajout ultérieur dans le panier.
- *
- * @category Classes
- *
- * @author Nostromo <contact@nostromo.com>
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- *
- * @link Classes/Article.php
+ * @package Nostromo\Classes
  */
 class Article
 {
@@ -46,35 +41,7 @@ class Article
     private $url;
 
     /**
-     * Constructeur d'un Article, sa référence est passé en paramètre
-     * Les autres informations sont obtenues via la base de données.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * Récupère l'article sous forme de tableau.
-     *
-     * @return array
-     */
-    public function getArticles()
-    {
-        $numArt = $this->numArt;
-        $designation = $this->designation;
-        $pu = $this->pu;
-        $qteStock = $this->qteStock;
-        $tab = [
-            'numArt' => $numArt,
-            'designation' => $designation,
-            'pu' => $pu,
-            'qteStock' => $qteStock,
-            'qte' => $this->qte
-        ];
-        return $tab;
-    }
-    /**
-     * Retourne la référence du Article.
+     * Retourne la référence de l'Article.
      *
      * @return string
      */
@@ -82,12 +49,9 @@ class Article
     {
         return $this->numArt;
     }
-    public function vider()
-    {
-    }
 
     /**
-     * Retourne le libellé du Article.
+     * Retourne la désignation de l'Article.
      *
      * @return string
      */
@@ -97,7 +61,7 @@ class Article
     }
 
     /**
-     * Get Qte.
+     * Retourne la quantité choisie par le client pour cet article
      *
      * @return int
      */
@@ -107,11 +71,9 @@ class Article
     }
 
     /**
-     * Augment de $quantite la quantité de l'article.
+     * Augmente de $quantite la quantité de l'article.
      *
      * @param int $quantite
-     *
-     * @throws \UnexpectedValueException
      */
     public function augmenterQuantite($quantite)
     {
@@ -127,6 +89,8 @@ class Article
     }
 
     /**
+     * Diminue de $quantite la quantité de l'article
+     *
      * @param int $quantite
      */
     public function diminuerQuantite($quantite)
@@ -136,8 +100,9 @@ class Article
             $this->qte = 0;
         }
     }
+
     /**
-     * Retourne la quantité commandée.
+     * Retourne le prix unitaire de l'Article.
      *
      * @return int
      */
@@ -147,7 +112,7 @@ class Article
     }
 
     /**
-     * Retourne le prix du Article.
+     * Retourne la quantité en stock de l'Article.
      *
      * @return int
      */
@@ -157,6 +122,8 @@ class Article
     }
 
     /**
+     * Set Qte.
+     *
      * @param int $qte
      *
      * @return Article
@@ -169,6 +136,8 @@ class Article
     }
 
     /**
+     * Set NumArt.
+     *
      * @param int $numArt
      *
      * @return Article
@@ -181,6 +150,8 @@ class Article
     }
 
     /**
+     * Set Designation.
+     *
      * @param string $designation
      *
      * @return Article
@@ -193,6 +164,8 @@ class Article
     }
 
     /**
+     * Set Pu.
+     *
      * @param int $pu
      *
      * @return Article
@@ -205,6 +178,8 @@ class Article
     }
 
     /**
+     * Set QteStock.
+     *
      * @param int $qteStock
      *
      * @return Article
@@ -217,6 +192,8 @@ class Article
     }
 
     /**
+     * Retourne le chemin d'accès à l'image de l'Article
+     *
      * @return string
      */
     public function getUrl()
@@ -229,6 +206,8 @@ class Article
     }
 
     /**
+     * Set Url.
+     *
      * @param string $url
      *
      * @return Article
@@ -240,18 +219,9 @@ class Article
         return $this;
     }
 
-    public function __toString()
-    {
-        return __CLASS__ .
-        ' numArt = '.$this->numArt.
-        ' designation = '.$this->designation.
-        ' pu = '.$this->pu.
-        ' qteStock = '.$this->qteStock.
-        ' qte = '.$this->qte.
-        ' url = '.$this->url;
-    }
-
     /**
+     * Retourne la description de l'Article
+     *
      * @return string
      */
     public function getDescription()
@@ -260,6 +230,8 @@ class Article
     }
 
     /**
+     * Set Description.
+     *
      * @param string $description
      * @return Article
      */
@@ -269,6 +241,11 @@ class Article
         return $this;
     }
 
+    /**
+     * Retourne le prix total (sans réduction) commandée par le client.
+     *
+     * @return int
+     */
     public function getMontant()
     {
         return $this->pu*$this->qte;

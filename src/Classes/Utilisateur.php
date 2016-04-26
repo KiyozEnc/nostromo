@@ -3,9 +3,9 @@
 namespace Nostromo\Classes;
 
 /**
- * Est un utilisateur du site.
- *
  * Class Utilisateur
+ * Est un Utilisateur du site
+ * @package Nostromo\Classes
  */
 class Utilisateur
 {

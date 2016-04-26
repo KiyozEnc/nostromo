@@ -3,7 +3,8 @@
 namespace Nostromo\Classes;
 
 /**
- * Permet de créer un vol pour un ajout ultérieur dans une réservation.
+ * Class Vol
+ * @package Nostromo\Classes
  */
 class Vol
 {
@@ -159,6 +160,6 @@ class Vol
      */
     public function getFormattedPrice()
     {
-        return $this->price.' €';
+        return Build::formaterEuro($this->price);
     }
 }

@@ -5,8 +5,8 @@ namespace Nostromo\Classes;
 use InvalidArgumentException;
 
 /**
- * Classe Panier
- * Permet de gérer un panier d'objets Produit
+ * Class Panier
+ * @package Nostromo\Classes
  */
 class Panier
 {
@@ -16,15 +16,11 @@ class Panier
      * @var Collection
      */
     private $collProduit;
+
     /**
      * @var int
      */
     private $pointsUtilise;
-
-    /**
-     *  Constructeur de la classe
-     *  Initialise la collection de produit.
-     */
 
     /**
      * Panier constructor.
@@ -35,9 +31,9 @@ class Panier
     }
 
     /**
-     * Retourne le nombre de produit.
+     * Retourne le nombre d'article dans le panier.
      *
-     * @return int Retourne un entier
+     * @return int
      */
     public function getNbProd()
     {
@@ -45,10 +41,10 @@ class Panier
     }
 
     /**
-     * Augmenter le produit de référence $ref de la quantité $qte.
+     * Augmente à l'article de numéro $ref $qte à sa quantité.
      *
-     * @param int $ref Reference du produit
-     * @param int $qte Nombre de produits à ajouter à la quantité
+     * @param int $ref Numéro de l'article
+     * @param int $qte Quantité à ajouter
      *
      * @throws \InvalidArgumentException
      */
@@ -75,12 +71,12 @@ class Panier
     }
 
     /**
-     * Diminuer le produit de référence $ref de la quantité $qte.
+     * Diminue à l'article de numéro $ref $qte à sa quantité ou supprime l'article si qte = 0.
      *
-     * @param int $ref Reference du produit
-     * @param int $qte Nombre de produits à retirer à la quantité
+     * @param int $ref Numéro de l'article
+     * @param int $qte Quantité à ajouter
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function diminuerQuantiteProduit($ref, $qte)
     {
@@ -93,6 +89,8 @@ class Panier
     }
 
     /**
+     * Ajoute un article au panier ou augmente de 1 sa quantité s'il est déjà dans le panier
+     *
      * @param Article $unProduit
      * @param int     $qte
      *
@@ -112,35 +110,27 @@ class Panier
     }
 
     /**
-     * Supprime un produit.
+     * Supprime un produit du panier.
      *
-     * @param int $refer
+     * @param int $numArt
      *
      * @throws InvalidArgumentException
      */
-    public function supprimerUnProduit($refer)
+    public function supprimerUnProduit($numArt)
     {
-        if ($this->collProduit->cleExiste($refer)) {
-            $this->collProduit->supprimer($refer);
+        if ($this->collProduit->cleExiste($numArt)) {
+            $this->collProduit->supprimer($numArt);
         }
     }
 
     /**
-     * Retourne l'ensemble des produits du panier.
+     * Retourne l'ensemble des articles du panier.
      *
      * @return array
      */
     public function getProduitsPanier()
     {
         return $this->collProduit->getCollection();
-    }
-
-    /**
-     * Retirer l'ensemble des produits du panier.
-     */
-    public function videPanier()
-    {
-        $this->collProduit->vider();
     }
 
     /**
@@ -163,6 +153,8 @@ class Panier
         return $this;
     }
     /**
+     * Retourne le prix total sans remise du contenu du panier
+     *
      * @return float
      */
     public function getPrixTotal()
@@ -176,6 +168,8 @@ class Panier
     }
 
     /**
+     * Retourne le prix total avec remise du contenu du panier
+     *
      * @return float
      */
     public function getPrixTotalWithRemise()
@@ -188,6 +182,11 @@ class Panier
         return $prix * $this->getMultiplicateurRemise();
     }
 
+    /**
+     * Retourne le multiplicateur à appliqué au prix à remiser
+     *
+     * @return float
+     */
     public function getMultiplicateurRemise()
     {
         $reduc = 1;
@@ -201,16 +200,13 @@ class Panier
     }
 
     /**
+     * Retourne le montant de la remise
+     *
      * @return float
      */
     public function getMontantRemise()
     {
-        $montant = 0;
-        foreach ($this->collProduit->getCollection() as $article) {
-            $montant += ($article->getPu() * $article->getQte()) - ($article->getPu() * $article->getQte())*$this->getMultiplicateurRemise();
-        }
-
-        return $montant;
+        return $this->getPrixTotal() - $this->getPrixTotalWithRemise();
     }
 
     /**

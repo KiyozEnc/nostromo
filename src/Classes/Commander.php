@@ -3,10 +3,9 @@
 namespace Nostromo\Classes;
 
 /**
- * Created by PhpStorm.
- * User: Kiyoz
- * Date: 25/01/2016
- * Time: 14:39.
+ * Class Commander
+ * Représente un article dans une commande
+ * @package Nostromo\Classes
  */
 class Commander
 {
@@ -22,13 +21,6 @@ class Commander
      * @var int
      */
     private $qte;
-
-    /**
-     * Commander constructor.
-     */
-    public function __construct()
-    {
-    }
 
     /**
      * @return Article

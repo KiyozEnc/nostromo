@@ -3,10 +3,8 @@
 namespace Nostromo\Classes;
 
 /**
- * Created by PhpStorm.
- * User: Kiyoz
- * Date: 25/01/2016
- * Time: 14:36.
+ * Class Commande
+ * @package Nostromo\Classes
  */
 class Commande
 {
@@ -131,6 +129,8 @@ class Commande
     }
 
     /**
+     * Retourne le montant de la commande avec remise
+     *
      * @return float
      */
     public function getMontantTotal()
@@ -144,6 +144,8 @@ class Commande
     }
 
     /**
+     * Retourne le montant de la commande sans remise.
+     *
      * @return float
      */
     public function getMontantTotalNoRemise()
@@ -157,19 +159,18 @@ class Commande
     }
 
     /**
+     * Retourne le montant de la remise
+     *
      * @return float
      */
     public function getMontantRemise()
     {
-        $montant = 0;
-        foreach ($this->getLesArticles()->getCollection() as $article) {
-            $montant += ($article->getPu() * $article->getQte()) - ($article->getPu() * $article->getQte())*$this->calculPourcentRemise();
-        }
-
-        return $montant;
+        return $this->getMontantTotalNoRemise() - $this->getMontantTotal();
     }
 
     /**
+     * Get PointsUtilise.
+     *
      * @return int
      */
     public function getPointsUtilise()
@@ -178,6 +179,8 @@ class Commande
     }
 
     /**
+     * Set PointsUtilise.
+     *
      * @param int $pointsUtilise
      * @return Commande
      */

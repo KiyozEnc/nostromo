@@ -3,10 +3,8 @@
 namespace Nostromo\Classes;
 
 /**
- * Created by PhpStorm.
- * User: Kiyoz
- * Date: 11/02/2016
- * Time: 01:46.
+ * Class Echeance
+ * @package Nostromo\Classes
  */
 class Echeance
 {

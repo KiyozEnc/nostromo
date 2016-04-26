@@ -2,10 +2,23 @@
 
 namespace Nostromo\Classes;
 
+/**
+ * Class Build
+ * Classe statique qui permet divers actions en communs sur toutes les pages.
+ * @package Nostromo\Classes
+ */
 class Build
 {
+    /**
+     * Interval de gain de points de fidélité pour les réservations.
+     */
     const TYPE_RESERVATION = 1200;
+
+    /**
+     * Interval de gain de points de fidélité pour les commandes (actuellement 10% du montant de la commande).
+     */
     const TYPE_COMMANDE = 'Commande';
+
     /**
      * Formate une chaîne de caractère de type Time en format français.
      *
@@ -52,20 +65,43 @@ class Build
         return $day.'/'.$month.'/'.$year.' à '.$hour.':'.$min;
     }
 
+    /**
+     * Formate une chaîne de caractères de type Number en format Euro français.
+     *
+     * @param double $arg
+     *
+     * @return string
+     */
     public static function formaterEuro($arg)
     {
         return number_format($arg, 2, ',', ' ').' €';
     }
+
+    /**
+     * Formate un objet de type \DateTime en extrayant seulement la date sans l'heure
+     *
+     * @param \DateTime $arg
+     * @return string
+     */
     public static function formaterDateTimeWithDate(\DateTime $arg)
     {
         return $arg->format('d/m/Y');
     }
+
+    /**
+     * Formate un objet de type \DateTime en extrayant la date avec l'heure
+     *
+     * @param \DateTime $arg
+     * @return string
+     */
     public static function formaterDateTimeWithTime(\DateTime $arg)
     {
         return $arg->format('d/m/Y H:i:s');
     }
 
     /**
+     * Permet de récupérer le nombre de points qui sera attribués suite à cette commande
+     *
      * @param float $price
      * @param int $type
      *
@@ -84,6 +120,11 @@ class Build
         return $points;
     }
 
+    /**
+     * Génère l'Url d'accès à l'image des vols.
+     *
+     * @return string
+     */
     public static function genererUrlImgAvion()
     {
         return 'public/Resources/img/avion.png';

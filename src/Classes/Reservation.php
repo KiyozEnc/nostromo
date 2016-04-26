@@ -7,9 +7,8 @@ use Nostromo\Models\MReservation;
 use Nostromo\Classes\Exception\ErrorSQLException;
 
 /**
- * Est une réservation d'un vol.
- *
  * Class Reservation
+ * @package Nostromo\Classes
  */
 class Reservation
 {
@@ -46,8 +45,17 @@ class Reservation
      */
     private $reduction;
 
+    /**
+     * Intérêt appliqué au paiement en plusieurs fois
+     */
     const INTERET = 0.0140;
+    /**
+     * Interval de points à utiliser au minimum
+     */
     const STEP_POINTS = 25;
+    /**
+     * Pourcentage à appliquer par chaque interval de points pour calculer la remise.
+     */
     const STEP_REDUCTION = 0.025;
 
     /**
@@ -201,22 +209,7 @@ class Reservation
     }
 
     /**
-     * Valide la réservation en l'enregistrant dans la base de données
-     *
-     * @throws ErrorSQLException
-     * @throws \InvalidArgumentException
-     */
-    public function flushValid()
-    {
-        MReservation::validerReservation(
-            $this->unClient,
-            $this->unVol,
-            $this
-        );
-    }
-
-    /**
-     * Récupère le prix de la réservation (comprend la remise lié aux points)
+     * Retourne le prix de la réservation (comprend la remise lié aux points)
      *
      * @return int
      */
@@ -254,7 +247,7 @@ class Reservation
     }
 
     /**
-     * Récupère les intérêts du paiement en plusieurs fois en pourcentage
+     * Récupère les intérêts du paiement en plusieurs fois en pourcentage, utilisé pour de l'affichage
      *
      * @return string
      */
@@ -311,6 +304,11 @@ class Reservation
         return $this;
     }
 
+    /**
+     * Récupère le pourcentage à appliquer au prix à remiser
+     *
+     * @return float
+     */
     public function getPercentReduction()
     {
         $percent = (float) 0;
