@@ -32,6 +32,7 @@ switch ($action) {
             header('Location:?page=connexion');
         }
         break;
+    // Partie Kevin C
     case 'edit':
         try {
             if (array_key_exists('actualpwd', $_POST)) {
@@ -95,6 +96,7 @@ switch ($action) {
             header('Location:?page=monCompte&action=edit');
         }
         break;
+    // Fin Partie
     case 'voirCommandes':
         try {
             if (array_key_exists('Utilisateur', $_SESSION)) {

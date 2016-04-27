@@ -1,3 +1,6 @@
+<?php
+// Vue de l'édition de compte (Partie Kevin C)
+?>
 <div class="row">
     <div class="col-xs-12 col-md-12 col-md-offset-1">
         <p class="text-center">Formulaire de modification</p>
