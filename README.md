@@ -16,3 +16,7 @@ Pour utiliser le code source de notre projet Nostromo, il vous faut suivre les i
 /path/to/composer.phar fait référence au chemin jusqu'à composer.phar
 
 [composer]: https://getcomposer.org/download/
+
+#### Documentations
+
+Les documentations sont disponibles dans le dossier docs
