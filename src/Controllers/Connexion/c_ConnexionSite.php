@@ -1,9 +1,9 @@
 <?php
 
+use Nostromo\Classes\Exception\NotFoundException;
 use Nostromo\Models\MUtilisateur;
 use Nostromo\Models\MConnexion as Connexion;
 use Nostromo\Models\MReservation;
-use Nostromo\Classes\Utilisateur;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirForm';
 
@@ -13,29 +13,27 @@ switch ($action) {
         break;
     case 'seConnecter':
         try {
-            if (array_key_exists('mailUser', $_POST)) {
+            try {
+                if (!array_key_exists('mailUser', $_POST)) {
+                    throw new NotFoundException('Cette page n\'existe pas.');
+                }
                 $unUtilisateur = MUtilisateur::getUser($_POST['mailUser']);
-                if ($_POST['mailUser'] === $unUtilisateur->getMail()
-                    && sha1($_POST['mdpUser']) === $unUtilisateur->getMdp()
+                if ($_POST['mailUser'] !== $unUtilisateur->getMail() &&
+                    sha1($_POST['mdpUser']) !== $unUtilisateur->getMdp()
                 ) {
-                    $_SESSION['Utilisateur'] = new Utilisateur();
+                    throw new InvalidArgumentException('E-mail ou mot de passe incorrecte.');
+                } else {
                     $_SESSION['Utilisateur'] = $unUtilisateur;
                     $_SESSION['Reservation'] = MReservation::getReservationClient($_SESSION['Utilisateur']);
                     Connexion::setFlashMessage('Connecté avec succès', 'valid');
                     header('Location:?page=index');
-                } else {
-                    Connexion::setFlashMessage(
-                        'E-mail ou mot de passe incorrecte',
-                        'error'
-                    );
-                    header('Location:?page=connexion');
                 }
-            } else {
-                Connexion::setFlashMessage(
-                    'Erreur 404 : Page introuvable',
-                    'error'
-                );
+            } catch (NotFoundException $e) {
+                Connexion::setFlashMessage($e->getMessage(), 'error');
                 header('Location:?page=index');
+            } catch (\InvalidArgumentException $e) {
+                Connexion::setFlashMessage($e->getMessage(), 'error');
+                header('Location:?page=connexion');
             }
         } catch (InvalidArgumentException $e) {
             Connexion::setFlashMessage($e->getMessage(), 'error');

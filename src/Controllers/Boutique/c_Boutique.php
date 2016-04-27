@@ -5,6 +5,7 @@ use Nostromo\Models\MArticle;
 use Nostromo\Models\MConnexion as Connexion;
 
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : 'voirBoutique';
+
 switch ($action) {
     case 'voirBoutique':
         try {
@@ -18,7 +19,7 @@ switch ($action) {
 
     case 'voirArticle':
         try {
-            if (!array_key_exists('Utilisateur', $_SESSION)) {
+            if (!Connexion::sessionOuverte()) {
                 throw new NotConnectedException();
             }
         } catch (NotConnectedException $e) {
