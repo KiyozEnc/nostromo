@@ -10,6 +10,7 @@ namespace Nostromo\Models;
 
 use Nostromo\Classes\Collection;
 use Nostromo\Classes\Echeance;
+use Nostromo\Classes\Exception\CollectionException;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Reservation;
 
@@ -21,8 +22,9 @@ class MEcheance
      * @param Reservation $reservation
      *
      * @return Collection
+     *
      * @throws ErrorSQLException
-     * @throws \InvalidArgumentException
+     * @throws CollectionException
      */
     public static function getEcheances(Reservation $reservation)
     {

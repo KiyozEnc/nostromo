@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use Nostromo\Classes\Build;
 use Nostromo\Classes\Collection;
 use Nostromo\Classes\Echeance;
+use Nostromo\Classes\Exception\CollectionException;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Reservation;
 use Nostromo\Classes\Utilisateur;
@@ -24,7 +25,7 @@ class MReservation
      * @param Vol         $unVol
      * @param Reservation $uneReservation
      *
-     * @throws \InvalidArgumentException
+     * @throws CollectionException
      * @throws ErrorSQLException
      */
     public static function validerReservation(Utilisateur $unClient, Vol $unVol, Reservation $uneReservation)
@@ -127,7 +128,7 @@ class MReservation
      *
      * @return Reservation
      *
-     * @throws InvalidArgumentException
+     * @throws CollectionException
      * @throws ErrorSQLException
      */
     public static function getReservationClient(Utilisateur $unClient)
