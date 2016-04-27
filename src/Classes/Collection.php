@@ -2,7 +2,7 @@
 
 namespace Nostromo\Classes;
 
-use InvalidArgumentException;
+use Nostromo\Classes\Exception\CollectionException;
 
 /**
  * Class Collection
@@ -21,7 +21,7 @@ class Collection
      * @param mixed $obj
      * @param null $key
      *
-     * @throws InvalidArgumentException
+     * @throws CollectionException
      */
     public function ajouter($obj, $key = null)
     {
@@ -29,7 +29,7 @@ class Collection
             $this->tab[] = $obj;
         } else {
             if (array_key_exists($key, $this->tab)) {
-                throw new InvalidArgumentException("Key {$key} already in use.");
+                throw new CollectionException("Key $key already in use.");
             } else {
                 $this->tab[$key] = $obj;
             }
@@ -43,28 +43,28 @@ class Collection
      *
      * @return mixed
      *
-     * @throws InvalidArgumentException
+     * @throws CollectionException
      */
     public function getElement($key)
     {
         if (array_key_exists($key, $this->tab)) {
             return $this->tab[$key];
         } else {
-            throw new InvalidArgumentException("Invalid key $key.");
+            throw new CollectionException("Invalid key $key.");
         }
     }
 
     /**
      * @param mixed $key
      *
-     * @throws InvalidArgumentException
+     * @throws CollectionException
      */
     public function supprimer($key)
     {
         if (array_key_exists($key, $this->tab)) {
             unset($this->tab[$key]);
         } else {
-            throw new InvalidArgumentException("Invalid key $key.");
+            throw new CollectionException("Invalid key $key.");
         }
     }
 
