@@ -26,7 +26,7 @@ class Build
      *
      * @return string
      */
-    public static function formaterDate($dateDuVol)
+    public static function fDate($dateDuVol)
     {
         $year = substr($dateDuVol, 0, -6);
         $month = substr($dateDuVol, 5, -3);
@@ -42,7 +42,7 @@ class Build
      *
      * @return string
      */
-    public static function formaterHeure($heureDuVol)
+    public static function fHeure($heureDuVol)
     {
         return substr($heureDuVol, 0, -3);
     }
@@ -54,7 +54,7 @@ class Build
      *
      * @return string
      */
-    public static function formaterDateEtHeure($var)
+    public static function fDateHeure($var)
     {
         $year = substr($var, 0, -15);
         $month = substr($var, 5, -12);
@@ -72,7 +72,7 @@ class Build
      *
      * @return string
      */
-    public static function formaterEuro($arg)
+    public static function fEuro($arg)
     {
         return number_format($arg, 2, ',', ' ').' €';
     }
@@ -83,7 +83,7 @@ class Build
      * @param \DateTime $arg
      * @return string
      */
-    public static function formaterDateTimeWithDate(\DateTime $arg)
+    public static function fDateTimeDate(\DateTime $arg)
     {
         return $arg->format('d/m/Y');
     }
@@ -94,7 +94,7 @@ class Build
      * @param \DateTime $arg
      * @return string
      */
-    public static function formaterDateTimeWithTime(\DateTime $arg)
+    public static function fDateTimeTime(\DateTime $arg)
     {
         return $arg->format('d/m/Y H:i:s');
     }
@@ -107,7 +107,7 @@ class Build
      *
      * @return int
      */
-    public static function getNewPoints($price, $type = self::TYPE_RESERVATION)
+    public static function newPoints($price, $type = self::TYPE_RESERVATION)
     {
         $points = 0;
         if ($type === self::TYPE_COMMANDE) {
@@ -128,21 +128,5 @@ class Build
     public static function genererUrlImgAvion()
     {
         return 'public/Resources/img/avion.png';
-    }
-
-    /**
-     * Retourne le mois au format string de la date (en string) passée en paramètre (format Y-m-d)
-     *
-     * @param $dateString
-     * @return string
-     */
-    public static function formaterFr($dateString)
-    {
-        $lesMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-        $mois = substr($dateString, 5, -3);
-        if (substr($mois, 0, 1) === '0') {
-            $mois = substr($mois, 1, 2);
-        }
-        return $lesMois[$mois - 1];
     }
 }

@@ -1,7 +1,9 @@
 <div class="row row-centered">
     <?php
-    if (array_key_exists('Reservation', $_SESSION) && $_SESSION['Reservation']->isValid()) { ?>
-        <p class="col-xs-12 col-md-8 col-md-offset-2 col-centered">Votre vol décolle dans
+    if (array_key_exists('Reservation', $_SESSION) &&
+        $_SESSION['Reservation']->isValid()) { ?>
+        <p class="col-xs-12 col-md-8 col-md-offset-2 col-centered">
+            Votre vol décolle dans
             <span id="time"></span> !</p>
         <?php
     } else { ?>

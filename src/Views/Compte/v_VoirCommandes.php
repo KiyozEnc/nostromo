@@ -1,6 +1,10 @@
 <div class="row row-centered">
     <div class="col-xs-12 col-md-6 col-centered">
-        <form class="form-horizontal" action="?page=monCompte&action=voirCommandes" method="post" role="form">
+        <form
+            class="form-horizontal"
+            action="?page=monCompte&action=voirCommandes"
+            method="post"
+            role="form">
             <div class="form-group">
                 <label for="inputID" class="col-md-2 control-label">Commandes</label>
                 <div class="col-xs-12 col-md-10 col-centered">
@@ -12,8 +16,12 @@
                         if (isset($lesCommandes)) {
                             foreach ($lesCommandes->getCollection() as $commande) {
                                 ?>
-                                <option value="<?= $commande->getId() ?>"><?= 'N°'.$commande->getId().' - '. Build::formaterDateTimeWithTime(new DateTime($commande->getUneDate())) ?> - <?= Build::formaterEuro($commande->getMontantTotal());
-                                    ?></option>
+                                <option
+                                    value="<?= $commande->getId() ?>">
+                                    N°<?= $commande->getId() ?> -
+                                    <?= Build::fDateTimeTime(new DateTime($commande->getUneDate())) ?> -
+                                    <?= Build::fEuro($commande->getMontantTotal()); ?>
+                                </option>
                                 <?php
 
                             }
@@ -46,9 +54,9 @@
 
                     <tr>
                         <td><?= $article->getDesignation() ?></td>
-                        <td><?= Build::formaterEuro($article->getPu()) ?></td>
+                        <td><?= Build::fEuro($article->getPu()) ?></td>
                         <td><?= $article->getQte() ?></td>
-                        <td><?= Build::formaterEuro($article->getMontant()); ?></td>
+                        <td><?= Build::fEuro($article->getMontant()); ?></td>
                     </tr>
                     <?php
 
@@ -57,19 +65,19 @@
                 </tbody>
             </table>
             <?php
-            if ($uneCommande->getPointsUtilise() > 0) {
-                echo "
-                    <h5 class='text-left'>
-                        Vous avez utilisé {$uneCommande->getPointsUtilise()} points de fidélité
-                        (<span class=\"text-warning\">- ".Build::formaterEuro($uneCommande->getMontantRemise()).'</span>)
-                        et gagner '.
-                        Build::getNewPoints($uneCommande->getMontantTotalNoRemise(), Build::TYPE_COMMANDE).
-                        ' nouveaux points avec cette commande.
-                    </h5>'
-                ;
+            if ($uneCommande->getPointsUtilise() > 0) { ?>
+                <h5 class='text-left'>
+                    Vous avez utilisé <?= $uneCommande->getPointsUtilise() ?> points de fidélité
+                    (<span class=\"text-warning\">- <?= Build::fEuro($uneCommande->getMontantRemise()) ?>.'</span>)
+                    et gagner <?= Build::newPoints($uneCommande->getMontantTotalNoRemise(), Build::TYPE_COMMANDE) ?>
+                    nouveaux points avec cette commande.
+                </h5>
+                <?php
             }
             ?>
-            <h3>Total : <span class="text-warning"><?= Build::formaterEuro($uneCommande->getMontantTotal()) ?></span></h3>
+            <h3>
+                Total : <span class="text-warning"><?= Build::fEuro($uneCommande->getMontantTotal()) ?></span>
+            </h3>
             <?php
 
         } else {
@@ -86,6 +94,10 @@
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-3 col-md-offset-3">
-        <a href="?page=monCompte" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+        <a
+            href="?page=monCompte"
+            class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span> Retour
+        </a>
     </div>
 </div>

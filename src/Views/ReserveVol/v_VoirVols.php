@@ -34,7 +34,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                             }
                             ?></h2>
                         <h4>Date et heure : <?= $unVol->getDateVol() ?> à <?= $unVol->getHeureVol() ?></h4>
-                        <h5>Prix : <?php echo Build::formaterEuro($unVol->getPrice());
+                        <h5>Prix : <?php echo Build::fEuro($unVol->getPrice());
                             ?>
                         </h5>
                         <?php

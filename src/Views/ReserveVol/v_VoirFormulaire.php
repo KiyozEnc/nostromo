@@ -13,7 +13,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                 <h3>Date et heure : <?= $vol->getDateVol() ?> à <?= $vol->getHeureVol() ?></h3>
                 <form action="?page=reserver&action=validReserverVol&vol=<?= $vol->getNumVol(); ?>" method="POST" role="form" autocomplete="off">
                     <h3 class="text-muted"><?= $nbPlaceRestante ?> places disponibles !</h3>
-                    <h4 class="text-uppercase text-warning">Vol à partir de <?= \Nostromo\Classes\Build::formaterEuro($vol->getPrice()) ?></h4>
+                    <h4 class="text-uppercase text-warning">Vol à partir de <?= \Nostromo\Classes\Build::fEuro($vol->getPrice()) ?></h4>
                     <div class="row">
                         <div class="col-xs-12 col-md-2">
                             <div class="form-group">

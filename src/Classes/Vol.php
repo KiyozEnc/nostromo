@@ -73,7 +73,7 @@ class Vol
      */
     public function getDateVol()
     {
-        return Build::formaterDate($this->dateVol);
+        return Build::fDate($this->dateVol);
     }
 
     /**
@@ -93,7 +93,7 @@ class Vol
      */
     public function getHeureVol()
     {
-        return Build::formaterHeure($this->heureVol);
+        return Build::fHeure($this->heureVol);
     }
 
     /**
@@ -160,6 +160,6 @@ class Vol
      */
     public function getFormattedPrice()
     {
-        return Build::formaterEuro($this->price);
+        return Build::fEuro($this->price);
     }
 }

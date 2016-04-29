@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by Kiyoz.
- * User : Kiyoz
- * Date : 05/02/2016
- * Time : 16:18.
- */
 require_once ROOT.'src/Views/v_Alert.php';
+
 
 if (array_key_exists('action', $_GET)) {
     $action = $_GET['action'];
 } else {
-    $action = '';
     if ($action === '' && $_GET['page'] === 'monCompte') {
         $action = 'voirMonCompte';
     }

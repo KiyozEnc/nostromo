@@ -60,7 +60,7 @@ switch ($action) {
             MUtilisateur::setPoints(
                 $_SESSION['Utilisateur'],
                 $_SESSION['Utilisateur']->getPoints() +
-                Build::getNewPoints(
+                Build::newPoints(
                     $_SESSION['Panier']->getPrixTotal(),
                     Build::TYPE_COMMANDE
                 )

@@ -20,7 +20,7 @@ if (array_key_exists('Panier', $_SESSION)) {
             </div>
             <div class="col-xs-12 col-md-3">
                 <?php
-                echo Build::formaterEuro($art->getPu());
+                echo Build::fEuro($art->getPu());
                 ?>
             </div>
             <div class="col-xs-12 col-md-3">
@@ -105,7 +105,7 @@ if (array_key_exists('Panier', $_SESSION)) {
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-5">
-                <h4>Total à payer : <span id="total"><?php echo Build::formaterEuro($_SESSION['Panier']->getPrixTotal());
+                <h4>Total à payer : <span id="total"><?php echo Build::fEuro($_SESSION['Panier']->getPrixTotal());
                         ?></span></h4>
                 <h5>Total remise (en %) : <span id="remise">0%</span></h5>
             </div>

@@ -90,7 +90,7 @@ class MReservation
             $conn->commit();
             $uneReservation->setLesEcheance($lesEcheances);
             $points = MUtilisateur::getPoints($unClient) - $uneReservation->getReduction();
-            MUtilisateur::setPoints($unClient, $points + Build::getNewPoints($uneReservation->getPriceReservation()));
+            MUtilisateur::setPoints($unClient, $points + Build::newPoints($uneReservation->getPriceReservation()));
             $conn = null;
         } catch (PDOException $e) {
             $conn->rollBack();
@@ -125,7 +125,7 @@ class MReservation
                 ]
             );
             $conn->commit();
-            $points = MUtilisateur::getPoints($uneReservation->getUnClient()) - Build::getNewPoints($uneReservation->getPriceReservation()) + $uneReservation->getReduction();
+            $points = MUtilisateur::getPoints($uneReservation->getUnClient()) - Build::newPoints($uneReservation->getPriceReservation()) + $uneReservation->getReduction();
             MUtilisateur::setPoints($uneReservation->getUnClient(), $points);
             $conn = null;
         } catch (PDOException $e) {

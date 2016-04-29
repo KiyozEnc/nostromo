@@ -4,10 +4,8 @@ namespace Nostromo\Tests;
 use Nostromo\Classes\Article;
 
 /**
- * Created by PhpStorm.
- * User: Kiyoz
- * Date: 02/04/2016
- * Time: 16:31
+ * Class ArticleTest
+ * @package Nostromo\Tests
  */
 class ArticleTest extends \PHPUnit_Framework_TestCase
 {

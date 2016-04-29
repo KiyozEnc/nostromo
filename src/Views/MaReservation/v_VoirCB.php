@@ -21,7 +21,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         </div>
     </div>
 <?php
-if ($_SESSION['Reservation']->getReduction() === 0 || $_SESSION['Reservation']->getReduction() === null) {
+if ($_SESSION['Reservation']->getReduction() === 0) {
     echo '<br><p>Vous avez choisi de ne pas appliquer vos points de fidélité</p>';
 } else {
     echo '<br>
@@ -41,7 +41,11 @@ if (array_key_exists('type', $_GET)) {
         <br>
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <form action="?page=maReservation&action=payment&type=comptant" method="post" role="form" autocomplete="off">
+                <form
+                    action="?page=maReservation&action=payment&type=comptant"
+                    method="post"
+                    role="form"
+                    autocomplete="off">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
@@ -122,13 +126,14 @@ if (array_key_exists('type', $_GET)) {
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <?php echo
-                            Build::formaterEuro($_SESSION['Reservation']->getPriceReservation()); ?>
+                            Build::fEuro($_SESSION['Reservation']->getPriceReservation()); ?>
                         - aujourd'hui
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        Dont <?= Build::formaterEuro($_SESSION['Reservation']->getPriceRemise()); ?> de remise lié aux points de fidélité.
+                        Dont <?= Build::fEuro($_SESSION['Reservation']->getPriceRemise()); ?>
+                        de remise lié aux points de fidélité.
                     </div>
                 </div>
             </div>
@@ -138,7 +143,11 @@ if (array_key_exists('type', $_GET)) {
         <br>
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <form action="?page=maReservation&action=payment&type=3fois" method="post" role="form" autocomplete="off">
+                <form
+                    action="?page=maReservation&action=payment&type=3fois"
+                    method="post"
+                    role="form"
+                    autocomplete="off">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
@@ -224,27 +233,28 @@ if (array_key_exists('type', $_GET)) {
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <?php echo
-                                Build::formaterEuro($_SESSION['Reservation']->getFirstEcheancePrice()); ?>
+                                Build::fEuro($_SESSION['Reservation']->getFirstEcheancePrice()); ?>
                         - aujourd'hui (<?php echo $_SESSION['Reservation']->getInteret().' supplémentaires'; ?>)
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <?php echo
-                                Build::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
-                        - le <?php echo Build::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(1)); ?>
+                                Build::fEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
+                        - le <?php echo Build::fDateTimeDate($_SESSION['Reservation']->getDateEcheance(1)); ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <?php echo
-                                Build::formaterEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
-                        - le <?php echo Build::formaterDateTimeWithDate($_SESSION['Reservation']->getDateEcheance(2)); ?>
+                                Build::fEuro($_SESSION['Reservation']->getOtherEcheancePrice()); ?>
+                        - le <?php echo Build::fDateTimeDate($_SESSION['Reservation']->getDateEcheance(2)); ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        Dont <?= Build::formaterEuro($_SESSION['Reservation']->getPriceRemise()); ?> de remise lié aux points de fidélité.
+                        Dont <?= Build::fEuro($_SESSION['Reservation']->getPriceRemise()); ?>
+                        de remise lié aux points de fidélité.
                     </div>
                 </div>
             </div>

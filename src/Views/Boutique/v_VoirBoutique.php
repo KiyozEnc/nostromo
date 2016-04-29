@@ -1,5 +1,4 @@
 <?php
-
 use Nostromo\Models\MConnexion as Connexion;
 
 require_once ROOT.'src/Views/v_Alert.php'; ?>
@@ -17,7 +16,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                     <img width="60%"
                          height="60%"
                          class="img-responsive"
-                         src=<?php echo $unArt->getUrl(); ?>
+                         src="<?php echo $unArt->getUrl(); ?>"
                          title="Article n°<?= $unArt->getNumArt() ?>">
                     <?php
                 } else { ?>
@@ -25,7 +24,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                         <img width="60%"
                              height="60%"
                              class="img-responsive"
-                             src=<?php echo $unArt->getUrl(); ?>
+                             src="<?php echo $unArt->getUrl(); ?>"
                              title="Article n°<?= $unArt->getNumArt() ?>">
                     </a>
                 <?php
