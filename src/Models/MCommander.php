@@ -6,16 +6,13 @@ use Nostromo\Classes\Commande;
 use Nostromo\Classes\Commander;
 use Nostromo\Classes\Collection;
 use InvalidArgumentException;
+use Nostromo\Classes\Exception\CollectionException;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use PDOException;
 
 /**
- * Class MCommander.
- *
- * @category Models
- *
- * @author   Nostromo <contact@nostromo.com>
- * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * Class MCommander
+ * @package Nostromo\Models
  */
 class MCommander
 {
@@ -27,7 +24,7 @@ class MCommander
      *
      * @return Collection
      *
-     * @throws InvalidArgumentException
+     * @throws CollectionException
      * @throws ErrorSQLException
      */
     public static function getUneCommande(Commande $uneCommande, $index = false)
@@ -48,7 +45,7 @@ class MCommander
             }
             $conn->commit();
         } catch (PDOException $e) {
-            throw new InvalidArgumentException(
+            throw new ErrorSQLException(
                 'Impossible de récupérer la commande n°'.$uneCommande->getId().' Détails : '.$e->getMessage()
             );
         }
@@ -56,6 +53,13 @@ class MCommander
         return $lesArticles;
     }
 
+    /**
+     * Enregistre les articles d'une commande du client en cours
+     *
+     * @param Commander $unCommander
+     *
+     * @throws ErrorSQLException
+     */
     public static function ajouterArticleCommande(Commander $unCommander)
     {
         try {

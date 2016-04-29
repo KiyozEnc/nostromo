@@ -2,28 +2,25 @@
 
 namespace Nostromo\Models;
 
+use Nostromo\Classes\Exception\CollectionException;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Vol;
 use Nostromo\Classes\Collection;
-use InvalidArgumentException;
 use PDOException;
 
 /**
- * Class MVol.
- *
- * @category Models
- *
- * @author   Nostromo <contact@nostromo.com>
- * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- *
- * @link     localhost
+ * Class MVol
+ * @package Nostromo\Models
  */
 class MVol
 {
     /**
+     * Récupère tous les vols disponibles (non partis)
+     *
      * @return Collection
      *
-     * @throws InvalidArgumentException
+     * @throws ErrorSQLException
+     * @throws CollectionException
      */
     public static function getVols()
     {
@@ -47,13 +44,15 @@ class MVol
                 $lesVols->ajouter($unVol);
             }
         } catch (PDOException $ex) {
-            throw new InvalidArgumentException('Aucun vol n\'est disponible');
+            throw new ErrorSQLException('Aucun vol n\'est disponible');
         }
 
         return $lesVols;
     }
 
     /**
+     * Récupère un vol via son numéro $numVol
+     *
      * @param $numVol
      *
      * @return Vol
@@ -84,11 +83,13 @@ class MVol
 
 
     /**
+     * Récupère le nombre de place restante d'un vol
+     *
      * @param Vol $unVol
      *
      * @return int
      *
-     * @throws InvalidArgumentException
+     * @throws ErrorSQLException
      */
     public static function getPlaceRestante(Vol $unVol)
     {
@@ -102,14 +103,17 @@ class MVol
                 $nbPlace -= $tabVol['nbPers'];
             }
         } catch (PDOException $e) {
-            throw new InvalidArgumentException('Le vol n\'existe pas');
+            throw new ErrorSQLException('Le vol n\'existe pas');
         }
 
         return $nbPlace;
     }
 
     /**
+     * Récupère le temps avant qu'un vol ne parte
+     *
      * @param Vol $unVol
+     *
      * @return string
      *
      * @throws ErrorSQLException

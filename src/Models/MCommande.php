@@ -2,20 +2,16 @@
 
 namespace Nostromo\Models;
 
-use InvalidArgumentException;
 use Nostromo\Classes\Commande;
+use Nostromo\Classes\Exception\CollectionException;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use PDOException;
 use Nostromo\Classes\Utilisateur;
 use Nostromo\Classes\Collection;
 
 /**
- * Class MCommande.
- *
- * @category Models
- *
- * @author   Nostromo <contact@nostromo.com>
- * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * Class MCommande
+ * @package Nostromo\Models
  */
 class MCommande
 {
@@ -26,8 +22,8 @@ class MCommande
      *
      * @return Commande $uneCommande
      *
-     * @throws \InvalidArgumentException
      * @throws ErrorSQLException
+     * @throws CollectionException
      */
     public static function getUneCommande($id)
     {
@@ -44,6 +40,7 @@ class MCommande
             throw new ErrorSQLException($e->getMessage());
         }
     }
+
     /**
      * Récupère les commandes dont l'utilisateur est passé en paramètre.
      *
@@ -52,7 +49,7 @@ class MCommande
      *
      * @return Collection $lesCommandes
      *
-     * @throws \InvalidArgumentException
+     * @throws CollectionException
      * @throws ErrorSQLException
      */
     public static function getCommandes(Utilisateur $unClient, $index = false)
@@ -77,6 +74,12 @@ class MCommande
         return $lesCommandes;
     }
 
+    /**
+     * Enregistre la commande finalisée du client
+     *
+     * @param Commande $uneCommande
+     * @throws ErrorSQLException
+     */
     public static function ajouterCommande(Commande $uneCommande)
     {
         try {

@@ -18,9 +18,16 @@ use Nostromo\Classes\Utilisateur;
 use Nostromo\Classes\Vol;
 use PDOException;
 
+/**
+ * Class MReservation
+ * @package Nostromo\Models
+ */
 class MReservation
 {
     /**
+     * Permet de valider la réservation en paramètre. Gère le paiement en plusieurs
+     * échéances
+     *
      * @param Utilisateur $unClient
      * @param Vol         $unVol
      * @param Reservation $uneReservation
@@ -94,7 +101,14 @@ class MReservation
             );
         }
     }
-    
+
+    /**
+     * Permet d'annuler une réservation déjà validée (rembourse les points utilisés et gagnés)
+     *
+     * @param Reservation $uneReservation
+     *
+     * @throws ErrorSQLException
+     */
     public static function annulerReservationValidee(Reservation $uneReservation)
     {
         $conn = MConnexion::getBdd();
@@ -124,6 +138,8 @@ class MReservation
     }
 
     /**
+     * Récupère la réservation en cours du client
+     *
      * @param Utilisateur $unClient
      *
      * @return Reservation

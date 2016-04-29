@@ -8,31 +8,26 @@ use PDOException;
 use UnexpectedValueException;
 
 /**
- * Class Connexion.
- *
- * PHP version 5.6
- *
- * @category Models
- *
- * @author   Nostromo <contact@nostromo.com>
- * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * Class MConnexion
+ * @package Nostromo\Models
  */
 class MConnexion
 {
     /**
-     * BDD Connexion.
+     * Permet de connecter à la base de données afin d'avoir accès
+     * au driver PDO
      *
      * @return PDO
      */
     public static function getBdd()
     {
-        $host = 'localhost';
-        $dbname = 'myDbName';
+        $hote = 'localhost';
+        $base = 'myDbName';
         $user = 'myUser';
         $mdp = 'myPassword';
         try {
             $pdo = new PDO(
-                'mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8',
+                'mysql:host=' . $hote . ';dbname=' . $base . ';charset=utf8',
                 $user,
                 $mdp,
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
@@ -55,12 +50,10 @@ class MConnexion
     }
 
     /**
-     * Ajoute un message flash alert.
+     * Ajoute un message flash dans les variables de session.
      *
      * @param string $message Message
-     * @param string $type    Type
-     *
-     * @throws UnexpectedValueException
+     * @param string $type    Type de validation
      */
     public static function setFlashMessage($message = 'Erreur inconnue', $type = 'error')
     {
@@ -83,6 +76,14 @@ class MConnexion
         }
     }
 
+    /**
+     * Permet de récupérer le nouveau id de commande qui sera généré
+     * via le auto_increment de la base de données
+     *
+     * @return int
+     *
+     * @throws ErrorSQLException
+     */
     public static function getLastIdCommande()
     {
         $conn = self::getBdd();
@@ -99,19 +100,27 @@ class MConnexion
         }
     }
 
+    /**
+     * Permet de récupérer le nouveau id de réservation qui sera généré
+     * via le auto_increment de la base de données
+     *
+     * @return int
+     *
+     * @throws ErrorSQLException
+     */
     public static function getLastIdReservation()
-        {
-            $conn = self::getBdd();
-            try {
-                $req = "SELECT `AUTO_INCREMENT` as AI
-                FROM  INFORMATION_SCHEMA.TABLES
-                WHERE TABLE_SCHEMA = '2014-nostromo_base'
-                AND   TABLE_NAME   = 'reservation';";
-                $req = $conn->query($req);
-                $req = $req->fetch();
-                return (int) $req['AI'];
-            } catch (PDOException $e) {
-                throw new ErrorSQLException($e->getMessage());
-            }
+    {
+        $conn = self::getBdd();
+        try {
+            $req = "SELECT `AUTO_INCREMENT` as AI
+            FROM  INFORMATION_SCHEMA.TABLES
+            WHERE TABLE_SCHEMA = '2014-nostromo_base'
+            AND   TABLE_NAME   = 'reservation';";
+            $req = $conn->query($req);
+            $req = $req->fetch();
+            return (int) $req['AI'];
+        } catch (PDOException $e) {
+            throw new ErrorSQLException($e->getMessage());
         }
+    }
 }

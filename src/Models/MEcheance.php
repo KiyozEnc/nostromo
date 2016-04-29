@@ -14,6 +14,10 @@ use Nostromo\Classes\Exception\CollectionException;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use Nostromo\Classes\Reservation;
 
+/**
+ * Class MEcheance
+ * @package Nostromo\Models
+ */
 class MEcheance
 {
     /**
@@ -46,9 +50,10 @@ class MEcheance
     }
 
     /**
-     * Ajoute une échéance à la réservation de l'échéance
+     * Ajoute une échéance à la réservation en cours
      *
      * @param Echeance $echeance
+     *
      * @throws ErrorSQLException
      */
     public static function addEcheance(Echeance $echeance)

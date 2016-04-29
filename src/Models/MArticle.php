@@ -3,27 +3,24 @@
 namespace Nostromo\Models;
 
 use Nostromo\Classes\Article;
-use InvalidArgumentException;
 use Nostromo\Classes\Collection;
+use Nostromo\Classes\Exception\CollectionException;
 use Nostromo\Classes\Exception\ErrorSQLException;
 use PDOException;
 
 /**
- * Class MArticle.
- *
- * @category Models
- *
- * @author   Nostromo <contact@nostromo.com>
- * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * Class MArticle
+ * @package Nostromo\Models
  */
 class MArticle
 {
     /**
+     * Récupère un article numéro $ref
+     *
      * @param int $ref
      *
      * @return Article
      *
-     * @throws InvalidArgumentException
      * @throws ErrorSQLException
      */
     public static function getArticle($ref)
@@ -54,8 +51,8 @@ class MArticle
      *
      * @return Collection
      *
-     * @throws InvalidArgumentException
      * @throws ErrorSQLException
+     * @throws CollectionException
      */
     public static function getArticles()
     {
@@ -83,6 +80,14 @@ class MArticle
         }
     }
 
+    /**
+     * Met à jour le stock de l'article passé en paramètre
+     * lorsqu'un client finalise sa commande
+     *
+     * @param Article $article
+     * @param int $qteCommande
+     * @throws ErrorSQLException
+     */
     public static function updateQteStock(Article $article, $qteCommande)
     {
         $conn = MConnexion::getBdd();

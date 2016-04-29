@@ -7,18 +7,14 @@ use Nostromo\Classes\Utilisateur;
 use PDOException;
 
 /**
- * Class MUtilisateur.
- *
- * @category Models
- *
- * @author   Nostromo <contact@nostromo.com>
- * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- *
- * @link     localhost
+ * Class MUtilisateur
+ * @package Nostromo\Models
  */
 class MUtilisateur
 {
     /**
+     * Récupère l'utilisateur via son email passé en paramètre
+     *
      * @param string $email
      *
      * @return Utilisateur
@@ -52,6 +48,8 @@ class MUtilisateur
     }
 
     /**
+     * Enregistre l'utilisateur qui vient de s'inscrire
+     *
      * @param Utilisateur $unClient
      *
      * @throws ErrorSQLException
@@ -83,6 +81,8 @@ class MUtilisateur
     }
 
     /**
+     * Récupère un utilisateur via son id passé en paramètre
+     *
      * @param int $id
      *
      * @return Utilisateur
@@ -116,7 +116,8 @@ class MUtilisateur
     }
 
     /**
-     * Met à jour un utilisateur dans la base de données dont l'utilisateur est passé en paramètre.
+     * Met à jour un utilisateur (formulaire de modification de compte)
+     * dans la base de données dont l'utilisateur est passé en paramètre.
      *
      * @param Utilisateur $user
      *
@@ -156,9 +157,19 @@ class MUtilisateur
             throw new ErrorSQLException($e->getMessage());
         }
     }
+
+    /**
+     * Permet de récupérer les points actuels du client
+     * Ainsi, le nombre de points du client ne sera jamais erroné
+     *
+     * @param Utilisateur $user
+     *
+     * @return int
+     *
+     * @throws ErrorSQLException
+     */
     public static function getPoints(Utilisateur $user)
     {
-        $points = 0;
         try {
             $conn = MConnexion::getBdd();
             $reqPrepare = $conn->prepare('SELECT pointsClt FROM client WHERE numClt = ?');
@@ -174,6 +185,8 @@ class MUtilisateur
     }
 
     /**
+     * Met à jour le nombre de points d'un client
+     *
      * @param Utilisateur $user
      * @param int $points
      *
