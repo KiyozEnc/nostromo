@@ -23,7 +23,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                         class="img-responsive hidden-xs"
                         height="128"
                         width="128"
-                        src=<?= \Nostromo\Classes\Build::genererUrlImgAvion() ?>
+                        src="<?= \Nostromo\Classes\Build::genererUrlImgAvion() ?>"
                         title="Vol n°<?= $unVol->getNumVol() ?>"
                     >
                     <div class="caption">

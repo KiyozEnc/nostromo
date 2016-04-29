@@ -1,4 +1,5 @@
 <?php
+use Nostromo\Classes\Build;
 use Nostromo\Classes\Reservation;
 
 require_once ROOT.'src/Views/v_Alert.php'; ?>
@@ -6,29 +7,55 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
     <div class="col-xs-12 col-lg-12 col-md-12 col-md-12">
         <div class="thumbnail">
             <div class="col-md-3 col-md-3">
-                <img class="img-responsive" height="256" width="256" src=<?= \Nostromo\Classes\Build::genererUrlImgAvion() ?> title="Vol n°<?= $vol->getNumVol() ?>">
+                <img
+                    class="img-responsive"
+                    height="256"
+                    width="256"
+                    src="<?= Build::genererUrlImgAvion() ?>"
+                    title="Vol n°<?= $vol->getNumVol() ?>">
             </div>
             <div class="caption">
                 <h2 class="text-primary">Vol n°<?= $vol->getNumVol() ?></h2>
                 <h3>Date et heure : <?= $vol->getDateVol() ?> à <?= $vol->getHeureVol() ?></h3>
-                <form action="?page=reserver&action=validReserverVol&vol=<?= $vol->getNumVol(); ?>" method="POST" role="form" autocomplete="off">
+                <form
+                    action="?page=reserver&action=validReserverVol&vol=<?= $vol->getNumVol(); ?>"
+                    method="POST"
+                    role="form"
+                    autocomplete="off">
                     <h3 class="text-muted"><?= $nbPlaceRestante ?> places disponibles !</h3>
-                    <h4 class="text-uppercase text-warning">Vol à partir de <?= \Nostromo\Classes\Build::fEuro($vol->getPrice()) ?></h4>
+                    <h4 class="text-uppercase text-warning">Vol à partir de <?= Build::fEuro($vol->getPrice()) ?></h4>
                     <div class="row">
                         <div class="col-xs-12 col-md-2">
                             <div class="form-group">
                                 <label for="">Nombre de personnes</label>
-                                <input type="number" min="1" class="form-control" id="nbPers" name="nbPers" placeholder="Nombre de personnes" value="1">
+                                <input
+                                    type="number"
+                                    min="1"
+                                    class="form-control"
+                                    id="nbPers"
+                                    name="nbPers"
+                                    placeholder="Nombre de personnes"
+                                    value="1">
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-2">
                             <div class="checkbox">
-                                <label><input id="reduction" type="checkbox" name="reduction">Appliqué une réduction ?</label>
+                                <label>
+                                    <input
+                                        id="reduction"
+                                        type="checkbox"
+                                        name="reduction">
+                                    Appliqué une réduction ?
+                                </label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
-                                <label for="">Réduction (-<?= Reservation::STEP_REDUCTION * 100 ?>% par <?= Reservation::STEP_POINTS ?> points)</label>
+                                <label for="">
+                                    Réduction
+                                    (-<?= Reservation::STEP_REDUCTION * 100 ?>%
+                                    par <?= Reservation::STEP_POINTS ?> points)
+                                </label>
                                 <input
                                     id="pointsUtilise"
                                     type="number"
@@ -42,7 +69,11 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                             </div>
                         </div>
                     </div>
-                    <a href="?page=reserver" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+                    <a
+                        href="?page=reserver"
+                        class="btn btn-default">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Retour
+                    </a>
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </form>
             </div>

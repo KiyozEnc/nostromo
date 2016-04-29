@@ -1,4 +1,3 @@
-<!-- Alerte valid -->
 <div class="row row-centered">
     <div class="col-md-6 col-xs-12 col-centered">
         <?php
@@ -12,7 +11,6 @@
                 </button>
             </div>
         <?php
-
         }
         if (array_key_exists('error', $_SESSION)) {
             ?>

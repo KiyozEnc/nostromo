@@ -6,7 +6,7 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
         <div class="form-group">
             <label for="nomTitulaire">Nom du titulaire de la carte</label>
             <input
-                type="nomTitulaire"
+                type="text"
                 class="form-control"
                 id="nomTitulaire"
                 name="nomTitulaire"
@@ -73,12 +73,20 @@ require_once ROOT.'src/Views/v_Alert.php'; ?>
                 </div>
             </div>
         </div>
-        <a href="?page=monPanier" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+        <a
+            href="?page=monPanier"
+            class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span> Retour
+        </a>
         <button type="submit" class="btn btn-primary">Finaliser la commande</button>
     </div>
 </form>
 <div class="col-xs-12 col-md-4">
     <h3>Montant TTC à payer aujourd'hui : </h3>
     <h4><?php echo \Nostromo\Classes\Build::fEuro($_SESSION['Panier']->getPrixTotalWithRemise()); ?></h4>
-    <h5>Dont <?= round((1 - $_SESSION['Panier']->getMultiplicateurRemise()) * 100, 2) ?>% (<?= \Nostromo\Classes\Build::fEuro($_SESSION['Panier']->getMontantRemise()) ?>) de remise immédiate liée aux points de fidélité.</h5>
+    <h5>Dont
+        <?= round((1 - $_SESSION['Panier']->getMultiplicateurRemise()) * 100, 2) ?>%
+        (<?= \Nostromo\Classes\Build::fEuro($_SESSION['Panier']->getMontantRemise()) ?>)
+        de remise immédiate liée aux points de fidélité.
+    </h5>
 </div>

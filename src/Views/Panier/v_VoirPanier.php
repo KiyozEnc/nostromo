@@ -1,6 +1,4 @@
 <?php
-
-
 use Nostromo\Classes\Build;
 use Nostromo\Classes\Reservation;
 
@@ -11,32 +9,34 @@ if (array_key_exists('Panier', $_SESSION)) {
     <h2 class="text-center text-info">Votre Panier</h2>
     <?php
     $total = 0;
-    foreach ($_SESSION['Panier']->getProduitsPanier() as $art) {
-        ?>
+    foreach ($_SESSION['Panier']->getProduitsPanier() as $art) { ?>
         <div class="row">
             <div class="col-xs-12 col-md-3">
-                <?php echo '<span class="text-uppercase"><a href="?page=materiel&action=voirArticle&article='.$art->getNumArt().'&target=panier">'.$art->getDesignation().'</a></span>';
-                ?>
+                <span class="text-uppercase">
+                    <a
+                        href="?page=materiel&action=voirArticle&article=<?= $art->getNumArt() ?>&target=panier">
+                        <?= $art->getDesignation() ?>
+                    </a>
+                </span>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <?= Build::fEuro($art->getPu()); ?>
             </div>
             <div class="col-xs-12 col-md-3">
                 <?php
-                echo Build::fEuro($art->getPu());
-                ?>
-            </div>
-            <div class="col-xs-12 col-md-3">
-                <?php
-                if ($art->getQteStock() !== 0 && $art->getQte() <= $art->getQteStock()) {
-                    echo '<span class="text-success">En stock</span>';
-                } else {
-                    echo '<span class="text-danger">Rupture de stock !</span>';
+                if ($art->getQteStock() !== 0 && $art->getQte() <= $art->getQteStock()) { ?>
+                    <span class="text-success">En stock</span>
+                    <?php
+                } else { ?>
+                    <span class="text-danger">Rupture de stock !</span>
+                    <?php
                 }
                 ?>
             </div>
             <div class="col-xs-12 col-md-3">
-                <span class="sr-only" data-attr="<?php echo $art->getNumArt();
-                ?>"></span>
-                <select name="qte" id="qte" class="form-control" onchange="setQte(<?php echo $art->getNumArt();
-                ?>, <?php echo $art->getQte();
+                <span class="sr-only" data-attr="<?= $art->getNumArt(); ?>"></span>
+                <select name="qte" id="qte" class="form-control" onchange="setQte(<?= $art->getNumArt();
+                ?>, <?= $art->getQte();
                 ?>)">
                     <?php
                     for ($i = 0; $i <= $art->getQteStock(); ++$i) {
@@ -73,10 +73,10 @@ if (array_key_exists('Panier', $_SESSION)) {
         <div class="col-xs-12 col-md-5">
             <div class="checkbox">
                 <label><input id="reduction" type="checkbox" name="reduction"
-                    <?php
-                    if ($_SESSION['Panier']->getPointsUtilise() > 0) {
-                        echo 'checked=checked';
-                    } ?>
+                        <?php
+                        if ($_SESSION['Panier']->getPointsUtilise() > 0) {
+                            echo 'checked=checked';
+                        } ?>
                     >Appliqué une réduction ?</label>
             </div>
         </div>
@@ -85,7 +85,13 @@ if (array_key_exists('Panier', $_SESSION)) {
         <div class="row">
             <div class="col-xs-12 col-md-3">
                 <div class="form-group">
-                    <label for="">Réduction (-<span id="percent"><?= round(Reservation::STEP_REDUCTION * 100 * 1.5, 2) ?></span>% par <span id="step"><?= Reservation::STEP_POINTS ?></span> points)</label>
+                    <label for="">
+                        Réduction
+                        (-<span id="percent"><?= round(Reservation::STEP_REDUCTION * 100 * 1.5, 2) ?></span>%
+                        par <span id="step">
+                            <?= Reservation::STEP_POINTS ?>
+                        </span> points)
+                    </label>
                     <input
                         id="pointsUtilise"
                         type="number"
@@ -112,13 +118,21 @@ if (array_key_exists('Panier', $_SESSION)) {
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <a href ="?page=monPanier&action=viderPanier" onclick="return etesVousSur('Voulez-vous vider le panier ?')" class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span> Vider</a>
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Passer la commande</button>
+                <a
+                    href="?page=monPanier&action=viderPanier"
+                    onclick="return etesVousSur('Voulez-vous vider le panier ?')"
+                    class="btn btn-primary">
+                    <span class="glyphicon glyphicon-trash"></span> Vider
+                </a>
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span> Passer la commande
+                </button>
             </div>
         </div>
     </form>
     <?php
-
 } else {
     ?>
     <div class="row">
