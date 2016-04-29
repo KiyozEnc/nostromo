@@ -34,15 +34,18 @@ switch ($action) {
             if (!MConnexion::sessionOuverte()) {
                 throw new NotConnectedException();
             }
-            if (array_key_exists('Reservation', $_SESSION) && $_SESSION['Reservation']->isValid()) {
+            if (array_key_exists('Reservation', $_SESSION) &&
+                $_SESSION['Reservation']->isValid()) {
                 throw new InvalidArgumentException('Vous avez déjà une réservation.');
             }
-            if (array_key_exists('vol', $_GET) && array_key_exists('nbPers', $_POST)) {
+            if (array_key_exists('vol', $_GET) &&
+                array_key_exists('nbPers', $_POST)) {
                 $unVol = MVol::getUnVol($_GET['vol']);
                 if ($_POST['nbPers'] !== 0 ||
                     $_POST['nbPers'] <= MVol::getPlaceRestante($unVol)
                 ) {
-                    if (array_key_exists('pointsUtilise', $_POST) && $_POST['pointsUtilise'] > MUtilisateur::getPoints($_SESSION['Utilisateur'])) {
+                    if (array_key_exists('pointsUtilise', $_POST) &&
+                        $_POST['pointsUtilise'] > MUtilisateur::getPoints($_SESSION['Utilisateur'])) {
                         throw new UnexpectedValueException('Vous n\'avez pas assez de points');
                     }
                     $_SESSION['Reservation'] = new Reservation();
@@ -52,7 +55,8 @@ switch ($action) {
                         ->setValid(false)
                         ->setUnClient($_SESSION['Utilisateur'])
                         ->setUnVol($unVol);
-                    if (array_key_exists('pointsUtilise', $_POST) && !empty($_POST['pointsUtilise'])) {
+                    if (array_key_exists('pointsUtilise', $_POST) &&
+                        !empty($_POST['pointsUtilise'])) {
                         $_SESSION['Reservation']->setReduction($_POST['pointsUtilise']);
                     }
                 } else {

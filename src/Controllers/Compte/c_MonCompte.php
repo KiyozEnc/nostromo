@@ -63,7 +63,9 @@ switch ($action) {
                     if (!empty($_POST['firstname'])) {
                         $_SESSION['Utilisateur']->setPrenom($_POST['firstname']);
                     }
-                    if (!empty($_POST['cp']) && !empty($_POST['city']) && !empty($_POST['address'])) {
+                    if (!empty($_POST['cp']) &&
+                        !empty($_POST['city']) &&
+                        !empty($_POST['address'])) {
                         if (is_numeric($_POST['cp'])) {
                             $_SESSION['Utilisateur']
                                 ->setAdresse($_POST['address'])

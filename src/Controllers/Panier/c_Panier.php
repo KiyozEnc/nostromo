@@ -172,7 +172,9 @@ switch ($action) {
 
     case 'choisirQte':
         try {
-            if (!array_key_exists('qte', $_GET) && !array_key_exists('article', $_GET) && !array_key_exists('Panier', $_SESSION)) {
+            if (!array_key_exists('qte', $_GET) &&
+                !array_key_exists('article', $_GET) &&
+                !array_key_exists('Panier', $_SESSION)) {
                 throw new InvalidArgumentException('Invalid args');
             }
             if ($_GET['qte'] === '0') {
