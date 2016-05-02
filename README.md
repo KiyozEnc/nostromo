@@ -1,7 +1,7 @@
-# Nostromo Finale version
+# Site web pour nostromo PPE
 ### Vol dans l'espace
 Pour utiliser le code source de notre projet Nostromo, il vous faut suivre les instructions suivantes :
- 
+
 #### Installation :
  - Exécuter install.bat sous Windows
  - Indiquer les informations demandées
@@ -13,7 +13,7 @@ Pour utiliser le code source de notre projet Nostromo, il vous faut suivre les i
  - Pour terminer l'installation, il vous faut [composer].
  - Exécuter la commande : php /path/to/composer.phar update --no-dev au sein du projet nostromo
 
-/path/to/composer.phar fait référence au chemin jusqu'à composer.phar
+/path/to/composer.phar fait référence au chemin jusqu'au fichier composer.phar précédemment récupéré grâce à l'installation de [composer]
 
 [composer]: https://getcomposer.org/download/
 
