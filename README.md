@@ -11,8 +11,7 @@ Pour utiliser le code source de notre projet Nostromo, il vous faut suivre les i
  
 #### Initialiser Composer :
  - Pour terminer l'installation, il vous faut [composer].
- - Exécuter la commande : php /path/to/composer.phar update --no-dev au sein du projet nostromo
-La commande télécharge les dépendances composer grâce à cette commande.
+ - Exécuter la commande : *php /path/to/composer.phar update --no-dev* au sein du projet nostromo. La commande télécharge les dépendances composer nécessaires.
 
 /path/to/composer.phar fait référence au chemin jusqu'au fichier composer.phar précédemment récupéré grâce à l'installation de [composer]
 
